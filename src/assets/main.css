@@ -1,0 +1,434 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: rgba(244, 225, 64, 0.5);
+    max-height: 100vh;
+    overflow-y: auto;
+    position: relative;
+}
+body.bg-dark {
+    background: linear-gradient(0deg, #f4e140 0%, #f4e140 100%), #fff;
+}
+#app {
+    position: relative;
+    overflow: hidden;
+}
+.bottom-vector {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    z-index: -1;
+}
+h1 {
+    color: #000;
+    text-align: center;
+    font-family: 'obviously', sans-serif;
+
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 570;
+    line-height: 42px;
+    margin-bottom: 50px;
+}
+h1.intro-heading {
+    color: #000;
+    font-family: 'obviously', sans-serif;
+
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 550;
+    line-height: 32px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+h1.intro-heading span {
+    display: block;
+    color: #000;
+    font-family: 'obviously', sans-serif;
+
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 570;
+    line-height: 75px;
+}
+h2 {
+    text-align: center;
+}
+.intro-selection h2 {
+    color: #000;
+    font-family: 'obviously', sans-serif;
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 550;
+    line-height: 26px;
+    margin-bottom: 20px;
+}
+.intro-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+.intro-selection__buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+.intro-selection__buttons button {
+    background-color: #4a74eb;
+    color: #ffffff;
+    padding: 15px 26px 15px 26px;
+    margin-right: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 72px;
+    margin-bottom: 1rem;
+}
+.intro-visual {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+}
+.teacher-visual {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    z-index: 10;
+}
+.classroom-visual {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+.line-behind-classroom {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.brand-logo {
+    display: block;
+    margin: 90px auto 50px auto;
+    width: 100%;
+}
+.brand-logo--mobile {
+    display: none;
+}
+.brand-logo img {
+    display: block;
+}
+.back-button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    bottom: 75px;
+}
+.progress__wrapper {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 65px;
+}
+.progress {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 12px;
+    width: 100%;
+    height: 14px;
+    position: relative;
+}
+.progress__count {
+    margin-left: auto;
+    margin-bottom: 8px;
+}
+.completeness {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(74, 116, 235, 1);
+    border-radius: 12px;
+    transition: width 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+}
+form {
+    display: block;
+    margin: 0 auto;
+    max-width: 800px;
+}
+form button {
+    float: right;
+}
+input[name='subjects'] {
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 3rem;
+    height: 3rem;
+    opacity: 0;
+    cursor: pointer;
+}
+input[name='subjects']:checked + .custom-checkbox {
+    display: none;
+}
+.custom-checkbox-checked {
+    display: none;
+}
+input[name='subjects']:checked ~ .custom-checkbox-checked {
+    display: block;
+}
+.container {
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+    padding-bottom: 100px;
+}
+.container .brand-logo img {
+    margin: 0 auto;
+}
+.container--intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 112px;
+    margin-bottom: 112px;
+    margin-left: 127px;
+    height: calc(100vh - 224px);
+    width: 50%;
+    max-width: 600px;
+}
+.container--intro .brand-logo {
+    margin-bottom: 0;
+}
+.answer__container {
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 60px;
+    max-width: 600px;
+}
+.answer__buttons-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.answer__buttons-wrapper .answer__btn {
+    width: calc(25% - 30px);
+    margin: 15px;
+    justify-content: center;
+}
+.answer__container--wide {
+    max-width: 700px;
+}
+.answer__btn {
+    color: #000;
+    text-align: center;
+    font-family: 'obviously', sans-serif;
+
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 550;
+    line-height: 30px;
+    text-align: left;
+    width: 100%;
+    padding: 10px 10px 12px 10px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.1);
+    border: none;
+    outline: none;
+    margin-bottom: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.answer__btn span {
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.answer__btn span img {
+    z-index: 1;
+}
+.digi-input {
+    font-family: 'obviously', sans-serif;
+
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 550;
+    line-height: 40px;
+    color: #777777;
+    padding: 26px;
+    border-radius: 16px;
+    border: 1.333px solid #b8b8b8;
+    background: #fff;
+
+    display: block;
+    margin: 0 auto;
+    max-width: 800px;
+    width: 100%;
+}
+.digi-input::placeholder {
+    font-family: 'obviously', sans-serif;
+
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 550;
+    line-height: 40px;
+
+    color: #b8b8b8;
+}
+
+/* Benefit1 */
+.benefit-heading {
+    color: #000;
+    font-family: 'obviously', sans-serif;
+
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 570;
+    line-height: 65px;
+    text-align: left;
+}
+.benefit-container {
+    width: 50%;
+}
+.benefit-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 20;
+}
+.benefit-row .icon {
+    padding-right: 20px;
+}
+
+.benefit-row .content p {
+    color: #000;
+    font-family: 'obviously', sans-serif;
+
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 540;
+    line-height: 30px;
+}
+.benefit-row .content p strong {
+    font-weight: 560;
+}
+.benefit-btn {
+    font-family: 'obviously', sans-serif;
+
+    font-size: 20.8px;
+    font-style: normal;
+    font-weight: 550;
+    line-height: 28.6px; /* 137.5% */
+
+    display: flex;
+    align-items: center;
+    height: 65px;
+    padding: 0 25px;
+    background-color: rgba(74, 116, 235, 1);
+    border-radius: 75px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    color: white;
+
+    margin-top: 100px;
+    position: relative;
+    z-index: 10;
+}
+.benefit-btn img {
+    margin-left: 16px;
+}
+@media (max-width: 1024px) {
+    .intro-visual {
+        z-index: -1;
+    }
+    .container--intro {
+        width: 100%;
+        padding: 100px 10%;
+        margin: 0;
+        max-width: unset;
+        height: unset;
+    }
+    .container--intro .brand-logo {
+        display: none;
+    }
+    .container--intro > .brand-logo--mobile {
+        display: block;
+        margin-top: 0;
+        margin-left: 0;
+        margin-bottom: 38px;
+    }
+    .container--intro > .brand-logo--mobile img {
+        margin-left: 0;
+    }
+    h1.intro-heading {
+        margin-bottom: 32px;
+    }
+    .answer__container.answer__container--wide {
+        width: 100%;
+        padding: 0;
+    }
+    .container {
+        width: 100%;
+        padding: 0 10%;
+    }
+    .answer__container {
+        width: 100%;
+    }
+    .back-button {
+        bottom: 10px;
+    }
+    .benefit-container {
+        width: 100%;
+        padding-top: 42px;
+    }
+    .teacher-visual {
+        position: unset;
+        width: 100%;
+        transform: scale(2);
+        padding-left: 20%;
+    }
+    .answer__buttons-wrapper .answer__btn {
+        width: calc(25% - 10px);
+        margin: 5px;
+        justify-content: center;
+    }
+    .classroom-visual {
+        position: static;
+        z-index: -1;
+        transform: unset;
+        width: 100%;
+        transform: translateX(15%);
+    }
+    .line-behind-classroom {
+        top: unset;
+        bottom: 0;
+        left: -70px;
+    }
+}
+@media (max-width: 1440px) {
+    .teacher-visual {
+        transform: scale(1);
+    }
+}
