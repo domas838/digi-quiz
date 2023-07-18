@@ -2,8 +2,9 @@
 import { store } from '../store'
 const props = defineProps(['questions', 'next'])
 
-const selectFirstAnswer = (classNumber) => {
-    store.result1 = classNumber
+const selectClass = (classNumber) => {
+    store.selectedClass = classNumber.replace(' kl.', '')
+    console.log(store.selectedClass)
     props.next()
 }
 const selectAnswer = (answerIndex) => {
@@ -165,7 +166,7 @@ const proceedWithMultipleSelection = () => {
                         ]"
                         :key="index"
                         class="answer__btn"
-                        @click="selectFirstAnswer(classNo)"
+                        @click="selectClass(classNo)"
                     >
                         {{ classNo }}
                     </button>
@@ -198,13 +199,12 @@ const proceedWithMultipleSelection = () => {
                 </div>
                 <div v-if="store.step === 4">
                     <button
-                        v-for="(a, index) in q.Ans"
-                        :key="index"
+                        v-if="store.selectedClass >= 1 && store.selectedClass <= 4"
                         class="answer__btn"
                         @click="selectMultipleAnswers($event)"
                     >
-                        <span v-if="store.step == 4 && index + 1 === 1"
-                            ><input type="checkbox" name="subjects" value="Matematika" />
+                        <span
+                            ><input type="checkbox" name="subjects" value="Pasaulio pažinimas" />
                             <img
                                 src="../assets/images/checkbox.svg"
                                 alt=""
@@ -217,8 +217,15 @@ const proceedWithMultipleSelection = () => {
                             />
                             🧮
                         </span>
-                        <span v-if="store.step === 4 && index + 1 === 2"
-                            ><input type="checkbox" name="subjects" value="Lietuvių kalba" />
+                        Pasaulio pažinimas
+                    </button>
+                    <button
+                        v-if="store.selectedClass >= 5 && store.selectedClass <= 6"
+                        class="answer__btn"
+                        @click="selectMultipleAnswers($event)"
+                    >
+                        <span
+                            ><input type="checkbox" name="subjects" value="Gamta ir žmogus" />
                             <img
                                 src="../assets/images/checkbox.svg"
                                 alt=""
@@ -229,10 +236,17 @@ const proceedWithMultipleSelection = () => {
                                 alt=""
                                 class="custom-checkbox-checked"
                             />
-                            📖
+                            🧮
                         </span>
-                        <span v-if="store.step === 4 && index + 1 === 3"
-                            ><input type="checkbox" name="subjects" value="Anglų kalba" />
+                        Gamta ir žmogus
+                    </button>
+                    <button
+                        v-if="store.selectedClass >= 7 && store.selectedClass <= 8"
+                        class="answer__btn"
+                        @click="selectMultipleAnswers($event)"
+                    >
+                        <span
+                            ><input type="checkbox" name="subjects" value="Įdomusis mokslas" />
                             <img
                                 src="../assets/images/checkbox.svg"
                                 alt=""
@@ -243,9 +257,79 @@ const proceedWithMultipleSelection = () => {
                                 alt=""
                                 class="custom-checkbox-checked"
                             />
-                            🇬🇧
+                            🧮
                         </span>
-                        <span v-if="store.step === 4 && index + 1 === 4"
+                        Įdomusis mokslas
+                    </button>
+                    <button
+                        v-if="store.selectedClass >= 5 && store.selectedClass <= 12"
+                        class="answer__btn"
+                        @click="selectMultipleAnswers($event)"
+                    >
+                        <span
+                            ><input type="checkbox" name="subjects" value="Geografija" />
+                            <img
+                                src="../assets/images/checkbox.svg"
+                                alt=""
+                                class="custom-checkbox"
+                            />
+                            <img
+                                src="../assets/images/checkbox-checked.svg"
+                                alt=""
+                                class="custom-checkbox-checked"
+                            />
+                            🧮
+                        </span>
+                        Geografija
+                    </button>
+                    <button
+                        v-if="store.selectedClass >= 5 && store.selectedClass <= 12"
+                        class="answer__btn"
+                        @click="selectMultipleAnswers($event)"
+                    >
+                        <span
+                            ><input type="checkbox" name="subjects" value="Istorija" />
+                            <img
+                                src="../assets/images/checkbox.svg"
+                                alt=""
+                                class="custom-checkbox"
+                            />
+                            <img
+                                src="../assets/images/checkbox-checked.svg"
+                                alt=""
+                                class="custom-checkbox-checked"
+                            />
+                            🧮
+                        </span>
+                        Istorija
+                    </button>
+                    <button
+                        v-if="store.selectedClass >= 7 && store.selectedClass <= 12"
+                        class="answer__btn"
+                        @click="selectMultipleAnswers($event)"
+                    >
+                        <span
+                            ><input type="checkbox" name="subjects" value="Biologija" />
+                            <img
+                                src="../assets/images/checkbox.svg"
+                                alt=""
+                                class="custom-checkbox"
+                            />
+                            <img
+                                src="../assets/images/checkbox-checked.svg"
+                                alt=""
+                                class="custom-checkbox-checked"
+                            />
+                            🧮
+                        </span>
+                        Biologija
+                    </button>
+                    <button
+                        v-if="store.selectedClass >= 7 && store.selectedClass <= 12"
+                        class="answer__btn"
+                        @click="selectMultipleAnswers($event)"
+                    >
+                        <span
                             ><input type="checkbox" name="subjects" value="Fizika" />
                             <img
                                 src="../assets/images/checkbox.svg"
@@ -259,8 +343,15 @@ const proceedWithMultipleSelection = () => {
                             />
                             ⚡
                         </span>
-                        <span v-if="store.step === 4 && index + 1 === 5"
-                            ><input type="checkbox" name="subjects" value="Chemija " />
+                        Fizika
+                    </button>
+                    <button
+                        v-if="store.selectedClass >= 8 && store.selectedClass <= 12"
+                        class="answer__btn"
+                        @click="selectMultipleAnswers($event)"
+                    >
+                        <span
+                            ><input type="checkbox" name="subjects" value="Chemija" />
                             <img
                                 src="../assets/images/checkbox.svg"
                                 alt=""
@@ -273,7 +364,70 @@ const proceedWithMultipleSelection = () => {
                             />
                             🧪
                         </span>
-                        {{ a }}
+                        Chemija
+                    </button>
+                    <button
+                        v-if="store.selectedClass >= 1 && store.selectedClass <= 12"
+                        class="answer__btn"
+                        @click="selectMultipleAnswers($event)"
+                    >
+                        <span
+                            ><input type="checkbox" name="subjects" value="Lietuvių kalba" />
+                            <img
+                                src="../assets/images/checkbox.svg"
+                                alt=""
+                                class="custom-checkbox"
+                            />
+                            <img
+                                src="../assets/images/checkbox-checked.svg"
+                                alt=""
+                                class="custom-checkbox-checked"
+                            />
+                            📖
+                        </span>
+                        Lietuvių kalba
+                    </button>
+                    <button
+                        v-if="store.selectedClass >= 1 && store.selectedClass <= 12"
+                        class="answer__btn"
+                        @click="selectMultipleAnswers($event)"
+                    >
+                        <span
+                            ><input type="checkbox" name="subjects" value="Anglų kalba" />
+                            <img
+                                src="../assets/images/checkbox.svg"
+                                alt=""
+                                class="custom-checkbox"
+                            />
+                            <img
+                                src="../assets/images/checkbox-checked.svg"
+                                alt=""
+                                class="custom-checkbox-checked"
+                            />
+                            🇬🇧
+                        </span>
+                        Anglų kalba
+                    </button>
+                    <button
+                        v-if="store.selectedClass >= 1 && store.selectedClass <= 12"
+                        class="answer__btn"
+                        @click="selectMultipleAnswers($event)"
+                    >
+                        <span
+                            ><input type="checkbox" name="subjects" value="Matematika" />
+                            <img
+                                src="../assets/images/checkbox.svg"
+                                alt=""
+                                class="custom-checkbox"
+                            />
+                            <img
+                                src="../assets/images/checkbox-checked.svg"
+                                alt=""
+                                class="custom-checkbox-checked"
+                            />
+                            🧮
+                        </span>
+                        Matematika
                     </button>
                 </div>
                 <div v-if="store.step > 4">

@@ -7,7 +7,7 @@ export const store = reactive({
     isLoading: false,
     isShowingBenefit: false,
     respondent: 'child',
-    answer1: null,
+    selectedClass: null,
     showFirstBenefit: false,
     showSecondBenefit: false,
     userEmail: '',
