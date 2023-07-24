@@ -22,7 +22,7 @@ const programRecomendationHandler = () => {
                 switch (item.values.Tier) {
                     case 'TIER0':
                         if (
-                            item.values.grade === store.selectedClass &&
+                            item.values.Grade === store.selectedClass &&
                             item.values.Persona === store.selectedPersona &&
                             item.values.Tags === store.TIER0 &&
                             store.selectedSubjects.includes(item.values.Subject)
@@ -32,7 +32,7 @@ const programRecomendationHandler = () => {
                         break
                     case 'TIER1':
                         if (
-                            item.values.grade === store.selectedClass &&
+                            item.values.Grade === store.selectedClass &&
                             item.values.Persona === store.selectedPersona &&
                             item.values.Tags === store.TIER1 &&
                             store.selectedSubjects.includes(item.values.Subject) &&
@@ -43,7 +43,7 @@ const programRecomendationHandler = () => {
                         break
                     case 'TIER2':
                         if (
-                            item.values.grade === store.selectedClass &&
+                            item.values.Grade === store.selectedClass &&
                             item.values.Persona === store.selectedPersona &&
                             item.values.Tags === store.TIER2 &&
                             store.selectedSubjects.includes(item.values.Subject) &&
@@ -54,7 +54,7 @@ const programRecomendationHandler = () => {
                         break
                     case 'TIER3':
                         if (
-                            item.values.grade === store.selectedClass &&
+                            item.values.Grade === store.selectedClass &&
                             item.values.Persona === store.selectedPersona &&
                             item.values.Tags === store.TIER3 &&
                             store.selectedSubjects.includes(item.values.Subject) &&
