@@ -35,8 +35,7 @@ const programRecomendationHandler = () => {
                             item.values.Grade === store.selectedClass &&
                             item.values.Persona === store.selectedPersona &&
                             item.values.Tags === store.TIER1 &&
-                            store.selectedSubjects.includes(item.values.Subject) &&
-                            store.TIER1 === item.values.Tags
+                            store.selectedSubjects.includes(item.values.Subject)
                         ) {
                             store.recomendationsArrTIER1.push(item)
                         }
@@ -46,8 +45,7 @@ const programRecomendationHandler = () => {
                             item.values.Grade === store.selectedClass &&
                             item.values.Persona === store.selectedPersona &&
                             item.values.Tags === store.TIER2 &&
-                            store.selectedSubjects.includes(item.values.Subject) &&
-                            store.TIER2 === item.values.Tags
+                            store.selectedSubjects.includes(item.values.Subject)
                         ) {
                             store.recomendationsArrTIER2.push(item)
                         }
@@ -57,8 +55,7 @@ const programRecomendationHandler = () => {
                             item.values.Grade === store.selectedClass &&
                             item.values.Persona === store.selectedPersona &&
                             item.values.Tags === store.TIER3 &&
-                            store.selectedSubjects.includes(item.values.Subject) &&
-                            store.TIER3 === item.values.Tags
+                            store.selectedSubjects.includes(item.values.Subject)
                         ) {
                             store.recomendationsArrTIER3.push(item)
                         }
