@@ -4,7 +4,6 @@ const props = defineProps(['questions', 'next'])
 
 const selectClass = (classNumber) => {
     store.selectedClass = classNumber.replace(' kl.', '')
-    console.log(store.selectedClass)
     props.next()
 }
 const selectAnswer = (answerIndex) => {

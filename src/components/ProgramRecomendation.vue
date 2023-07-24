@@ -17,21 +17,51 @@ const programRecomendationHandler = () => {
         })
 
         instance.get('/rows?useColumnNames=true').then((response) => {
-            // console.log(response.data.items)
             response.data.items.forEach((item) => {
-                // console.log(item)
+                console.log(item)
                 switch (item.values.Tier) {
                     case 'TIER0':
-                        store.recomendationsArrTIER0.push(item)
+                        if (
+                            item.values.grade === store.selectedClass &&
+                            item.values.Persona === store.selectedPersona &&
+                            item.values.Tags === store.TIER0 &&
+                            store.selectedSubjects.includes(item.values.Subject)
+                        ) {
+                            store.recomendationsArrTIER0.push(item)
+                        }
                         break
                     case 'TIER1':
-                        store.recomendationsArrTIER1.push(item)
+                        if (
+                            item.values.grade === store.selectedClass &&
+                            item.values.Persona === store.selectedPersona &&
+                            item.values.Tags === store.TIER1 &&
+                            store.selectedSubjects.includes(item.values.Subject) &&
+                            store.TIER1 === item.values.Tags
+                        ) {
+                            store.recomendationsArrTIER1.push(item)
+                        }
                         break
                     case 'TIER2':
-                        store.recomendationsArrTIER2.push(item)
+                        if (
+                            item.values.grade === store.selectedClass &&
+                            item.values.Persona === store.selectedPersona &&
+                            item.values.Tags === store.TIER2 &&
+                            store.selectedSubjects.includes(item.values.Subject) &&
+                            store.TIER2 === item.values.Tags
+                        ) {
+                            store.recomendationsArrTIER2.push(item)
+                        }
                         break
                     case 'TIER3':
-                        store.recomendationsArrTIER3.push(item)
+                        if (
+                            item.values.grade === store.selectedClass &&
+                            item.values.Persona === store.selectedPersona &&
+                            item.values.Tags === store.TIER3 &&
+                            store.selectedSubjects.includes(item.values.Subject) &&
+                            store.TIER3 === item.values.Tags
+                        ) {
+                            store.recomendationsArrTIER3.push(item)
+                        }
                         break
 
                     default:
@@ -39,7 +69,9 @@ const programRecomendationHandler = () => {
                 }
             })
             console.log('TIER0', store.recomendationsArrTIER0)
-            console.log(store.recomendationsArrTIER1)
+            console.log('TIER1', store.recomendationsArrTIER1)
+            console.log('TIER2', store.recomendationsArrTIER2)
+            console.log('TIER3', store.recomendationsArrTIER3)
             store.isLoading = false
             return response.data.items
         })
