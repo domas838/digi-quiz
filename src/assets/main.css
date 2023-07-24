@@ -88,6 +88,12 @@ h2 {
     cursor: pointer;
     border-radius: 72px;
     margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+.intro-selection__buttons button img {
+    width: 2rem;
+    margin-right: 1rem;
 }
 .intro-visual {
     position: fixed;
@@ -430,5 +436,24 @@ input[name='subjects']:checked ~ .custom-checkbox-checked {
 @media (max-width: 1440px) {
     .teacher-visual {
         transform: scale(1);
+    }
+}
+.spinner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+.spinner img {
+    animation: rotate 3s infinite;
+    width: 48px;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }

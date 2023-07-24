@@ -11,12 +11,8 @@ export const store = reactive({
     showFirstBenefit: false,
     showSecondBenefit: false,
     userEmail: '',
-    answers: {
-        selected1: null,
-        selected4: [],
-        selected6: null,
-        TIER: ''
-    },
+    selectedSubjects: [],
+    TIER: '',
     PROFILE1: [],
     PROFILE2: [],
     PROFILE3: [],
@@ -24,7 +20,11 @@ export const store = reactive({
     TIER1: null,
     TIER2: null,
     TIER3: null,
-    selectedPersona: 'Primary',
+    selectedPersona: null,
+    recomendationsArrTIER0: [],
+    recomendationsArrTIER1: [],
+    recomendationsArrTIER2: [],
+    recomendationsArrTIER3: [],
     quiz: {
         child: [
             { qNo: 1, Q: 'Kurioje klasėje mokaisi?' },
@@ -44,17 +44,17 @@ export const store = reactive({
                     'Siekiu asmeninio augimo dalykuose, kurie mane domina ir sekasi.',
                     'Noriu patikras ir egzaminus išlaikyti aukščiausiais balais, kad įstočiau į svajonių universitetą.',
                     'Stengiuosi pasigerinti pažymius ir užlopyti mokslo metų eigoje atsiradančias spragas.',
-                    'Tikiuosi subalansuoti mokymąsi su kitais hobiais ir užsiėmimais – laiko valdymas svarbiausia!'
+                    'Tikiuosi subalansuoti mokymąsi su kitais hobiais ir užsiėmimais - laiko valdymas svarbiausia!'
                 ]
             },
             {
                 qNo: 4,
-                Q: 'Pažymėk visus dalykus, kurių norėtumei mokytis papildomai 💪',
+                Q: 'Pažymėk visus dalykus, kurių norėtumei mokytis papildomai',
                 Ans: ['Matematika', 'Lietuvių kalba', 'Anglų kalba', 'Fizika', 'Chemija']
             },
             {
                 qNo: 5,
-                Q: 'Kaip vertini savo motyvaciją mokytis? 🎯🔥',
+                Q: 'Kaip vertini savo motyvaciją mokytis?',
                 Ans: [
                     'Motyvacija - mano antras vardas! Nuolat ieškau būtų tobulėti ir išmokti ką nors naujo.',
                     'Neblogai. Daugiausiai dėmesio skiriu geriems kontrolinių, testų, egzaminų rezultatams.',
@@ -64,7 +64,7 @@ export const store = reactive({
             },
             {
                 qNo: 6,
-                Q: 'Kokio pamokų kurso tipo tikiesi? 📚🤔',
+                Q: 'Kokio pamokų kurso tipo tikiesi?',
                 Ans: [
                     'Svarbu, kad kursas užtikrintų rezultatus, net jei ne visiškai atitinka temas, kurias dabar einu mokykloje.',
                     'Norėčiau, kad pamokos atitiktų mokykloje einamas temas, kad galėčiau geriau joms pasiruošti.',
@@ -74,7 +74,7 @@ export const store = reactive({
             },
             {
                 qNo: 7,
-                Q: 'Kokio intensyvumo mokymosi norėtum? ⚡️💪',
+                Q: 'Kokio intensyvumo mokymosi norėtum?',
                 Ans: [
                     'Ne intensyvaus. Planuoju mokytis 1-2 kartus per savaitę, kad liktų laiko kitoms veikloms.',
                     'Vidutiniško. Noriu subalansuoto mokymo plano, kuris padėtų siekti savo tikslų, bet esu pasiruošęs padirbėt!',
@@ -116,7 +116,7 @@ export const store = reactive({
                     'Nebloga. Daugiausiai dėmesio skiria testų, egzaminų rezultatams.',
                     'Vidutiniškai. Nori pasigerinti pažymius, bet ne visada turi pakankamai noro.',
                     'Priklauso nuo to, kiek laisvo laiko turi nuo kitų veiklų.',
-                    'Mokslai – ne pagrindinis prioritetas.'
+                    'Mokslai - ne pagrindinis prioritetas.'
                 ]
             },
             {

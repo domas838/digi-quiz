@@ -1,14 +1,12 @@
 <script setup>
 import { store } from './store.js'
 import { onMounted } from 'vue'
-
 import RespondentQuestions from './components/RespondentQuestions.vue'
 import FirstBenefit from './components/FirstBenefit.vue'
 import SecondBenefit from './components/SecondBenefit.vue'
 import EmailForm from './components/EmailForm.vue'
 import ProgramRecomendation from './components/ProgramRecomendation.vue'
 const url = new URL(window.location.href)
-
 onMounted(() => {
     if (store.step === 0) {
         document.body.classList.add('bg-dark')
@@ -37,6 +35,7 @@ onMounted(() => {
         store.showCTA = false
     }
 })
+
 const respondentChildHandler = () => {
     store.step = 1
     store.respondent = 'child'
@@ -59,6 +58,7 @@ const prevStep = () => {
     }
 }
 const nextStep = () => {
+    console.log('nextStep()')
     if (store.step <= store.quiz.child.length) {
         if (store.step === 3 && store.showFirstBenefit === false) {
             if (!url.searchParams.has('class')) {
@@ -120,10 +120,11 @@ const completeness = (step) => {
                 <h2>Pasirinkite, kas esate</h2>
                 <div class="intro-selection__buttons">
                     <button class="button--child" @click="respondentChildHandler()">
-                        🎒 Esu mokinys
+                        <img src="./assets/images/emoji/INTRO_backback.svg" alt="" /> Esu mokinys
                     </button>
                     <button class="button--parent" @click="respondentParentHandler()">
-                        🧑 Esu tėvelis/globėjas
+                        <img src="./assets/images/emoji/INTRO_parent.svg" alt="" /> Esu
+                        tėvelis/globėjas
                     </button>
                 </div>
             </div>
@@ -161,10 +162,10 @@ const completeness = (step) => {
             </div>
         </div>
         <div class="answer__container answer__container--wide" v-if="store.respondent === 'child'">
-            <RespondentQuestions v-bind:questions="store.quiz.child" v-bind:next="nextStep" />
+            <RespondentQuestions v-bind:questions="store.quiz.child" :next="nextStep" />
         </div>
         <div class="answer__container answer__container--wide" v-if="store.respondent === 'parent'">
-            <RespondentQuestions v-bind:questions="store.quiz.parent" v-bind:next="nextStep" />
+            <RespondentQuestions v-bind:questions="store.quiz.parent" :next="nextStep" />
         </div>
 
         <FirstBenefit />

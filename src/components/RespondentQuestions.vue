@@ -13,13 +13,13 @@ const selectAnswer = (answerIndex) => {
         case 2:
             switch (answerIndex) {
                 case 1:
-                    store.PROFILE1 = ['Ambitious', 'Exam-oriented']
+                    store.PROFILE1 = ['Ambitious', 'Exam Oriented']
                     break
                 case 2:
-                    store.PROFILE1 = ['Exam-oriented', 'Busy multitasker']
+                    store.PROFILE1 = ['Exam Oriented', 'Busy Multitasker']
                     break
                 case 3:
-                    store.PROFILE1 = ['Struggling', 'Busy multitasker']
+                    store.PROFILE1 = ['Struggling', 'Busy Multitasker']
                     break
 
                 default:
@@ -33,13 +33,13 @@ const selectAnswer = (answerIndex) => {
                     store.PROFILE2 = ['Ambitious']
                     break
                 case 2:
-                    store.PROFILE2 = ['Exam-oriented']
+                    store.PROFILE2 = ['Exam Oriented']
                     break
                 case 3:
                     store.PROFILE2 = ['Struggling']
                     break
                 case 4:
-                    store.PROFILE2 = ['Busy multitasker']
+                    store.PROFILE2 = ['Busy Multitasker']
                     break
 
                 default:
@@ -58,13 +58,13 @@ const selectAnswer = (answerIndex) => {
                     store.PROFILE3 = ['Ambitious']
                     break
                 case 2:
-                    store.PROFILE3 = ['Exam-oriented']
+                    store.PROFILE3 = ['Exam Oriented']
                     break
                 case 3:
                     store.PROFILE3 = ['Struggling']
                     break
                 case 4:
-                    store.PROFILE3 = ['Busy multitasker']
+                    store.PROFILE3 = ['Busy Multitasker']
                     break
                 case 5:
                     store.PROFILE3 = ['Socializer']
@@ -79,15 +79,17 @@ const selectAnswer = (answerIndex) => {
         case 6:
             switch (answerIndex) {
                 case 1:
-                    store.answers.selected6 = 'A'
-                    break
+                    props.next()
+                    return
                 case 2:
-                    store.answers.selected6 = 'Flexible - textbook'
-                    store.answers.TIER = 'TIER0'
+                    store.TIER = 'TIER0'
                     break
                 case 3:
-                    store.answers.selected6 = 'C'
-                    break
+                    props.next()
+                    return
+                case 4:
+                    props.next()
+                    return
                 default:
                     return
             }
@@ -96,18 +98,18 @@ const selectAnswer = (answerIndex) => {
         case 7:
             switch (answerIndex) {
                 case 1:
-                    if (store.answers.TIER !== 'TIER0') {
-                        store.answers.TIER = 'TIER1'
+                    if (store.TIER !== 'TIER0') {
+                        store.TIER = 'TIER1'
                     }
                     break
                 case 2:
-                    if (store.answers.TIER !== 'TIER0') {
-                        store.answers.TIER = 'TIER2'
+                    if (store.TIER !== 'TIER0') {
+                        store.TIER = 'TIER2'
                     }
                     break
                 case 3:
-                    if (store.answers.TIER !== 'TIER0') {
-                        store.answers.TIER = 'TIER3'
+                    if (store.TIER !== 'TIER0') {
+                        store.TIER = 'TIER3'
                     }
                     break
 
@@ -138,7 +140,7 @@ const proceedWithMultipleSelection = () => {
 
     inputs.forEach((input) => {
         if (input.checked) {
-            store.answers.selected4.push(input.value)
+            store.selectedSubjects.push(input.value)
         }
     })
 }
@@ -146,7 +148,10 @@ const proceedWithMultipleSelection = () => {
 <template>
     <div v-for="(q, index) in props.questions" :key="index">
         <div v-if="q.qNo === store.step && store.step === 1">
-            <h1>{{ q.Q }}</h1>
+            <h1>
+                {{ q.Q }}
+            </h1>
+
             <div class="answer__content">
                 <div class="answer__buttons-wrapper">
                     <button
@@ -181,7 +186,64 @@ const proceedWithMultipleSelection = () => {
                 !store.showSecondBenefit
             "
         >
-            <h1>{{ q.Q }}</h1>
+            <h1>
+                {{ q.Q }}
+
+                <img
+                    v-if="store.step === 2"
+                    src="../assets/images/emoji/Q2_text1.svg"
+                    class="emoji"
+                    alt=""
+                />
+                <img
+                    v-if="store.step === 2"
+                    src="../assets/images/emoji/Q2_text2.svg"
+                    class="emoji"
+                    alt=""
+                />
+                <img
+                    v-if="store.step === 4"
+                    src="../assets/images/emoji/Q7_text1.svg"
+                    class="emoji"
+                    alt=""
+                />
+                <img
+                    v-if="store.step === 5"
+                    src="../assets/images/emoji/Q5_text1.svg"
+                    class="emoji"
+                    alt=""
+                />
+                <img
+                    v-if="store.step === 5"
+                    src="../assets/images/emoji/Q5_text2.svg"
+                    class="emoji"
+                    alt=""
+                />
+                <img
+                    v-if="store.step === 6"
+                    src="../assets/images/emoji/Q6_text1.svg"
+                    class="emoji"
+                    alt=""
+                />
+                <img
+                    v-if="store.step === 6"
+                    src="../assets/images/emoji/Q6_text2.svg"
+                    class="emoji"
+                    alt=""
+                />
+                <img
+                    v-if="store.step === 7"
+                    src="../assets/images/emoji/Q7_text1.svg"
+                    class="emoji"
+                    alt=""
+                />
+                <img
+                    v-if="store.step === 7"
+                    src="../assets/images/emoji/Q7_text2.svg"
+                    class="emoji"
+                    alt=""
+                />
+            </h1>
 
             <div class="answer__container" v-if="!store.showFirstBenefit">
                 <div v-if="store.step < 4">
@@ -191,9 +253,15 @@ const proceedWithMultipleSelection = () => {
                         class="answer__btn"
                         @click="selectAnswer(index + 1)"
                     >
-                        <span v-if="store.step == 2 && index + 1 === 1">😍 </span>
-                        <span v-if="store.step == 2 && index + 1 === 2">😊 </span>
-                        <span v-if="store.step == 2 && index + 1 === 3">😫 </span>
+                        <span v-if="store.step == 2 && index + 1 === 1"
+                            ><img src="../assets/images/emoji/Q2_A.svg" class="emoji" alt="" />
+                        </span>
+                        <span v-if="store.step == 2 && index + 1 === 2"
+                            ><img src="../assets/images/emoji/Q2_B.svg" class="emoji" alt="" />
+                        </span>
+                        <span v-if="store.step == 2 && index + 1 === 3"
+                            ><img src="../assets/images/emoji/Q2_C.svg" class="emoji" alt="" />
+                        </span>
                         {{ a }}
                     </button>
                 </div>
@@ -215,7 +283,11 @@ const proceedWithMultipleSelection = () => {
                                 alt=""
                                 class="custom-checkbox-checked"
                             />
-                            🧮
+                            <img
+                                src="../assets/images/emoji/Q4_pazinimas.svg"
+                                class="emoji"
+                                alt=""
+                            />
                         </span>
                         Pasaulio pažinimas
                     </button>
@@ -236,7 +308,7 @@ const proceedWithMultipleSelection = () => {
                                 alt=""
                                 class="custom-checkbox-checked"
                             />
-                            🧮
+                            <img src="../assets/images/emoji/Q4_gamta.svg" alt="" class="emoji" />
                         </span>
                         Gamta ir žmogus
                     </button>
@@ -257,7 +329,11 @@ const proceedWithMultipleSelection = () => {
                                 alt=""
                                 class="custom-checkbox-checked"
                             />
-                            🧮
+                            <img
+                                src="../assets/images/emoji/Q4_idomusis.svg"
+                                alt=""
+                                class="emoji"
+                            />
                         </span>
                         Įdomusis mokslas
                     </button>
@@ -278,7 +354,11 @@ const proceedWithMultipleSelection = () => {
                                 alt=""
                                 class="custom-checkbox-checked"
                             />
-                            🧮
+                            <img
+                                src="../assets/images/emoji/Q4_geografija.svg"
+                                alt=""
+                                class="emoji"
+                            />
                         </span>
                         Geografija
                     </button>
@@ -299,7 +379,11 @@ const proceedWithMultipleSelection = () => {
                                 alt=""
                                 class="custom-checkbox-checked"
                             />
-                            🧮
+                            <img
+                                src="../assets/images/emoji/Q4_istorija.svg"
+                                alt=""
+                                class="emoji"
+                            />
                         </span>
                         Istorija
                     </button>
@@ -320,7 +404,11 @@ const proceedWithMultipleSelection = () => {
                                 alt=""
                                 class="custom-checkbox-checked"
                             />
-                            🧮
+                            <img
+                                src="../assets/images/emoji/Q4_biologija.svg"
+                                alt=""
+                                class="emoji"
+                            />
                         </span>
                         Biologija
                     </button>
@@ -341,7 +429,7 @@ const proceedWithMultipleSelection = () => {
                                 alt=""
                                 class="custom-checkbox-checked"
                             />
-                            ⚡
+                            <img src="../assets/images/emoji/Q4_fizika.svg" alt="" class="emoji" />
                         </span>
                         Fizika
                     </button>
@@ -362,7 +450,7 @@ const proceedWithMultipleSelection = () => {
                                 alt=""
                                 class="custom-checkbox-checked"
                             />
-                            🧪
+                            <img src="../assets/images/emoji/Q4_chemija.svg" alt="" class="emoji" />
                         </span>
                         Chemija
                     </button>
@@ -383,7 +471,11 @@ const proceedWithMultipleSelection = () => {
                                 alt=""
                                 class="custom-checkbox-checked"
                             />
-                            📖
+                            <img
+                                src="../assets/images/emoji/Q4_lietuviu.svg"
+                                alt=""
+                                class="emoji"
+                            />
                         </span>
                         Lietuvių kalba
                     </button>
@@ -404,7 +496,7 @@ const proceedWithMultipleSelection = () => {
                                 alt=""
                                 class="custom-checkbox-checked"
                             />
-                            🇬🇧
+                            <img src="../assets/images/emoji/Q4_anglu.svg" alt="" class="emoji" />
                         </span>
                         Anglų kalba
                     </button>
@@ -425,7 +517,11 @@ const proceedWithMultipleSelection = () => {
                                 alt=""
                                 class="custom-checkbox-checked"
                             />
-                            🧮
+                            <img
+                                src="../assets/images/emoji/Q4_matematika.svg"
+                                alt=""
+                                class="emoji"
+                            />
                         </span>
                         Matematika
                     </button>
@@ -437,19 +533,41 @@ const proceedWithMultipleSelection = () => {
                         class="answer__btn"
                         @click="selectAnswer(index + 1)"
                     >
-                        <span v-if="store.step == 5 && index + 1 === 1">🚀 </span>
-                        <span v-if="store.step == 5 && index + 1 === 2">👍 </span>
-                        <span v-if="store.step == 5 && index + 1 === 3">😬 </span>
-                        <span v-if="store.step == 5 && index + 1 === 4">🙄 </span>
+                        <span v-if="store.step == 5 && index + 1 === 1"
+                            ><img src="../assets/images/emoji/Q5_A.svg" alt="" class="emoji" />
+                        </span>
+                        <span v-if="store.step == 5 && index + 1 === 2"
+                            ><img src="../assets/images/emoji/Q5_B.svg" alt="" class="emoji" />
+                        </span>
+                        <span v-if="store.step == 5 && index + 1 === 3"
+                            ><img src="../assets/images/emoji/Q5_C.svg" alt="" class="emoji" />
+                        </span>
+                        <span v-if="store.step == 5 && index + 1 === 4"
+                            ><img src="../assets/images/emoji/Q5_D.svg" alt="" class="emoji" />
+                        </span>
 
-                        <span v-if="store.step == 6 && index + 1 === 1">📝 </span>
-                        <span v-if="store.step == 6 && index + 1 === 2">🎓 </span>
-                        <span v-if="store.step == 6 && index + 1 === 3">👍 </span>
-                        <span v-if="store.step == 6 && index + 1 === 4">🤷‍♂️ </span>
+                        <span v-if="store.step == 6 && index + 1 === 1"
+                            ><img src="../assets/images/emoji/Q6_A.svg" alt="" class="emoji" />
+                        </span>
+                        <span v-if="store.step == 6 && index + 1 === 2"
+                            ><img src="../assets/images/emoji/Q6_B.svg" alt="" class="emoji" />
+                        </span>
+                        <span v-if="store.step == 6 && index + 1 === 3"
+                            ><img src="../assets/images/emoji/Q6_C.svg" alt="" class="emoji" />
+                        </span>
+                        <span v-if="store.step == 6 && index + 1 === 4"
+                            ><img src="../assets/images/emoji/Q6_D.svg" alt="" class="emoji" />
+                        </span>
 
-                        <span v-if="store.step == 7 && index + 1 === 1">😌 </span>
-                        <span v-if="store.step == 7 && index + 1 === 2">😎 </span>
-                        <span v-if="store.step == 7 && index + 1 === 3">🔥 </span>
+                        <span v-if="store.step == 7 && index + 1 === 1"
+                            ><img src="../assets/images/emoji/Q7_A.svg" alt="" class="emoji" />
+                        </span>
+                        <span v-if="store.step == 7 && index + 1 === 2"
+                            ><img src="../assets/images/emoji/Q7_B.svg" alt="" class="emoji" />
+                        </span>
+                        <span v-if="store.step == 7 && index + 1 === 3"
+                            ><img src="../assets/images/emoji/Q7_C.svg" alt="" class="emoji" />
+                        </span>
                         {{ a }}
                     </button>
                 </div>

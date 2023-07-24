@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@vitejs/plugin-basic-ssl": "^1.0.1",
+    "axios": "^1.4.0",
     "vite-plugin-mkcert": "^1.16.0",
     "vue": "^3.3.4"
   },

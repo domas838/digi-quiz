@@ -20,14 +20,14 @@ const submitHandler = (PROFILE1, PROFILE2, PROFILE3) => {
     } else if (result.length == 1) {
         store.selectedPersona = duplicated[0]
     } else if (result.length == 2) {
-        if (result.includes('Busy multitasker') && result.includes('Struggling')) {
+        if (result.includes('Busy Multitasker') && result.includes('Struggling')) {
             store.selectedPersona = 'Struggling'
         }
-        if (result.includes('Exam-oriented') && result.includes('Ambitious')) {
+        if (result.includes('Exam Oriented') && result.includes('Ambitious')) {
             store.selectedPersona = 'Ambitious'
         }
-        if (result.includes('Exam-oriented') && result.includes('Busy multitasker')) {
-            if (store.answers.TIER === 'TIER1') {
+        if (result.includes('Exam Oriented') && result.includes('Busy Multitasker')) {
+            if (store.TIER === 'TIER1') {
                 store.selectedPersona = 'Struggling'
             } else {
                 store.selectedPersona = 'Ambitious'
@@ -36,10 +36,10 @@ const submitHandler = (PROFILE1, PROFILE2, PROFILE3) => {
         //
     } else if (result.length >= 2) {
         if (
-            (result.includes('Busy multitasker') || result.includes('Struggling')) &&
-            (result.includes('Exam-oriented') || result.includes('Ambitious'))
+            (result.includes('Busy Multitasker') || result.includes('Struggling')) &&
+            (result.includes('Exam Oriented') || result.includes('Ambitious'))
         ) {
-            if (store.answers.TIER === 'TIER1') {
+            if (store.TIER === 'TIER1') {
                 store.selectedPersona = 'Struggling'
             } else {
                 store.selectedPersona = 'Ambitious'
@@ -50,19 +50,19 @@ const submitHandler = (PROFILE1, PROFILE2, PROFILE3) => {
     console.log('Persona ' + store.selectedPersona)
     switch (store.selectedPersona) {
         case 'Ambitious':
-            if (store.answers.TIER === 'TIER0') {
+            if (store.TIER === 'TIER0') {
                 store.TIER0 = 'Textbook, flexible'
             }
             store.TIER1 = 'Advanced'
             store.TIER2 = 'Exam prep'
             store.TIER3 = 'School prep'
             break
-        case 'Exam-oriented':
-            if (store.answers.TIER === 'TIER0') {
+        case 'Exam Oriented':
+            if (store.TIER === 'TIER0') {
                 store.TIER0 = 'Textbook, flexible'
             }
             store.TIER1 = 'Exam prep'
-            if (PROFILE1 === ['Ambitious', 'Exam-oriented']) {
+            if (PROFILE1 === ['Ambitious', 'Exam Oriented']) {
                 store.TIER2 = 'Exam advanced prep'
                 store.TIER3 = 'Advanced school prep'
             } else {
@@ -71,11 +71,11 @@ const submitHandler = (PROFILE1, PROFILE2, PROFILE3) => {
             }
 
             break
-        case 'Busy multitasker':
-            if (store.answers.TIER === 'TIER0') {
+        case 'Busy Multitasker':
+            if (store.TIER === 'TIER0') {
                 store.TIER0 = 'Textbook, flexible'
             }
-            if (PROFILE1 === ['Ambitious', 'Exam-oriented']) {
+            if (PROFILE1 === ['Ambitious', 'Exam Oriented']) {
                 store.TIER1 = 'Exam advanced prep'
             } else {
                 store.TIER1 = 'Exam prep'
@@ -85,7 +85,7 @@ const submitHandler = (PROFILE1, PROFILE2, PROFILE3) => {
 
             break
         case 'Struggling':
-            if (store.answers.TIER === 'TIER0') {
+            if (store.TIER === 'TIER0') {
                 store.TIER0 = 'Textbook, flexible'
             }
             store.TIER1 = 'Textbook, flexible'
@@ -94,23 +94,23 @@ const submitHandler = (PROFILE1, PROFILE2, PROFILE3) => {
 
             break
         case 'Socializer':
-            if (store.answers.TIER === 'TIER0') {
+            if (store.TIER === 'TIER0') {
                 store.TIER0 = 'Textbook, flexible'
             }
             store.TIER1 = 'Non-formal'
-            if (PROFILE1 === ['Ambitious', 'Exam-oriented']) {
+            if (PROFILE1 === ['Ambitious', 'Exam Oriented']) {
                 store.TIER2 = 'Exam prep'
             } else {
                 store.TIER2 = 'School prep'
             }
             if (PROFILE2 === 'Exam oriented') {
-                if (PROFILE1 === ['Ambitious', 'Exam-oriented']) {
+                if (PROFILE1 === ['Ambitious', 'Exam Oriented']) {
                     store.TIER3 = 'Advanced exam prep'
                 } else {
                     store.TIER3 = 'School prep'
                 }
             } else {
-                if (PROFILE1 === ['Ambitious', 'Exam-oriented']) {
+                if (PROFILE1 === ['Ambitious', 'Exam Oriented']) {
                     store.TIER3 = 'Advanced school prep'
                 } else {
                     store.TIER3 = 'Textbook, flexible'
@@ -125,7 +125,7 @@ const submitHandler = (PROFILE1, PROFILE2, PROFILE3) => {
     console.log('TIER1 ' + store.TIER1)
     console.log('TIER2 ' + store.TIER2)
     console.log('TIER3 ' + store.TIER3)
-
+    console.log(store.selectedSubjects)
     store.step += 1
     store.showRecomendations = true
 }
