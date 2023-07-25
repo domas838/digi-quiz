@@ -1,86 +1,30 @@
 <script setup>
-import axios from 'axios'
-import { onMounted } from 'vue'
 import { store } from '../store'
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
 
-const token = 'a29826cb-670e-4b25-9669-35f67b2e3e3b'
-
-onMounted(() => {
-    programRecomendationHandler()
-})
-const programRecomendationHandler = () => {
-    store.isLoading = true
-    setTimeout(() => {
-        const instance = axios.create({
-            baseURL: 'https://coda.io/apis/v1/docs/otYeYWMX9e/tables/grid-8XN2uCh13U/',
-            headers: { Authorization: 'Bearer ' + token }
-        })
-
-        instance.get('/rows?useColumnNames=true').then((response) => {
-            response.data.items.forEach((item) => {
-                console.log(item)
-                switch (item.values.Tier) {
-                    case 'TIER0':
-                        if (
-                            item.values.Grade === store.selectedClass &&
-                            item.values.Persona === store.selectedPersona &&
-                            item.values.Tags === store.TIER0 &&
-                            store.selectedSubjects.includes(item.values.Subject)
-                        ) {
-                            store.recomendationsArrTIER0.push(item)
-                        }
-                        break
-                    case 'TIER1':
-                        if (
-                            item.values.Grade === store.selectedClass &&
-                            item.values.Persona === store.selectedPersona &&
-                            item.values.Tags === store.TIER1 &&
-                            store.selectedSubjects.includes(item.values.Subject)
-                        ) {
-                            store.recomendationsArrTIER1.push(item)
-                        }
-                        break
-                    case 'TIER2':
-                        if (
-                            item.values.Grade === store.selectedClass &&
-                            item.values.Persona === store.selectedPersona &&
-                            item.values.Tags === store.TIER2 &&
-                            store.selectedSubjects.includes(item.values.Subject)
-                        ) {
-                            store.recomendationsArrTIER2.push(item)
-                        }
-                        break
-                    case 'TIER3':
-                        if (
-                            item.values.Grade === store.selectedClass &&
-                            item.values.Persona === store.selectedPersona &&
-                            item.values.Tags === store.TIER3 &&
-                            store.selectedSubjects.includes(item.values.Subject)
-                        ) {
-                            store.recomendationsArrTIER3.push(item)
-                        }
-                        break
-
-                    default:
-                        break
-                }
-            })
-            console.log('TIER0', store.recomendationsArrTIER0)
-            console.log('TIER1', store.recomendationsArrTIER1)
-            console.log('TIER2', store.recomendationsArrTIER2)
-            console.log('TIER3', store.recomendationsArrTIER3)
-            store.isLoading = false
-            return response.data.items
-        })
-    }, 3000)
+const fakeArr = [0, 1, 2, 3, 4, 5, 6, 7]
+const settings = {
+    itemsToShow: 4,
+    snapAlign: 'start',
+    breakpoints: {
+        0: {
+            itemsToShow: 1
+        },
+        // 700px and up
+        700: {
+            itemsToShow: 2
+        },
+        // 1024 and up
+        1024: {
+            itemsToShow: 4
+        }
+    }
 }
 </script>
-<template>
-    <div class="spinner" v-if="store.isLoading">
-        <img src="../assets/images/spinner.svg" alt="" />
-    </div>
-    <h1 v-if="store.isLoading">Skaičiuojame rezultatus...</h1>
 
+<template>
+    <h1>Remiantis apklausa, rekomenduojame mokytis pagal šias programas:</h1>
     <div v-if="store.recomendationsArrTIER0.length">
         <h2>TIER0 Programs</h2>
 
@@ -109,4 +53,118 @@ const programRecomendationHandler = () => {
             {{ item.values.ProgramName }}
         </div>
     </div>
+
+    <carousel v-bind="settings">
+        <slide v-for="slide in fakeArr" :key="slide"
+            ><div class="slide-header">
+                <img src="../assets/images/slider-header.jpg" alt="" />
+                <div class="slide-content">
+                    <h3>Metinis VBE uždavinių pasiruošimas</h3>
+                    <h4>Teacher <span>Vardas Pavardė</span></h4>
+                </div>
+                <div class="slide-separator"></div>
+                <div class="slide-summary">
+                    <div class="slide-summary-line">
+                        <div class="icon">
+                            <img src="../assets/images/icon-lessons.svg" alt="" />
+                        </div>
+                        <div class="title">82 lessons in total</div>
+                    </div>
+                    <div class="slide-summary-line">
+                        <div class="icon">
+                            <img src="../assets/images/icon-live-lessons.svg" alt="" />
+                        </div>
+                        <div class="title">With LIVE lessons</div>
+                    </div>
+                    <div class="slide-summary-line">
+                        <div class="icon">
+                            <img src="../assets/images/icon-tests.svg" alt="" />
+                        </div>
+                        <div class="title">Tests inside</div>
+                    </div>
+                </div>
+            </div>
+        </slide>
+
+        <template #addons>
+            <navigation />
+        </template>
+    </carousel>
 </template>
+
+<style scoped>
+.slide-header {
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+    overflow: hidden;
+}
+.slide-header img {
+    width: 100%;
+    display: block;
+}
+.slide-content {
+    background-color: #ffffff;
+    padding: 15px;
+}
+.slide-summary {
+    background-color: #ffffff;
+    padding: 15px;
+    border-bottom-left-radius: 11px;
+    border-bottom-right-radius: 11px;
+}
+.slide-separator {
+    height: 1px;
+    max-width: 90%;
+    display: block;
+    margin: 0 auto;
+    background-color: #f0f0f0;
+}
+.slide-summary-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.slide-summary-line .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    padding: 6px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+h3 {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px; /* 137.5% */
+}
+h4 {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 133.333% */
+    margin: 16px 0;
+}
+h4 span {
+    font-weight: 700;
+}
+h5 {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px; /* 133.333% */
+}
+@media (min-width: 992px) {
+    h1 {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 70%;
+    }
+}
+</style>

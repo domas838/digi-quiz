@@ -6,6 +6,7 @@ import FirstBenefit from './components/FirstBenefit.vue'
 import SecondBenefit from './components/SecondBenefit.vue'
 import EmailForm from './components/EmailForm.vue'
 import ProgramRecomendation from './components/ProgramRecomendation.vue'
+import ProgramsLoader from './components/ProgramsLoader.vue'
 const url = new URL(window.location.href)
 onMounted(() => {
     if (store.step === 0) {
@@ -58,7 +59,6 @@ const prevStep = () => {
     }
 }
 const nextStep = () => {
-    console.log('nextStep()')
     if (store.step <= store.quiz.child.length) {
         if (store.step === 3 && store.showFirstBenefit === false) {
             if (!url.searchParams.has('class')) {
@@ -142,7 +142,12 @@ const completeness = (step) => {
         </div>
         <div
             class="progress__wrapper"
-            v-if="store.step >= 1 && !store.showFirstBenefit && !store.showSecondBenefit"
+            v-if="
+                store.step >= 1 &&
+                !store.showFirstBenefit &&
+                !store.showSecondBenefit &&
+                store.step < 9
+            "
         >
             <button
                 class="back-button"
@@ -162,16 +167,18 @@ const completeness = (step) => {
             </div>
         </div>
         <div class="answer__container answer__container--wide" v-if="store.respondent === 'child'">
-            <RespondentQuestions v-bind:questions="store.quiz.child" :next="nextStep" />
+            <RespondentQuestions :questions="store.quiz.child" :next="nextStep" />
         </div>
         <div class="answer__container answer__container--wide" v-if="store.respondent === 'parent'">
-            <RespondentQuestions v-bind:questions="store.quiz.parent" :next="nextStep" />
+            <RespondentQuestions :questions="store.quiz.parent" :next="nextStep" />
         </div>
 
         <FirstBenefit />
         <SecondBenefit />
-        <EmailForm v-if="store.showCTA" />
-        <ProgramRecomendation v-if="store.showRecomendations" />
+        <ProgramsLoader v-if="store.step === 8" />
+        <EmailForm v-if="store.step === 9" />
+
+        <ProgramRecomendation v-if="store.step === 10 && store.showRecomendations" />
     </div>
     <img src="./assets/images/bottomVector.svg" class="bottom-vector" alt="" />
 </template>

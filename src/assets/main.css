@@ -8,6 +8,7 @@ body {
     max-height: 100vh;
     overflow-y: auto;
     position: relative;
+    font-family: 'obviously', sans-serif;
 }
 body.bg-dark {
     background: linear-gradient(0deg, #f4e140 0%, #f4e140 100%), #fff;
@@ -74,10 +75,7 @@ h2 {
     align-items: flex-start;
     text-align: left;
 }
-.intro-selection__buttons {
-    display: flex;
-    flex-wrap: wrap;
-}
+
 .intro-selection__buttons button {
     background-color: #4a74eb;
     color: #ffffff;
@@ -90,6 +88,16 @@ h2 {
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
+    transition: 0.25s ease;
+}
+.intro-selection__buttons button:hover {
+    background-color: #194fe6;
+}
+.intro-selection__buttons button.button--parent {
+    background-color: #ff714b;
+}
+.intro-selection__buttons button.button--parent:hover {
+    background-color: #ef5830;
 }
 .intro-selection__buttons button img {
     width: 2rem;
@@ -361,6 +369,10 @@ input[name='subjects']:checked ~ .custom-checkbox-checked {
     margin-top: 100px;
     position: relative;
     z-index: 10;
+    transition: 0.25s ease;
+}
+.benefit-btn:hover {
+    background-color: #194fe6;
 }
 .benefit-btn img {
     margin-left: 16px;
@@ -456,4 +468,13 @@ input[name='subjects']:checked ~ .custom-checkbox-checked {
     to {
         transform: rotate(360deg);
     }
+}
+.carousel__prev {
+    left: -60px !important;
+}
+.carousel__next {
+    right: -60px !important;
+}
+.carousel__slide {
+    padding: 0.5rem;
 }
