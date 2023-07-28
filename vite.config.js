@@ -11,7 +11,17 @@ export default defineConfig({
         https: true
     },
 
-    plugins: [vue(), vueJsx(), mkcert()],
+    plugins: [
+        vue({
+            template: {
+                compilerOptions: {
+                    isCustomElement: (tag) => ['VueFaqAccordion'].includes(tag)
+                }
+            }
+        }),
+        vueJsx(),
+        mkcert()
+    ],
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))

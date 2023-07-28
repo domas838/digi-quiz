@@ -133,10 +133,15 @@ const completeness = (step) => {
             <img src="./assets/images/digiklase.svg" alt="digiklase logo" />
         </div>
     </div>
-    <div class="container" v-if="store.step !== 0">
+    <div class="container" v-if="store.step !== 0 && store.step !== 10">
         <div
             class="brand-logo"
-            v-if="store.step > 0 && !store.showFirstBenefit && !store.showSecondBenefit"
+            v-if="
+                store.step > 0 &&
+                store.step < 10 &&
+                !store.showFirstBenefit &&
+                !store.showSecondBenefit
+            "
         >
             <img src="./assets/images/digiklase.svg" alt="digiklase logo" />
         </div>
@@ -166,10 +171,16 @@ const completeness = (step) => {
                 ></span>
             </div>
         </div>
-        <div class="answer__container answer__container--wide" v-if="store.respondent === 'child'">
+        <div
+            class="answer__container answer__container--wide"
+            v-if="store.respondent === 'child' && store.step !== 10"
+        >
             <RespondentQuestions :questions="store.quiz.child" :next="nextStep" />
         </div>
-        <div class="answer__container answer__container--wide" v-if="store.respondent === 'parent'">
+        <div
+            class="answer__container answer__container--wide"
+            v-if="store.respondent === 'parent' && store.step !== 10"
+        >
             <RespondentQuestions :questions="store.quiz.parent" :next="nextStep" />
         </div>
 
@@ -177,10 +188,12 @@ const completeness = (step) => {
         <SecondBenefit />
         <ProgramsLoader v-if="store.step === 8" />
         <EmailForm v-if="store.step === 9" />
-
-        <ProgramRecomendation v-if="store.step === 10 && store.showRecomendations" />
     </div>
-    <img src="./assets/images/bottomVector.svg" class="bottom-vector" alt="" />
+    <img
+        src="./assets/images/bottomVector.svg"
+        class="bottom-vector"
+        alt="Vector"
+        v-if="store.step !== 10"
+    />
+    <ProgramRecomendation v-if="store.step === 10 && store.showRecomendations" />
 </template>
-
-<style scoped></style>

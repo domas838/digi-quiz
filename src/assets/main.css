@@ -17,6 +17,7 @@ body.bg-dark {
     position: relative;
     overflow: hidden;
 }
+
 .bottom-vector {
     width: 100%;
     bottom: 0;
@@ -182,9 +183,7 @@ form {
     margin: 0 auto;
     max-width: 800px;
 }
-form button {
-    float: right;
-}
+
 input[name='subjects'] {
     position: absolute;
     z-index: 10;
@@ -210,6 +209,8 @@ input[name='subjects']:checked ~ .custom-checkbox-checked {
     width: 90%;
     max-width: 1200px;
     padding-bottom: 100px;
+    z-index: 10;
+    position: relative;
 }
 .container .brand-logo img {
     margin: 0 auto;
@@ -370,12 +371,45 @@ input[name='subjects']:checked ~ .custom-checkbox-checked {
     position: relative;
     z-index: 10;
     transition: 0.25s ease;
+    margin: 0 auto;
 }
 .benefit-btn:hover {
     background-color: #194fe6;
 }
+.cta-btn img,
 .benefit-btn img {
     margin-left: 16px;
+}
+.cta-btn {
+    display: flex;
+    align-items: center;
+    font-family: 'obviously', sans-serif;
+    width: fit-content;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 550;
+    line-height: 18px;
+
+    padding: 0 25px;
+    background-color: rgba(74, 116, 235, 1);
+    border-radius: 75px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    color: white;
+
+    z-index: 10;
+
+    transition: 0.25s ease;
+
+    height: 45px;
+    text-decoration: none;
+}
+.cta-btn:hover {
+    background-color: #194fe6;
+}
+.benefit-row + .benefit-btn {
+    float: left;
 }
 @media (max-width: 1024px) {
     .intro-visual {
@@ -409,7 +443,7 @@ input[name='subjects']:checked ~ .custom-checkbox-checked {
     }
     .container {
         width: 100%;
-        padding: 0 10%;
+        padding: 0 5%;
     }
     .answer__container {
         width: 100%;
@@ -477,4 +511,25 @@ input[name='subjects']:checked ~ .custom-checkbox-checked {
 }
 .carousel__slide {
     padding: 0.5rem;
+}
+.notice {
+    background: linear-gradient(0deg, rgba(74, 116, 235, 0.2) 0%, rgba(74, 116, 235, 0.2) 100%),
+        #fff;
+    padding: 15px 25px;
+    border-radius: 12px;
+}
+.cta-link {
+    font-size: 16px;
+    font-style: normal;
+    line-height: 28.6px;
+    text-decoration-line: underline;
+
+    color: #4a74eb;
+}
+.d-flex .cta-btn,
+.d-flex .cta-link {
+    margin-top: 50px;
+}
+.d-flex .cta-btn {
+    margin-right: 32px;
 }

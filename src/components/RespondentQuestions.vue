@@ -577,7 +577,7 @@ const proceedWithMultipleSelection = () => {
                         class="benefit-btn"
                         style="margin-top: 2rem"
                     >
-                        Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
+                        Tęsti <img src="../assets/images/arrow-right.svg" alt="Tęsti" />
                     </button>
                 </div>
             </div>

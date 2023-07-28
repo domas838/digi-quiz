@@ -131,19 +131,45 @@ const submitHandler = (PROFILE1, PROFILE2, PROFILE3) => {
 }
 </script>
 <template>
-    <h1 v-if="store.respondent === 'child'">Įvesk savo ir tėčio/globėjo el. paštą</h1>
+    <h1 v-if="store.respondent === 'child'">Įvesk savo ir tėvelio/globėjo el. paštą</h1>
     <h1 v-if="store.respondent === 'parent'">Įveskite el. paštą, kur išsiųsime rezultatus</h1>
     <form action="" @submit="submitHandler(store.PROFILE1, store.PROFILE2, store.PROFILE3, $event)">
-        <input
-            class="digi-input"
-            type="email"
-            name="user-email"
-            id="user-email"
-            placeholder="El. paštas"
-            v-model="store.userEmail"
-        />
+        <div v-if="store.respondent === 'child'">
+            <input
+                class="digi-input"
+                type="email"
+                name="child-email"
+                id="child-email"
+                placeholder="Tavo el. paštas"
+                v-model="store.childEmail"
+                style="margin-bottom: 1rem"
+            />
+            <input
+                class="digi-input"
+                type="email"
+                name="parent-email"
+                id="parent-email"
+                placeholder="Tėvelio/globėjo el. paštas"
+                v-model="store.parentEmail"
+                style="margin-bottom: 1rem"
+            />
+            <div class="notice">
+                Įvedus tėvelio/globėjo el. paštą, tau priklausys papildoma
+                <strong>15% nuolaida</strong> narystei įsigyti! Kodą išssiųsime el. paštu.
+            </div>
+        </div>
+        <div v-if="store.respondent === 'parent'">
+            <input
+                class="digi-input"
+                type="email"
+                name="parent-email"
+                id="parent-email"
+                placeholder="El. paštas"
+                v-model="store.parentEmail"
+            />
+        </div>
         <button type="submit" class="benefit-btn" style="margin-top: 2rem">
-            Siųsti <img src="../assets/images/arrow-right.svg" alt="" />
+            Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
         </button>
     </form>
 </template>
