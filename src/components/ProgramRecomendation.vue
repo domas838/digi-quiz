@@ -263,7 +263,7 @@ const getCurrentYear = () => {
                 </div>
                 <div class="testimonial">
                     <div class="author">
-                        <img src="../assets/images/testinmonial-author.svg" alt="" />
+                        <img src="../assets/images/testimonial-author.svg" alt="" />
                     </div>
                     <div class="text">
                         <p>
@@ -866,6 +866,7 @@ ul li::before {
 }
 .testimonial {
     display: flex;
+    align-items: center;
     padding: 15px 20px;
     border-radius: 12px;
     background: rgba(74, 116, 235, 0.1);
@@ -876,6 +877,11 @@ ul li::before {
     margin-right: 20px;
     border-radius: 50%;
     overflow: hidden;
+    width: 55px;
+}
+.testimonial .author img {
+    display: block;
+    width: 100%;
 }
 .testimonial .text p {
     font-size: 16px;
