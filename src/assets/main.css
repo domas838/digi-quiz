@@ -564,3 +564,21 @@ input[name='subjects']:checked ~ .custom-checkbox-checked {
 .d-flex .cta-btn {
     margin-right: 32px;
 }
+.histories-carousel {
+    padding-top: 100px !important;
+    position: relative;
+}
+.histories-carousel .carousel__prev,
+.histories-carousel .carousel__next {
+    position: absolute;
+    right: 0;
+    top: 31px;
+}
+
+.histories-carousel .carousel__prev {
+    left: unset !important;
+    right: 66px !important;
+}
+.histories-carousel .carousel__next {
+    right: 12px !important;
+}

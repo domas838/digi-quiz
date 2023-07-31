@@ -8,7 +8,6 @@ const token = 'a29826cb-670e-4b25-9669-35f67b2e3e3b'
 
 onMounted(() => {
     programRecomendationHandler()
-    console.log(store.step)
 })
 const programRecomendationHandler = () => {
     store.isLoading = true

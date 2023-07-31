@@ -39,6 +39,10 @@ const singleSlideSettings = {
     itemsToShow: 1,
     snapAlign: 'start'
 }
+const historiesCarousel = {
+    itemsToShow: 1,
+    snapAlign: 'start'
+}
 const testimSettings = {
     itemsToShow: 3.8,
     snapAlign: 'center'
@@ -387,12 +391,19 @@ const getCurrentYear = () => {
             </div>
         </div>
         <div class="container container--narrow histories-carousel">
-            <carousel v-bind="singleSlideSettings">
+            <carousel v-bind="historiesCarousel">
                 <slide v-for="item in fakeArr" :key="item">
                     <img src="../assets/images/karina.png" alt="" />
                 </slide>
                 <template #addons>
-                    <navigation />
+                    <navigation>
+                        <template #next>
+                            <img src="../assets/images/next-carousel.svg" alt="" />
+                        </template>
+                        <template #prev>
+                            <img src="../assets/images/prev-carousel.svg" alt="" />
+                        </template>
+                    </navigation>
                 </template>
             </carousel>
         </div>
@@ -504,9 +515,7 @@ header .logo {
 .carousel {
     margin-bottom: 125px;
 }
-.histories-carousel {
-    padding-top: 100px !important;
-}
+
 .wrapper.pt {
     padding-top: 125px;
 }
