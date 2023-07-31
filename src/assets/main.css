@@ -15,7 +15,7 @@ body.bg-dark {
 }
 #app {
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .bottom-vector {

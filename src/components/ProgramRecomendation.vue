@@ -6,6 +6,17 @@ import { store } from '../store'
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import SectionCTA from '../components/SectionCTA.vue'
+
+import { ref } from 'vue'
+import { vElementVisibility } from '@vueuse/components'
+
+const target = ref(null)
+const isVisible = ref(false)
+
+function onElementVisibility(state) {
+    isVisible.value = state
+}
+
 const fakeArr = [0, 1, 2, 3, 4, 5, 6, 7]
 const settings = {
     itemsToShow: 4,
@@ -196,11 +207,20 @@ const getCurrentYear = () => {
                 <p><span>2 hours</span>of quizzes</p>
             </div>
         </div>
-        <div class="container pb0">
+        <div class="container">
             <h2 class="section-title">
                 Pagal tavo atsakymus <br />
                 rekomenduojamas Digiklasės planas
             </h2>
+        </div>
+    </div>
+    <div
+        class="wrapper light"
+        :class="{ sticky: isVisible }"
+        ref="target"
+        v-element-visibility="onElementVisibility"
+    >
+        <div class="container">
             <div class="cta-card">
                 <div class="header">
                     <p>Rekomenduojamas planas:</p>
@@ -403,7 +423,7 @@ const getCurrentYear = () => {
             <SectionCTA />
         </div>
     </div>
-    <div class="wrapper light pt">
+    <div class="wrapper light pt page-bottom">
         <div class="container container--narrow">
             <h2 class="section-title">
                 Atsakymai į <span>Dažniausiai <br />Užduodamus Klausimus (D.U.K.)</span>
@@ -616,9 +636,9 @@ video {
     cursor: pointer;
 }
 .btn--secondary {
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
-    font-weight: 550;
+    font-weight: 400;
     line-height: 22px;
     color: #000000;
     border-radius: 56px;
@@ -691,13 +711,33 @@ video {
         margin-bottom: 0;
     }
 }
+@media (min-width: 1440px) {
+    .sticky {
+        position: fixed !important;
+        bottom: 50px;
+        z-index: 100;
+        margin-bottom: 0;
+        margin: 0 auto;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        background-color: transparent !important;
+        padding-bottom: 0;
+    }
+    .sticky .container {
+        padding-bottom: 0;
+        width: 100%;
+    }
+    .page-bottom {
+        padding-bottom: 150px !important;
+    }
+}
+
 .cta-card {
     border-radius: 12px;
     background: #fff;
     box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.1);
     padding: 28px 36px;
-    margin-top: 46px;
-    margin-bottom: 115px;
     z-index: 10;
     position: relative;
 }
@@ -1039,8 +1079,9 @@ ul li::before {
     min-height: 70px;
 }
 .faq-header p {
+    font-family: 'obviously', sans-serif;
+
     font-size: 18px;
-    font-style: normal;
     font-weight: 570;
     line-height: 30px;
 }
