@@ -9,20 +9,12 @@ import ProgramRecomendation from './components/ProgramRecomendation.vue'
 import ProgramsLoader from './components/ProgramsLoader.vue'
 const url = new URL(window.location.href)
 onMounted(() => {
-    if (store.step === 0) {
-        document.body.classList.add('bg-dark')
-    } else {
-        document.body.classList.remove('bg-dark')
-    }
-
     if (url.searchParams.has('role')) {
         if (url.searchParams.get('role') === 'parent') {
-            document.body.classList.remove('bg-dark')
             store.respondent = 'parent'
             store.step = 1
         }
         if (url.searchParams.get('role') === 'child') {
-            document.body.classList.remove('bg-dark')
             store.respondent = 'child'
 
             store.step = 1
@@ -31,7 +23,6 @@ onMounted(() => {
 
     if (url.searchParams.has('class') || url.searchParams.has('subject')) {
         // praleidžiame INTRO, Q1 langą, Q4, BENEFIT, CTA langus.
-        document.body.classList.remove('bg-dark')
         store.step = 2
         store.showCTA = false
     }
@@ -40,12 +31,10 @@ onMounted(() => {
 const respondentChildHandler = () => {
     store.step = 1
     store.respondent = 'child'
-    document.body.classList.remove('bg-dark')
 }
 const respondentParentHandler = () => {
     store.step = 1
     store.respondent = 'parent'
-    document.body.classList.remove('bg-dark')
 }
 const prevStep = () => {
     if (store.step === 3 && store.showFirstBenefit) {
@@ -62,8 +51,6 @@ const nextStep = () => {
     if (store.step <= store.quiz.child.length) {
         if (store.step === 3 && store.showFirstBenefit === false) {
             if (!url.searchParams.has('class')) {
-                document.body.classList.add('bg-dark')
-
                 store.step = 3
                 store.showFirstBenefit = true
             } else {
@@ -72,7 +59,6 @@ const nextStep = () => {
             }
         } else if (store.step === 5 && store.showSecondBenefit === false) {
             if (!url.searchParams.has('class')) {
-                document.body.classList.add('bg-dark')
                 store.step = 5
                 store.showSecondBenefit = true
             } else {
@@ -80,7 +66,6 @@ const nextStep = () => {
                 store.showSecondBenefit = false
             }
         } else {
-            document.body.classList.remove('bg-dark')
             store.step += 1
         }
         if (url.searchParams.has('class') || url.searchParams.has('subject')) {

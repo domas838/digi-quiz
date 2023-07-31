@@ -137,14 +137,14 @@ const selectMultipleAnswers = (event) => {
     }
 }
 const proceedWithMultipleSelection = () => {
-    store.step += 1
-    const inputs = document.querySelectorAll("input[name='subjects']")
+    const selectedInputs = document.querySelectorAll("input[name='subjects']:checked")
+    if (selectedInputs.length) {
+        store.step += 1
 
-    inputs.forEach((input) => {
-        if (input.checked) {
+        selectedInputs.forEach((input) => {
             store.selectedSubjects.push(input.value)
-        }
-    })
+        })
+    }
 }
 </script>
 <template>
@@ -155,7 +155,7 @@ const proceedWithMultipleSelection = () => {
             </h1>
 
             <div class="answer__content">
-                <div class="answer__buttons-wrapper">
+                <div class="answer__buttons-wrapper grade">
                     <button
                         v-for="(classNo, index) in [
                             '1 kl.',

@@ -2,7 +2,6 @@
 import { store } from '../store'
 
 const acceptSecondBenefit = () => {
-    document.body.classList.remove('bg-dark')
     store.showSecondBenefit = false
     store.step += 1
 }

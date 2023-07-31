@@ -1,7 +1,6 @@
 <script setup>
 import { store } from '../store'
 const acceptFirstBenefit = () => {
-    document.body.classList.remove('bg-dark')
     store.showFirstBenefit = false
     store.step += 1
 }

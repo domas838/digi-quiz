@@ -512,6 +512,22 @@ header .logo {
     display: block;
     max-width: 185px;
 }
+@media (max-width: 576px) {
+    header .logo {
+        max-width: 125px;
+        width: 50%;
+    }
+    header .content > div {
+        width: 50%;
+    }
+    header .cta-btn {
+        white-space: nowrap;
+        font-size: 12px;
+    }
+    header .cta-btn img {
+        width: 16px;
+    }
+}
 .carousel {
     margin-bottom: 125px;
 }
