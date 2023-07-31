@@ -219,7 +219,7 @@ const getCurrentYear = () => {
         </div>
     </div>
     <div
-        class="wrapper light"
+        class="wrapper light before-sticky"
         :class="{ sticky: isVisible }"
         ref="target"
         v-element-visibility="onElementVisibility"
@@ -721,14 +721,21 @@ video {
     }
 }
 @media (min-width: 1440px) {
+    .before-sticky .cta-card {
+        transform: translateY(250px);
+    }
+    .before-sticky.sticky .cta-card {
+        transform: translateY(0);
+    }
+    .sticky .cta-card {
+        transition: 1s ease-in-out;
+    }
     .sticky {
         position: fixed !important;
         bottom: 50px;
         z-index: 100;
         margin-bottom: 0;
         margin: 0 auto;
-        left: 50%;
-        transform: translateX(-50%);
         width: 100%;
         background-color: transparent !important;
         padding-bottom: 0;

@@ -564,6 +564,13 @@ input[name='subjects']:checked ~ .custom-checkbox-checked {
 .d-flex .cta-btn {
     margin-right: 32px;
 }
+.carousel__prev,
+.carousel__next {
+    border-radius: 50% !important;
+    width: 44px !important;
+    height: 44px !important;
+    background-color: white !important;
+}
 .histories-carousel {
     padding-top: 100px !important;
     position: relative;
@@ -581,4 +588,19 @@ input[name='subjects']:checked ~ .custom-checkbox-checked {
 }
 .histories-carousel .carousel__next {
     right: 12px !important;
+}
+.carousel__pagination-button {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #ddd !important;
+}
+.carousel__pagination-button::after {
+    display: none !important;
+}
+.carousel__pagination-button--active {
+    background-color: #4a74eb !important;
+}
+.carousel__pagination-item {
+    margin: 0 8px;
 }
