@@ -279,12 +279,7 @@ const getCurrentYear = () => {
                     <li>Weekly progress reports for both learners and parents</li>
                     <li>Works on all devices</li>
                 </ul>
-                <div class="d-flex y-center">
-                    <a href="" class="cta-btn"
-                        >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
-                    /></a>
-                    <a href="/" class="cta-link">Žiūrėti visus planus</a>
-                </div>
+                <SectionCTA />
                 <div class="testimonial">
                     <div class="author">
                         <img src="../assets/images/testimonial-author.svg" alt="" />
@@ -476,7 +471,7 @@ const getCurrentYear = () => {
             <div>
                 <p>© {{ getCurrentYear() }} Digiklasė. Visos teisės saugomos</p>
             </div>
-            <div>
+            <div class="footer-nav">
                 <a
                     href="https://digiklase.lt/privatumo-politika"
                     target="_blank"
@@ -628,6 +623,11 @@ header .logo {
     background-image: url(../assets/images/poster.png);
     background-position: center;
     z-index: 5;
+}
+@media (max-width: 576px) {
+    .video-wrapper {
+        min-height: 350px;
+    }
 }
 video {
     position: absolute;
@@ -903,6 +903,13 @@ video {
 .content--right {
     width: 100%;
 }
+@media (max-width: 576px) {
+    .section-title,
+    .content--left h2 {
+        font-size: 34px;
+        line-height: 1.3;
+    }
+}
 @media screen and (min-width: 768px) {
     .content--left {
         width: 50%;
@@ -1109,6 +1116,7 @@ ul li::before {
     background-color: transparent;
     cursor: pointer;
     min-height: 70px;
+    text-align: left;
 }
 .faq-header p {
     font-family: 'obviously', sans-serif;
@@ -1212,7 +1220,7 @@ h5 {
     transition: height 600ms cubic-bezier(0.3, 0, 0.6, 1);
 }
 footer {
-    height: 100px;
+    min-height: 100px;
     background-color: #000000;
     display: flex;
     align-items: center;
@@ -1234,6 +1242,22 @@ footer a:hover {
 }
 .footer-link:first-child {
     margin-right: 60px;
+}
+@media (max-width: 768px) {
+    footer {
+        padding: 16px 0;
+    }
+    footer .container {
+        flex-direction: column;
+    }
+    .footer-link {
+        display: block;
+        margin: 8px 0;
+    }
+    .footer-nav {
+        order: -1;
+        margin-bottom: 16px;
+    }
 }
 .pb {
     padding-bottom: 100px;
