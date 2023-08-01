@@ -47,9 +47,19 @@ const testimSettings = {
     itemsToShow: 3.8,
     snapAlign: 'center'
 }
-const playVideoHandler = (event) => {
-    event.target.style.display = 'none'
-    document.getElementById('videoHow').play()
+
+const playVideoHandler = () => {
+    console.log('Click')
+    if (!document.getElementById('videoHow').playing) {
+        document.querySelector('.play-btn').classList.add('isPlaying')
+        document.querySelector('.pause-btn').classList.add('isPlaying')
+        document.getElementById('videoHow').play()
+    }
+}
+const pauseVideoHandler = () => {
+    document.querySelector('.play-btn').classList.remove('isPlaying')
+    document.querySelector('.pause-btn').classList.remove('isPlaying')
+    document.getElementById('videoHow').pause()
 }
 const isHidden = reactive({
     isHidden: true
@@ -259,6 +269,9 @@ const getCurrentYear = () => {
                     <source src="../assets/video/demo.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
+                <div class="pause-btn" @click="pauseVideoHandler">
+                    <img src="../assets/images/pause-btn.svg" alt="" />
+                </div>
             </div>
         </div>
 
@@ -648,7 +661,8 @@ video {
     z-index: 10;
 }
 
-.play-btn {
+.play-btn,
+.pause-btn {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -659,6 +673,15 @@ video {
     outline: none;
     background-color: transparent;
     cursor: pointer;
+}
+.play-btn.isPlaying {
+    display: none;
+}
+.pause-btn {
+    display: none;
+}
+.pause-btn.isPlaying {
+    display: block;
 }
 .btn--secondary {
     font-size: 14px;
