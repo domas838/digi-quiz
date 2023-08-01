@@ -233,12 +233,7 @@ const getCurrentYear = () => {
                 <p><span>2 hours</span>of quizzes</p>
             </div>
         </div>
-        <div class="container">
-            <h2 class="section-title">
-                Pagal tavo atsakymus <br />
-                rekomenduojamas Digiklasės planas
-            </h2>
-        </div>
+        
     </div>
     <div
         class="wrapper light before-sticky"
@@ -256,7 +251,7 @@ const getCurrentYear = () => {
                         <h3>„Visi mokykliniai dalykai ir visi būreliai“</h3>
                     </div>
                     <div class="price">
-                        <p>Nuo</p>
+                        <p>Nuo </p>
                         <p><span>49,00 </span>€/mėn.</p>
                     </div>
                     <div class="action">
@@ -784,9 +779,9 @@ video {
         margin-bottom: 0;
     }
 }
-@media (min-width: 1440px) {
-    .before-sticky .cta-card {
+.before-sticky .cta-card {
         transform: translateY(250px);
+        position: relative;
     }
     .before-sticky.sticky .cta-card {
         transform: translateY(0);
@@ -794,6 +789,59 @@ video {
     .sticky .cta-card {
         transition: 1s ease-in-out;
     }
+@media (max-width: 767.89px) {
+    .before-sticky.sticky {
+        position: fixed;
+        bottom: 0;
+        z-index: 99;
+    }
+    .before-sticky.sticky .container  {
+        padding: 0;
+        text-align: center;
+    }
+    .before-sticky.sticky .title {
+        margin-bottom: 0;
+    }
+    .before-sticky.sticky .header p {
+        line-height: unset;
+    }
+    .before-sticky.sticky .title h3 {
+        font-size: 14px;
+        line-height: unset;
+    }
+    .before-sticky.sticky .price {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        white-space: break-spaces;
+    }
+
+    .before-sticky.sticky .price p {
+        font-size: 12px;
+    }
+    .before-sticky.sticky .price p span {
+        font-size: 30px;
+    }
+    .before-sticky.sticky .action {
+        margin-top: 8px;
+    }
+    .before-sticky.sticky .cta-btn {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 0 !important;
+    }
+    .before-sticky.sticky .header p {
+        font-size: 8px;
+    }
+    .before-sticky.sticky .cta-link {
+        display: none;
+    }
+    .cta-card {
+        padding: 10px 20px !important;
+    }
+}
+@media (min-width: 767.99px) {
+
     .sticky {
         position: fixed !important;
         bottom: 50px;
@@ -807,6 +855,8 @@ video {
     .sticky .container {
         padding-bottom: 0;
         width: 100%;
+    
+
     }
     .page-bottom {
         padding-bottom: 150px !important;
@@ -982,14 +1032,27 @@ ul {
     margin-top: 30px;
 }
 ul li {
-    padding-left: 48px;
+    padding-left: 32px;
     position: relative;
     height: 50px;
 }
 ul li::before {
-    content: url(../assets/images/tick.svg);
+    content:'';
+    background-image: url(../assets/images/tick.svg);
+    background-size: 100% 100%;
+    width: 20px;
+    height: 20px;
     position: absolute;
     left: 0;
+}
+@media (min-width: 768px) {
+    ul li {
+        padding-left: 42px;
+    }
+    ul li::before  {
+        width: 32px;
+        height: 32px;
+    }
 }
 .testimonial {
     display: flex;

@@ -426,12 +426,13 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
 .cta-btn {
     display: flex;
     align-items: center;
+    justify-content: center;
     font-family: 'obviously', sans-serif;
     width: fit-content;
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
-
+    text-align: center;
     padding: 0 25px;
     background-color: rgba(74, 116, 235, 1);
     border-radius: 75px;
@@ -453,8 +454,6 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
 @media (max-width: 576px) {
     .cta-btn {
         width: 100%;
-        justify-content: center;
-        text-align: center;
     }
     .cta-btn img {
         margin-left: 16px;

@@ -26,6 +26,9 @@ onMounted(() => {
         store.step = 2
         store.showCTA = false
     }
+    if (url.searchParams.has('class') ) {
+        store.respondent = 'child'
+    }
 })
 
 const respondentChildHandler = () => {
