@@ -44,8 +44,20 @@ const historiesCarousel = {
     snapAlign: 'start'
 }
 const testimSettings = {
-    itemsToShow: 3.8,
-    snapAlign: 'center'
+    snapAlign: 'center',
+    breakpoints: {
+        0: {
+            itemsToShow: 1.4
+        },
+        // 700px and up
+        700: {
+            itemsToShow: 2.8
+        },
+        // 1024 and up
+        1024: {
+            itemsToShow: 3.8
+        }
+    }
 }
 
 const playVideoHandler = () => {
@@ -307,7 +319,7 @@ const getCurrentYear = () => {
             </div>
         </div>
     </div>
-    <div class="wrapper yellow">
+    <div class="wrapper yellow overflow-hidden">
         <img class="blue-vector-left-top" src="../assets/images/blue-line-left.svg" alt="" />
         <div class="container container--narrow teachers">
             <h2 class="section-title">Susipažink, tavo būsimi mokytojai:</h2>
@@ -539,9 +551,18 @@ header .logo {
 .carousel {
     margin-bottom: 125px;
 }
-
+@media (max-width: 576px) {
+    .carousel {
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
 .wrapper.pt {
     padding-top: 125px;
+}
+.wrapper.overflow-hidden {
+    overflow: hidden;
 }
 .wrapper.light {
     background-color: #ffffff;
@@ -562,6 +583,10 @@ header .logo {
 }
 .wrapper.dark.inner {
     padding-top: 0;
+}
+.wrapper.dark.inner .carousel {
+    width: 100%;
+    max-width: 100%;
 }
 .wrapper.dark.inner .carousel {
     margin-bottom: 0;
@@ -820,7 +845,7 @@ video {
     line-height: 30px;
 }
 .cta-card h3 {
-    font-size: 32px;
+    font-size: 30px;
     font-style: normal;
     font-weight: 570;
     line-height: 42px;
@@ -929,7 +954,7 @@ video {
 @media (max-width: 576px) {
     .section-title,
     .content--left h2 {
-        font-size: 34px;
+        font-size: 30px;
         line-height: 1.3;
     }
 }
@@ -1290,6 +1315,7 @@ footer a:hover {
 }
 @media (min-width: 992px) {
     h1 {
+        font-size: 32px;
         display: block;
         margin-left: auto;
         margin-right: auto;
