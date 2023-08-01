@@ -61,7 +61,6 @@ const testimSettings = {
 }
 
 const playVideoHandler = () => {
-    console.log('Click')
     if (!document.getElementById('videoHow').playing) {
         document.querySelector('.play-btn').classList.add('isPlaying')
         document.querySelector('.pause-btn').classList.add('isPlaying')
@@ -977,6 +976,10 @@ video {
     display: block;
     max-width: 100%;
     margin: 0 auto;
+}
+.content--left .cta-btn img {
+    margin-right:  unset;
+    margin-left: 16px;
 }
 .content--left h2 {
     text-align: left;
