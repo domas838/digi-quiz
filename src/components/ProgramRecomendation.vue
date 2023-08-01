@@ -6,15 +6,24 @@ import { store } from '../store'
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import SectionCTA from '../components/SectionCTA.vue'
-
 import { ref } from 'vue'
 import { vElementVisibility } from '@vueuse/components'
 
+const allPlansURL = 'https://app.digiklase.lt/plans/choose'
+
+const selectedPlanURL = () => {
+    // TO-DO if plan !== all
+    let subjectsString = store.selectedSubjects.join(',')
+
+    let url = `https://app.digiklase.lt/plans/choose?class=${store.selectedClass}&plan=XXX&subjects=${subjectsString}`
+
+    return url
+}
 const target = ref(null)
-const isVisible = ref(false)
+const isOfferVisible = ref(false)
 
 function onElementVisibility(state) {
-    isVisible.value = state
+    isOfferVisible.value = state
 }
 
 const fakeArr = [0, 1, 2, 3, 4, 5, 6, 7]
@@ -72,8 +81,8 @@ const pauseVideoHandler = () => {
     document.querySelector('.pause-btn').classList.remove('isPlaying')
     document.getElementById('videoHow').pause()
 }
-const isHidden = reactive({
-    isHidden: true
+const isFaqHidden = reactive({
+    isFaqHidden: true
 })
 const questions = reactive([
     {
@@ -114,7 +123,7 @@ const handleAccordion = (selectedIndex) => {
 }
 const showAllFaqs = (event) => {
     event.target.style.display = 'none'
-    isHidden.isHidden = false
+    isFaqHidden.isFaqHidden = false
 }
 const getCurrentYear = () => {
     const dateobj = new Date()
@@ -128,7 +137,7 @@ const getCurrentYear = () => {
         <div class="content">
             <img class="logo" src="../assets/images/digiklase.svg" alt="" />
             <div>
-                <a href="/" class="cta-btn"
+                <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
                     >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
                 /></a>
             </div>
@@ -209,7 +218,7 @@ const getCurrentYear = () => {
                         Tavo galimą rezultatą apskaičiavome remdamiesi
                         <strong>5 897</strong> panašių žmonių rezultatais
                     </p>
-                    <a href="" class="cta-btn"
+                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
                         >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
                     /></a>
                 </div>
@@ -232,11 +241,10 @@ const getCurrentYear = () => {
                 <p><span>2 hours</span>of quizzes</p>
             </div>
         </div>
-        
     </div>
     <div
         class="wrapper light before-sticky"
-        :class="{ sticky: isVisible }"
+        :class="{ sticky: isOfferVisible }"
         ref="target"
         v-element-visibility="onElementVisibility"
     >
@@ -250,14 +258,16 @@ const getCurrentYear = () => {
                         <h3>„Visi mokykliniai dalykai ir visi būreliai“</h3>
                     </div>
                     <div class="price">
-                        <p>Nuo </p>
+                        <p>Nuo</p>
                         <p><span>49,00 </span>€/mėn.</p>
                     </div>
                     <div class="action">
-                        <a href="" class="cta-btn"
+                        <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
                             >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
                         /></a>
-                        <a href="/" class="cta-link">Žiūrėti visus planus</a>
+                        <a :href="allPlansURL" target="_blank" class="cta-link"
+                            >Žiūrėti visus planus</a
+                        >
                     </div>
                 </div>
             </div>
@@ -298,7 +308,7 @@ const getCurrentYear = () => {
                     <li>Weekly progress reports for both learners and parents</li>
                     <li>Works on all devices</li>
                 </ul>
-                <SectionCTA />
+                <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="selectedPlanURL" />
                 <div class="testimonial">
                     <div class="author">
                         <img src="../assets/images/testimonial-author.svg" alt="" />
@@ -326,7 +336,7 @@ const getCurrentYear = () => {
                     <pagination />
                 </template>
             </carousel>
-            <SectionCTA />
+            <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="selectedPlanURL" />
         </div>
     </div>
     <div class="wrapper light-grey">
@@ -445,7 +455,7 @@ const getCurrentYear = () => {
     </div>
     <div class="wrapper dark inner">
         <div class="container container--narrow pb">
-            <SectionCTA />
+            <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="selectedPlanURL" />
         </div>
     </div>
     <div class="wrapper light pt page-bottom">
@@ -457,7 +467,7 @@ const getCurrentYear = () => {
                 v-for="(question, index) in questions"
                 :key="question.title"
                 class="faq-accordion"
-                :class="{ hidden: index >= 3 && isHidden.isHidden }"
+                :class="{ hidden: index >= 3 && isFaqHidden.isFaqHidden }"
             >
                 <button @click="() => handleAccordion(index)" class="faq-header">
                     <div>
@@ -480,7 +490,7 @@ const getCurrentYear = () => {
                 Prisijunk prie daugiau nei <span>10 000 bendraminčių</span> bendruomenės!
             </h2>
             <div class="pb">
-                <SectionCTA />
+                <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="selectedPlanURL" />
             </div>
         </div>
         <img src="../assets/images/elipses.svg" class="footer-elipses" alt="" />
@@ -779,22 +789,22 @@ video {
     }
 }
 .before-sticky .cta-card {
-        transform: translateY(250px);
-        position: relative;
-    }
-    .before-sticky.sticky .cta-card {
-        transform: translateY(0);
-    }
-    .sticky .cta-card {
-        transition: 1s ease-in-out;
-    }
+    transform: translateY(250px);
+    position: relative;
+}
+.before-sticky.sticky .cta-card {
+    transform: translateY(0);
+}
+.sticky .cta-card {
+    transition: 1s ease-in-out;
+}
 @media (max-width: 767.89px) {
     .before-sticky.sticky {
         position: fixed;
         bottom: 0;
         z-index: 99;
     }
-    .before-sticky.sticky .container  {
+    .before-sticky.sticky .container {
         padding: 0;
         text-align: center;
     }
@@ -840,7 +850,6 @@ video {
     }
 }
 @media (min-width: 767.99px) {
-
     .sticky {
         position: fixed !important;
         bottom: 50px;
@@ -854,8 +863,6 @@ video {
     .sticky .container {
         padding-bottom: 0;
         width: 100%;
-    
-
     }
     .page-bottom {
         padding-bottom: 150px !important;
@@ -978,7 +985,7 @@ video {
     margin: 0 auto;
 }
 .content--left .cta-btn img {
-    margin-right:  unset;
+    margin-right: unset;
     margin-left: 16px;
 }
 .content--left h2 {
@@ -1040,7 +1047,7 @@ ul li {
     height: 50px;
 }
 ul li::before {
-    content:'';
+    content: '';
     background-image: url(../assets/images/tick.svg);
     background-size: 100% 100%;
     width: 20px;
@@ -1052,7 +1059,7 @@ ul li::before {
     ul li {
         padding-left: 42px;
     }
-    ul li::before  {
+    ul li::before {
         width: 32px;
         height: 32px;
     }

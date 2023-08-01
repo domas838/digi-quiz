@@ -76,6 +76,7 @@ h2 {
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+    width: 100%;
 }
 
 .intro-selection__buttons button {
@@ -112,6 +113,7 @@ h2 {
     .intro-selection__buttons button {
         width: 100%;
         white-space: nowrap;
+        font-size: 16px;
     }
     .benefit-btn {
         width: 100%;

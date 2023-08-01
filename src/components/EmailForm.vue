@@ -25,7 +25,6 @@ const submitHandler = (event) => {
     // store.isLoading = true
     event.preventDefault()
 
-    
     // console.log('TIER0 ' + store.TIER0)
     // console.log('TIER1 ' + store.TIER1)
     // console.log('TIER2 ' + store.TIER2)

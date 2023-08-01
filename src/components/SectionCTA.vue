@@ -1,9 +1,12 @@
+<script setup>
+const props = defineProps(['allPlansURL', 'selectedPlanURL'])
+</script>
 <template>
     <div class="d-flex justify-center cta-buttons">
-        <a href="" class="cta-btn"
+        <a :href="props.selectedPlanURL()" target="_blank" class="cta-btn"
             >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
         /></a>
-        <a href="/" class="cta-link">Žiūrėti visus planus</a>
+        <a :href="props.allPlansURL" target="_blank" class="cta-link">Žiūrėti visus planus</a>
     </div>
 </template>
 

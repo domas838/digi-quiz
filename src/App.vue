@@ -7,7 +7,9 @@ import SecondBenefit from './components/SecondBenefit.vue'
 import EmailForm from './components/EmailForm.vue'
 import ProgramRecomendation from './components/ProgramRecomendation.vue'
 import ProgramsLoader from './components/ProgramsLoader.vue'
+
 const url = new URL(window.location.href)
+
 onMounted(() => {
     if (url.searchParams.has('role')) {
         if (url.searchParams.get('role') === 'parent') {
@@ -26,7 +28,7 @@ onMounted(() => {
         store.step = 2
         store.showCTA = false
     }
-    if (url.searchParams.has('class') ) {
+    if (url.searchParams.has('class')) {
         store.respondent = 'child'
     }
 })
@@ -95,26 +97,23 @@ const completeness = (step) => {
             <img src="./assets/images/digiklase.svg" alt="digiklase logo" />
         </div>
         <img src="./assets/images/skateboard.svg" alt="" class="intro-visual" />
-        <div>
-            <h1 class="intro-heading">
-                Užpildykite trumpą klausimyną ir <br />
-                gaukite specialiai JUMS pritaikytą
-                <span
-                    >Digiklasės <br />
-                    pasiūlymą</span
-                >
-            </h1>
-            <div class="intro-selection">
-                <h2>Pasirinkite, kas esate</h2>
-                <div class="intro-selection__buttons">
-                    <button class="button--child" @click="respondentChildHandler()">
-                        <img src="./assets/images/emoji/INTRO_backback.svg" alt="" /> Esu mokinys
-                    </button>
-                    <button class="button--parent" @click="respondentParentHandler()">
-                        <img src="./assets/images/emoji/INTRO_parent.svg" alt="" /> Esu
-                        tėvelis/globėjas
-                    </button>
-                </div>
+        <h1 class="intro-heading">
+            Užpildykite trumpą klausimyną ir <br />
+            gaukite specialiai JUMS pritaikytą
+            <span
+                >Digiklasės <br />
+                pasiūlymą</span
+            >
+        </h1>
+        <div class="intro-selection">
+            <h2>Pasirinkite, kas esate</h2>
+            <div class="intro-selection__buttons">
+                <button class="button--child" @click="respondentChildHandler()">
+                    <img src="./assets/images/emoji/INTRO_backback.svg" alt="" /> Esu mokinys
+                </button>
+                <button class="button--parent" @click="respondentParentHandler()">
+                    <img src="./assets/images/emoji/INTRO_parent.svg" alt="" /> Esu tėvelis/globėjas
+                </button>
             </div>
         </div>
         <div class="brand-logo">
@@ -174,7 +173,7 @@ const completeness = (step) => {
 
         <FirstBenefit />
         <SecondBenefit />
-        <ProgramsLoader v-if="store.step === 8" />
+        <ProgramsLoader v-if="store.step === 8" :baseUrl="url" />
         <EmailForm v-if="store.step === 9" />
     </div>
     <img
