@@ -81,7 +81,7 @@ const nextStep = () => {
 }
 
 const completeness = (step) => {
-    return (100 / store.quiz.child.length) * (step - 1)
+    return (100 / store.quiz.child.length) * step
 }
 </script>
 

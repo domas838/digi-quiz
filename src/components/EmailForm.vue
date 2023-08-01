@@ -1,8 +1,29 @@
 <script setup>
 import { store } from '../store'
+import { computed } from 'vue'
 const toFindDuplicates = (arry) => arry.filter((item, index) => arry.indexOf(item) !== index)
 
-const submitHandler = (PROFILE1, PROFILE2, PROFILE3) => {
+const submitChildEmail = (event) => {
+    event.preventDefault()
+    store.isChildEmailEntered = true
+}
+const isChildProceedDisabled = computed(() => {
+    if (!store.childEmail || !store.aggreeWithPrivacy) {
+        return true
+    } else {
+        return false
+    }
+})
+const isParentProceedDisabled = computed(() => {
+    if (!store.parentEmail || !store.aggreeWithPrivacy) {
+        return true
+    } else {
+        return false
+    }
+})
+
+console.log(isChildProceedDisabled)
+const submitHandler = (PROFILE1, PROFILE2, PROFILE3, event) => {
     // store.isLoading = true
     event.preventDefault()
 
@@ -131,45 +152,139 @@ const submitHandler = (PROFILE1, PROFILE2, PROFILE3) => {
 }
 </script>
 <template>
-    <h1 v-if="store.respondent === 'child'">Įvesk savo ir tėvelio/globėjo el. paštą</h1>
-    <h1 v-if="store.respondent === 'parent'">Įveskite el. paštą, kur išsiųsime rezultatus</h1>
-    <form action="" @submit="submitHandler(store.PROFILE1, store.PROFILE2, store.PROFILE3, $event)">
-        <div v-if="store.respondent === 'child'">
+    <h1 v-if="store.respondent === 'child' && !store.isChildEmailEntered">
+        Kur siųsti rezultatus?
+    </h1>
+    <h1 v-if="store.respondent === 'child' && store.isChildEmailEntered">
+        Pasidalink rezultatais su tėveliais/globėjais ir gauk 15 EUR nuolaidą narystei įsigyti!
+    </h1>
+    <h1 v-if="store.respondent === 'parent'">
+        Įveskite el. paštą, kur išsiųsime rezultatus ir gaukite 15 EUR nuolaidą narystei įsigyti!
+    </h1>
+    <div v-if="store.respondent === 'child'">
+        <input
+            v-if="!store.isChildEmailEntered"
+            class="digi-input"
+            type="email"
+            name="child-email"
+            id="child-email"
+            placeholder="Tavo el. paštas"
+            v-model="store.childEmail"
+            style="margin-bottom: 1rem"
+        />
+        <input
+            v-if="store.isChildEmailEntered"
+            class="digi-input"
+            type="email"
+            name="parent-email"
+            id="parent-email"
+            placeholder="Tėvelio/globėjo el. paštas"
+            v-model="store.parentEmail"
+            style="margin-bottom: 1rem"
+        />
+        <div class="aggree-row" v-if="!store.isChildEmailEntered">
             <input
-                class="digi-input"
-                type="email"
-                name="child-email"
-                id="child-email"
-                placeholder="Tavo el. paštas"
-                v-model="store.childEmail"
-                style="margin-bottom: 1rem"
+                type="checkbox"
+                name="privacy"
+                id="privacy"
+                value="Sutinku su privatumo politika ir naudojimosi taisyklėmis"
+                v-model="store.aggreeWithPrivacy"
             />
-            <input
-                class="digi-input"
-                type="email"
-                name="parent-email"
-                id="parent-email"
-                placeholder="Tėvelio/globėjo el. paštas"
-                v-model="store.parentEmail"
-                style="margin-bottom: 1rem"
+            <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
+            <img
+                src="../assets/images/checkbox-checked.svg"
+                alt=""
+                class="custom-checkbox-checked"
             />
-            <div class="notice">
-                Įvedus tėvelio/globėjo el. paštą, tau priklausys papildoma
-                <strong>15% nuolaida</strong> narystei įsigyti! Kodą išssiųsime el. paštu.
-            </div>
+            <label for="privacy" class="aggree-label"
+                >Sutinku su
+                <a href="https://digiklase.lt/privatumo-politika" target="_blank"
+                    >privatumo politika ir naudojimosi taisyklėmis</a
+                ></label
+            >
         </div>
-        <div v-if="store.respondent === 'parent'">
+        <div class="aggree-row" v-if="!store.isChildEmailEntered">
             <input
-                class="digi-input"
-                type="email"
-                name="parent-email"
-                id="parent-email"
-                placeholder="El. paštas"
-                v-model="store.parentEmail"
+                type="checkbox"
+                name="age"
+                id="age"
+                value="Man jau yra 13 metų"
+                v-model="store.olderThanThirteen"
             />
+            <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
+            <img
+                src="../assets/images/checkbox-checked.svg"
+                alt=""
+                class="custom-checkbox-checked"
+            />
+            <label for="age" class="aggree-label">Man jau yra 13 metų</label>
         </div>
-        <button type="submit" class="benefit-btn" style="margin-top: 2rem">
-            Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
-        </button>
-    </form>
+        <div class="aggree-row" v-if="!store.isChildEmailEntered">
+            <p>
+                *Jeigu tau mažiau nei 13 m., paprašyk tėvelių/globėjų pagalbos užpildyti apklausą.
+            </p>
+        </div>
+        <div class="notice" v-if="store.isChildEmailEntered">
+            Įvedus tėvelio/globėjo el. paštą, tau priklausys papildoma
+            <strong>15% nuolaida</strong> narystei įsigyti! Kodą išssiųsime el. paštu.
+        </div>
+    </div>
+    <div v-if="store.respondent === 'parent'">
+        <input
+            class="digi-input"
+            type="email"
+            name="parent-email"
+            id="parent-email"
+            placeholder="El. paštas"
+            v-model="store.parentEmail"
+            style="margin-bottom: 1rem"
+        />
+    </div>
+    <div class="aggree-row" v-if="store.respondent === 'parent'">
+        <input
+            type="checkbox"
+            name="privacy"
+            id="privacy"
+            value="Sutinku su privatumo politika ir naudojimosi taisyklėmis"
+            v-model="store.aggreeWithPrivacy"
+        />
+        <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
+        <img src="../assets/images/checkbox-checked.svg" alt="" class="custom-checkbox-checked" />
+        <label for="privacy" class="aggree-label"
+            >Sutinku su
+            <a href="https://digiklase.lt/privatumo-politika" target="_blank"
+                >privatumo politika ir naudojimosi taisyklėmis</a
+            ></label
+        >
+    </div>
+    <button
+        v-if="store.respondent === 'child' && !store.isChildEmailEntered"
+        type="submit"
+        class="benefit-btn"
+        style="margin-top: 2rem"
+        @click="submitChildEmail($event)"
+        :disabled="isChildProceedDisabled"
+    >
+        Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
+    </button>
+    <button
+        v-if="store.respondent === 'parent'"
+        type="submit"
+        class="benefit-btn"
+        style="margin-top: 2rem"
+        @click="submitHandler(store.PROFILE1, store.PROFILE2, store.PROFILE3, $event)"
+        :disabled="isParentProceedDisabled"
+    >
+        Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
+    </button>
+
+    <button
+        v-if="store.respondent === 'child' && store.isChildEmailEntered"
+        type="submit"
+        class="benefit-btn"
+        style="margin-top: 2rem"
+        @click="submitHandler(store.PROFILE1, store.PROFILE2, store.PROFILE3, $event)"
+    >
+        Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
+    </button>
 </template>
