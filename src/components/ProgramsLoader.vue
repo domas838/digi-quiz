@@ -194,6 +194,7 @@ const programRecomendationHandler = () => {
         })
         .then(() => {
             document.cookie = `memby_quiz_persona=${store.selectedPersona}`
+            document.cookie = `memby_quiz_programs=${'TO-DO'}`
         })
         .then(() => {
             if (url.searchParams.has('app') && url.searchParams.get('app') === 'true') {

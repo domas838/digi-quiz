@@ -126,6 +126,7 @@ const selectAnswer = (answerIndex) => {
 }
 
 const selectMultipleAnswers = (event) => {
+    store.isSubjectNotSelected = false
     const input = event.target.querySelector('input')
     const answerCardWrapper = input.parentNode.parentNode
     if (input.checked) {
@@ -136,6 +137,7 @@ const selectMultipleAnswers = (event) => {
         answerCardWrapper.classList.add('selected')
     }
 }
+
 const proceedWithMultipleSelection = () => {
     const selectedInputs = document.querySelectorAll("input[name='subjects']:checked")
     if (selectedInputs.length) {
@@ -586,6 +588,7 @@ const proceedWithMultipleSelection = () => {
                         @click="proceedWithMultipleSelection()"
                         class="benefit-btn"
                         style="margin-top: 2rem"
+                        :disabled="store.isSubjectNotSelected"
                     >
                         Tęsti <img src="../assets/images/arrow-right.svg" alt="Tęsti" />
                     </button>

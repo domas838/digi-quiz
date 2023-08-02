@@ -8,6 +8,7 @@ export const store = reactive({
     aggreeWithPrivacy: true,
     olderThanThirteen: true,
     isShowingBenefit: false,
+    isSubjectNotSelected: true,
     respondent: null,
     selectedClass: null,
     showFirstBenefit: false,

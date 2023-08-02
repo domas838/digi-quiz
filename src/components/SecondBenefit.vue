@@ -28,9 +28,8 @@ const benefits = [
             <button @click="acceptSecondBenefit()" class="benefit-btn">
                 Tęsti <img src="../assets/images/arrow-right.svg" alt="Next" />
             </button>
-            <img src="../assets/images/Line.svg" alt="" class="line-behind-classroom" />
 
-            <img src="../assets/images/classroom.svg" alt="" class="classroom-visual" />
+            <img src="../assets/images/classroom.png" alt="" class="classroom-visual" />
         </div>
     </div>
 </template>

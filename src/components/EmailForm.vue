@@ -6,15 +6,23 @@ const submitChildEmail = (event) => {
     event.preventDefault()
     store.isChildEmailEntered = true
 }
+
+const emailIsValid = (email) => {
+    if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        return true
+    } else {
+        return false
+    }
+}
 const isChildProceedDisabled = computed(() => {
-    if (!store.childEmail || !store.aggreeWithPrivacy) {
+    if (!store.childEmail || !store.aggreeWithPrivacy || !emailIsValid(store.childEmail)) {
         return true
     } else {
         return false
     }
 })
 const isParentProceedDisabled = computed(() => {
-    if (!store.parentEmail || !store.aggreeWithPrivacy) {
+    if (!store.parentEmail || !store.aggreeWithPrivacy || !emailIsValid(store.parentEmail)) {
         return true
     } else {
         return false
@@ -39,10 +47,12 @@ const submitHandler = (event) => {
         Kur siųsti rezultatus?
     </h1>
     <h1 v-if="store.respondent === 'child' && store.isChildEmailEntered">
-        Pasidalink rezultatais su tėveliais/globėjais ir gauk 15 EUR nuolaidą narystei įsigyti!
+        Pasidalink rezultatais su tėveliais/globėjais ir gauk <span>15 EUR nuolaidą</span> narystei
+        įsigyti!
     </h1>
     <h1 v-if="store.respondent === 'parent'">
-        Įveskite el. paštą, kur išsiųsime rezultatus ir gaukite 15 EUR nuolaidą narystei įsigyti!
+        Įveskite el. paštą, kur išsiųsime rezultatus ir gaukite
+        <span>15 EUR nuolaidą</span> narystei įsigyti!
     </h1>
     <div v-if="store.respondent === 'child'">
         <input
@@ -171,3 +181,14 @@ const submitHandler = (event) => {
         Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
     </button>
 </template>
+
+<style scoped>
+h1 {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+h1 span {
+    color: #4a74eb;
+}
+</style>

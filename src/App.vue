@@ -182,5 +182,11 @@ const completeness = (step) => {
         alt="Vector"
         v-if="store.step !== 10"
     />
+    <img
+        src="./assets/images/Line.svg"
+        alt=""
+        class="line-behind-classroom"
+        v-if="store.showSecondBenefit && store.step === 5"
+    />
     <ProgramRecomendation v-if="store.step === 10 && store.showRecomendations" />
 </template>

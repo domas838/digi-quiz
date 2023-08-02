@@ -14,6 +14,7 @@ body {
 #app {
     position: relative;
     overflow-y: hidden;
+    min-height: 100vh;
 }
 
 .bottom-vector {
@@ -137,16 +138,17 @@ h2 {
 .classroom-visual {
     position: fixed;
     bottom: 0;
-    right: 0;
+    right: -200px;
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
+    max-width: 60%;
 }
 .line-behind-classroom {
     position: absolute;
     right: 0;
     top: 0;
-    bottom: 0;
+    height: 100%;
 }
 .brand-logo {
     display: block;
@@ -539,7 +541,9 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
         z-index: -1;
         transform: unset;
         width: 100%;
-        transform: translateX(15%);
+        max-width: 100%;
+
+        transform: translateX(0);
     }
     .line-behind-classroom {
         top: unset;
@@ -627,9 +631,12 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
     font-style: normal;
     line-height: 28.6px;
     font-weight: 400;
-    text-decoration-line: underline;
+    text-decoration: underline;
 
     color: #4a74eb;
+}
+.cta-link:hover {
+    text-decoration: none;
 }
 .d-flex .cta-btn,
 .d-flex .cta-link {
@@ -679,6 +686,9 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
     margin: 0 8px;
 }
 button:disabled {
-    opacity: 0.5;
     cursor: not-allowed;
+    background-color: #d1d1d1;
+}
+button:disabled:hover {
+    background-color: #d1d1d1;
 }

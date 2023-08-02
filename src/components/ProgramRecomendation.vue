@@ -145,7 +145,7 @@ const getCurrentYear = () => {
     </header>
     <div class="wrapper yellow">
         <div class="container">
-            <h1>Remiantis tavo atsakymais, rekomenduojame mokytis pagal šias programas:</h1>
+            <h1>Rekomenduojame mokytis pagal šias programas:</h1>
             <div v-if="store.recomendationsArrTIER0.length">
                 <h2>TIER0 Programs</h2>
 
@@ -213,11 +213,10 @@ const getCurrentYear = () => {
             </carousel>
             <div class="content--flex last-section-block">
                 <div class="content--left">
-                    <h2><span>Iki 2 balų geresni pažymiai,</span> vos per 2 mėnesius!</h2>
-                    <p>
-                        Tavo galimą rezultatą apskaičiavome remdamiesi
-                        <strong>5 897</strong> panašių žmonių rezultatais
-                    </p>
+                    <h2>
+                        Pasieksi <span>iki 2 balų geresnius pažymius,</span> vos per 2 mėnesius!
+                    </h2>
+                    <p>Tavo rezultatą apskaičiavome remdamiesi 5124 panašių mokinių atsakymais</p>
                     <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
                         >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
                     /></a>
@@ -232,13 +231,17 @@ const getCurrentYear = () => {
     <div class="wrapper light">
         <div class="flex-container cards-wrapper">
             <div class="card card--left">
-                <p>At least <span>2 hours</span>of group lessons</p>
+                <h3>Tau reikės:</h3>
+
+                <p>Bent <span>2 val./sav.</span>papildomų grupinių pamokų</p>
+                <img src="../assets/images/heart.svg" alt="Heart" />
             </div>
             <div class="card card--middle">
-                <p>At least <span>1 hour</span>of watching other Mathsup learning material</p>
+                <p>Bent <span>1 val./sav.</span>praeėjusių pamokų vaizdo įrašų peržiūrėjimo</p>
             </div>
             <div class="card card--right">
-                <p><span>2 hours</span>of quizzes</p>
+                <p>Iki <span>1 val./sav.</span>darbo su asistentais</p>
+                <img src="../assets/images/time.svg" alt="Time" />
             </div>
         </div>
     </div>
@@ -299,14 +302,13 @@ const getCurrentYear = () => {
                 <img src="../assets/images/pupil.svg" alt="" />
             </div>
             <div class="content--right list-content">
-                <h3>Group tutoring for different skill levels:</h3>
+                <h3>Papildomos grupinės pamokos internetu:</h3>
                 <ul>
-                    <li>Mathematics and Maths Literacy</li>
-                    <li>2-3 classes/week, max 15 students/group</li>
-                    <li>CAPS or IEB programmes</li>
-                    <li>Ask questions, get immediate help</li>
-                    <li>Weekly progress reports for both learners and parents</li>
-                    <li>Works on all devices</li>
+                    <li>Įtraukiantys mokytojai</li>
+                    <li>Individualus mokymosi planas</li>
+                    <li>Pamokų vaizdo įrašai</li>
+                    <li>Prizai už mokymąsi</li>
+                    <li>Draugiška kaina</li>
                 </ul>
                 <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="selectedPlanURL" />
                 <div class="testimonial">
@@ -315,9 +317,10 @@ const getCurrentYear = () => {
                     </div>
                     <div class="text">
                         <p>
-                            “I never thought online maths lessons could be so interesting and fun!”
+                            „Vos per mėnesį sugebėjau savo matematikos pažymį pasikelti net trimis
+                            balais“
                         </p>
-                        <p><strong>Lethabo, Grade 10</strong></p>
+                        <p><strong>11-okė Sibilė, Panevėžys</strong></p>
                     </div>
                 </div>
             </div>
@@ -347,13 +350,20 @@ const getCurrentYear = () => {
                 </div>
                 <div class="content">
                     <p>
-                        “I can't believe I didn't find out about MathsUp sooner. Ever since I
-                        started learning with MathsUp, my grades have been steadily improving. The
-                        lessons are top-notch, with outstanding teachers guiding us through each
-                        session. Plus, I've managed to save a considerable amount of money. I
-                        wholeheartedly recommend MathsUp to all students out there!”
+                        „Devintoje klasėje pradėjau svajoti apie medicinos studijas, todėl labai
+                        džiaugiuosi, kad tokia motyvuotų ir išsilavinusių mokytojų komanda buvo
+                        šalia nuo pat pradžių. Įvairūs konspektai, virtualios pamokos ir jauki
+                        digiklasiečių kompanija tapo mano laisvalaikiu! Pauliaus pamokose dėstomais
+                        biologijos universitetinio lygio pagrindais buvo tikras malonumas, o į
+                        Austėjos sveikatos mokslų pamokas jungiausi iš įvairiausių pasaulio kraštų,
+                        kad tik galėčiau išnagrinėti dar vieno paciento ligą.“
                     </p>
-                    <p><strong>Adisa, student (+23% improvement in maths)</strong></p>
+                    <p>
+                        <strong
+                            >Karolis, Kaišiadorių Algirdo Brazausko gimnazija, buvęs Digiklasės
+                            mokinys</strong
+                        >
+                    </p>
                 </div>
             </div>
         </div>
@@ -743,7 +753,28 @@ video {
 
 .card--left {
     background-color: #ffffff;
+    position: relative;
 }
+.card--left img {
+    position: absolute;
+    left: 32px;
+    bottom: -32px;
+}
+.card--left h3 {
+    display: none;
+}
+@media (min-width: 1025px) {
+    .card--left h3 {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: -50px;
+        font-size: 26px;
+        font-weight: 570;
+        line-height: 36px;
+    }
+}
+
 .card--left span {
     color: #ff714b;
 }
@@ -756,7 +787,11 @@ video {
 .card.card--right p {
     color: #f4e140;
     display: block;
-    margin-top: 26px;
+}
+.card--right img {
+    position: absolute;
+    top: -32px;
+    right: 32px;
 }
 .card p {
     font-size: 16px;
