@@ -49,14 +49,23 @@ const settings = {
 }
 const singleSlideSettings = {
     itemsToShow: 1,
-    snapAlign: 'start'
+    snapAlign: 'start',
+    pauseAutoplayOnHover: true,
+    autoplay: 3000,
+    wrapAround: true
 }
 const storiesCarousel = {
     itemsToShow: 1,
-    snapAlign: 'start'
+    snapAlign: 'start',
+    pauseAutoplayOnHover: true,
+    autoplay: 3000,
+    wrapAround: true
 }
 const testimSettings = {
     snapAlign: 'center',
+    pauseAutoplayOnHover: true,
+    autoplay: 3000,
+    wrapAround: true,
     breakpoints: {
         0: {
             itemsToShow: 1.4
@@ -394,8 +403,70 @@ const getCurrentYear = () => {
         <div class="container container--narrow teachers">
             <h2 class="section-title">Susipažink, tavo būsimi mokytojai:</h2>
             <carousel v-bind="singleSlideSettings" class="teacher-carousel">
-                <slide v-for="teacher in fakeArr" :key="teacher">
-                    <img src="../assets/images/teacher-slide.svg" alt="" />
+                <slide :key="0">
+                    <picture>
+                        <source
+                            media="(min-width: 768px)"
+                            srcset="../assets/images/teachers/Sarunas.png"
+                        />
+                        <source
+                            media="(min-width: 100px)"
+                            srcset="../assets/images/teachers/Sarunas-mobile.png"
+                        />
+                        <img src="../assets/images/teachers/Sarunas.png" alt="Sarunas" />
+                    </picture>
+                </slide>
+                <slide :key="1">
+                    <picture>
+                        <source
+                            media="(min-width: 768px)"
+                            srcset="../assets/images/teachers/Alius.png"
+                        />
+                        <source
+                            media="(min-width: 100px)"
+                            srcset="../assets/images/teachers/Alius-mobile.png"
+                        />
+                        <img src="../assets/images/teachers/Alius.png" alt="Alius" />
+                    </picture>
+                </slide>
+                <slide :key="2">
+                    <picture>
+                        <source
+                            media="(min-width: 768px)"
+                            srcset="../assets/images/teachers/Paulius.png"
+                        />
+                        <source
+                            media="(min-width: 100px)"
+                            srcset="../assets/images/teachers/Paulius-mobile.png"
+                        />
+                        <img src="../assets/images/teachers/Paulius.png" alt="Paulius" />
+                    </picture>
+                </slide>
+                <slide :key="3">
+                    <picture>
+                        <source
+                            media="(min-width: 768px)"
+                            srcset="../assets/images/teachers/Egle.png"
+                        />
+                        <source
+                            media="(min-width: 100px)"
+                            srcset="../assets/images/teachers/Egle-mobile.png"
+                        />
+                        <img src="../assets/images/teachers/Egle.png" alt="Egle" />
+                    </picture>
+                </slide>
+                <slide :key="4">
+                    <picture>
+                        <source
+                            media="(min-width: 768px)"
+                            srcset="../assets/images/teachers/Algis.png"
+                        />
+                        <source
+                            media="(min-width: 100px)"
+                            srcset="../assets/images/teachers/Algis-mobile.png"
+                        />
+                        <img src="../assets/images/teachers/Algis.png" alt="Algis" />
+                    </picture>
                 </slide>
                 <template #addons>
                     <navigation />
