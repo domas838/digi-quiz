@@ -652,23 +652,38 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
     height: 44px !important;
     background-color: white !important;
 }
-.histories-carousel {
+.stories-carousel {
     padding-top: 100px !important;
     position: relative;
 }
-.histories-carousel .carousel__prev,
-.histories-carousel .carousel__next {
-    position: absolute;
-    right: 0;
-    top: 31px;
+.stories-carousel .carousel__slide {
+    align-items: flex-start;
 }
+.stories-carousel .carousel__prev,
+.stories-carousel .carousel__next {
+    top: 300px;
+}
+.stories-carousel .carousel__prev {
+    left: -20px !important;
+}
+.stories-carousel .carousel__next {
+    right: -20px !important;
+}
+@media (min-width: 768px) {
+    .stories-carousel .carousel__prev,
+    .stories-carousel .carousel__next {
+        position: absolute;
+        right: 0;
+        top: 31px;
+    }
 
-.histories-carousel .carousel__prev {
-    left: unset !important;
-    right: 66px !important;
-}
-.histories-carousel .carousel__next {
-    right: 12px !important;
+    .stories-carousel .carousel__prev {
+        left: unset !important;
+        right: 66px !important;
+    }
+    .stories-carousel .carousel__next {
+        right: 12px !important;
+    }
 }
 .carousel__pagination-button {
     width: 15px;

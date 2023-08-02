@@ -51,7 +51,7 @@ const singleSlideSettings = {
     itemsToShow: 1,
     snapAlign: 'start'
 }
-const historiesCarousel = {
+const storiesCarousel = {
     itemsToShow: 1,
     snapAlign: 'start'
 }
@@ -84,6 +84,35 @@ const pauseVideoHandler = () => {
     document.querySelector('.pause-btn').classList.remove('isPlaying')
     document.getElementById('videoHow').pause()
 }
+
+const storiesArray = [
+    {
+        head: 'Patricijos mama:',
+        body: 'Labai noriu pasidžiaugti atradusi Digiklasę. Po kelių Digiklasės pamokų mūsų Patricija mokykloje gavo pirmą dešimtuką iš matematikos. Rodės, kad iš laimės pakils iki dangaus, sakė, kad tai tik dėka Digiklasės. Mokytojai labai aiškiai išaiškina, moka įdomiai vesti pamokas, kurias tikrai įdomu klausytis! Aš, kaip mama, matydama vyresnėlės pažangą moksluose, užregistruosiu dar ir mažylę į Digiklasę. Ačiū Digiklasės mokytojams, kurie moka gerai išaiškinti, ko nesupranta vaikai ir motyvuoja kuo geriau mokytis.',
+        foot: 'Patricijos (7 klasė) mama Vita'
+    },
+    {
+        head: 'Ievos istorija',
+        body: 'Per 2 metus išmokau labai daug, to net neįmanoma nusakyti žodžiais. Per visą laikotarpį man digiklasė tapo ne tik mokymosi priemone, bet ir viena didele šeima. Ne tik pagerinau savo pažymius ir tikrai padidinau savo egzaminų rezultatus, bet taip pat išmokau kai ko, kas yra daug vertingiau negu rezultatai ar skaičiai. Per tuos 2 metus išmokau vertinti mažus dalykus gyvenime, pasidžiaugti savo sėkme ir nenuvertinti savęs, net jei viskas vyksta ne pagal planą. Sutikau begalę nuostabių ir šiltų žmonių, kurie mane motyvavo kiekvieną dieną nepasiduoti ir siekti daugiau, negu pati galiu įsivaizduoti. Dar kartelį noriu iš visos širdies padėkoti visiems mokytojams už pagalbą, atsidavimą 1000% ir nuolatinį tikėjimą savo mokiniais.',
+        foot: 'Ieva, Palangos senoji gimnazija, buvusi Digiklasės mokinė'
+    },
+    {
+        head: 'Sibilės istorija',
+        body: 'Šarūno matematikos pamokos mane įkvėpė nepasiduoti ir siekti geresnių rezultatų mokantis. Dėka šio mokytojo, vos per mėnesį sugebėjau savo matematikos pažymį pasikelti net trimis balais. Matydama tokius rezultatus, nusprendžiau mokytis daugiau dalykų Digiklasėje, o mokytojai mokykloje pastebėjo mano gerėjančius rezultatus. Digiklasėje ne tik įgyjau daugiau žinių, bet ir sutikau fainus žmones, kurie mane priimė kaip šeima.',
+        foot: '11-okė Sibilė, Panevėžio Juozo Miltinio gimnazija'
+    },
+    {
+        head: 'Karolis dalinasi',
+        body: 'Devintoje klasėje pradėjau svajoti apie medicinos studijas, todėl labai džiaugiuosi, kad tokia motyvuotų ir išsilavinusių mokytojų komanda buvo šalia nuo pat pradžių. Įvairūs konspektai, virtualios pamokos ir jauki digiklasiečių kompanija tapo mano laisvalaikiu! Pauliaus pamokose dėstomais biologijos universitetinio lygio pagrindais buvo tikras malonumas, o į Austėjos sveikatos mokslų pamokas jungiausi iš įvairiausių pasaulio kraštų, kad tik galėčiau išnagrinėti dar vieno paciento ligą.',
+        foot: 'Karolis, Kaišiadorių Algirdo Brazausko gimnazija, buvęs Digiklasės mokinys'
+    },
+    {
+        head: 'Pauliaus istorija',
+        body: 'Digiklasė yra nepakeičiamas mokymosi įrankis, kurį naudoju jau tris metus. Ši platforma padėjo man atrasti savo ateities karjerą ir rasti mane dominančias sritis, leisdama mokytis savo tempu. Jos interaktyvumas ir modernios technologijos pagerino mano pažymius - džiaugiuosi, kad per naudojimąsi Digiklase mano pažymiai pakilo net per du balus.',
+        foot: 'Paulius, 11 klasė, Panevėžio Juozo Miltinio gimnazija'
+    }
+]
+
 const isFaqHidden = reactive({
     isFaqHidden: true
 })
@@ -427,10 +456,22 @@ const getCurrentYear = () => {
                 </div>
             </div>
         </div>
-        <div class="container container--narrow histories-carousel">
-            <carousel v-bind="historiesCarousel">
-                <slide v-for="item in fakeArr" :key="item">
-                    <img src="../assets/images/karina.png" alt="" />
+        <div class="container container--narrow stories-carousel">
+            <carousel v-bind="storiesCarousel">
+                <slide v-for="(item, index) in storiesArray" :key="item">
+                    <div class="story-slide">
+                        <div class="story-image">
+                            <img
+                                :src="'../src/assets/images/stories/story-' + index + '.png'"
+                                alt=""
+                            />
+                        </div>
+                        <div class="story-body">
+                            <h4>{{ item.head }}</h4>
+                            <p>{{ item.body }}</p>
+                            <h5>{{ item.foot }}</h5>
+                        </div>
+                    </div>
                 </slide>
                 <template #addons>
                     <navigation>
@@ -529,6 +570,68 @@ const getCurrentYear = () => {
 </template>
 
 <style scoped>
+.stories-carousel .carousel {
+    width: 100%;
+    max-width: 100%;
+}
+.story-slide {
+    width: 100%;
+}
+.story-image {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.story-image img {
+    width: 100%;
+}
+.story-body {
+    border-radius: 12px;
+    background-color: #333;
+    padding: 30px;
+    text-align: left;
+}
+.story-body h4 {
+    font-size: 26px;
+    font-weight: 570;
+    line-height: 40px;
+    color: #fff;
+    margin-top: 0;
+}
+.story-body p {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: #fff;
+    margin-bottom: 16px;
+}
+.story-body h5 {
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 26px;
+    color: #fff;
+}
+@media (min-width: 768px) {
+    .story-slide {
+        display: flex;
+        position: relative;
+    }
+    .story-image,
+    .story-body {
+        min-width: 50%;
+    }
+
+    .story-body {
+        height: fit-content;
+        /* position: absolute;
+        right: 0;
+        top: 70px; */
+        min-width: 60%;
+        transform: translate(-90px, 70px);
+    }
+}
+
 header {
     padding: 0 5%;
     height: 65px;
