@@ -1363,7 +1363,8 @@ ul li::before {
 .testimonial .text p {
     font-size: 16px;
     font-style: normal;
-    font-weight: 550;
+
+    font-weight: 400;
     line-height: 22px;
 }
 .testimonial .text p span {
