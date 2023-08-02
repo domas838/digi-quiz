@@ -1100,7 +1100,7 @@ video {
 @media (min-width: 767.99px) {
     .sticky {
         position: fixed !important;
-        bottom: 50px;
+        bottom: 0px;
         z-index: 100;
         margin-bottom: 0;
         margin: 0 auto;
