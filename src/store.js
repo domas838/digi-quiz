@@ -61,17 +61,18 @@ export const store = reactive({
                 qNo: 5,
                 Q: 'Kaip vertini savo motyvaciją mokytis?',
                 Ans: [
-                    'Motyvacija - mano antras vardas! Nuolat ieškau būtų tobulėti ir išmokti ką nors naujo.',
-                    'Neblogai. Daugiausiai dėmesio skiriu geriems kontrolinių, testų, egzaminų rezultatams.',
-                    'Vidutiniškai, kaip kada. Noriu pasigerinti pažymius, bet ne visada turiu pakankamai noro. Padėkit!',
-                    'Priklauso nuo to, kiek laisvo laiko turiu. Daugiausia motyvacijos jaučiu kai mano grafikas lankstus.'
+                    'Labai aukšta, nuolat ieškau būdų tobulėti ir išmokti kažko naujo',
+                    'Aukšta, dėmesį skiriu kontroliniams, testams ar egzaminams',
+                    'Vidutinė, noriu pagerinti pažymius, bet kartais tingiu',
+                    'Prastoka, nebent grafikas labai lankstus',
+                    'Mokslai man nėra pagrindinis priorititetas'
                 ]
             },
             {
                 qNo: 6,
                 Q: 'Kokio pamokų kurso tipo tikiesi?',
                 Ans: [
-                    'Svarbu, kad kursas užtikrintų rezultatus, net jei ne visiškai atitinka temas, kurias dabar einu mokykloje.',
+                    'Svarbu pasiruošimas egzaminams, o ne artėjantys pažymiai',
                     'Norėčiau, kad pamokos atitiktų mokykloje einamas temas, kad galėčiau geriau joms pasiruošti.',
                     'Abu variantai skamba gerai.',
                     'Dar nežinau.'
@@ -81,9 +82,9 @@ export const store = reactive({
                 qNo: 7,
                 Q: 'Kokio intensyvumo mokymosi norėtum?',
                 Ans: [
-                    'Ne intensyvaus. Planuoju mokytis 1-2 kartus per savaitę, kad liktų laiko kitoms veikloms.',
-                    'Vidutiniško. Noriu subalansuoto mokymo plano, kuris padėtų siekti savo tikslų, bet esu pasiruošęs padirbėt!',
-                    'Intensyvaus! Esu pasiryžęs siekti progreso ir noriu tam skirti tiek laiko, kiek reikės.'
+                    'Ne intensyvaus, maždaug 1 valandą per savaitę',
+                    'Vidutiniško, apie 2 valandas per savaitę',
+                    'Intensyvaus, daugiau nei 3 valandas per savaitę'
                 ]
             }
         ],

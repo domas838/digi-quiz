@@ -545,39 +545,42 @@ const proceedWithMultipleSelection = () => {
                         @click="selectAnswer(index + 1)"
                     >
                         <span v-if="store.step == 5 && index + 1 === 1"
-                            ><img src="../assets/images/emoji/Q5_A.svg" alt="" class="emoji" />
+                            ><img src="../assets/images/emoji/Q5_A.svg" alt="Emoji" class="emoji" />
                         </span>
                         <span v-if="store.step == 5 && index + 1 === 2"
-                            ><img src="../assets/images/emoji/Q5_B.svg" alt="" class="emoji" />
+                            ><img src="../assets/images/emoji/Q5_B.svg" alt="Emoji" class="emoji" />
                         </span>
                         <span v-if="store.step == 5 && index + 1 === 3"
-                            ><img src="../assets/images/emoji/Q5_C.svg" alt="" class="emoji" />
+                            ><img src="../assets/images/emoji/Q5_C.svg" alt="Emoji" class="emoji" />
                         </span>
                         <span v-if="store.step == 5 && index + 1 === 4"
-                            ><img src="../assets/images/emoji/Q5_D.svg" alt="" class="emoji" />
+                            ><img src="../assets/images/emoji/Q5_D.svg" alt="Emoji" class="emoji" />
+                        </span>
+                        <span v-if="store.step == 5 && index + 1 === 5"
+                            ><img src="../assets/images/emoji/Q5_E.svg" alt="Emoji" class="emoji" />
                         </span>
 
                         <span v-if="store.step == 6 && index + 1 === 1"
-                            ><img src="../assets/images/emoji/Q6_A.svg" alt="" class="emoji" />
+                            ><img src="../assets/images/emoji/Q6_A.svg" alt="Emoji" class="emoji" />
                         </span>
                         <span v-if="store.step == 6 && index + 1 === 2"
-                            ><img src="../assets/images/emoji/Q6_B.svg" alt="" class="emoji" />
+                            ><img src="../assets/images/emoji/Q6_B.svg" alt="Emoji" class="emoji" />
                         </span>
                         <span v-if="store.step == 6 && index + 1 === 3"
-                            ><img src="../assets/images/emoji/Q6_C.svg" alt="" class="emoji" />
+                            ><img src="../assets/images/emoji/Q6_C.svg" alt="Emoji" class="emoji" />
                         </span>
                         <span v-if="store.step == 6 && index + 1 === 4"
-                            ><img src="../assets/images/emoji/Q6_D.svg" alt="" class="emoji" />
+                            ><img src="../assets/images/emoji/Q6_D.svg" alt="Emoji" class="emoji" />
                         </span>
 
                         <span v-if="store.step == 7 && index + 1 === 1"
-                            ><img src="../assets/images/emoji/Q7_A.svg" alt="" class="emoji" />
+                            ><img src="../assets/images/emoji/Q7_A.svg" alt="Emoji" class="emoji" />
                         </span>
                         <span v-if="store.step == 7 && index + 1 === 2"
-                            ><img src="../assets/images/emoji/Q7_B.svg" alt="" class="emoji" />
+                            ><img src="../assets/images/emoji/Q7_B.svg" alt="Emoji" class="emoji" />
                         </span>
                         <span v-if="store.step == 7 && index + 1 === 3"
-                            ><img src="../assets/images/emoji/Q7_C.svg" alt="" class="emoji" />
+                            ><img src="../assets/images/emoji/Q7_C.svg" alt="Emoji" class="emoji" />
                         </span>
                         {{ a }}
                     </button>
