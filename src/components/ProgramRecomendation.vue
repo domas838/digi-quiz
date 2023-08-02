@@ -21,11 +21,14 @@ const selectedPlanURL = () => {
 }
 const target = ref(null)
 const isOfferVisible = ref(false)
-
-function onElementVisibility(state) {
+function onOfferVisibility(state) {
     isOfferVisible.value = state
 }
-
+const footerTarget = ref(null)
+const isFooterVisible = ref(false)
+function onFooterVisibility(state) {
+    isFooterVisible.value = state
+}
 const fakeArr = [0, 1, 2, 3, 4, 5, 6, 7]
 const settings = {
     itemsToShow: 4,
@@ -247,9 +250,9 @@ const getCurrentYear = () => {
     </div>
     <div
         class="wrapper light before-sticky"
-        :class="{ sticky: isOfferVisible }"
+        :class="{ sticky: isOfferVisible, hidden: isFooterVisible }"
         ref="target"
-        v-element-visibility="onElementVisibility"
+        v-element-visibility="onOfferVisibility"
     >
         <div class="container">
             <div class="cta-card">
@@ -505,7 +508,7 @@ const getCurrentYear = () => {
         </div>
         <img src="../assets/images/elipses.svg" class="footer-elipses" alt="" />
     </div>
-    <footer>
+    <footer ref="footerTarget" v-element-visibility="onFooterVisibility">
         <div class="container d-flex">
             <div>
                 <p>© {{ getCurrentYear() }} Digiklasė. Visos teisės saugomos</p>
@@ -833,6 +836,12 @@ video {
 .sticky .cta-card {
     transition: 1s ease-in-out;
 }
+.before-sticky.sticky {
+    transition: 0.25s ease-in-out;
+}
+.before-sticky.sticky.hidden {
+    opacity: 0;
+}
 @media (max-width: 767.89px) {
     .before-sticky.sticky {
         position: fixed;
@@ -884,6 +893,7 @@ video {
         padding: 10px 20px !important;
     }
 }
+
 @media (min-width: 767.99px) {
     .sticky {
         position: fixed !important;
