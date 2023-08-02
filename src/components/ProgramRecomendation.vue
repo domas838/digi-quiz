@@ -243,7 +243,39 @@ const getCurrentYear = () => {
                     <navigation />
                 </template>
             </carousel>
-            <div class="content--flex last-section-block">
+            <div class="content--flex last-section-block" v-if="store.childLevel === 'A'">
+                <div class="content--left">
+                    <h2>
+                        <span>Pagerinsime tavo žinias</span> su įdomesniu ir nestandartiniu turiniu
+                        Pasieksi
+                    </h2>
+                    <p>
+                        Tavo pažymiai jau dabar yra neblogi. Todėl mūsų tikslas bus tave dar labiau
+                        sudominti ir įtraukti į mokslą su nauja mokymosi medžiaga
+                    </p>
+                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                        >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
+                    /></a>
+                </div>
+                <div class="content--right">
+                    <img src="../assets/images/your-level-A.svg" class="level-image" alt="" />
+                </div>
+            </div>
+            <div class="content--flex last-section-block" v-if="store.childLevel === 'B'">
+                <div class="content--left">
+                    <h2>
+                        Pasieksi <span>0,5-2 balų geresnius pažymius,</span> vos per 3 mėnesius!
+                    </h2>
+                    <p>Tavo rezultatą apskaičiavome remdamiesi 7348 panašių mokinių atsakymais</p>
+                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                        >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
+                    /></a>
+                </div>
+                <div class="content--right">
+                    <img src="../assets/images/your-level-B.svg" class="level-image" alt="" />
+                </div>
+            </div>
+            <div class="content--flex last-section-block" v-if="store.childLevel === 'C'">
                 <div class="content--left">
                     <h2>
                         Pasieksi <span>iki 2 balų geresnius pažymius,</span> vos per 2 mėnesius!
@@ -254,7 +286,7 @@ const getCurrentYear = () => {
                     /></a>
                 </div>
                 <div class="content--right">
-                    <img src="../assets/images/your-level.svg" class="level-image" alt="" />
+                    <img src="../assets/images/your-level-C.svg" class="level-image" alt="" />
                 </div>
             </div>
         </div>

@@ -13,12 +13,15 @@ const selectAnswer = (answerIndex) => {
             switch (answerIndex) {
                 case 1:
                     store.PROFILE1 = ['Ambitious', 'Exam Oriented']
+                    store.childLevel = 'A'
                     break
                 case 2:
                     store.PROFILE1 = ['Exam Oriented', 'Busy Multitasker']
+                    store.childLevel = 'B'
                     break
                 case 3:
                     store.PROFILE1 = ['Struggling', 'Busy Multitasker']
+                    store.childLevel = 'C'
                     break
 
                 default:

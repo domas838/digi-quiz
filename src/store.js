@@ -17,6 +17,7 @@ export const store = reactive({
     isChildEmailEntered: false,
     parentEmail: '',
     selectedSubjects: [],
+    childLevel: '',
     TIER: '',
     PROFILE1: [],
     PROFILE2: [],
