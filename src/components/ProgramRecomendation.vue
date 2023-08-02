@@ -461,10 +461,7 @@ const getCurrentYear = () => {
                 <slide v-for="(item, index) in storiesArray" :key="item">
                     <div class="story-slide">
                         <div class="story-image">
-                            <img
-                                :src="'../src/assets/images/stories/story-' + index + '.png'"
-                                alt=""
-                            />
+                            <img :src="'/assets/images/stories/story-' + index + '.png'" alt="" />
                         </div>
                         <div class="story-body">
                             <h4>{{ item.head }}</h4>
