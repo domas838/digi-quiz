@@ -247,7 +247,6 @@ const getCurrentYear = () => {
                 <div class="content--left">
                     <h2>
                         <span>Pagerinsime tavo žinias</span> su įdomesniu ir nestandartiniu turiniu
-                        Pasieksi
                     </h2>
                     <p>
                         Tavo pažymiai jau dabar yra neblogi. Todėl mūsų tikslas bus tave dar labiau
