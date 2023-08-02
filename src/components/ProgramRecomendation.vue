@@ -333,7 +333,7 @@ const getCurrentYear = () => {
                         <h3>„Visi mokykliniai dalykai ir visi būreliai“</h3>
                     </div>
                     <div class="price">
-                        <p>Nuo</p>
+                        <p>Nuo &nbsp;</p>
                         <p><span>49,00 </span>€/mėn.</p>
                     </div>
                     <div class="action">
