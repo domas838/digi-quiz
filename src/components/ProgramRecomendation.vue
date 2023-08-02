@@ -1354,11 +1354,13 @@ ul li::before {
     margin-right: 20px;
     border-radius: 50%;
     overflow: hidden;
-    width: 55px;
+    width: 90px;
 }
 .testimonial .author img {
     display: block;
     width: 100%;
+    width: 55px;
+    height: 55px;
 }
 .testimonial .text p {
     font-size: 16px;
@@ -1366,6 +1368,7 @@ ul li::before {
 
     font-weight: 400;
     line-height: 22px;
+    margin-bottom: 8px;
 }
 .testimonial .text p span {
     font-size: 17px;
