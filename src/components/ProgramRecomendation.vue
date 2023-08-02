@@ -366,7 +366,7 @@ const getCurrentYear = () => {
                 <img src="../assets/images/pupil.svg" alt="" />
             </div>
             <div class="content--right list-content">
-                <h3>Papildomos grupinės pamokos internetu:</h3>
+                <h3>Papildomos grupinės<br />pamokos internetu:</h3>
                 <ul>
                     <li>Įtraukiantys mokytojai</li>
                     <li>Individualus mokymosi planas</li>
@@ -800,6 +800,7 @@ header .logo {
     width: 100%;
     z-index: 1;
 }
+
 .video-wrapper {
     position: relative;
     border-radius: 24px;
@@ -1214,6 +1215,11 @@ video {
         margin-top: 16px;
     }
 }
+.list-content h3 {
+    font-size: 32px;
+    font-weight: 570;
+    line-height: 46px;
+}
 ul {
     list-style: none;
     margin-top: 30px;
@@ -1221,7 +1227,11 @@ ul {
 ul li {
     padding-left: 32px;
     position: relative;
-    height: 50px;
+    min-height: 50px;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 570;
+    line-height: 30px; /* 166.667% */
 }
 ul li::before {
     content: '';
@@ -1232,6 +1242,20 @@ ul li::before {
     position: absolute;
     left: 0;
 }
+@media (max-width: 576px) {
+    .list-content h3 {
+        font-size: 30px;
+        line-height: 1.3;
+    }
+    .list-content .cta-buttons {
+        flex-direction: column;
+    }
+}
+@media (min-width: 576px) {
+    .list-content .cta-buttons {
+        justify-content: flex-start;
+    }
+}
 @media (min-width: 768px) {
     ul li {
         padding-left: 42px;
@@ -1240,7 +1264,13 @@ ul li::before {
         width: 32px;
         height: 32px;
     }
+
+    .list-content .cta-buttons .cta-btn {
+        margin-right: 0;
+        margin-top: 32px;
+    }
 }
+
 .testimonial {
     display: flex;
     align-items: center;
