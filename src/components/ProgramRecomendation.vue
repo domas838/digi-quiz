@@ -592,12 +592,7 @@ const getCurrentYear = () => {
         </div>
     </div>
     <div class="wrapper dark inner">
-        <carousel
-            v-bind="testimSettings"
-            :wrapAround="true"
-            :transition="500"
-            class="testimonials-carousel"
-        >
+        <carousel v-bind="testimSettings" class="testimonials-carousel">
             <slide :key="1">
                 <img src="../assets/images/reviews/Review-1.svg" alt="" />
             </slide>
