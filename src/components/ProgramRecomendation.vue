@@ -598,8 +598,23 @@ const getCurrentYear = () => {
             :transition="500"
             class="testimonials-carousel"
         >
-            <slide v-for="review in fakeArr" :key="review">
-                <img src="../assets/images/review-card.png" alt="" />
+            <slide :key="1">
+                <img src="../assets/images/reviews/Review-1.svg" alt="" />
+            </slide>
+            <slide :key="2">
+                <img src="../assets/images/reviews/Review-2.svg" alt="" />
+            </slide>
+            <slide :key="3">
+                <img src="../assets/images/reviews/Review-3.svg" alt="" />
+            </slide>
+            <slide :key="4">
+                <img src="../assets/images/reviews/Review-4.svg" alt="" />
+            </slide>
+            <slide :key="5">
+                <img src="../assets/images/reviews/Review-5.svg" alt="" />
+            </slide>
+            <slide :key="6">
+                <img src="../assets/images/reviews/Review-6.svg" alt="" />
             </slide>
             <template #addons>
                 <pagination />
@@ -723,9 +738,6 @@ const getCurrentYear = () => {
 
     .story-body {
         height: fit-content;
-        /* position: absolute;
-        right: 0;
-        top: 70px; */
         min-width: 60%;
         transform: translate(-90px, 70px);
     }
