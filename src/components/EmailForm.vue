@@ -44,16 +44,19 @@ const submitHandler = (event) => {
 </script>
 <template>
     <h1 v-if="store.respondent === 'child' && !store.isChildEmailEntered">
-        Kur siųsti rezultatus?
+        Rekomenduosime planą, kuris padėtų pasiekti visų užsibrėžtų tikslų
     </h1>
+    <p v-if="store.respondent === 'child' && !store.isChildEmailEntered">
+        Kur atsiųsti rezultatus?
+    </p>
     <h1 v-if="store.respondent === 'child' && store.isChildEmailEntered">
         Pasidalink rezultatais su tėveliais/globėjais ir gauk <span>15 EUR nuolaidą</span> narystei
         įsigyti!
     </h1>
     <h1 v-if="store.respondent === 'parent'">
-        Įveskite el. paštą, kur išsiųsime rezultatus ir gaukite
-        <span>15 EUR nuolaidą</span> narystei įsigyti!
+        Rekomenduosime planą, kuris padėtų pasiekti visų užsibrėžtų tikslų
     </h1>
+    <p v-if="store.respondent === 'parent'">Kur atsiųsti rezultatus?</p>
     <div v-if="store.respondent === 'child'">
         <input
             v-if="!store.isChildEmailEntered"
@@ -75,6 +78,13 @@ const submitHandler = (event) => {
             v-model="store.parentEmail"
             style="margin-bottom: 1rem"
         />
+        <div class="privacy-notice">
+            <img src="../assets/images/Lock.svg" alt="Lock" />
+            <p>
+                Jūsų asmens duomenys pas mus yra saugūs. Beje, nesiunčiame šlamšto ir nesidaliname
+                el. pašto adresais su trečiosiomis šalimis.
+            </p>
+        </div>
         <div class="aggree-row" v-if="!store.isChildEmailEntered">
             <input
                 type="checkbox"
@@ -187,8 +197,32 @@ h1 {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 32px;
+}
+p {
+    margin-bottom: 32px;
+    text-align: center;
 }
 h1 span {
     color: #4a74eb;
+}
+.privacy-notice {
+    display: flex;
+    align-items: flex-start;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.privacy-notice img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+.privacy-notice p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    text-align: left;
+    margin-bottom: 10px;
 }
 </style>

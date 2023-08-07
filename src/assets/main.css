@@ -263,7 +263,6 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
 .answer__buttons-wrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
 }
 .answer__buttons-wrapper .answer__btn {
     width: calc(25% - 30px);
@@ -625,6 +624,9 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
 .aggree-label a {
     text-decoration: underline;
     color: #000;
+}
+.aggree-label a:hover {
+    color: #4a74eb;
 }
 .cta-link {
     font-size: 14px;

@@ -163,7 +163,6 @@ const proceedWithMultipleSelection = () => {
                 <div class="answer__buttons-wrapper grade">
                     <button
                         v-for="(classNo, index) in [
-                            '1 kl.',
                             '2 kl.',
                             '3 kl.',
                             '4 kl.',

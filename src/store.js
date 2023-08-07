@@ -36,21 +36,21 @@ export const store = reactive({
             { qNo: 1, Q: 'Kurioje klasėje mokaisi?' },
             {
                 qNo: 2,
-                Q: 'Kaip vertini savo matematikos žinias ir įgūdžius?',
+                Q: 'Kaip vertini savo akademines žinias ir įgūdžius?',
                 Ans: [
-                    'Matematika ir aš puikiai sutariame, jokių problemų!',
+                    'Puikiai, jokių problemų!',
                     'Viskas kaip ir tvarkoj, bet kartais pasitaiko problemų.',
-                    'Visiškai atskiri pasauliai, nuolat stringu.'
+                    'Prastai, nuolat stringu.'
                 ]
             },
             {
                 qNo: 3,
-                Q: 'Kuris iš šių tikslų labiausiai atitinka tave?',
+                Q: 'Kuris iš šių tikslų tau aktualiausias?',
                 Ans: [
-                    'Siekiu asmeninio augimo dalykuose, kurie mane domina ir sekasi.',
-                    'Noriu patikras ir egzaminus išlaikyti aukščiausiais balais, kad įstočiau į svajonių universitetą.',
-                    'Stengiuosi pasigerinti pažymius ir užlopyti mokslo metų eigoje atsiradančias spragas.',
-                    'Tikiuosi subalansuoti mokymąsi su kitais hobiais ir užsiėmimais - laiko valdymas svarbiausia!'
+                    'Pasiruošimas egzaminui.',
+                    'Pažymių pagerinimas ir spragų taisymas.',
+                    'Asmeninis augimas mane dominančiuose dalykuose.',
+                    'Subalansuoti mokymąsi su kitais hobiais ir užsiėmimais – laiko valdymas svarbiausia!'
                 ]
             },
             {
@@ -71,21 +71,21 @@ export const store = reactive({
             },
             {
                 qNo: 6,
-                Q: 'Kokio pamokų kurso tipo tikiesi?',
+                Q: 'Koks mokymosi formatas tau tinka labiausiai?',
                 Ans: [
-                    'Svarbu pasiruošimas egzaminams, o ne artėjantys pažymiai',
-                    'Norėčiau, kad pamokos atitiktų mokykloje einamas temas, kad galėčiau geriau joms pasiruošti.',
-                    'Abu variantai skamba gerai.',
+                    'Pagal mokytojo sudarytą metinę programą.',
+                    'Pagal mokykloje einamus skyrius.',
+                    'Abu variantai vienodai svarbūs.',
                     'Dar nežinau.'
                 ]
             },
             {
                 qNo: 7,
-                Q: 'Kokio intensyvumo mokymosi norėtum?',
+                Q: 'Kiek laiko per savaitę galėtum skirti vienam dalykui?',
                 Ans: [
-                    'Ne intensyvaus, maždaug 1 valandą per savaitę',
-                    'Vidutiniško, apie 2 valandas per savaitę',
-                    'Intensyvaus, daugiau nei 3 valandas per savaitę'
+                    'Maždaug 1 valandą per savaitę.',
+                    'Apie 2 valandas per savaitę.',
+                    'Daugiau nei 3 valandas per savaitę.'
                 ]
             }
         ],
@@ -93,21 +93,21 @@ export const store = reactive({
             { qNo: 1, Q: 'Kurioje klasėje mokosi jūsų vaikas?' },
             {
                 qNo: 2,
-                Q: 'Kaip įvertintumėte savo vaiko matematikos žinias ir įgūdžius?',
+                Q: 'Kaip įvertintumėte savo vaiko akademines žinias ir įgūdžius?',
                 Ans: [
                     'Puikiai, jokių problemų!',
-                    'Neblogai, tik kartais pasitaiko problemų.',
+                    'Viskas kaip ir tvarkoj, bet kartais pasitaiko problemų.',
                     'Reikia nuolatinio įdirbio, problematiška.'
                 ]
             },
             {
                 qNo: 3,
-                Q: 'Su kuriuo iš akademinių tikslų savo vaikui norėtumėte padėti labiausiai?',
+                Q: 'Kuris tikslas aktualiausias Jūsų vaikui?',
                 Ans: [
-                    'Paskatinti augimą dalykuose, kurie vaikui sekasi ir domina.',
-                    'Patikras ir egzaminus išlaikyti aukščiausiais balais, kad įstotų į svajonių universitetą.',
-                    'Pasigerinti pažymius ir užlopyti mokslo metų eigoje atsirandančias spragas.',
-                    'Subalansuoti mokymąsi su kitais hobiais ir užsiėmimais!'
+                    'Pasiruošimas egzaminui.',
+                    'Pažymių pagerinimas ir spragų ištaisymas.',
+                    'Asmeninis augimas dominančiuose dalykuose.',
+                    'Subalansuoti mokymąsi su kitais hobiais ir užsiėmimais – laiko valdymas svarbiausia!'
                 ]
             },
             {
@@ -120,7 +120,7 @@ export const store = reactive({
                 Q: 'Kaip įvertintumėte savo vaiko motyvaciją mokytis?',
                 Ans: [
                     'Ideali, nuolat ieško ko nors naujo',
-                    'Nebloga. Daugiausiai dėmesio skiria testų, egzaminų rezultatams.',
+                    'Gerai. Daugiausiai dėmesio skiria testų, egzaminų rezultatams.',
                     'Vidutiniškai. Nori pasigerinti pažymius, bet ne visada turi pakankamai noro.',
                     'Priklauso nuo to, kiek laisvo laiko turi nuo kitų veiklų.',
                     'Mokslai - ne pagrindinis prioritetas.'
@@ -128,21 +128,21 @@ export const store = reactive({
             },
             {
                 qNo: 6,
-                Q: 'Kokio pamokų kurso tikitės?',
+                Q: 'Koks mokymosi formatas jums tinkantis labiausiai?',
                 Ans: [
-                    'Svarbu, kad kursas užtikrintų rezultatus, net jei ne visiškai atitinka temas, kurios dabar mokomos mokykloje.',
-                    'Norėčiau, kad pamokos atitiktų mokykloje einamas temas, kad vaikas galėtų geriau joms pasiruošti.',
-                    'Abu variantai skamba gerai.',
+                    'Pagal mokytojo sudarytą metinę programą.',
+                    'Pagal mokykloje einamus skyrius.',
+                    'Abu variantai vienodai svarbūs.',
                     'Nežinau, nėra svarbu.'
                 ]
             },
             {
                 qNo: 7,
-                Q: 'Kokio pamokų intensyvumo tikitės?',
+                Q: 'Kiek laiko per savaitę jūsų vaikas galėtų skirti vienam dalykui?',
                 Ans: [
-                    'Ne intensyvaus. Mokytis 1-2 kartus per savaitę, kad liktų laiko kitoms veikloms.',
-                    'Vidutiniško. Subalansuotas mokymo planas, kuris padėtų siekti tikslų.',
-                    'Intensyvaus! Vaikas yra pasiryžęs siekti progreso ir skirs tiek laiko, kiek reikės'
+                    'Maždaug po 1 valandą per savaitę.',
+                    'Apie 2 valandas per savaitę.',
+                    'Daugiau nei 3 valandas per savaitę.'
                 ]
             }
         ]

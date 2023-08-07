@@ -9,7 +9,7 @@ const acceptSecondBenefit = () => {
 const benefits = [
     '<strong>Tiesioginės pamokų transliacijos</strong>',
     '<strong>Skiringi sudėtingumo lygiai,</strong> jog galėtum mokytis tau labiausiai tinkančiu tempu',
-    '<strong>Išmaniossios mokymo technologijos</strong> ir gyvi pokalbiai',
+    '<strong>Išmaniosios mokymo technologijos</strong> ir gyvi pokalbiai',
     '<strong>Individualūs testai</strong> pamokų metu žinioms patikrinti',
     'Visų transliacijų <strong>įrašų archyvas</strong>'
 ]

@@ -5,7 +5,7 @@ import { Collapse } from 'vue-collapsed'
 import { store } from '../store'
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
-import SectionCTA from '../components/SectionCTA.vue'
+import SectionCTA from './SecondBenefit.vue'
 import { ref } from 'vue'
 import { vElementVisibility } from '@vueuse/components'
 
