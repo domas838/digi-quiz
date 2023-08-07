@@ -21,9 +21,11 @@ const programRecomendationHandler = () => {
         return duplicated.indexOf(element) === index
     })
 
-    if (store.PROFILE3[0] === 'Socializer') {
-        store.selectedPersona = store.PROFILE3[0]
-    } else if (result.length == 1) {
+    // if (store.PROFILE3[0] === 'Socializer') {
+    //     store.selectedPersona = store.PROFILE3[0]
+    // } else
+
+    if (result.length == 1) {
         store.selectedPersona = duplicated[0]
     } else if (result.length == 2) {
         if (result.includes('Busy Multitasker') && result.includes('Struggling')) {
