@@ -678,7 +678,7 @@ const getCurrentYear = () => {
             </div>
             <button class="btn--secondary" @click="showAllFaqs">Žiūrėti visus</button>
             <h2 class="section-title last-section">
-                Prisijunk prie daugiau nei <span>10 000 bendraminčių</span> bendruomenės!
+                Prisijunk prie daugiau nei <span>15 000 bendraminčių</span> bendruomenės!
             </h2>
             <div class="pb">
                 <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="selectedPlanURL" />
