@@ -157,6 +157,24 @@ const questions = reactive([
         isExpanded: false
     }
 ])
+switch (store.selectedPersona) {
+    case 'Ambitious':
+        store.selectedPersonaLT = 'Ambitious'
+        break
+    case 'Exam Oriented':
+        store.selectedPersonaLT = 'Exam Oriented'
+        break
+
+    case 'Busy Multitasker':
+        store.selectedPersonaLT = 'Užsiėmusi(-ęs) devyndarbė(-is)'
+        break
+    case 'Struggling':
+        store.selectedPersonaLT = 'Struggling'
+        break
+    default:
+        break
+}
+
 const handleAccordion = (selectedIndex) => {
     questions.forEach((_, index) => {
         questions[index].isExpanded = index === selectedIndex ? !questions[index].isExpanded : false
@@ -318,34 +336,44 @@ const getCurrentYear = () => {
         </div>
     </div>
     <div
-        class="wrapper light before-sticky"
-        :class="{ sticky: isOfferVisible, hidden: isFooterVisible }"
+        class="wrapper light sticky"
+        :class="{ hidden: isFooterVisible }"
         ref="target"
         v-element-visibility="onOfferVisibility"
     >
-        <div class="container">
-            <div class="cta-card">
-                <div class="header">
-                    <p>Rekomenduojamas planas:</p>
+        <div class="cta-card">
+            <div class="header">
+                <p>Rekomenduojamas planas:</p>
+            </div>
+            <div class="content">
+                <div class="title">
+                    <h3>„Visi mokykliniai dalykai ir visi būreliai“</h3>
                 </div>
-                <div class="content">
-                    <div class="title">
-                        <h3>„Visi mokykliniai dalykai ir visi būreliai“</h3>
-                    </div>
-                    <div class="price">
-                        <p>Nuo &nbsp;</p>
-                        <p><span>49,00 </span>€/mėn.</p>
-                    </div>
-                    <div class="action">
-                        <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
-                            >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
-                        /></a>
-                        <a :href="allPlansURL" target="_blank" class="cta-link"
-                            >Žiūrėti visus planus</a
-                        >
-                    </div>
+                <div class="price">
+                    <p>Nuo &nbsp;</p>
+                    <p><span>49,00 </span>€/mėn.</p>
+                </div>
+                <div class="action">
+                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                        >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
+                    /></a>
+                    <a :href="allPlansURL" target="_blank" class="cta-link">Žiūrėti visus planus</a>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="wrapper light">
+        <div class="container">
+            <h2 class="section-title--small">
+                Remdamiesi apklausa nustatėme ir tavo asmenybės tipą:
+            </h2>
+            <img src="../assets/images/personality.svg" alt="Personality" class="personality-img" />
+            <h2 class="section-title blue">{{ store.selectedPersonaLT }}</h2>
+            <p class="p-narrow">
+                Busy multitasker is a well-rounded high school student who's active in
+                extracurricular activities and values success in her hobbies, but struggles with
+                balancing academic demands and achieving high grades in a limited time frame.
+            </p>
         </div>
     </div>
     <div class="wrapper light">
@@ -679,65 +707,6 @@ const getCurrentYear = () => {
 </template>
 
 <style scoped>
-.stories-carousel .carousel {
-    width: 100%;
-    max-width: 100%;
-}
-.story-slide {
-    width: 100%;
-}
-.story-image {
-    width: 100%;
-    margin-bottom: 20px;
-}
-.story-image img {
-    width: 100%;
-}
-.story-body {
-    border-radius: 12px;
-    background-color: #333;
-    padding: 30px;
-    text-align: left;
-}
-.story-body h4 {
-    font-size: 26px;
-    font-weight: 570;
-    line-height: 40px;
-    color: #fff;
-    margin-top: 0;
-}
-.story-body p {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
-    color: #fff;
-    margin-bottom: 16px;
-}
-.story-body h5 {
-    font-size: 19px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 26px;
-    color: #fff;
-}
-@media (min-width: 768px) {
-    .story-slide {
-        display: flex;
-        position: relative;
-    }
-    .story-image,
-    .story-body {
-        min-width: 50%;
-    }
-
-    .story-body {
-        height: fit-content;
-        min-width: 60%;
-        transform: translate(-90px, 70px);
-    }
-}
-
 header {
     padding: 0 5%;
     height: 65px;
@@ -849,6 +818,17 @@ header .logo {
     z-index: 10;
     position: relative;
 }
+.section-title--small {
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 570;
+    line-height: 36px; /* 138.462% */
+    max-width: 750px;
+    margin: 0 auto;
+}
+.section-title.blue {
+    color: #4a74eb;
+}
 .section-title + p {
     text-align: center;
     margin-top: 16px;
@@ -868,6 +848,10 @@ header .logo {
     position: absolute;
     top: 120px;
     right: 0;
+}
+.personality-img {
+    display: block;
+    margin: 50px auto;
 }
 .footer-elipses {
     position: absolute;
@@ -912,7 +896,10 @@ video {
     bottom: 0;
     z-index: 10;
 }
-
+.p-narrow {
+    max-width: 750px;
+    margin: 0 auto;
+}
 .play-btn,
 .pause-btn {
     position: absolute;
@@ -1036,74 +1023,21 @@ video {
         margin-bottom: 0;
     }
 }
-.before-sticky .cta-card {
-    transform: translateY(250px);
-    position: relative;
-}
-.before-sticky.sticky .cta-card {
-    transform: translateY(0);
-}
-.sticky .cta-card {
-    transition: 1s ease-in-out;
-}
-.before-sticky.sticky {
-    transition: 0.25s ease-in-out;
-}
-.before-sticky.sticky.hidden {
-    opacity: 0;
-}
-@media (max-width: 767.89px) {
-    .before-sticky.sticky {
-        position: fixed;
-        bottom: 0;
-        z-index: 99;
-    }
-    .before-sticky.sticky .container {
-        padding: 0;
-        text-align: center;
-    }
-    .before-sticky.sticky .title {
-        margin-bottom: 0;
-    }
-    .before-sticky.sticky .header p {
-        line-height: unset;
-    }
-    .before-sticky.sticky .title h3 {
-        font-size: 14px;
-        line-height: unset;
-    }
-    .before-sticky.sticky .price {
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        white-space: break-spaces;
-    }
 
-    .before-sticky.sticky .price p {
-        font-size: 12px;
-    }
-    .before-sticky.sticky .price p span {
-        font-size: 30px;
-    }
-    .before-sticky.sticky .action {
-        margin-top: 8px;
-    }
-    .before-sticky.sticky .cta-btn {
-        width: 100%;
-        justify-content: center;
-        margin-bottom: 0 !important;
-    }
-    .before-sticky.sticky .header p {
-        font-size: 8px;
-    }
-    .before-sticky.sticky .cta-link {
-        display: none;
-    }
+.sticky {
+    transition: 0.5s ease-in-out;
+    padding-bottom: 0 !important;
+}
+
+@media (max-width: 767.89px) {
     .cta-card {
         padding: 10px 20px !important;
     }
 }
-
+.sticky.hidden {
+    opacity: 0;
+    z-index: -1;
+}
 @media (min-width: 767.99px) {
     .sticky {
         position: fixed !important;
@@ -1115,6 +1049,7 @@ video {
         background-color: transparent !important;
         padding-bottom: 0;
     }
+
     .sticky .container {
         padding-bottom: 0;
         width: 100%;
@@ -1125,7 +1060,6 @@ video {
 }
 
 .cta-card {
-    border-radius: 12px;
     background: #fff;
     box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.1);
     padding: 28px 36px;
@@ -1347,7 +1281,64 @@ ul li::before {
         margin-top: 32px;
     }
 }
+.stories-carousel .carousel {
+    width: 100%;
+    max-width: 100%;
+}
+.story-slide {
+    width: 100%;
+}
+.story-image {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.story-image img {
+    width: 100%;
+}
+.story-body {
+    border-radius: 12px;
+    background-color: #333;
+    padding: 30px;
+    text-align: left;
+}
+.story-body h4 {
+    font-size: 26px;
+    font-weight: 570;
+    line-height: 40px;
+    color: #fff;
+    margin-top: 0;
+}
+.story-body p {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: #fff;
+    margin-bottom: 16px;
+}
+.story-body h5 {
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 26px;
+    color: #fff;
+}
+@media (min-width: 768px) {
+    .story-slide {
+        display: flex;
+        position: relative;
+    }
+    .story-image,
+    .story-body {
+        min-width: 50%;
+    }
 
+    .story-body {
+        height: fit-content;
+        min-width: 60%;
+        transform: translate(-90px, 70px);
+    }
+}
 .testimonial {
     display: flex;
     align-items: center;

@@ -27,6 +27,7 @@ export const store = reactive({
     TIER2: null,
     TIER3: null,
     selectedPersona: null,
+    selectedPersonaLT: '',
     recomendationsArrTIER0: [],
     recomendationsArrTIER1: [],
     recomendationsArrTIER2: [],
