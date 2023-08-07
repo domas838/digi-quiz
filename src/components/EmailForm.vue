@@ -14,6 +14,10 @@ const emailIsValid = (email) => {
         return false
     }
 }
+const cancelEmailHandler = () => {
+    store.step += 1
+    store.showRecomendations = true
+}
 const isChildProceedDisabled = computed(() => {
     if (!store.childEmail || !store.aggreeWithPrivacy || !emailIsValid(store.childEmail)) {
         return true
@@ -43,6 +47,13 @@ const submitHandler = (event) => {
 }
 </script>
 <template>
+    <button
+        class="close-email-form"
+        @click="cancelEmailHandler"
+        v-if="store.respondent === 'child' && store.isChildEmailEntered"
+    >
+        <img src="../assets/images/close-x.svg" width="48" height="48" />
+    </button>
     <h1 v-if="store.respondent === 'child' && !store.isChildEmailEntered">
         Rekomenduosime planą, kuris padėtų pasiekti visų užsibrėžtų tikslų
     </h1>
@@ -170,6 +181,7 @@ const submitHandler = (event) => {
     >
         Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
     </button>
+
     <button
         v-if="store.respondent === 'parent'"
         type="submit"
@@ -180,16 +192,17 @@ const submitHandler = (event) => {
     >
         Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
     </button>
-
-    <button
-        v-if="store.respondent === 'child' && store.isChildEmailEntered"
-        type="submit"
-        class="benefit-btn"
-        style="margin-top: 2rem"
-        @click="submitHandler($event)"
-    >
-        Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
-    </button>
+    <div class="submit-container" v-if="store.respondent === 'child' && store.isChildEmailEntered">
+        <button
+            type="submit"
+            class="benefit-btn"
+            @click="submitHandler($event)"
+            :disabled="isParentProceedDisabled"
+        >
+            Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
+        </button>
+        <a href="javascript:void(0)" @click="cancelEmailHandler">Praleisti</a>
+    </div>
 </template>
 
 <style scoped>
@@ -224,5 +237,44 @@ h1 span {
     line-height: 20px;
     text-align: left;
     margin-bottom: 10px;
+}
+.submit-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.submit-container button {
+    margin: 0;
+}
+.submit-container a {
+    color: #4a74eb;
+    min-width: 155px;
+    display: flex;
+    justify-content: center;
+}
+.submit-container a:hover {
+    text-decoration: none;
+}
+.close-email-form {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    right: -5%;
+    top: -5%;
+    cursor: pointer;
+}
+@media (max-width: 992px) {
+    .close-email-form {
+        right: 1rem;
+        top: -4rem;
+    }
+}
+@media (max-width: 768px) {
+    .close-email-form {
+        right: 1rem;
+        top: -1rem;
+    }
 }
 </style>
