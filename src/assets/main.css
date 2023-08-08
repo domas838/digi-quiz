@@ -600,7 +600,10 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
 .carousel__slide img {
     max-width: 100%;
 }
-
+.faq-body a {
+    color: #000;
+    font-weight: 570;
+}
 .aggree-row {
     display: flex;
     align-items: center;

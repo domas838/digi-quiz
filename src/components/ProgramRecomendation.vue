@@ -128,32 +128,72 @@ const isFaqHidden = reactive({
 const questions = reactive([
     {
         title: 'Kiek kainuoja „Digiklasės“ pamokos?',
-        answer: 'Kiek kainuoja „Digiklasės“ pamokos?',
+        answer: '<p>Yra 3 skirtingi planai. Galima pasirinkti:</p><p>– Vieną pamoką (nuo 22,00 EUR/mėn.)</p><p>– Dvi pamokas (nuo 44,00 EUR/mėn.)</p><p>– Visas pamokas ir visus būrelius (nuo 49,00 EUR/mėn.)</p><br/><p>Į kainą taip pat įskaičiuoti pamokų transliacijų įrašai ir papildoma asmeninė pagalba mokiniams.</p><br/>Atkreipkite dėmesį, kad pasirinkus apmokėjimą kortele, pinigai nuskaitomi automatiškai kas 30 dienų. Automatinius nuskaitymus galima atšaukti. <a href="https://help.memby.org/lt/articles/6265406-kas-yra-pasikartojantys-mokejimai" target="_blank">Sužinoti daugiau</a></p>',
         isExpanded: false // Initial value
     },
     {
         title: 'Kas tie pasikartojantys mokėjimai?',
-        answer: 'Kas tie pasikartojantys mokėjimai?',
+        answer: '<p>Digiklasėje veikia pasikartojantys mokėjimai, kai pasirinkus apmokėjimą kortele pinigai nuskaičiuojami automatiškai kas 30 dienų. Žinoma, automatinius nuskaitimus galima atšaukti, o šį modelį pasirinkome tam, kad įsigijus Digiklasės narystę ir pasirinkus apmokėjimą kortele, jums nereikėtų rūpintis pasikartojančiais mokėjimais ir narystė tęstųsi be jokių trikdžių. <a href="https://help.memby.org/lt/articles/6265406-kas-yra-pasikartojantys-mokejimai" target="_blank" >Sužinoti daugiau</a></p>',
+        isExpanded: false
+    },
+    {
+        title: 'Ar „Digiklasėje“ mokomos temos sutampa su mokykloje mokomomis temomis?',
+        answer: '<p>Per visus mokslo metus Digiklasėje praeiname visą bendrąją programą. Visgi, tai – individualus klausimas kiekvienam mokiniui. Viskas priklauso nuo mokyklos ir programos, kuria vadovaujamasi pačioje mokykloje.</p><p>Taip pat, dažniausiai mokiniams duodame balsuoti už kitos pamokos temą. Tokiu būdu tema bus paranki didžiajai daliai moksleivių. Jeigu pastebime, kad balsų pasiskirstymas per didelis – darome daugiau pamokų norint patenkinti visų grupių poreikius.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Ar galima užduoti klausimus pamokos metu?',
+        answer: '<p>Taip! Yra 2 būdai:</p><p>1) Galima užduoti klausimą susirašinėjimo lange.</p><p>2) Galima pakelti ranką ir gyvai (balsu) užduoti klausimą mokytojui.</p>',
         isExpanded: false
     },
     {
         title: 'Kaip prisijungti į „Digiklasę“?',
-        answer: 'Kaip prisijungti į „Digiklasę“?',
+        answer: '<p>1. Kai išsirinksite norimas pamokas, mūsų kainų puslapyje pasirinkite labiausiai patinkantį planą.</p><p>2. Atlikite saugų ir paprastą mokėjimą bei užbaikite nesudėtingą registraciją į mokymosi platformą.</p><p>3. Prisijunkite į pamokas ir džiaukitės gerėjančiais rezultatais.</p>',
         isExpanded: false
     },
     {
-        title: 'Kaip prisijungti į „Digiklasę“?',
-        answer: 'Kaip prisijungti į „Digiklasę“?',
+        title: 'Nuo kelintos klasės galima mokytis „Digiklasėje“?',
+        answer: 'Mokome 1–12 klasių mokinius.',
         isExpanded: false
     },
     {
-        title: 'Kaip prisijungti į „Digiklasę“?',
-        answer: 'Kaip prisijungti į „Digiklasę“?',
+        title: 'Kaip prisijungti prie „Discord“ bendruomenės?',
+        answer: '<p>Prisijungus prie savo <a href="https://app.digiklase.lt/login" target="_blank">paskyros</a>, puslapio apačioje rasite <a href="https://discord.com/invite/VqhjZeUNG4" target="_blank">„Discord“</a> programėlę ir dešinėje pusėje esantį mygtuką <a href="https://discord.com/invite/VqhjZeUNG4" target="_blank">„Connect“</a>.</p>',
         isExpanded: false
     },
     {
-        title: 'Kaip prisijungti į „Digiklasę“?',
-        answer: 'Kaip prisijungti į „Digiklasę“?',
+        title: 'Ar jau įvykusių pamokų įrašai kainuoja papildomai?',
+        answer: '<p>Ne, viskas yra įskaičiuota į planą, tad drąsiai galite žiūrėti nusipirktų pamokų įrašus.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Ar pamokos vyksta grupėmis, ar individualiai?',
+        answer: '<p>Pamokos vyksta nedidelėmis grupėmis.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Ar ruošiate valstybiniams brandos egzaminams?',
+        answer: '<p>Taip, ruošiame. Dvyliktokai pas mus gali ruoštis specialiose VBE pamokose, skirtose anglų kalbos, biologijos, chemijos, fizikos, geografijos, istorijos, lietuvių kalbos ir matematikos egzaminų pasiruošimui.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Kokiu laiku vyksta pamokos?',
+        answer: '<p>Pamokos vyksta darbo dienomis nuo 16:00 iki 20:00 val. Detalesnė informaciją rasite mūsų <a href="https://digiklase.lt/tvarkarastis" target="_blank">tvarkaraštyje</a>.</p><p>O šeštadieniais vykdome papildomas pamokas, skirtas VBE pasiruošimui. Jų metu sprendžiame ir analizuojame egzamino uždavinius.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Kaip nuskaičiuojami pinigai nuo kortelės?',
+        answer: '<p>Pasirinkus 1 mėn. planą, po 30 d. planas bus atnaujinamas ir pinigai nuskaitomi automatiškai. Norint sustabdyti narystę, automatinį pratęsimą reikia atšaukti nustatymuose. Jei tavo planas yra terminuotas (3 ar 9 mėn.), pinigai bus automatiškai nuskaičiuojami kas 30 dienų iki kol planas pasibaigs. Terminuotam planui pasibaigus galite sustabdyti automatinį atnaujinimą arba tęsti dar mėnesiui už tą pačią mėnesinę kainą (ir taip kol nesustabdysite)! Daugiau apie <a href="https://help.memby.org/lt/articles/6265406-kas-yra-pasikartojantys-mokejimai" target="_blank">pasikartojančius mokėjimus</a>.</p><p>P.S. visa tai negalioja mokėjimams per „Paysera“.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Ar galima pasikeisti užsakytą planą?',
+        answer: '<p>Galima tik pasikeisti iš pigesnio plano į brangesnį. Iš brangesnio plano pasikeisti į pigesnį galimybės nėra.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Kur pažiūrėti koks planas užsakytas ir kokia galiojimo trukmė?',
+        answer: '<p>Tai gali pasitikrinti savo paskyros nustatymuose, jei nepavyksta – drąsiai rašyk mums ir padėsime tai padaryti.</p>',
         isExpanded: false
     }
 ])
@@ -669,11 +709,7 @@ const getCurrentYear = () => {
                     </div>
                 </button>
                 <Collapse :when="questions[index].isExpanded" class="collapse">
-                    <div class="faq-body">
-                        <p>
-                            {{ question.answer }}
-                        </p>
-                    </div>
+                    <div class="faq-body" v-html="question.answer"></div>
                 </Collapse>
             </div>
             <button class="btn--secondary" @click="showAllFaqs">Žiūrėti visus</button>
@@ -1528,6 +1564,7 @@ ul li::before {
 .faq-body {
     padding-bottom: 32px !important;
 }
+
 .slide-header {
     border-top-left-radius: 11px;
     border-top-right-radius: 11px;
