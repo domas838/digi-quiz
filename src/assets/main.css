@@ -600,14 +600,7 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
 .carousel__slide img {
     max-width: 100%;
 }
-.notice {
-    background: linear-gradient(0deg, rgba(74, 116, 235, 0.2) 0%, rgba(74, 116, 235, 0.2) 100%),
-        #fff;
-    padding: 15px 25px;
-    border-radius: 12px;
-    margin: 0 auto;
-    max-width: 800px;
-}
+
 .aggree-row {
     display: flex;
     align-items: center;
@@ -615,6 +608,12 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
     max-width: 800px;
     position: relative;
     margin-bottom: 10px;
+}
+.aggree-row p {
+    font-size: 14px !important;
+    font-weight: 300;
+    line-height: 20px;
+    text-align: left !important;
 }
 .aggree-label {
     font-size: 16px;

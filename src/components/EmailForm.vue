@@ -138,10 +138,6 @@ const submitHandler = (event) => {
                 *Jeigu tau mažiau nei 13 m., paprašyk tėvelių/globėjų pagalbos užpildyti apklausą.
             </p>
         </div>
-        <div class="notice" v-if="store.isChildEmailEntered">
-            Įvedus tėvelio/globėjo el. paštą, tau priklausys papildoma
-            <strong>15% nuolaida</strong> narystei įsigyti! Kodą išssiųsime el. paštu.
-        </div>
     </div>
     <div v-if="store.respondent === 'parent'">
         <input
@@ -215,6 +211,7 @@ h1 {
 p {
     margin-bottom: 32px;
     text-align: center;
+    font-size: 20px;
 }
 h1 span {
     color: #4a74eb;
@@ -226,6 +223,7 @@ h1 span {
     margin-left: auto;
     margin-right: auto;
 }
+
 .privacy-notice img {
     width: 40px;
     height: 40px;
