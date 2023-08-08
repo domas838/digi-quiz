@@ -66,8 +66,8 @@ export const store = reactive({
                     'Labai aukšta, nuolat ieškau būdų tobulėti ir išmokti kažko naujo',
                     'Aukšta, dėmesį skiriu kontroliniams, testams ar egzaminams',
                     'Vidutinė, noriu pagerinti pažymius, bet kartais tingiu',
-                    'Prastoka, nebent grafikas labai lankstus',
-                    'Mokslai man nėra pagrindinis priorititetas'
+                    'Prastoka, nebent grafikas labai lankstus'
+                    // 'Mokslai man nėra pagrindinis priorititetas' /// +++ (Socializer Question) +++ ///
                 ]
             },
             {

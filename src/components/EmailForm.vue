@@ -6,7 +6,8 @@ const submitChildEmail = (event) => {
     event.preventDefault()
     store.isChildEmailEntered = true
 }
-
+// Klaviyo API KEY
+// pk_5a1e956f717f7efdc37cbdf9ca124b1986
 const emailIsValid = (email) => {
     if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         return true
@@ -34,14 +35,7 @@ const isParentProceedDisabled = computed(() => {
 })
 
 const submitHandler = (event) => {
-    // store.isLoading = true
     event.preventDefault()
-
-    // console.log('TIER0 ' + store.TIER0)
-    // console.log('TIER1 ' + store.TIER1)
-    // console.log('TIER2 ' + store.TIER2)
-    // console.log('TIER3 ' + store.TIER3)
-    // console.log(store.selectedSubjects)
     store.step += 1
     store.showRecomendations = true
 }

@@ -1,11 +1,10 @@
 <script setup>
-import axios from 'axios'
 import { onMounted } from 'vue'
 
 import { store } from '../store'
 const url = new URL(window.location.href)
 
-const token = 'a29826cb-670e-4b25-9669-35f67b2e3e3b'
+const props = defineProps(['instance'])
 
 const toFindDuplicates = (arry) => arry.filter((item, index) => arry.indexOf(item) !== index)
 
@@ -21,42 +20,40 @@ const programRecomendationHandler = () => {
         return duplicated.indexOf(element) === index
     })
 
-    // if (store.PROFILE3[0] === 'Socializer') {
-    //     store.selectedPersona = store.PROFILE3[0]
-    // } else
-
-    if (result.length == 1) {
+    if (store.PROFILE3[0] === 'Socializer') {
+        store.selectedPersona = store.PROFILE3[0]
+    } else if (result.length == 1) {
         store.selectedPersona = duplicated[0]
     } else if (result.length == 2) {
-        if (result.includes('Busy Multitasker') && result.includes('Struggling')) {
-            store.selectedPersona = 'Struggling'
+        // if (result.includes('Busy multitasker') && result.includes('Struggling')) {
+        //     store.selectedPersona = 'Struggling'
+        // }
+        if (result.includes('Exam-oriented') && result.includes('Ambitious student')) {
+            store.selectedPersona = 'Ambitious student'
         }
-        if (result.includes('Exam Oriented') && result.includes('Ambitious')) {
-            store.selectedPersona = 'Ambitious'
-        }
-        if (result.includes('Exam Oriented') && result.includes('Busy Multitasker')) {
+        if (result.includes('Exam-oriented') && result.includes('Busy multitasker')) {
             if (store.TIER === 'TIER1') {
                 store.selectedPersona = 'Struggling'
             } else {
-                store.selectedPersona = 'Ambitious'
+                store.selectedPersona = 'Ambitious student'
             }
         }
         //
     } else if (result.length >= 2) {
         if (
-            (result.includes('Busy Multitasker') || result.includes('Struggling')) &&
-            (result.includes('Exam Oriented') || result.includes('Ambitious'))
+            (result.includes('Busy multitasker') || result.includes('Struggling')) &&
+            (result.includes('Exam-oriented') || result.includes('Ambitious student'))
         ) {
             if (store.TIER === 'TIER1') {
                 store.selectedPersona = 'Struggling'
             } else {
-                store.selectedPersona = 'Ambitious'
+                store.selectedPersona = 'Ambitious student'
             }
         }
     }
 
     switch (store.selectedPersona) {
-        case 'Ambitious':
+        case 'Ambitious student':
             if (store.TIER === 'TIER0') {
                 store.TIER0 = 'Textbook, flexible'
             }
@@ -64,12 +61,12 @@ const programRecomendationHandler = () => {
             store.TIER2 = 'Exam prep'
             store.TIER3 = 'School prep'
             break
-        case 'Exam Oriented':
+        case 'Exam-oriented':
             if (store.TIER === 'TIER0') {
                 store.TIER0 = 'Textbook, flexible'
             }
             store.TIER1 = 'Exam prep'
-            if (store.PROFILE1 === ['Ambitious', 'Exam Oriented']) {
+            if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
                 store.TIER2 = 'Exam advanced prep'
                 store.TIER3 = 'Advanced school prep'
             } else {
@@ -78,11 +75,11 @@ const programRecomendationHandler = () => {
             }
 
             break
-        case 'Busy Multitasker':
+        case 'Busy multitasker':
             if (store.TIER === 'TIER0') {
                 store.TIER0 = 'Textbook, flexible'
             }
-            if (store.PROFILE1 === ['Ambitious', 'Exam Oriented']) {
+            if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
                 store.TIER1 = 'Exam advanced prep'
             } else {
                 store.TIER1 = 'Exam prep'
@@ -105,19 +102,19 @@ const programRecomendationHandler = () => {
                 store.TIER0 = 'Textbook, flexible'
             }
             store.TIER1 = 'Non-formal'
-            if (store.PROFILE1 === ['Ambitious', 'Exam Oriented']) {
+            if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
                 store.TIER2 = 'Exam prep'
             } else {
                 store.TIER2 = 'School prep'
             }
-            if (store.PROFILE2 === 'Exam oriented') {
-                if (store.PROFILE1 === ['Ambitious', 'Exam Oriented']) {
+            if (store.PROFILE2 === 'Exam-oriented') {
+                if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
                     store.TIER3 = 'Advanced exam prep'
                 } else {
                     store.TIER3 = 'School prep'
                 }
             } else {
-                if (store.PROFILE1 === ['Ambitious', 'Exam Oriented']) {
+                if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
                     store.TIER3 = 'Advanced school prep'
                 } else {
                     store.TIER3 = 'Textbook, flexible'
@@ -129,87 +126,54 @@ const programRecomendationHandler = () => {
             break
     }
 
-    const instance = axios.create({
-        baseURL: 'https://coda.io/apis/v1/docs/otYeYWMX9e/tables/grid-8XN2uCh13U/',
-        headers: { Authorization: 'Bearer ' + token }
-    })
-
-    instance
+    props.instance
         .get('/rows?useColumnNames=true')
         .then((response) => {
             response.data.items.forEach((item) => {
                 console.log(item)
                 // console.log('store.selectedClass', typeof Number(store.selectedClass))
                 // console.log('store.selectedPersona', store.selectedPersona)
-                // console.log('store.TIER0', store.TIER0)
-                // console.log('store.TIER1', store.TIER1)
-                // console.log('store.TIER2', store.TIER2)
-                // console.log('store.TIER3', store.TIER3)
-                // console.log('store.TIER4', store.TIER4)
-                console.log(
-                    'TIER0',
-                    item.values.Grade == Number(store.selectedClass) &&
-                        item.values.Persona === store.selectedPersona &&
-                        item.values.Tags === store.TIER0 &&
-                        store.selectedSubjects.includes(item.values.Subject)
-                )
-                console.log(
-                    'TIER1',
-                    item.values.Grade === Number(store.selectedClass) &&
-                        item.values.Persona === store.selectedPersona &&
-                        item.values.Tags === store.TIER1 &&
-                        store.selectedSubjects.includes(item.values.Subject)
-                )
-                console.log(
-                    'TIER2',
-                    item.values.Grade === Number(store.selectedClass) &&
-                        item.values.Persona === store.selectedPersona &&
-                        item.values.Tags === store.TIER1 &&
-                        store.selectedSubjects.includes(item.values.Subject)
-                )
-                console.log(
-                    'TIER3',
-                    item.values.Grade === Number(store.selectedClass) &&
-                        item.values.Persona === store.selectedPersona &&
-                        item.values.Tags === store.TIER3 &&
-                        store.selectedSubjects.includes(item.values.Subject)
-                )
+                console.log(item.values.Tag, store.TIER0)
+                console.log(item.values.Tag, store.TIER1)
+                console.log(item.values.Tag, store.TIER2)
+                console.log(item.values.Tag, store.TIER3)
+
                 switch (item.values.Tier) {
-                    case 'TIER0':
+                    case 0:
                         if (
                             item.values.Grade == Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
-                            item.values.Tags === store.TIER0 &&
+                            item.values.Tag === store.TIER0 &&
                             store.selectedSubjects.includes(item.values.Subject)
                         ) {
                             store.recomendationsArrTIER0.push(item)
                         }
                         break
-                    case 'TIER1':
+                    case 1:
                         if (
                             item.values.Grade === Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
-                            item.values.Tags === store.TIER1 &&
+                            item.values.Tag === store.TIER1 &&
                             store.selectedSubjects.includes(item.values.Subject)
                         ) {
                             store.recomendationsArrTIER1.push(item)
                         }
                         break
-                    case 'TIER2':
+                    case 2:
                         if (
                             item.values.Grade === Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
-                            item.values.Tags === store.TIER2 &&
+                            item.values.Tag === store.TIER2 &&
                             store.selectedSubjects.includes(item.values.Subject)
                         ) {
                             store.recomendationsArrTIER2.push(item)
                         }
                         break
-                    case 'TIER3':
+                    case 3:
                         if (
                             item.values.Grade === Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
-                            item.values.Tags === store.TIER3 &&
+                            item.values.Tag === store.TIER3 &&
                             store.selectedSubjects.includes(item.values.Subject)
                         ) {
                             store.recomendationsArrTIER3.push(item)
@@ -241,6 +205,18 @@ const programRecomendationHandler = () => {
                 window.location = 'http://app.digiklase.lt/v2/quiz-recommendations'
             } else {
                 store.isLoading = false
+
+                // Set query params for returning visitors from the same URL
+                url.searchParams.set('Persona', store.selectedPersona)
+                url.searchParams.set('class', store.selectedClass)
+                url.searchParams.set('level', store.childLevel)
+                url.searchParams.set('subjects', JSON.stringify(store.selectedSubjects))
+                url.searchParams.set('TIER0', JSON.stringify(store.recomendationsArrTIER0))
+                url.searchParams.set('TIER1', JSON.stringify(store.recomendationsArrTIER1))
+                url.searchParams.set('TIER2', JSON.stringify(store.recomendationsArrTIER2))
+                url.searchParams.set('TIER3', JSON.stringify(store.recomendationsArrTIER3))
+                window.history.replaceState(null, null, url)
+
                 if (store.showCTA) {
                     store.step += 1
                 } else {

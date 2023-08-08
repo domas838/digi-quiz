@@ -4,6 +4,7 @@ const props = defineProps(['questions', 'next'])
 
 const selectClass = (classNumber) => {
     store.selectedClass = classNumber.replace(' kl.', '')
+
     props.next()
 }
 const selectAnswer = (answerIndex) => {
@@ -12,15 +13,15 @@ const selectAnswer = (answerIndex) => {
         case 2:
             switch (answerIndex) {
                 case 1:
-                    store.PROFILE1 = ['Ambitious', 'Exam Oriented']
+                    store.PROFILE1 = ['Ambitious student', 'Exam-oriented']
                     store.childLevel = 'A'
                     break
                 case 2:
-                    store.PROFILE1 = ['Exam Oriented', 'Busy Multitasker']
+                    store.PROFILE1 = ['Exam-oriented', 'Busy multitasker']
                     store.childLevel = 'B'
                     break
                 case 3:
-                    store.PROFILE1 = ['Struggling', 'Busy Multitasker']
+                    store.PROFILE1 = ['Struggling', 'Busy multitasker']
                     store.childLevel = 'C'
                     break
 
@@ -32,16 +33,16 @@ const selectAnswer = (answerIndex) => {
         case 3:
             switch (answerIndex) {
                 case 1:
-                    store.PROFILE2 = ['Ambitious']
+                    store.PROFILE2 = ['Ambitious student']
                     break
                 case 2:
-                    store.PROFILE2 = ['Exam Oriented']
+                    store.PROFILE2 = ['Exam-oriented']
                     break
                 case 3:
                     store.PROFILE2 = ['Struggling']
                     break
                 case 4:
-                    store.PROFILE2 = ['Busy Multitasker']
+                    store.PROFILE2 = ['Busy multitasker']
                     break
 
                 default:
@@ -57,16 +58,16 @@ const selectAnswer = (answerIndex) => {
         case 5:
             switch (answerIndex) {
                 case 1:
-                    store.PROFILE3 = ['Ambitious']
+                    store.PROFILE3 = ['Ambitious student']
                     break
                 case 2:
-                    store.PROFILE3 = ['Exam Oriented']
+                    store.PROFILE3 = ['Exam-oriented']
                     break
                 case 3:
                     store.PROFILE3 = ['Struggling']
                     break
                 case 4:
-                    store.PROFILE3 = ['Busy Multitasker']
+                    store.PROFILE3 = ['Busy multitasker']
                     break
                 case 5:
                     store.PROFILE3 = ['Socializer']

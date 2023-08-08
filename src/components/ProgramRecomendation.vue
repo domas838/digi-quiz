@@ -42,7 +42,7 @@ const isFooterVisible = ref(false)
 function onFooterVisibility(state) {
     isFooterVisible.value = state
 }
-const fakeArr = [0, 1, 2, 3, 4, 5, 6, 7]
+// const fakeArr = [0, 1, 2, 3]
 const settings = {
     itemsToShow: 4,
     snapAlign: 'start',
@@ -211,14 +211,14 @@ const questions = reactive([
     }
 ])
 switch (store.selectedPersona) {
-    case 'Ambitious':
+    case 'Ambitious student':
         store.selectedPersonaLT = 'Ambicinga(-s)'
         break
-    case 'Exam Oriented':
+    case 'Exam-oriented':
         store.selectedPersonaLT = 'Orientuota(-s) į egzaminus'
         break
 
-    case 'Busy Multitasker':
+    case 'Busy multitasker':
         store.selectedPersonaLT = 'Užsiėmusi(-ęs) devyndarbė(-is)'
         break
     case 'Struggling':
@@ -266,10 +266,10 @@ const getCurrentYear = () => {
                             :picture="item.values.Picture"
                             :subject="item.values.Subject"
                             :programTitle="item.values.ProgramName"
-                            :teacherName="item.valuesTeacherName"
-                            :teacherImage="item.valuesTeacherImage"
+                            :teacherName="item.values.TeacherName"
+                            :teacherImage="item.values.TeacherImage"
                             description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
-                            lessonsCount="2"
+                            :lessonsCount="item.values.LessonsPerWeek"
                         />
                     </div>
                 </slide>
@@ -280,10 +280,10 @@ const getCurrentYear = () => {
                             :picture="item.values.Picture"
                             :subject="item.values.Subject"
                             :programTitle="item.values.ProgramName"
-                            :teacherName="item.valuesTeacherName"
-                            :teacherImage="item.valuesTeacherImage"
+                            :teacherName="item.values.TeacherName"
+                            :teacherImage="item.values.TeacherImage"
                             description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
-                            lessonsCount="2"
+                            :lessonsCount="item.values.LessonsPerWeek"
                         />
                     </div>
                 </slide>
@@ -294,10 +294,10 @@ const getCurrentYear = () => {
                             :picture="item.values.Picture"
                             :subject="item.values.Subject"
                             :programTitle="item.values.ProgramName"
-                            :teacherName="item.valuesTeacherName"
-                            :teacherImage="item.valuesTeacherImage"
+                            :teacherName="item.values.TeacherName"
+                            :teacherImage="item.values.TeacherImage"
                             description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
-                            lessonsCount="2"
+                            :lessonsCount="item.values.LessonsPerWeek"
                         />
                     </div>
                 </slide>
@@ -308,15 +308,15 @@ const getCurrentYear = () => {
                             :picture="item.values.Picture"
                             :subject="item.values.Subject"
                             :programTitle="item.values.ProgramName"
-                            :teacherName="item.valuesTeacherName"
-                            :teacherImage="item.valuesTeacherImage"
+                            :teacherName="item.values.TeacherName"
+                            :teacherImage="item.values.TeacherImage"
                             description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
-                            lessonsCount="2"
+                            :lessonsCount="item.values.LessonsPerWeek"
                         />
                     </div>
                 </slide>
 
-                <slide v-for="slide in fakeArr" :key="slide">
+                <!-- <slide v-for="slide in fakeArr" :key="slide">
                     <ProgramSlide
                         :isTopRecomendation="false"
                         subject="Matematika"
@@ -325,7 +325,7 @@ const getCurrentYear = () => {
                         description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
                         lessonsCount="2"
                     />
-                </slide>
+                </slide> -->
 
                 <template #addons>
                     <navigation />
@@ -430,10 +430,35 @@ const getCurrentYear = () => {
             </h2>
             <img src="../assets/images/personality.svg" alt="Personality" class="personality-img" />
             <h2 class="section-title blue">{{ store.selectedPersonaLT }}</h2>
-            <p class="p-narrow">
-                Busy multitasker is a well-rounded high school student who's active in
-                extracurricular activities and values success in her hobbies, but struggles with
-                balancing academic demands and achieving high grades in a limited time frame.
+            <p class="p-narrow" v-if="store.selectedPersona === 'Ambitious student'">
+                You are the Ambitious Student, passionate about science subjects and mathematics.
+                Your ambition drives you to seek academic success and personal growth, fueled by
+                discipline and determination. You aim for top exam scores and acceptance into your
+                dream school or university, using online resources and extracurricular activities to
+                pursue your goals.
+            </p>
+            <p class="p-narrow" v-if="store.selectedPersona === 'Exam-oriented'">
+                The Exam Achiever is focused on scoring high marks in exams and getting accepted
+                into a dream school or university. Valuing academic success, discipline, and
+                self-improvement, they are often frustrated by limited access to quality resources
+                and teachers. Actively participating in online sessions and group discussions, they
+                seek to excel despite the challenges, blending a love for science, mathematics, and
+                non-fiction with a determination to achieve their goals.
+            </p>
+
+            <p class="p-narrow" v-if="store.selectedPersona === 'Busy multitasker'">
+                You're the Busy Multitasker, always juggling various activities, clubs, and hobbies
+                outside of your academics. Success in your interests and passions fuels you, but
+                balancing academics can be a challenge. With so much on your plate, efficient
+                learning and time management are essential to go from average to high grades. Your
+                driven spirit is admirable, but remember, focusing on the quality of what you do can
+                sometimes be more beneficial than the quantity.
+            </p>
+            <p class="p-narrow" v-if="store.selectedPersona === 'Struggling'">
+                The Aspiring Achiever seeks academic success but often feels lost without clear
+                guidance. They are quick to join lessons if relevant but may lose interest without
+                continuous engagement. Balancing a love for gaming or spending time with friends
+                with a desire to improve, they need targeted support to thrive.
             </p>
         </div>
     </div>

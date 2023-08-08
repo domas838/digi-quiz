@@ -1,6 +1,8 @@
 <script setup>
 import { store } from './store.js'
 import { onMounted } from 'vue'
+import axios from 'axios'
+
 import RespondentQuestions from './components/RespondentQuestions.vue'
 import FirstBenefit from './components/FirstBenefit.vue'
 import SecondBenefit from './components/SecondBenefit.vue'
@@ -9,7 +11,12 @@ import ProgramRecomendation from './components/ProgramRecomendation.vue'
 import ProgramsLoader from './components/ProgramsLoader.vue'
 
 const url = new URL(window.location.href)
+const token = 'a29826cb-670e-4b25-9669-35f67b2e3e3b'
 
+const instance = axios.create({
+    baseURL: 'https://coda.io/apis/v1/docs/otYeYWMX9e/tables/grid-8XN2uCh13U/',
+    headers: { Authorization: 'Bearer ' + token }
+})
 onMounted(() => {
     if (url.searchParams.has('role')) {
         if (url.searchParams.get('role') === 'parent') {
@@ -30,6 +37,90 @@ onMounted(() => {
     }
     if (url.searchParams.has('class')) {
         store.respondent = 'child'
+    }
+
+    // Redirect straight to results
+    if (
+        url.searchParams.has('Persona') &&
+        url.searchParams.has('class') &&
+        url.searchParams.has('level') &&
+        url.searchParams.has('subjects') &&
+        url.searchParams.has('TIER0') &&
+        url.searchParams.has('TIER1') &&
+        url.searchParams.has('TIER3') &&
+        url.searchParams.has('TIER3')
+    ) {
+        // Display results
+        store.step = 10
+        store.showRecomendations = true
+
+        // Set Data Values
+        store.selectedPersona = url.searchParams.get('Persona')
+        store.selectedClass = url.searchParams.get('class')
+        store.childLevel = url.searchParams.get('level')
+        store.selectedSubjects = JSON.parse(url.searchParams.get('subjects'))
+        store.recomendationsArrTIER0 = JSON.parse(url.searchParams.get('TIER0'))
+        store.recomendationsArrTIER1 = JSON.parse(url.searchParams.get('TIER1'))
+        store.recomendationsArrTIER2 = JSON.parse(url.searchParams.get('TIER2'))
+        store.recomendationsArrTIER3 = JSON.parse(url.searchParams.get('TIER3'))
+
+        instance.get('/rows?useColumnNames=true').then((response) => {
+            response.data.items.forEach((item) => {
+                console.log(item)
+                switch (item.values.Tier) {
+                    case '0':
+                        if (
+                            item.values.Grade == Number(store.selectedClass) &&
+                            item.values.Persona === store.selectedPersona &&
+                            item.values.Tags === store.TIER0 &&
+                            store.selectedSubjects.includes(item.values.Subject)
+                        ) {
+                            store.recomendationsArrTIER0.push(item)
+                        }
+                        break
+                    case '1':
+                        if (
+                            item.values.Grade === Number(store.selectedClass) &&
+                            item.values.Persona === store.selectedPersona &&
+                            item.values.Tags === store.TIER1 &&
+                            store.selectedSubjects.includes(item.values.Subject)
+                        ) {
+                            store.recomendationsArrTIER1.push(item)
+                        }
+                        break
+                    case '2':
+                        if (
+                            item.values.Grade === Number(store.selectedClass) &&
+                            item.values.Persona === store.selectedPersona &&
+                            item.values.Tags === store.TIER2 &&
+                            store.selectedSubjects.includes(item.values.Subject)
+                        ) {
+                            store.recomendationsArrTIER2.push(item)
+                        }
+                        break
+                    case '3':
+                        if (
+                            item.values.Grade === Number(store.selectedClass) &&
+                            item.values.Persona === store.selectedPersona &&
+                            item.values.Tags === store.TIER3 &&
+                            store.selectedSubjects.includes(item.values.Subject)
+                        ) {
+                            store.recomendationsArrTIER3.push(item)
+                        }
+                        break
+
+                    default:
+                        break
+                }
+            })
+            console.log('Persona', store.selectedPersona)
+            console.log('TIER0', store.recomendationsArrTIER0)
+            console.log('TIER1', store.recomendationsArrTIER1)
+            console.log('TIER2', store.recomendationsArrTIER2)
+            console.log('TIER3', store.recomendationsArrTIER3)
+
+            return response.data.items
+        })
     }
 })
 
@@ -173,7 +264,7 @@ const completeness = (step) => {
 
         <FirstBenefit />
         <SecondBenefit />
-        <ProgramsLoader v-if="store.step === 8" :baseUrl="url" />
+        <ProgramsLoader v-if="store.step === 8" :baseUrl="url" :instance="instance" />
         <EmailForm v-if="store.step === 9" />
     </div>
     <img
