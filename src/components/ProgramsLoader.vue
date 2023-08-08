@@ -195,8 +195,12 @@ const programRecomendationHandler = () => {
             return response.data.items
         })
         .then(() => {
-            document.cookie = `memby_quiz_persona=${store.selectedPersona}`
-            document.cookie = `memby_quiz_programs=${'TO-DO'}`
+            const d = new Date()
+            d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000)
+            let expires = 'expires=' + d.toUTCString()
+
+            document.cookie = `memby_quiz_persona=${store.selectedPersona} ; Domain=digiklase.lt ;  ${expires} ; path=/;`
+            document.cookie = `memby_quiz_programs=${'TO-DO'} ; Domain=digiklase.lt ;  ${expires} ; path=/;`
         })
         .then(() => {
             if (url.searchParams.has('app') && url.searchParams.get('app') === 'true') {
