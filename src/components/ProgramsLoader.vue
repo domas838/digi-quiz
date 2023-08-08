@@ -55,7 +55,6 @@ const programRecomendationHandler = () => {
         }
     }
 
-    console.log('Persona ' + store.selectedPersona)
     switch (store.selectedPersona) {
         case 'Ambitious':
             if (store.TIER === 'TIER0') {
@@ -140,10 +139,45 @@ const programRecomendationHandler = () => {
         .then((response) => {
             response.data.items.forEach((item) => {
                 console.log(item)
+                // console.log('store.selectedClass', typeof Number(store.selectedClass))
+                // console.log('store.selectedPersona', store.selectedPersona)
+                // console.log('store.TIER0', store.TIER0)
+                // console.log('store.TIER1', store.TIER1)
+                // console.log('store.TIER2', store.TIER2)
+                // console.log('store.TIER3', store.TIER3)
+                // console.log('store.TIER4', store.TIER4)
+                console.log(
+                    'TIER0',
+                    item.values.Grade == Number(store.selectedClass) &&
+                        item.values.Persona === store.selectedPersona &&
+                        item.values.Tags === store.TIER0 &&
+                        store.selectedSubjects.includes(item.values.Subject)
+                )
+                console.log(
+                    'TIER1',
+                    item.values.Grade === Number(store.selectedClass) &&
+                        item.values.Persona === store.selectedPersona &&
+                        item.values.Tags === store.TIER1 &&
+                        store.selectedSubjects.includes(item.values.Subject)
+                )
+                console.log(
+                    'TIER2',
+                    item.values.Grade === Number(store.selectedClass) &&
+                        item.values.Persona === store.selectedPersona &&
+                        item.values.Tags === store.TIER1 &&
+                        store.selectedSubjects.includes(item.values.Subject)
+                )
+                console.log(
+                    'TIER3',
+                    item.values.Grade === Number(store.selectedClass) &&
+                        item.values.Persona === store.selectedPersona &&
+                        item.values.Tags === store.TIER3 &&
+                        store.selectedSubjects.includes(item.values.Subject)
+                )
                 switch (item.values.Tier) {
                     case 'TIER0':
                         if (
-                            item.values.Grade === store.selectedClass &&
+                            item.values.Grade == Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
                             item.values.Tags === store.TIER0 &&
                             store.selectedSubjects.includes(item.values.Subject)
@@ -153,7 +187,7 @@ const programRecomendationHandler = () => {
                         break
                     case 'TIER1':
                         if (
-                            item.values.Grade === store.selectedClass &&
+                            item.values.Grade === Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
                             item.values.Tags === store.TIER1 &&
                             store.selectedSubjects.includes(item.values.Subject)
@@ -163,7 +197,7 @@ const programRecomendationHandler = () => {
                         break
                     case 'TIER2':
                         if (
-                            item.values.Grade === store.selectedClass &&
+                            item.values.Grade === Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
                             item.values.Tags === store.TIER2 &&
                             store.selectedSubjects.includes(item.values.Subject)
@@ -173,7 +207,7 @@ const programRecomendationHandler = () => {
                         break
                     case 'TIER3':
                         if (
-                            item.values.Grade === store.selectedClass &&
+                            item.values.Grade === Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
                             item.values.Tags === store.TIER3 &&
                             store.selectedSubjects.includes(item.values.Subject)

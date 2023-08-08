@@ -6,16 +6,29 @@ import { store } from '../store'
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import SectionCTA from './SecondBenefit.vue'
+import ProgramSlide from './ProgramSlide.vue'
 import { ref } from 'vue'
 import { vElementVisibility } from '@vueuse/components'
 
 const allPlansURL = 'https://app.digiklase.lt/plans/choose'
 
 const selectedPlanURL = () => {
-    // TO-DO if plan !== all
-    let subjectsString = store.selectedSubjects.join(',')
-
-    let url = `https://app.digiklase.lt/plans/choose?class=${store.selectedClass}&plan=XXX&subjects=${subjectsString}`
+    let subjectsString
+    let url
+    let planID
+    if (store.selectedSubjects.length === 1) {
+        planID = 1
+    } else if (store.selectedSubjects.length === 2) {
+        planID = 5
+    } else {
+        planID = 4
+    }
+    if (store.selectedSubjects.length >= 3) {
+        url = `https://app.digiklase.lt/plans/choose?class=${store.selectedClass}&plan=${planID}`
+    } else {
+        subjectsString = store.selectedSubjects.join(',')
+        url = `https://app.digiklase.lt/plans/choose?class=${store.selectedClass}&plan=${planID}&subjects=${subjectsString}`
+    }
 
     return url
 }
@@ -199,17 +212,17 @@ const questions = reactive([
 ])
 switch (store.selectedPersona) {
     case 'Ambitious':
-        store.selectedPersonaLT = 'Ambitious'
+        store.selectedPersonaLT = 'Ambicinga(-s)'
         break
     case 'Exam Oriented':
-        store.selectedPersonaLT = 'Exam Oriented'
+        store.selectedPersonaLT = 'Orientuota(-s) į egzaminus'
         break
 
     case 'Busy Multitasker':
         store.selectedPersonaLT = 'Užsiėmusi(-ęs) devyndarbė(-is)'
         break
     case 'Struggling':
-        store.selectedPersonaLT = 'Struggling'
+        store.selectedPersonaLT = 'Sunkiai sekasi'
         break
     default:
         break
@@ -245,65 +258,73 @@ const getCurrentYear = () => {
     <div class="wrapper yellow">
         <div class="container">
             <h1>Rekomenduojame mokytis pagal šias programas:</h1>
-            <div v-if="store.recomendationsArrTIER0.length">
-                <h2>TIER0 Programs</h2>
-
-                <div v-for="item in store.recomendationsArrTIER0" v-bind:key="item.id">
-                    {{ item.values.ProgramName }}
-                </div>
-            </div>
-            <div v-if="store.recomendationsArrTIER1.length">
-                <h2>TIER1 Programs</h2>
-
-                <div v-for="item in store.recomendationsArrTIER1" v-bind:key="item.id">
-                    {{ item.values.ProgramName }}
-                </div>
-            </div>
-            <div v-if="store.recomendationsArrTIER2.length">
-                <h2>TIER2 Programs</h2>
-
-                <div v-for="item in store.recomendationsArrTIER2" v-bind:key="item.id">
-                    {{ item.values.ProgramName }}
-                </div>
-            </div>
-            <div v-if="store.recomendationsArrTIER3.length">
-                <h2>TIER3 Programs</h2>
-
-                <div v-for="item in store.recomendationsArrTIER3" v-bind:key="item.id">
-                    {{ item.values.ProgramName }}
-                </div>
-            </div>
-
             <carousel v-bind="settings" class="carousel">
-                <slide v-for="slide in fakeArr" :key="slide"
-                    ><div class="slide-header">
-                        <img src="../assets/images/slider-header.jpg" alt="" />
-                        <div class="slide-content">
-                            <h3>Metinis VBE uždavinių pasiruošimas</h3>
-                            <h4>Teacher <span>Vardas Pavardė</span></h4>
-                        </div>
-                        <div class="slide-separator"></div>
-                        <div class="slide-summary">
-                            <div class="slide-summary-line">
-                                <div class="icon">
-                                    <img src="../assets/images/icon-lessons.svg" alt="" />
-                                </div>
-                                <div class="title">82 lessons in total</div>
-                            </div>
-                            <div class="slide-summary-line">
-                                <div class="icon">
-                                    <img src="../assets/images/icon-live-lessons.svg" alt="" />
-                                </div>
-                                <div class="title">With LIVE lessons</div>
-                            </div>
-                            <div class="slide-summary-line">
-                                <div class="icon">
-                                    <img src="../assets/images/icon-tests.svg" alt="" />
-                                </div>
-                                <div class="title">Tests inside</div>
-                            </div>
-                        </div>
+                <slide v-if="store.recomendationsArrTIER0.length">
+                    <div v-for="item in store.recomendationsArrTIER0" :key="item">
+                        <ProgramSlide
+                            :isTopRecomendation="true"
+                            :picture="item.values.Picture"
+                            :subject="item.values.Subject"
+                            :programTitle="item.values.ProgramName"
+                            :teacherName="item.valuesTeacherName"
+                            :teacherImage="item.valuesTeacherImage"
+                            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                            lessonsCount="2"
+                        />
                     </div>
+                </slide>
+                <slide v-if="store.recomendationsArrTIER1.length">
+                    <div v-for="item in store.recomendationsArrTIER1" :key="item">
+                        <ProgramSlide
+                            :isTopRecomendation="true"
+                            :picture="item.values.Picture"
+                            :subject="item.values.Subject"
+                            :programTitle="item.values.ProgramName"
+                            :teacherName="item.valuesTeacherName"
+                            :teacherImage="item.valuesTeacherImage"
+                            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                            lessonsCount="2"
+                        />
+                    </div>
+                </slide>
+                <slide v-if="store.recomendationsArrTIER2.length">
+                    <div v-for="item in store.recomendationsArrTIER2" :key="item">
+                        <ProgramSlide
+                            :isTopRecomendation="true"
+                            :picture="item.values.Picture"
+                            :subject="item.values.Subject"
+                            :programTitle="item.values.ProgramName"
+                            :teacherName="item.valuesTeacherName"
+                            :teacherImage="item.valuesTeacherImage"
+                            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                            lessonsCount="2"
+                        />
+                    </div>
+                </slide>
+                <slide v-if="store.recomendationsArrTIER3.length">
+                    <div v-for="item in store.recomendationsArrTIER3" :key="item">
+                        <ProgramSlide
+                            :isTopRecomendation="true"
+                            :picture="item.values.Picture"
+                            :subject="item.values.Subject"
+                            :programTitle="item.values.ProgramName"
+                            :teacherName="item.valuesTeacherName"
+                            :teacherImage="item.valuesTeacherImage"
+                            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                            lessonsCount="2"
+                        />
+                    </div>
+                </slide>
+
+                <slide v-for="slide in fakeArr" :key="slide">
+                    <ProgramSlide
+                        :isTopRecomendation="false"
+                        subject="Matematika"
+                        programTitle="Title"
+                        teacherName="Vardas Pavardė"
+                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                        lessonsCount="2"
+                    />
                 </slide>
 
                 <template #addons>
@@ -1565,67 +1586,6 @@ ul li::before {
     padding-bottom: 32px !important;
 }
 
-.slide-header {
-    border-top-left-radius: 11px;
-    border-top-right-radius: 11px;
-    overflow: hidden;
-}
-.slide-header img {
-    width: 100%;
-    display: block;
-}
-.slide-content {
-    background-color: #ffffff;
-    padding: 15px;
-    text-align: left;
-}
-.slide-summary {
-    background-color: #ffffff;
-    padding: 15px;
-    border-bottom-left-radius: 11px;
-    border-bottom-right-radius: 11px;
-}
-.slide-separator {
-    height: 1px;
-    max-width: 90%;
-    display: block;
-    margin: 0 auto;
-    background-color: #f0f0f0;
-}
-.slide-summary-line {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.slide-summary-line .icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-    min-height: 24px;
-    padding: 6px;
-    background-color: #f0f0f0;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-h3 {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 22px; /* 137.5% */
-}
-h4 {
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 16px; /* 133.333% */
-    margin: 16px 0;
-}
-h4 span {
-    font-weight: 700;
-}
 h5 {
     font-size: 12px;
     font-style: normal;
