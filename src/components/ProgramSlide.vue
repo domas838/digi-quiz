@@ -87,7 +87,7 @@ const props = defineProps([
                     ><img
                         v-if="props.teacherImage"
                         class="teacher-image"
-                        :src="props.teacherImage"
+                        :src="'/teacherPortraits/' + props.teacherImage"
                     />
                     <img
                         v-if="!props.teacherImage"
