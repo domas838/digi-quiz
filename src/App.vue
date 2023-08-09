@@ -25,6 +25,7 @@ const generateProgramRecomendations = (item) => {
                 item.values.Grade == Number(store.selectedClass)
             ) {
                 store.recomendationsArrTIER0.push(item)
+                store.membyIDsArray.push(item.values.MembyID)
             }
             if (
                 item.values.Grade == Number(store.selectedClass) &&
@@ -33,6 +34,7 @@ const generateProgramRecomendations = (item) => {
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
                 store.recomendationsArrTIER0.push(item)
+                store.membyIDsArray.push(item.values.MembyID)
             }
 
             break
@@ -42,6 +44,7 @@ const generateProgramRecomendations = (item) => {
                 item.values.Grade == Number(store.selectedClass)
             ) {
                 store.recomendationsArrTIER1.push(item)
+                store.membyIDsArray.push(item.values.MembyID)
             }
             if (
                 item.values.Grade === Number(store.selectedClass) &&
@@ -50,6 +53,7 @@ const generateProgramRecomendations = (item) => {
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
                 store.recomendationsArrTIER1.push(item)
+                store.membyIDsArray.push(item.values.MembyID)
             }
 
             break
@@ -59,6 +63,7 @@ const generateProgramRecomendations = (item) => {
                 item.values.Grade == Number(store.selectedClass)
             ) {
                 store.recomendationsArrTIER2.push(item)
+                store.membyIDsArray.push(item.values.MembyID)
             }
             if (
                 item.values.Grade === Number(store.selectedClass) &&
@@ -67,6 +72,7 @@ const generateProgramRecomendations = (item) => {
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
                 store.recomendationsArrTIER2.push(item)
+                store.membyIDsArray.push(item.values.MembyID)
             }
 
             break
@@ -76,6 +82,7 @@ const generateProgramRecomendations = (item) => {
                 item.values.Grade == Number(store.selectedClass)
             ) {
                 store.recomendationsArrTIER3.push(item)
+                store.membyIDsArray.push(item.values.MembyID)
             }
             if (
                 item.values.Grade === Number(store.selectedClass) &&
@@ -84,6 +91,7 @@ const generateProgramRecomendations = (item) => {
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
                 store.recomendationsArrTIER3.push(item)
+                store.membyIDsArray.push(item.values.MembyID)
             }
 
             break

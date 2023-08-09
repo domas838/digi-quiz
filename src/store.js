@@ -36,6 +36,8 @@ export const store = reactive({
     recomendationsArrTIER1: [],
     recomendationsArrTIER2: [],
     recomendationsArrTIER3: [],
+    membyIDsArray: [],
+
     quiz: {
         child: [
             { qNo: 1, Q: 'Kurioje klasėje mokaisi?' },

@@ -14,7 +14,6 @@ const toFindDuplicates = (arry) => arry.filter((item, index) => arry.indexOf(ite
 
 const programRecomendationHandler = () => {
     store.isLoading = true
-    let membyIDsArray = []
     let resultArray = []
     resultArray = resultArray.concat(store.PROFILE1, store.PROFILE2, store.PROFILE3)
 
@@ -161,7 +160,7 @@ const programRecomendationHandler = () => {
             d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000)
             let expires = 'expires=' + d.toUTCString()
 
-            const programs = JSON.stringify(membyIDsArray)
+            const programs = JSON.stringify(store.membyIDsArray)
 
             document.cookie = `memby_quiz_persona=${store.selectedPersona} ; Domain=digiklase.lt ;  ${expires} ; path=/;`
             document.cookie = `memby_quiz_programs=${programs} ; Domain=digiklase.lt ;  ${expires} ; path=/;`
