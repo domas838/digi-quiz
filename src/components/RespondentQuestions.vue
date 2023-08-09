@@ -143,7 +143,7 @@ const selectMultipleAnswers = (event) => {
 }
 
 const proceedWithMultipleSelection = () => {
-    const selectedInputs = document.querySelectorAll("input[name='subjects']:checked")
+    const selectedInputs = document.querySelectorAll("input[name='Subjects']:checked")
     if (selectedInputs.length) {
         store.step += 1
 
@@ -286,7 +286,7 @@ const proceedWithMultipleSelection = () => {
                         @click="selectMultipleAnswers($event)"
                     >
                         <span
-                            ><input type="checkbox" name="subjects" value="Matematika" />
+                            ><input type="checkbox" name="Subjects" value="Matematika" />
                             <img
                                 src="../assets/images/checkbox.svg"
                                 alt=""
@@ -311,7 +311,7 @@ const proceedWithMultipleSelection = () => {
                         @click="selectMultipleAnswers($event)"
                     >
                         <span
-                            ><input type="checkbox" name="subjects" value="Lietuvių kalba" />
+                            ><input type="checkbox" name="Subjects" value="Lietuvių kalba" />
                             <img
                                 src="../assets/images/checkbox.svg"
                                 alt=""
@@ -336,7 +336,7 @@ const proceedWithMultipleSelection = () => {
                         @click="selectMultipleAnswers($event)"
                     >
                         <span
-                            ><input type="checkbox" name="subjects" value="Biologija" />
+                            ><input type="checkbox" name="Subjects" value="Biologija" />
                             <img
                                 src="../assets/images/checkbox.svg"
                                 alt=""
@@ -361,7 +361,7 @@ const proceedWithMultipleSelection = () => {
                         @click="selectMultipleAnswers($event)"
                     >
                         <span
-                            ><input type="checkbox" name="subjects" value="Fizika" />
+                            ><input type="checkbox" name="Subjects" value="Fizika" />
                             <img
                                 src="../assets/images/checkbox.svg"
                                 alt=""
@@ -382,7 +382,7 @@ const proceedWithMultipleSelection = () => {
                         @click="selectMultipleAnswers($event)"
                     >
                         <span
-                            ><input type="checkbox" name="subjects" value="Chemija" />
+                            ><input type="checkbox" name="Subjects" value="Chemija" />
                             <img
                                 src="../assets/images/checkbox.svg"
                                 alt=""
@@ -403,7 +403,7 @@ const proceedWithMultipleSelection = () => {
                         @click="selectMultipleAnswers($event)"
                     >
                         <span
-                            ><input type="checkbox" name="subjects" value="Istorija" />
+                            ><input type="checkbox" name="Subjects" value="Istorija" />
                             <img
                                 src="../assets/images/checkbox.svg"
                                 alt=""
@@ -428,7 +428,7 @@ const proceedWithMultipleSelection = () => {
                         @click="selectMultipleAnswers($event)"
                     >
                         <span
-                            ><input type="checkbox" name="subjects" value="Anglų kalba" />
+                            ><input type="checkbox" name="Subjects" value="Anglų kalba" />
                             <img
                                 src="../assets/images/checkbox.svg"
                                 alt=""
@@ -451,8 +451,9 @@ const proceedWithMultipleSelection = () => {
                         <span
                             ><input
                                 type="checkbox"
-                                name="subjects"
-                                value="Geografija / Pasaulio pažinimas / Gamta ir žmogus"
+                                name="Subjects"
+                                value="Geografija / Pasaulio
+                            pažinimas / Gamta ir žmogus"
                             />
                             <img
                                 src="../assets/images/checkbox.svg"
@@ -479,7 +480,7 @@ const proceedWithMultipleSelection = () => {
                         @click="selectMultipleAnswers($event)"
                     >
                         <span
-                            ><input type="checkbox" name="subjects" value="Įdomusis mokslas" />
+                            ><input type="checkbox" name="Subjects" value="Įdomusis mokslas" />
                             <img
                                 src="../assets/images/checkbox.svg"
                                 alt=""

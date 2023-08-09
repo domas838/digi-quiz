@@ -231,6 +231,8 @@ const props = defineProps([
     height: 32px;
     width: 32px;
     margin-right: 10px;
+    object-fit: cover;
+    object-position: center;
 }
 .slide-summary {
     background-color: #ffffff;

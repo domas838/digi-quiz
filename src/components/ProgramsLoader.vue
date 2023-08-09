@@ -4,7 +4,11 @@ import { onMounted } from 'vue'
 import { store } from '../store'
 const url = new URL(window.location.href)
 
-const props = defineProps(['instance', 'generateProgramRecomendations'])
+const props = defineProps([
+    'instance',
+    'generateProgramRecomendations',
+    'selectMostRecommendedPrograms'
+])
 
 const toFindDuplicates = (arry) => arry.filter((item, index) => arry.indexOf(item) !== index)
 
@@ -146,7 +150,11 @@ const programRecomendationHandler = () => {
             console.log('TIER2', store.recomendationsArrTIER2)
             console.log('TIER3', store.recomendationsArrTIER3)
 
+            store.is
             return response.data.items
+        })
+        .then(() => {
+            props.selectMostRecommendedPrograms()
         })
         .then(() => {
             const d = new Date()
@@ -168,7 +176,7 @@ const programRecomendationHandler = () => {
                 url.searchParams.set('Persona', store.selectedPersona)
                 url.searchParams.set('Class', store.selectedClass)
                 url.searchParams.set('Level', store.childLevel)
-                url.searchParams.set('subjects', JSON.stringify(store.selectedSubjects))
+                url.searchParams.set('Subjects', JSON.stringify(store.selectedSubjects))
                 url.searchParams.set('TIER0', JSON.stringify(store.recomendationsArrTIER0))
                 url.searchParams.set('TIER1', JSON.stringify(store.recomendationsArrTIER1))
                 url.searchParams.set('TIER2', JSON.stringify(store.recomendationsArrTIER2))

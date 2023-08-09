@@ -34,6 +34,7 @@ const generateProgramRecomendations = (item) => {
             ) {
                 store.recomendationsArrTIER0.push(item)
             }
+
             break
         case '1':
             if (
@@ -50,6 +51,7 @@ const generateProgramRecomendations = (item) => {
             ) {
                 store.recomendationsArrTIER1.push(item)
             }
+
             break
         case '2':
             if (
@@ -66,6 +68,7 @@ const generateProgramRecomendations = (item) => {
             ) {
                 store.recomendationsArrTIER2.push(item)
             }
+
             break
         case '3':
             if (
@@ -82,11 +85,76 @@ const generateProgramRecomendations = (item) => {
             ) {
                 store.recomendationsArrTIER3.push(item)
             }
+
             break
 
         default:
             break
     }
+}
+const selectMostRecommendedPrograms = () => {
+    console.log('Select most recommended programs')
+
+    if (
+        store.recomendationsArrTIER0.length > 0 &&
+        store.recomendationsArrTIER1.length === 0 &&
+        store.recomendationsArrTIER2.length === 0 &&
+        store.recomendationsArrTIER3.length === 0
+    ) {
+        store.TIER0isRecomended = true
+    } else {
+        store.TIER0isRecomended = true
+    }
+
+    if (
+        store.recomendationsArrTIER0.length === 0 &&
+        store.recomendationsArrTIER1.length > 0 &&
+        store.recomendationsArrTIER2.length === 0 &&
+        store.recomendationsArrTIER3.length === 0
+    ) {
+        store.TIER1isRecomended = true
+    } else if (
+        store.recomendationsArrTIER0.length === 0 &&
+        store.recomendationsArrTIER1.length > 0
+    ) {
+        store.TIER1isRecomended = true
+    } else {
+        store.TIER1isRecomended = false
+    }
+    if (
+        store.recomendationsArrTIER0.length === 0 &&
+        store.recomendationsArrTIER1.length === 0 &&
+        store.recomendationsArrTIER2.length > 0 &&
+        store.recomendationsArrTIER3.length === 0
+    ) {
+        store.TIER2isRecomended = true
+    } else if (
+        store.recomendationsArrTIER1.length === 0 &&
+        store.recomendationsArrTIER2.length > 0
+    ) {
+        store.TIER2isRecomended = true
+    } else {
+        store.TIER2isRecomended = false
+    }
+    if (
+        store.recomendationsArrTIER0.length === 0 &&
+        store.recomendationsArrTIER1.length === 0 &&
+        store.recomendationsArrTIER2.length === 0 &&
+        store.recomendationsArrTIER3.length > 0
+    ) {
+        store.TIER3isRecomended = true
+    } else if (
+        store.recomendationsArrTIER2.length === 0 &&
+        store.recomendationsArrTIER3.length > 0
+    ) {
+        store.TIER3isRecomended = true
+    } else {
+        store.TIER3isRecomended = false
+    }
+    console.log(store.TIER0isRecomended)
+    console.log(store.TIER1isRecomended)
+    console.log(store.TIER2isRecomended)
+    console.log(store.TIER3isRecomended)
 }
 onMounted(() => {
     if (url.searchParams.has('role')) {
@@ -115,7 +183,7 @@ onMounted(() => {
         (url.searchParams.has('Persona') &&
             url.searchParams.has('Class') &&
             url.searchParams.has('Level') &&
-            url.searchParams.has('subjects') &&
+            url.searchParams.has('Subjects') &&
             url.searchParams.has('TIER0')) ||
         url.searchParams.has('TIER1') ||
         url.searchParams.has('TIER2') ||
@@ -130,7 +198,7 @@ onMounted(() => {
         store.selectedPersona = url.searchParams.get('Persona')
         store.selectedClass = url.searchParams.get('Class')
         store.childLevel = url.searchParams.get('Level')
-        store.selectedSubjects = JSON.parse(url.searchParams.get('subjects'))
+        store.selectedSubjects = JSON.parse(url.searchParams.get('Subjects'))
         if (url.searchParams.has('TIER0')) {
             store.recomendationsArrTIER0 = JSON.parse(url.searchParams.get('TIER0'))
         }
@@ -144,18 +212,23 @@ onMounted(() => {
             store.recomendationsArrTIER3 = JSON.parse(url.searchParams.get('TIER3'))
         }
 
-        instance.get('/rows?useColumnNames=true').then((response) => {
-            response.data.items.forEach((item) => {
-                generateProgramRecomendations(item)
-            })
-            console.log('Persona', store.selectedPersona)
-            console.log('TIER0', store.recomendationsArrTIER0)
-            console.log('TIER1', store.recomendationsArrTIER1)
-            console.log('TIER2', store.recomendationsArrTIER2)
-            console.log('TIER3', store.recomendationsArrTIER3)
+        instance
+            .get('/rows?useColumnNames=true')
+            .then((response) => {
+                response.data.items.forEach((item) => {
+                    generateProgramRecomendations(item)
+                })
+                console.log('Persona', store.selectedPersona)
+                console.log('TIER0', store.recomendationsArrTIER0)
+                console.log('TIER1', store.recomendationsArrTIER1)
+                console.log('TIER2', store.recomendationsArrTIER2)
+                console.log('TIER3', store.recomendationsArrTIER3)
 
-            return response.data.items
-        })
+                return response.data.items
+            })
+            .then(() => {
+                selectMostRecommendedPrograms()
+            })
     }
 })
 
@@ -304,6 +377,7 @@ const completeness = (step) => {
             :baseUrl="url"
             :instance="instance"
             :generateProgramRecomendations="generateProgramRecomendations"
+            :selectMostRecommendedPrograms="selectMostRecommendedPrograms"
         />
         <EmailForm v-if="store.step === 9" />
     </div>

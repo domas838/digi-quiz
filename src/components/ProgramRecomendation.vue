@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, computed } from 'vue'
+import { reactive } from 'vue'
 import { Collapse } from 'vue-collapsed'
 
 import { store } from '../store'
@@ -211,77 +211,6 @@ const questions = reactive([
     }
 ])
 
-const isOnlyOneTier = () => {
-    if (
-        store.TIER0.length > 0 &&
-        store.TIER1.length === 0 &&
-        store.TIER2.length === 0 &&
-        store.TIER3.length === 0
-    ) {
-        return true
-    }
-
-    if (
-        store.TIER0.length === 0 &&
-        store.TIER1.length > 0 &&
-        store.TIER2.length === 0 &&
-        store.TIER3.length === 0
-    ) {
-        return true
-    }
-
-    if (
-        store.TIER0.length === 0 &&
-        store.TIER1.length === 0 &&
-        store.TIER2.length > 0 &&
-        store.TIER3.length === 0
-    ) {
-        return true
-    }
-
-    if (
-        store.TIER0.length === 0 &&
-        store.TIER1.length === 0 &&
-        store.TIER2.length === 0 &&
-        store.TIER3.length > 0
-    ) {
-        return true
-    }
-    return false
-}
-const isTopRecomendation = computed(() => {
-    const TIER0 = () => {
-        if (isOnlyOneTier()) {
-            return true
-        }
-    }
-    const TIER1 = () => {
-        if (isOnlyOneTier()) {
-            return true
-        } else if (store.TIER0.length === 0 && store.TIER1.length > 0) {
-            return true
-        } else {
-            return false
-        }
-    }
-    const TIER2 = () => {
-        if (isOnlyOneTier()) {
-            return true
-        }
-    }
-    const TIER3 = () => {
-        if (isOnlyOneTier()) {
-            return true
-        }
-    }
-    return {
-        TIER0,
-        TIER1,
-        TIER2,
-        TIER3
-    }
-})
-
 switch (store.selectedPersona) {
     case 'Ambitious student':
         store.selectedPersonaLT = 'Ambicinga(-s)'
@@ -333,7 +262,7 @@ const getCurrentYear = () => {
             <carousel v-bind="settings" class="carousel">
                 <slide v-for="item in store.recomendationsArrTIER0" :key="item">
                     <ProgramSlide
-                        :isTopRecomendation="isTopRecomendation.TIER0"
+                        :isTopRecomendation="store.TIER0isRecomended"
                         :picture="item.values.Picture"
                         :subject="item.values.Subject"
                         :programTitle="item.values.ProgramName"
@@ -346,7 +275,7 @@ const getCurrentYear = () => {
 
                 <slide v-for="item in store.recomendationsArrTIER1" :key="item">
                     <ProgramSlide
-                        :isTopRecomendation="isTopRecomendation.TIER1"
+                        :isTopRecomendation="store.TIER1isRecomended"
                         :picture="item.values.Picture"
                         :subject="item.values.Subject"
                         :programTitle="item.values.ProgramName"
@@ -359,7 +288,7 @@ const getCurrentYear = () => {
 
                 <slide v-for="item in store.recomendationsArrTIER2" :key="item">
                     <ProgramSlide
-                        :isTopRecomendation="isTopRecomendation.TIER2"
+                        :isTopRecomendation="store.TIER2isRecomended"
                         :picture="item.values.Picture"
                         :subject="item.values.Subject"
                         :programTitle="item.values.ProgramName"
@@ -372,7 +301,7 @@ const getCurrentYear = () => {
 
                 <slide v-for="item in store.recomendationsArrTIER3" :key="item">
                     <ProgramSlide
-                        :isTopRecomendation="isTopRecomendation.TIER3"
+                        :isTopRecomendation="store.TIER3isRecomended"
                         :picture="item.values.Picture"
                         :subject="item.values.Subject"
                         :programTitle="item.values.ProgramName"
@@ -382,17 +311,6 @@ const getCurrentYear = () => {
                         :lessonsCount="item.values.LessonsPerWeek"
                     />
                 </slide>
-
-                <!-- <slide v-for="slide in fakeArr" :key="slide">
-                    <ProgramSlide
-                        :isTopRecomendation="false"
-                        subject="Matematika"
-                        programTitle="Title"
-                        teacherName="Vardas Pavardė"
-                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
-                        lessonsCount="2"
-                    />
-                </slide> -->
 
                 <template #addons>
                     <navigation />
