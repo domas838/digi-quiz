@@ -86,18 +86,8 @@ const generateProgramRecomendations = (item) => {
         store.recomendationsArrEVERYONE.push(item)
         store.membyIDsArray.push(item.values.MembyID)
     }
-    console.log(item.values.Tag === 'Advanced')
-    console.log(item.values.Grade === Number(store.selectedClass))
-    console.log(store.selectedSubjects.includes(item.values.Subject))
-    console.log(item.values.Grade === Number(store.selectedClass))
-    console.log('TIER0', store.recomendationsArrTIER0)
-    console.log('TIER1', store.recomendationsArrTIER1)
-    console.log('TIER2', store.recomendationsArrTIER2)
-    console.log('TIER3', store.recomendationsArrTIER3)
 }
 const selectMostRecommendedPrograms = () => {
-    console.log('Select most recommended programs')
-
     if (
         store.recomendationsArrTIER0.length > 0 &&
         store.recomendationsArrTIER1.length === 0 &&
@@ -166,11 +156,6 @@ const selectMostRecommendedPrograms = () => {
     } else {
         store.EVERYONEisRecomended = false
     }
-
-    // console.log(store.TIER0isRecomended)
-    // console.log(store.TIER1isRecomended)
-    // console.log(store.TIER2isRecomended)
-    // console.log(store.TIER3isRecomended)
 }
 onMounted(() => {
     if (url.searchParams.has('role')) {
