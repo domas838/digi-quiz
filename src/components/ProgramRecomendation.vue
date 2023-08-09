@@ -267,7 +267,7 @@ const getCurrentYear = () => {
                         :programTitle="item.values.ProgramName"
                         :teacherName="item.values.TeacherName"
                         :teacherImage="item.values.TeacherImage"
-                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                        :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
                     />
                 </slide>
@@ -280,7 +280,7 @@ const getCurrentYear = () => {
                         :programTitle="item.values.ProgramName"
                         :teacherName="item.values.TeacherName"
                         :teacherImage="item.values.TeacherImage"
-                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                        :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
                     />
                 </slide>
@@ -293,7 +293,7 @@ const getCurrentYear = () => {
                         :programTitle="item.values.ProgramName"
                         :teacherName="item.values.TeacherName"
                         :teacherImage="item.values.TeacherImage"
-                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                        :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
                     />
                 </slide>
@@ -306,7 +306,7 @@ const getCurrentYear = () => {
                         :programTitle="item.values.ProgramName"
                         :teacherName="item.values.TeacherName"
                         :teacherImage="item.values.TeacherImage"
-                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                        :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
                     />
                 </slide>
@@ -318,7 +318,7 @@ const getCurrentYear = () => {
                         :programTitle="item.values.ProgramName"
                         :teacherName="item.values.TeacherName"
                         :teacherImage="item.values.TeacherImage"
-                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                        :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
                     />
                 </slide>

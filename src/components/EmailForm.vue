@@ -5,7 +5,6 @@ import { computed } from 'vue'
 const submitChildEmail = (event) => {
     event.preventDefault()
     store.isChildEmailEntered = true
-    klaviyoRequestHandler()
 }
 // Klaviyo API KEY
 // pk_5a1e956f717f7efdc37cbdf9ca124b1986
@@ -43,7 +42,12 @@ const submitHandler = (event) => {
     store.showRecomendations = true
     klaviyoRequestHandler()
 }
-
+const submitChildAndParentHandler = (event) => {
+    event.preventDefault()
+    store.step += 1
+    store.showRecomendations = true
+    klaviyoRequestHandler()
+}
 const makeExternalID = (length) => {
     let result = ''
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -57,40 +61,42 @@ const makeExternalID = (length) => {
 }
 
 const klaviyoRequestHandler = () => {
-    let date = new Date()
+    console.log('SUBMIT EMAILS')
+    // let date = new Date()
 
-    const options = {
-        method: 'POST',
-        headers: {
-            accept: 'application/json',
-            revision: date.toISOString().split('T')[0],
-            'content-type': 'application/json',
-            Authorization: 'Klaviyo-API-Key pk_5a1e956f717f7efdc37cbdf9ca124b1986'
-        },
-        body: JSON.stringify({
-            data: {
-                type: 'profile',
-                attributes: {
-                    email: store.childEmail ? store.childEmail : store.parentEmail,
-                    external_id: makeExternalID(28),
-                    properties: {
-                        ResultURL: store.resultUrl,
-                        Persona: store.selectedPersona,
-                        Class: store.selectedClass,
-                        Respondent: store.respondent,
-                        ParentEmail: store.parentEmail,
-                        ChildEmail: store.childEmail,
-                        Motivation: store.childLevel
-                    }
-                }
-            }
-        })
-    }
+    // const options = {
+    //     method: 'POST',
+    //     headers: {
+    //         accept: 'application/json',
+    //         revision: date.toISOString().split('T')[0],
+    //         'Content-Type': 'application/json',
+    //         Authorization: 'Klaviyo-API-Key pk_5a1e956f717f7efdc37cbdf9ca124b1986',
+    //         mode: 'no-cors'
+    //     },
+    //     body: JSON.stringify({
+    //         data: {
+    //             type: 'profile',
+    //             attributes: {
+    //                 email: store.childEmail ? store.childEmail : store.parentEmail,
+    //                 external_id: makeExternalID(28),
+    //                 properties: {
+    //                     ResultURL: store.resultUrl,
+    //                     Persona: store.selectedPersona,
+    //                     Class: store.selectedClass,
+    //                     Respondent: store.respondent,
+    //                     ParentEmail: store.parentEmail,
+    //                     ChildEmail: store.childEmail,
+    //                     Motivation: store.childLevel
+    //                 }
+    //             }
+    //         }
+    //     })
+    // }
 
-    fetch('https://a.klaviyo.com/api/profiles/', options)
-        .then((response) => response.json())
-        .then((response) => console.log(response))
-        .catch((err) => console.error(err))
+    // fetch('https://a.klaviyo.com/api/profiles/', options)
+    //     .then((response) => response.json())
+    //     .then((response) => console.log(response))
+    //     .catch((err) => console.error(err))
 }
 </script>
 <template>
@@ -239,7 +245,7 @@ const klaviyoRequestHandler = () => {
         <button
             type="submit"
             class="benefit-btn"
-            @click="submitHandler($event)"
+            @click="submitChildAndParentHandler($event)"
             :disabled="isParentProceedDisabled"
         >
             Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
