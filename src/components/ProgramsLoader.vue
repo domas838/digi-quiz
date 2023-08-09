@@ -166,8 +166,8 @@ const programRecomendationHandler = () => {
 
                 // Set query params for returning visitors from the same URL
                 url.searchParams.set('Persona', store.selectedPersona)
-                url.searchParams.set('class', store.selectedClass)
-                url.searchParams.set('level', store.childLevel)
+                url.searchParams.set('Class', store.selectedClass)
+                url.searchParams.set('Level', store.childLevel)
                 url.searchParams.set('subjects', JSON.stringify(store.selectedSubjects))
                 url.searchParams.set('TIER0', JSON.stringify(store.recomendationsArrTIER0))
                 url.searchParams.set('TIER1', JSON.stringify(store.recomendationsArrTIER1))

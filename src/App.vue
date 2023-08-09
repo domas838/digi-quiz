@@ -101,20 +101,20 @@ onMounted(() => {
         }
     }
 
-    if (url.searchParams.has('class') || url.searchParams.has('subject')) {
+    if (url.searchParams.has('Class') || url.searchParams.has('subject')) {
         // praleidžiame INTRO, Q1 langą, Q4, BENEFIT, CTA langus.
         store.step = 2
         store.showCTA = false
     }
-    if (url.searchParams.has('class')) {
+    if (url.searchParams.has('Class')) {
         store.respondent = 'child'
     }
 
     // Redirect straight to results
     if (
         (url.searchParams.has('Persona') &&
-            url.searchParams.has('class') &&
-            url.searchParams.has('level') &&
+            url.searchParams.has('Class') &&
+            url.searchParams.has('Level') &&
             url.searchParams.has('subjects') &&
             url.searchParams.has('TIER0')) ||
         url.searchParams.has('TIER1') ||
@@ -128,8 +128,8 @@ onMounted(() => {
 
         // Set Data Values
         store.selectedPersona = url.searchParams.get('Persona')
-        store.selectedClass = url.searchParams.get('class')
-        store.childLevel = url.searchParams.get('level')
+        store.selectedClass = url.searchParams.get('Class')
+        store.childLevel = url.searchParams.get('Level')
         store.selectedSubjects = JSON.parse(url.searchParams.get('subjects'))
         if (url.searchParams.has('TIER0')) {
             store.recomendationsArrTIER0 = JSON.parse(url.searchParams.get('TIER0'))
@@ -181,7 +181,7 @@ const prevStep = () => {
 const nextStep = () => {
     if (store.step <= store.quiz.child.length) {
         if (store.step === 3 && store.showFirstBenefit === false) {
-            if (!url.searchParams.has('class')) {
+            if (!url.searchParams.has('Class')) {
                 store.step = 3
                 store.showFirstBenefit = true
             } else {
@@ -189,7 +189,7 @@ const nextStep = () => {
                 store.showFirstBenefit = false
             }
         } else if (store.step === 5 && store.showSecondBenefit === false) {
-            if (!url.searchParams.has('class')) {
+            if (!url.searchParams.has('Class')) {
                 store.step = 5
                 store.showSecondBenefit = true
             } else {
@@ -199,7 +199,7 @@ const nextStep = () => {
         } else {
             store.step += 1
         }
-        if (url.searchParams.has('class') || url.searchParams.has('subject')) {
+        if (url.searchParams.has('Class') || url.searchParams.has('subject')) {
             store.showFirstBenefit = false
             if (store.step === 4) {
                 store.step = 5
