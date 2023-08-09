@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from 'vue'
-import { Collapse } from 'vue-collapsed'
+// import { Collapse } from 'vue-collapsed'
 
 import { store } from '../store'
 import 'vue3-carousel/dist/carousel.css'
@@ -9,6 +9,7 @@ import SectionCTA from './SecondBenefit.vue'
 import ProgramSlide from './ProgramSlide.vue'
 import { ref } from 'vue'
 import { vElementVisibility } from '@vueuse/components'
+import AccordionFAQ from './AccordionFAQ.vue'
 
 const props = defineProps(['random'])
 
@@ -136,10 +137,10 @@ const storiesArray = [
     }
 ]
 
-const isFaqHidden = reactive({
-    isFaqHidden: true
-})
-const questions = reactive([
+// const isFaqHidden = reactive({
+//     isFaqHidden: true
+// })
+const faqLT = reactive([
     {
         title: 'Kiek kainuoja „Digiklasės“ pamokos?',
         answer: '<p>Yra 3 skirtingi planai. Galima pasirinkti:</p><p>– Vieną pamoką (nuo 22,00 EUR/mėn.)</p><p>– Dvi pamokas (nuo 44,00 EUR/mėn.)</p><p>– Visas pamokas ir visus būrelius (nuo 49,00 EUR/mėn.)</p><br/><p>Į kainą taip pat įskaičiuoti pamokų transliacijų įrašai ir papildoma asmeninė pagalba mokiniams.</p><br/>Atkreipkite dėmesį, kad pasirinkus apmokėjimą kortele, pinigai nuskaitomi automatiškai kas 30 dienų. Automatinius nuskaitymus galima atšaukti. <a href="https://help.memby.org/lt/articles/6265406-kas-yra-pasikartojantys-mokejimai" target="_blank">Sužinoti daugiau</a></p>',
@@ -211,7 +212,78 @@ const questions = reactive([
         isExpanded: false
     }
 ])
-
+const faqLV = reactive([
+    {
+        title: 'Cik maksā Memby nodarbības?',
+        answer: '<p>Izmēģinājuma nodarbība maksā 5 eiro. Mēneša abonements maksā 30 eiro. Slēdzot līgumu uz 9 mēnešiem, maksa ir 25 eiro mēnesī.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Kas ir iekļauts abonementa cenā?',
+        answer: '<p>Abonements nodrošina piekļuvi 8-16 nodarbībām mēnesī.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Kas ir regulārie maksājumi?',
+        answer: '<p>Memby ir pieejami periodiskie maksājumi. Tas nozīmē, ka nauda tiek ieturēta automātiski ik pēc 30 dienām. Automātisko maksājumu ir iespējams atcelt.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Kā no kartes tiek atskaitīta nauda?',
+        answer: '<p>Izvēloties viena mēneša plānu, pēc 30 dienām plāns tiks atjaunots un nauda izņemta automātiski. Lai to pārtrauktu, iestatījumos ir jāatceļ automātiskais maksājums. Ja izvēlētais plāns ir noteikta termiņa (9 mēnešiem), nauda tiks automātiski atskaitīta ik pēc 30 dienām līdz plāna beigām. Kad noteikta termiņa plāns beigsies, varēsi pārtraukt automātisko maksājumu vai turpināt vēl vienu mēnesi par to pašu mēneša cenu!</p><p>P.S. nekas no tā neattiecas uz Paysera maksājumiem.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Kur var redzēt, kāds plāns ir izvēlēts un cik ilgi tas ir derīgs?',
+        answer: '<p>To var pārbaudīt sava konta iestatījumos, ja tas nedarbojas – droši raksti mums un mēs palīdzēsim.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Vai varu mainīt izvēlēto plānu?',
+        answer: '<p>Var mainīt tikai no lētāka plāna uz dārgāku. Nav iespēju pāriet no dārgāka plāna uz lētāku.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Vai Memby mācīta viela sakrīt ar skolas vielu?',
+        answer: '<p>Nodarbību laikā izejam cauri vispārējai mācību programmai. Kā arī bieži vien skolēniem tiek dota iespēja balsot par nākamās nodarbības tēmu – tādā veidā pielāgojamies skolēnu vajadzībām. Ja pamanām, ka balsu sadalījums ir pārāk liels, vadām vairākas nodarbības, lai apmierinātu visu grupu vajadzības.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Vai es varu uzdot jautājumus nodarbību laikā?',
+        answer: '<p>Jā! Ir 2 veidi:</p><p>1) Vari uzdot jautājumu tērzēšanas logā.</p><p>2) Vari pacelt roku un uzdot skolotājam jautājumu tiešsaistē.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Kā pievienoties Memby?',
+        answer: '<p>1. Mūsu cenu lapā izvēlies sev tīkamāko plānu.</p><p>2. Veic drošu un vienkāršu maksājumu un pabeidz reģistrāciju.</p><p>3. Pievienojies nodarbībām un sasniedz labākus rezultātus.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'No kuras klases var mācīties Memby?',
+        answer: '<p>Mācām 5.-12. klašu skolēnus.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Vai par aizvadīto nodarbību ierakstiem jāmaksā papildus?',
+        answer: '<p>Nē, viss ir iekļauts plānā, tāpēc vari droši skatīties nodarbību ierakstus.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Vai nodarbības notiek grupās vai individuāli?',
+        answer: '<p>Nodarbības notiek nelielās grupās.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Vai sagatavojat valsts centralizētajam matemātikas eksāmeniem?',
+        answer: '<p>Jā, 11.-12. klašu skolēni pie mums var gatavoties matemātikas eksāmenam.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Kādos laikos ir nodarbības?',
+        answer: '<p>Nodarbības notiek darba dienās no plkst. 16.00 līdz 20.00. Lai iegūtu sīkāku informāciju, skaties mūsu grafiku! Sestdienās veicam papildus nodarbības eksāmena sagatavošanai. To laikā risinām un analizējam eksāmena uzdevumus.</p>',
+        isExpanded: false
+    }
+])
 switch (store.selectedPersona) {
     case 'Ambitious student':
         store.selectedPersonaLT = 'Ambicinga(-s)'
@@ -230,15 +302,15 @@ switch (store.selectedPersona) {
         break
 }
 
-const handleAccordion = (selectedIndex) => {
-    questions.forEach((_, index) => {
-        questions[index].isExpanded = index === selectedIndex ? !questions[index].isExpanded : false
-    })
-}
-const showAllFaqs = (event) => {
-    event.target.style.display = 'none'
-    isFaqHidden.isFaqHidden = false
-}
+// const handleAccordion = (selectedIndex, items) => {
+//     items.forEach((_, index) => {
+//         items[index].isExpanded = index === selectedIndex ? !items[index].isExpanded : false
+//     })
+// }
+// const showAllFaqs = (event) => {
+//     event.target.style.display = 'none'
+//     isFaqHidden.isFaqHidden = false
+// }
 const getCurrentYear = () => {
     const dateobj = new Date()
 
@@ -752,13 +824,14 @@ const getCurrentYear = () => {
             <h2 class="section-title">
                 Atsakymai į <span>Dažniausiai <br />Užduodamus Klausimus (D.U.K.)</span>
             </h2>
-            <div
-                v-for="(question, index) in questions"
+            <AccordionFAQ :content="faqLT" />
+            <!-- <div
+                v-for="(question, index) in faqLT"
                 :key="question.title"
                 class="faq-accordion"
                 :class="{ hidden: index >= 3 && isFaqHidden.isFaqHidden }"
             >
-                <button @click="() => handleAccordion(index)" class="faq-header">
+                <button @click="() => handleAccordion(index, faqLT)" class="faq-header">
                     <div>
                         <p>{{ question.title }}</p>
                     </div>
@@ -766,11 +839,11 @@ const getCurrentYear = () => {
                         <img src="../assets/images/arrow-bottom.svg" alt="V" />
                     </div>
                 </button>
-                <Collapse :when="questions[index].isExpanded" class="collapse">
+                <Collapse :when="faqLT[index].isExpanded" class="collapse">
                     <div class="faq-body" v-html="question.answer"></div>
                 </Collapse>
-            </div>
-            <button class="btn--secondary" @click="showAllFaqs">Žiūrėti visus</button>
+            </div> 
+            <button class="btn--secondary" @click="showAllFaqs">Žiūrėti visus</button> -->
             <h2 class="section-title last-section">
                 Prisijunk prie daugiau nei <span>15 000 bendraminčių</span> bendruomenės!
             </h2>
@@ -1016,21 +1089,7 @@ video {
 .pause-btn.isPlaying {
     display: block;
 }
-.btn--secondary {
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 22px;
-    color: #000000;
-    border-radius: 56px;
-    background-color: transparent;
-    border: 1px solid #000;
-    padding: 12px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 70px auto 0 auto;
-}
+
 .last-section {
     margin-top: 180px;
 }
@@ -1593,37 +1652,6 @@ ul li::before {
         width: calc(50% - 36px);
         margin: 0 18px 12px 18px;
     }
-}
-.faq-accordion:first-of-type {
-    margin-top: 80px;
-}
-.faq-accordion {
-    border-bottom: 2px solid #eeeff4;
-}
-.faq-accordion.hidden {
-    display: none;
-}
-.faq-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    cursor: pointer;
-    min-height: 70px;
-    text-align: left;
-}
-.faq-header p {
-    font-family: 'obviously', sans-serif;
-
-    font-size: 18px;
-    font-weight: 570;
-    line-height: 30px;
-}
-.faq-body {
-    padding-bottom: 32px !important;
 }
 
 h5 {

@@ -1,6 +1,7 @@
 <script setup>
 import { store } from '../store'
 import { computed } from 'vue'
+import axios from 'axios'
 const submitChildEmail = (event) => {
     event.preventDefault()
     store.isChildEmailEntered = true
@@ -49,6 +50,42 @@ const submitChildAndParentHandler = (event) => {
 }
 
 const klaviyoRequestHandler = () => {
+    const options = {
+        method: 'POST',
+        url: 'https://app.digiklase.lt/api/klaviyo/create',
+        headers: {
+            'content-type': 'application/json'
+        },
+        data: {
+            payload: {
+                data: {
+                    type: 'profile',
+                    attributes: {
+                        email: store.childEmail ? store.childEmail : store.parentEmail,
+                        properties: {
+                            ResultURL: store.resultUrl,
+                            Persona: store.selectedPersona,
+                            Class: store.selectedClass,
+                            Respondent: store.respondent,
+                            ParentEmail: store.parentEmail,
+                            ChildEmail: store.childEmail,
+                            Motivation: store.childLevel
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    axios
+        .request(options)
+        .then(function (response) {
+            console.log(response.data)
+        })
+        .catch(function (error) {
+            console.error(error)
+        })
+
     // let date = new Date()
     // const options = {
     //     method: 'POST',
@@ -65,15 +102,15 @@ const klaviyoRequestHandler = () => {
     //             attributes: {
     //                 email: store.childEmail ? store.childEmail : store.parentEmail,
     //                 external_id: makeRandomID(28),
-    //                 properties: {
-    //                     ResultURL: store.resultUrl,
-    //                     Persona: store.selectedPersona,
-    //                     Class: store.selectedClass,
-    //                     Respondent: store.respondent,
-    //                     ParentEmail: store.parentEmail,
-    //                     ChildEmail: store.childEmail,
-    //                     Motivation: store.childLevel
-    //                 }
+    // properties: {
+    //     ResultURL: store.resultUrl,
+    //     Persona: store.selectedPersona,
+    //     Class: store.selectedClass,
+    //     Respondent: store.respondent,
+    //     ParentEmail: store.parentEmail,
+    //     ChildEmail: store.childEmail,
+    //     Motivation: store.childLevel
+    // }
     //             }
     //         }
     //     })

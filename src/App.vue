@@ -247,40 +247,40 @@ const prevStep = () => {
     }
 }
 const nextStep = () => {
-    if (store.step <= store.quiz.child.length) {
-        if (store.step === 3 && store.showFirstBenefit === false) {
-            if (!url.searchParams.has('Class')) {
-                store.step = 3
-                store.showFirstBenefit = true
-            } else {
-                store.step = 4
-                store.showFirstBenefit = false
-            }
-        } else if (store.step === 5 && store.showSecondBenefit === false) {
-            if (!url.searchParams.has('Class')) {
-                store.step = 5
-                store.showSecondBenefit = true
-            } else {
-                store.step = 6
-                store.showSecondBenefit = false
-            }
+    if (store.step === 3 && store.showFirstBenefit === false) {
+        if (!url.searchParams.has('Class')) {
+            store.step = 3
+            store.showFirstBenefit = true
         } else {
-            store.step += 1
-        }
-        if (url.searchParams.has('Class') || url.searchParams.has('subject')) {
+            store.step = 4
             store.showFirstBenefit = false
-            if (store.step === 4) {
-                store.step = 5
-            }
-            if (store.step > 7) {
-                store.showRecomendations = true
-            }
+        }
+    } else if (store.step === 5 && store.showSecondBenefit === false) {
+        if (!url.searchParams.has('Class')) {
+            store.step = 5
+            store.showSecondBenefit = true
+        } else {
+            store.step = 6
+            store.showSecondBenefit = false
+        }
+    } else {
+        store.step += 1
+    }
+    if (url.searchParams.has('Class') || url.searchParams.has('subject')) {
+        store.showFirstBenefit = false
+        if (store.step === 4) {
+            store.step = 5
+        }
+        if (store.step > 7) {
+            store.showRecomendations = true
         }
     }
 }
 
 const completeness = (step) => {
-    return (100 / store.quiz.child.length) * step
+    if (store.lang === 'LT') {
+        return (100 / store.quiz.LT.child.length) * step
+    }
 }
 </script>
 
@@ -338,14 +338,20 @@ const completeness = (step) => {
             <button
                 class="back-button"
                 @click="prevStep()"
-                v-if="store.step <= store.quiz.child.length"
+                v-if="store.step <= store.quiz.LT.child.length"
             >
                 <img src="./assets/images/arrow.svg" alt="" />
             </button>
-            <div class="progress__count" v-if="store.step <= store.quiz.child.length">
-                <span>{{ store.step }} / {{ store.quiz.child.length }}</span>
+            <div
+                class="progress__count"
+                v-if="store.lang === 'LT' && store.step <= store.quiz.LT.child.length"
+            >
+                <span>{{ store.step }} / {{ store.quiz.LT.child.length }}</span>
             </div>
-            <div class="progress" v-if="store.step <= store.quiz.child.length">
+            <div
+                class="progress"
+                v-if="store.lang === 'LT' && store.step <= store.quiz.LT.child.length"
+            >
                 <span
                     class="completeness"
                     :style="{ width: completeness(store.step) + '%' }"
@@ -356,13 +362,31 @@ const completeness = (step) => {
             class="answer__container answer__container--wide"
             v-if="store.respondent === 'child' && store.step !== 10"
         >
-            <RespondentQuestions :questions="store.quiz.child" :next="nextStep" />
+            <RespondentQuestions
+                v-if="store.lang === 'LT'"
+                :questions="store.quiz.LT.child"
+                :next="nextStep"
+            />
+            <RespondentQuestions
+                v-if="store.lang === 'LV'"
+                :questions="store.quiz.LV.child"
+                :next="nextStep"
+            />
         </div>
         <div
             class="answer__container answer__container--wide"
             v-if="store.respondent === 'parent' && store.step !== 10"
         >
-            <RespondentQuestions :questions="store.quiz.parent" :next="nextStep" />
+            <RespondentQuestions
+                v-if="store.lang === 'LT'"
+                :questions="store.quiz.LT.parent"
+                :next="nextStep"
+            />
+            <RespondentQuestions
+                v-if="store.lang === 'LV'"
+                :questions="store.quiz.LV.parent"
+                :next="nextStep"
+            />
         </div>
 
         <FirstBenefit />
