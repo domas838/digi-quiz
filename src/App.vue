@@ -209,11 +209,6 @@ onMounted(() => {
                 response.data.items.forEach((item) => {
                     generateProgramRecomendations(item)
                 })
-                // console.log('Persona', store.selectedPersona)
-                // console.log('TIER0', store.recomendationsArrTIER0)
-                // console.log('TIER1', store.recomendationsArrTIER1)
-                // console.log('TIER2', store.recomendationsArrTIER2)
-                // console.log('TIER3', store.recomendationsArrTIER3)
 
                 return response.data.items
             })

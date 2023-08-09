@@ -5,9 +5,11 @@ import { computed } from 'vue'
 const submitChildEmail = (event) => {
     event.preventDefault()
     store.isChildEmailEntered = true
+    klaviyoRequestHandler()
 }
 // Klaviyo API KEY
 // pk_5a1e956f717f7efdc37cbdf9ca124b1986
+
 const emailIsValid = (email) => {
     if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         return true
@@ -18,6 +20,7 @@ const emailIsValid = (email) => {
 const cancelEmailHandler = () => {
     store.step += 1
     store.showRecomendations = true
+    klaviyoRequestHandler()
 }
 const isChildProceedDisabled = computed(() => {
     if (!store.childEmail || !store.aggreeWithPrivacy || !emailIsValid(store.childEmail)) {
@@ -38,6 +41,56 @@ const submitHandler = (event) => {
     event.preventDefault()
     store.step += 1
     store.showRecomendations = true
+    klaviyoRequestHandler()
+}
+
+const makeExternalID = (length) => {
+    let result = ''
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    const charactersLength = characters.length
+    let counter = 0
+    while (counter < length) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength))
+        counter += 1
+    }
+    return result
+}
+
+const klaviyoRequestHandler = () => {
+    let date = new Date()
+
+    const options = {
+        method: 'POST',
+        headers: {
+            accept: 'application/json',
+            revision: date.toISOString().split('T')[0],
+            'content-type': 'application/json',
+            Authorization: 'Klaviyo-API-Key pk_5a1e956f717f7efdc37cbdf9ca124b1986'
+        },
+        body: JSON.stringify({
+            data: {
+                type: 'profile',
+                attributes: {
+                    email: store.childEmail ? store.childEmail : store.parentEmail,
+                    external_id: makeExternalID(28),
+                    properties: {
+                        ResultURL: store.resultUrl,
+                        Persona: store.selectedPersona,
+                        Class: store.selectedClass,
+                        Respondent: store.respondent,
+                        ParentEmail: store.parentEmail,
+                        ChildEmail: store.childEmail,
+                        Motivation: store.childLevel
+                    }
+                }
+            }
+        })
+    }
+
+    fetch('https://a.klaviyo.com/api/profiles/', options)
+        .then((response) => response.json())
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err))
 }
 </script>
 <template>

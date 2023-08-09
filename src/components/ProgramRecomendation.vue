@@ -42,7 +42,6 @@ const isFooterVisible = ref(false)
 function onFooterVisibility(state) {
     isFooterVisible.value = state
 }
-// const fakeArr = [0, 1, 2, 3]
 const settings = {
     itemsToShow: 4,
     snapAlign: 'start',

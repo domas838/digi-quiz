@@ -41,7 +41,6 @@ const programRecomendationHandler = () => {
                 store.selectedPersona = 'Ambitious student'
             }
         }
-        //
     } else if (result.length >= 2) {
         if (
             (result.includes('Busy multitasker') || result.includes('Struggling')) &&
@@ -208,23 +207,9 @@ const programRecomendationHandler = () => {
         .get('/rows?useColumnNames=true')
         .then((response) => {
             response.data.items.forEach((item) => {
-                console.log(item)
-                // console.log('store.selectedClass', typeof Number(store.selectedClass))
-                // console.log('store.selectedPersona', store.selectedPersona)
-                // console.log(item.values.Tag, store.TIER0)
-                // console.log(item.values.Tag, store.TIER1)
-                // console.log(item.values.Tag, store.TIER2)
-                // console.log(item.values.Tag, store.TIER3)
-                // console.log(item.values.Persona === 'Everyone')
                 props.generateProgramRecomendations(item)
             })
-            // console.log('Persona', store.selectedPersona)
-            // console.log('TIER0', store.recomendationsArrTIER0)
-            // console.log('TIER1', store.recomendationsArrTIER1)
-            // console.log('TIER2', store.recomendationsArrTIER2)
-            // console.log('TIER3', store.recomendationsArrTIER3)
 
-            store.is
             return response.data.items
         })
         .then(() => {
@@ -256,7 +241,7 @@ const programRecomendationHandler = () => {
                 url.searchParams.set('TIER2', JSON.stringify(store.recomendationsArrTIER2))
                 url.searchParams.set('TIER3', JSON.stringify(store.recomendationsArrTIER3))
                 window.history.replaceState(null, null, url)
-
+                store.resultUrl = url
                 if (store.showCTA) {
                     store.step += 1
                 } else {
