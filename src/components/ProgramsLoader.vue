@@ -4,7 +4,7 @@ import { onMounted } from 'vue'
 import { store } from '../store'
 const url = new URL(window.location.href)
 
-const props = defineProps(['instance'])
+const props = defineProps(['instance', 'generateProgramRecomendations'])
 
 const toFindDuplicates = (arry) => arry.filter((item, index) => arry.indexOf(item) !== index)
 
@@ -138,67 +138,7 @@ const programRecomendationHandler = () => {
                 console.log(item.values.Tag, store.TIER2)
                 console.log(item.values.Tag, store.TIER3)
                 console.log(item.values.Persona === 'Everyone')
-                switch (item.values.Tier) {
-                    case '0':
-                        if (
-                            item.values.Grade == Number(store.selectedClass) &&
-                            item.values.Persona === store.selectedPersona &&
-                            item.values.Tag === store.TIER0 &&
-                            store.selectedSubjects.includes(item.values.Subject)
-                        ) {
-                            store.recomendationsArrTIER0.push(item)
-                            membyIDsArray.push.item.values.MembyID
-                        }
-                        if (item.values.Persona === 'Everyone') {
-                            store.recomendationsArrTIER0.push(item)
-                        }
-                        break
-                    case '1':
-                        if (
-                            item.values.Grade === Number(store.selectedClass) &&
-                            item.values.Persona === store.selectedPersona &&
-                            item.values.Tag === store.TIER1 &&
-                            store.selectedSubjects.includes(item.values.Subject)
-                        ) {
-                            store.recomendationsArrTIER1.push(item)
-                            membyIDsArray.push.item.values.MembyID
-                        }
-                        if (item.values.Persona === 'Everyone') {
-                            store.recomendationsArrTIER1.push(item)
-                        }
-                        break
-                    case '2':
-                        if (
-                            item.values.Grade === Number(store.selectedClass) &&
-                            item.values.Persona === store.selectedPersona &&
-                            item.values.Tag === store.TIER2 &&
-                            store.selectedSubjects.includes(item.values.Subject)
-                        ) {
-                            store.recomendationsArrTIER2.push(item)
-                            membyIDsArray.push.item.values.MembyID
-                        }
-                        if (item.values.Persona === 'Everyone') {
-                            store.recomendationsArrTIER2.push(item)
-                        }
-                        break
-                    case '3':
-                        if (
-                            item.values.Grade === Number(store.selectedClass) &&
-                            item.values.Persona === store.selectedPersona &&
-                            item.values.Tag === store.TIER3 &&
-                            store.selectedSubjects.includes(item.values.Subject)
-                        ) {
-                            store.recomendationsArrTIER3.push(item)
-                            membyIDsArray.push.item.values.MembyID
-                        }
-                        if (item.values.Persona === 'Everyone') {
-                            store.recomendationsArrTIER3.push(item)
-                        }
-                        break
-
-                    default:
-                        break
-                }
+                props.generateProgramRecomendations(item)
             })
             console.log('Persona', store.selectedPersona)
             console.log('TIER0', store.recomendationsArrTIER0)

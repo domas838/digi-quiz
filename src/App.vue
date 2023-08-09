@@ -17,6 +17,77 @@ const instance = axios.create({
     baseURL: 'https://coda.io/apis/v1/docs/otYeYWMX9e/tables/grid-8XN2uCh13U/',
     headers: { Authorization: 'Bearer ' + token }
 })
+const generateProgramRecomendations = (item) => {
+    switch (item.values.Tier) {
+        case '0':
+            if (
+                item.values.Persona === 'Everyone' &&
+                item.values.Grade == Number(store.selectedClass)
+            ) {
+                store.recomendationsArrTIER0.push(item)
+            }
+            if (
+                item.values.Grade == Number(store.selectedClass) &&
+                item.values.Persona === store.selectedPersona &&
+                item.values.Tags === store.TIER0 &&
+                store.selectedSubjects.includes(item.values.Subject)
+            ) {
+                store.recomendationsArrTIER0.push(item)
+            }
+            break
+        case '1':
+            if (
+                item.values.Persona === 'Everyone' &&
+                item.values.Grade == Number(store.selectedClass)
+            ) {
+                store.recomendationsArrTIER1.push(item)
+            }
+            if (
+                item.values.Grade === Number(store.selectedClass) &&
+                item.values.Persona === store.selectedPersona &&
+                item.values.Tags === store.TIER1 &&
+                store.selectedSubjects.includes(item.values.Subject)
+            ) {
+                store.recomendationsArrTIER1.push(item)
+            }
+            break
+        case '2':
+            if (
+                item.values.Persona === 'Everyone' &&
+                item.values.Grade == Number(store.selectedClass)
+            ) {
+                store.recomendationsArrTIER2.push(item)
+            }
+            if (
+                item.values.Grade === Number(store.selectedClass) &&
+                item.values.Persona === store.selectedPersona &&
+                item.values.Tags === store.TIER2 &&
+                store.selectedSubjects.includes(item.values.Subject)
+            ) {
+                store.recomendationsArrTIER2.push(item)
+            }
+            break
+        case '3':
+            if (
+                item.values.Persona === 'Everyone' &&
+                item.values.Grade == Number(store.selectedClass)
+            ) {
+                store.recomendationsArrTIER3.push(item)
+            }
+            if (
+                item.values.Grade === Number(store.selectedClass) &&
+                item.values.Persona === store.selectedPersona &&
+                item.values.Tags === store.TIER3 &&
+                store.selectedSubjects.includes(item.values.Subject)
+            ) {
+                store.recomendationsArrTIER3.push(item)
+            }
+            break
+
+        default:
+            break
+    }
+}
 onMounted(() => {
     if (url.searchParams.has('role')) {
         if (url.searchParams.get('role') === 'parent') {
@@ -75,65 +146,7 @@ onMounted(() => {
 
         instance.get('/rows?useColumnNames=true').then((response) => {
             response.data.items.forEach((item) => {
-                console.log(item)
-                console.log(item.values.Persona === 'Everyone')
-                switch (item.values.Tier) {
-                    case '0':
-                        if (item.values.Persona === 'Everyone') {
-                            store.recomendationsArrTIER0.push(item)
-                        }
-                        if (
-                            item.values.Grade == Number(store.selectedClass) &&
-                            item.values.Persona === store.selectedPersona &&
-                            item.values.Tags === store.TIER0 &&
-                            store.selectedSubjects.includes(item.values.Subject)
-                        ) {
-                            store.recomendationsArrTIER0.push(item)
-                        }
-                        break
-                    case '1':
-                        if (item.values.Persona === 'Everyone') {
-                            store.recomendationsArrTIER1.push(item)
-                        }
-                        if (
-                            item.values.Grade === Number(store.selectedClass) &&
-                            item.values.Persona === store.selectedPersona &&
-                            item.values.Tags === store.TIER1 &&
-                            store.selectedSubjects.includes(item.values.Subject)
-                        ) {
-                            store.recomendationsArrTIER1.push(item)
-                        }
-                        break
-                    case '2':
-                        if (item.values.Persona === 'Everyone') {
-                            store.recomendationsArrTIER2.push(item)
-                        }
-                        if (
-                            item.values.Grade === Number(store.selectedClass) &&
-                            item.values.Persona === store.selectedPersona &&
-                            item.values.Tags === store.TIER2 &&
-                            store.selectedSubjects.includes(item.values.Subject)
-                        ) {
-                            store.recomendationsArrTIER2.push(item)
-                        }
-                        break
-                    case '3':
-                        if (item.values.Persona === 'Everyone') {
-                            store.recomendationsArrTIER3.push(item)
-                        }
-                        if (
-                            item.values.Grade === Number(store.selectedClass) &&
-                            item.values.Persona === store.selectedPersona &&
-                            item.values.Tags === store.TIER3 &&
-                            store.selectedSubjects.includes(item.values.Subject)
-                        ) {
-                            store.recomendationsArrTIER3.push(item)
-                        }
-                        break
-
-                    default:
-                        break
-                }
+                generateProgramRecomendations(item)
             })
             console.log('Persona', store.selectedPersona)
             console.log('TIER0', store.recomendationsArrTIER0)
@@ -286,7 +299,12 @@ const completeness = (step) => {
 
         <FirstBenefit />
         <SecondBenefit />
-        <ProgramsLoader v-if="store.step === 8" :baseUrl="url" :instance="instance" />
+        <ProgramsLoader
+            v-if="store.step === 8"
+            :baseUrl="url"
+            :instance="instance"
+            :generateProgramRecomendations="generateProgramRecomendations"
+        />
         <EmailForm v-if="store.step === 9" />
     </div>
     <img
