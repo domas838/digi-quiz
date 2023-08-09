@@ -21,16 +21,9 @@ const generateProgramRecomendations = (item) => {
     switch (item.values.Tier) {
         case '0':
             if (
-                item.values.Persona === 'Everyone' &&
-                item.values.Grade == Number(store.selectedClass)
-            ) {
-                store.recomendationsArrTIER0.push(item)
-                store.membyIDsArray.push(item.values.MembyID)
-            }
-            if (
+                (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER0) &&
                 item.values.Grade == Number(store.selectedClass) &&
                 item.values.Persona === store.selectedPersona &&
-                item.values.Tags === store.TIER0 &&
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
                 store.recomendationsArrTIER0.push(item)
@@ -40,16 +33,9 @@ const generateProgramRecomendations = (item) => {
             break
         case '1':
             if (
-                item.values.Persona === 'Everyone' &&
-                item.values.Grade == Number(store.selectedClass)
-            ) {
-                store.recomendationsArrTIER1.push(item)
-                store.membyIDsArray.push(item.values.MembyID)
-            }
-            if (
+                (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER1) &&
                 item.values.Grade === Number(store.selectedClass) &&
                 item.values.Persona === store.selectedPersona &&
-                item.values.Tags === store.TIER1 &&
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
                 store.recomendationsArrTIER1.push(item)
@@ -59,16 +45,9 @@ const generateProgramRecomendations = (item) => {
             break
         case '2':
             if (
-                item.values.Persona === 'Everyone' &&
-                item.values.Grade == Number(store.selectedClass)
-            ) {
-                store.recomendationsArrTIER2.push(item)
-                store.membyIDsArray.push(item.values.MembyID)
-            }
-            if (
+                (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER2) &&
                 item.values.Grade === Number(store.selectedClass) &&
                 item.values.Persona === store.selectedPersona &&
-                item.values.Tags === store.TIER2 &&
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
                 store.recomendationsArrTIER2.push(item)
@@ -78,16 +57,9 @@ const generateProgramRecomendations = (item) => {
             break
         case '3':
             if (
-                item.values.Persona === 'Everyone' &&
-                item.values.Grade == Number(store.selectedClass)
-            ) {
-                store.recomendationsArrTIER3.push(item)
-                store.membyIDsArray.push(item.values.MembyID)
-            }
-            if (
+                (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER3) &&
                 item.values.Grade === Number(store.selectedClass) &&
-                item.values.Persona === store.selectedPersona &&
-                item.values.Tags === store.TIER3 &&
+                item.values.Grade === Number(store.selectedClass) &&
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
                 store.recomendationsArrTIER3.push(item)
@@ -99,6 +71,18 @@ const generateProgramRecomendations = (item) => {
         default:
             break
     }
+    if (item.values.Persona === 'Everyone' && item.values.Grade == Number(store.selectedClass)) {
+        store.recomendationsArrEVERYONE.push(item)
+        store.membyIDsArray.push(item.values.MembyID)
+    }
+    console.log(item.values.Tag === 'Advanced')
+    console.log(item.values.Grade === Number(store.selectedClass))
+    console.log(store.selectedSubjects.includes(item.values.Subject))
+    console.log(item.values.Grade === Number(store.selectedClass))
+    console.log('TIER0', store.recomendationsArrTIER0)
+    console.log('TIER1', store.recomendationsArrTIER1)
+    console.log('TIER2', store.recomendationsArrTIER2)
+    console.log('TIER3', store.recomendationsArrTIER3)
 }
 const selectMostRecommendedPrograms = () => {
     console.log('Select most recommended programs')
@@ -159,10 +143,10 @@ const selectMostRecommendedPrograms = () => {
     } else {
         store.TIER3isRecomended = false
     }
-    console.log(store.TIER0isRecomended)
-    console.log(store.TIER1isRecomended)
-    console.log(store.TIER2isRecomended)
-    console.log(store.TIER3isRecomended)
+    // console.log(store.TIER0isRecomended)
+    // console.log(store.TIER1isRecomended)
+    // console.log(store.TIER2isRecomended)
+    // console.log(store.TIER3isRecomended)
 }
 onMounted(() => {
     if (url.searchParams.has('role')) {
@@ -197,7 +181,6 @@ onMounted(() => {
         url.searchParams.has('TIER2') ||
         url.searchParams.has('TIER3')
     ) {
-        console.log('IF')
         // Display results
         store.step = 10
         store.showRecomendations = true
@@ -226,11 +209,11 @@ onMounted(() => {
                 response.data.items.forEach((item) => {
                     generateProgramRecomendations(item)
                 })
-                console.log('Persona', store.selectedPersona)
-                console.log('TIER0', store.recomendationsArrTIER0)
-                console.log('TIER1', store.recomendationsArrTIER1)
-                console.log('TIER2', store.recomendationsArrTIER2)
-                console.log('TIER3', store.recomendationsArrTIER3)
+                // console.log('Persona', store.selectedPersona)
+                // console.log('TIER0', store.recomendationsArrTIER0)
+                // console.log('TIER1', store.recomendationsArrTIER1)
+                // console.log('TIER2', store.recomendationsArrTIER2)
+                // console.log('TIER3', store.recomendationsArrTIER3)
 
                 return response.data.items
             })

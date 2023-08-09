@@ -311,6 +311,18 @@ const getCurrentYear = () => {
                         :lessonsCount="item.values.LessonsPerWeek"
                     />
                 </slide>
+                <slide v-for="item in store.recomendationsArrEVERYONE" :key="item">
+                    <ProgramSlide
+                        :isTopRecomendation="false"
+                        :picture="item.values.Picture"
+                        :subject="item.values.Subject"
+                        :programTitle="item.values.ProgramName"
+                        :teacherName="item.values.TeacherName"
+                        :teacherImage="item.values.TeacherImage"
+                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                        :lessonsCount="item.values.LessonsPerWeek"
+                    />
+                </slide>
 
                 <template #addons>
                     <navigation />

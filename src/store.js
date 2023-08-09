@@ -36,6 +36,7 @@ export const store = reactive({
     recomendationsArrTIER1: [],
     recomendationsArrTIER2: [],
     recomendationsArrTIER3: [],
+    recomendationsArrEVERYONE: [],
     membyIDsArray: [],
 
     quiz: {
@@ -129,8 +130,8 @@ export const store = reactive({
                     'Ideali, nuolat ieško ko nors naujo',
                     'Gerai. Daugiausiai dėmesio skiria testų, egzaminų rezultatams.',
                     'Vidutiniškai. Nori pasigerinti pažymius, bet ne visada turi pakankamai noro.',
-                    'Priklauso nuo to, kiek laisvo laiko turi nuo kitų veiklų.',
-                    'Mokslai - ne pagrindinis prioritetas.'
+                    'Priklauso nuo to, kiek laisvo laiko turi nuo kitų veiklų.'
+                    // 'Mokslai - ne pagrindinis prioritetas.'
                 ]
             },
             {
