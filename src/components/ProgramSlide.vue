@@ -75,7 +75,25 @@ const props = defineProps([
                     src="../assets/images/emoji/Q4_geografija.svg"
                     class="emoji"
                     alt=""
-                    v-if="props.subject === 'Geografija / Pasaulio pažinimas / Gamta ir žmogus'"
+                    v-if="props.subject === 'Geografija'"
+                />
+                <img
+                    src="../assets/images/emoji/Q4_pazinimas.svg"
+                    class="emoji"
+                    alt=""
+                    v-if="props.subject === 'Pasaulio pažinimas'"
+                />
+                <img
+                    src="../assets/images/emoji/Q4_gamta.svg"
+                    class="emoji"
+                    alt=""
+                    v-if="props.subject === 'Gamta ir žmogus'"
+                />
+                <img
+                    src="../assets/images/emoji/Q4_idomusis.svg"
+                    class="emoji"
+                    alt=""
+                    v-if="props.subject === 'Įdomusis mokslas'"
                 />
                 <span>{{ props.subject }}</span>
             </div>

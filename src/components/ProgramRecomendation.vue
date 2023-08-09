@@ -453,7 +453,11 @@ const getCurrentYear = () => {
             <p>Šis vaizdo įrašas trumpai ir aiškiai papasakos, kaip veikia Digiklasė</p>
             <div class="video-wrapper">
                 <div class="play-btn" @click="playVideoHandler">
-                    <img src="../assets/images/play-btn.svg" alt="" />
+                    <img
+                        src="../assets/images/play-btn.svg"
+                        alt="Video Placeholder"
+                        loading="lazy"
+                    />
                 </div>
                 <video id="videoHow" width="100%" height="100%" preload="none">
                     <source src="../assets/video/demo.mp4" type="video/mp4" />

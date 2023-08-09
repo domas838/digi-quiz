@@ -55,6 +55,82 @@ const programRecomendationHandler = () => {
         }
     }
 
+    // BEFORE REFACTOR TO "ADVANCED"
+    // switch (store.selectedPersona) {
+    //     case 'Ambitious student':
+    //         if (store.TIER === 'TIER0') {
+    //             store.TIER0 = 'Textbook, flexible'
+    //         }
+    //         store.TIER1 = 'Advanced'
+    //         store.TIER2 = 'Exam prep'
+    //         store.TIER3 = 'School prep'
+    //         break
+    //     case 'Exam-oriented':
+    //         if (store.TIER === 'TIER0') {
+    //             store.TIER0 = 'Textbook, flexible'
+    //         }
+    //         store.TIER1 = 'Exam prep'
+    //         if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
+    //             store.TIER2 = 'Exam advanced prep'
+    //             store.TIER3 = 'Advanced school prep'
+    //         } else {
+    //             store.TIER2 = 'School prep'
+    //             store.TIER3 = 'Textbook, flexible'
+    //         }
+
+    //         break
+    //     case 'Busy multitasker':
+    //         if (store.TIER === 'TIER0') {
+    //             store.TIER0 = 'Textbook, flexible'
+    //         }
+    //         if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
+    //             store.TIER1 = 'Exam advanced prep'
+    //         } else {
+    //             store.TIER1 = 'Exam prep'
+    //         }
+    //         store.TIER2 = 'School prep'
+    //         store.TIER3 = 'Textbook, flexible'
+
+    //         break
+    //     case 'Struggling':
+    //         if (store.TIER === 'TIER0') {
+    //             store.TIER0 = 'Textbook, flexible'
+    //         }
+    //         store.TIER1 = 'Textbook, flexible'
+    //         store.TIER2 = 'School prep'
+    //         store.TIER3 = 'Exam prep'
+
+    //         break
+    //     case 'Socializer':
+    //         if (store.TIER === 'TIER0') {
+    //             store.TIER0 = 'Textbook, flexible'
+    //         }
+    //         store.TIER1 = 'Non-formal'
+    //         if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
+    //             store.TIER2 = 'Exam prep'
+    //         } else {
+    //             store.TIER2 = 'School prep'
+    //         }
+    //         if (store.PROFILE2 === 'Exam-oriented') {
+    //             if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
+    //                 store.TIER3 = 'Advanced exam prep'
+    //             } else {
+    //                 store.TIER3 = 'School prep'
+    //             }
+    //         } else {
+    //             if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
+    //                 store.TIER3 = 'Advanced school prep'
+    //             } else {
+    //                 store.TIER3 = 'Textbook, flexible'
+    //             }
+    //         }
+    //         break
+
+    //     default:
+    //         break
+    // }
+
+    // AFTER REFACTOR TO "ADVANCED"
     switch (store.selectedPersona) {
         case 'Ambitious student':
             if (store.TIER === 'TIER0') {
@@ -70,8 +146,8 @@ const programRecomendationHandler = () => {
             }
             store.TIER1 = 'Exam prep'
             if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
-                store.TIER2 = 'Exam advanced prep'
-                store.TIER3 = 'Advanced school prep'
+                store.TIER2 = 'Advanced'
+                store.TIER3 = 'Advanced'
             } else {
                 store.TIER2 = 'School prep'
                 store.TIER3 = 'Textbook, flexible'
@@ -83,7 +159,7 @@ const programRecomendationHandler = () => {
                 store.TIER0 = 'Textbook, flexible'
             }
             if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
-                store.TIER1 = 'Exam advanced prep'
+                store.TIER1 = 'Advanced'
             } else {
                 store.TIER1 = 'Exam prep'
             }
@@ -112,13 +188,13 @@ const programRecomendationHandler = () => {
             }
             if (store.PROFILE2 === 'Exam-oriented') {
                 if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
-                    store.TIER3 = 'Advanced exam prep'
+                    store.TIER3 = 'Advanced'
                 } else {
                     store.TIER3 = 'School prep'
                 }
             } else {
                 if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
-                    store.TIER3 = 'Advanced school prep'
+                    store.TIER3 = 'Advanced'
                 } else {
                     store.TIER3 = 'Textbook, flexible'
                 }
@@ -128,7 +204,6 @@ const programRecomendationHandler = () => {
         default:
             break
     }
-
     props.instance
         .get('/rows?useColumnNames=true')
         .then((response) => {

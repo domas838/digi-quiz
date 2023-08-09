@@ -449,12 +449,7 @@ const proceedWithMultipleSelection = () => {
                         @click="selectMultipleAnswers($event)"
                     >
                         <span
-                            ><input
-                                type="checkbox"
-                                name="Subjects"
-                                value="Geografija / Pasaulio
-                            pažinimas / Gamta ir žmogus"
-                            />
+                            ><input type="checkbox" name="Subjects" value="Geografija" />
                             <img
                                 src="../assets/images/checkbox.svg"
                                 alt=""
@@ -471,7 +466,55 @@ const proceedWithMultipleSelection = () => {
                                 alt=""
                             />
                         </span>
-                        Geografija / Pasaulio pažinimas / Gamta ir žmogus
+                        Geografija
+                    </button>
+                    <button
+                        v-if="store.selectedClass >= 1 && store.selectedClass <= 4"
+                        class="answer__btn"
+                        @click="selectMultipleAnswers($event)"
+                    >
+                        <span
+                            ><input type="checkbox" name="Subjects" value="Pasaulio pažinimas" />
+                            <img
+                                src="../assets/images/checkbox.svg"
+                                alt=""
+                                class="custom-checkbox"
+                            />
+                            <img
+                                src="../assets/images/checkbox-checked.svg"
+                                alt=""
+                                class="custom-checkbox-checked"
+                            />
+                            <img
+                                src="../assets/images/emoji/Q4_pazinimas.svg"
+                                class="emoji"
+                                alt=""
+                            />
+                        </span>
+
+                        Pasaulio pažinimas
+                    </button>
+                    <button
+                        v-if="store.selectedClass >= 1 && store.selectedClass <= 4"
+                        class="answer__btn"
+                        @click="selectMultipleAnswers($event)"
+                    >
+                        <span
+                            ><input type="checkbox" name="Subjects" value="Gamta ir žmogus" />
+                            <img
+                                src="../assets/images/checkbox.svg"
+                                alt=""
+                                class="custom-checkbox"
+                            />
+                            <img
+                                src="../assets/images/checkbox-checked.svg"
+                                alt=""
+                                class="custom-checkbox-checked"
+                            />
+                            <img src="../assets/images/emoji/Q4_gamta.svg" class="emoji" alt="" />
+                        </span>
+
+                        Gamta ir žmogus
                     </button>
 
                     <button
