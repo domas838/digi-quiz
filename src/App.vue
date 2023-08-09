@@ -41,15 +41,16 @@ onMounted(() => {
 
     // Redirect straight to results
     if (
-        url.searchParams.has('Persona') &&
-        url.searchParams.has('class') &&
-        url.searchParams.has('level') &&
-        url.searchParams.has('subjects') &&
-        url.searchParams.has('TIER0') &&
-        url.searchParams.has('TIER1') &&
-        url.searchParams.has('TIER3') &&
+        (url.searchParams.has('Persona') &&
+            url.searchParams.has('class') &&
+            url.searchParams.has('level') &&
+            url.searchParams.has('subjects') &&
+            url.searchParams.has('TIER0')) ||
+        url.searchParams.has('TIER1') ||
+        url.searchParams.has('TIER2') ||
         url.searchParams.has('TIER3')
     ) {
+        console.log('IF')
         // Display results
         store.step = 10
         store.showRecomendations = true
@@ -59,10 +60,18 @@ onMounted(() => {
         store.selectedClass = url.searchParams.get('class')
         store.childLevel = url.searchParams.get('level')
         store.selectedSubjects = JSON.parse(url.searchParams.get('subjects'))
-        store.recomendationsArrTIER0 = JSON.parse(url.searchParams.get('TIER0'))
-        store.recomendationsArrTIER1 = JSON.parse(url.searchParams.get('TIER1'))
-        store.recomendationsArrTIER2 = JSON.parse(url.searchParams.get('TIER2'))
-        store.recomendationsArrTIER3 = JSON.parse(url.searchParams.get('TIER3'))
+        if (url.searchParams.has('TIER0')) {
+            store.recomendationsArrTIER0 = JSON.parse(url.searchParams.get('TIER0'))
+        }
+        if (url.searchParams.has('TIER1')) {
+            store.recomendationsArrTIER1 = JSON.parse(url.searchParams.get('TIER1'))
+        }
+        if (url.searchParams.has('TIER2')) {
+            store.recomendationsArrTIER2 = JSON.parse(url.searchParams.get('TIER2'))
+        }
+        if (url.searchParams.has('TIER3')) {
+            store.recomendationsArrTIER3 = JSON.parse(url.searchParams.get('TIER3'))
+        }
 
         instance.get('/rows?useColumnNames=true').then((response) => {
             response.data.items.forEach((item) => {
