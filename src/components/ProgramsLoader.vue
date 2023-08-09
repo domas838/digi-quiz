@@ -10,7 +10,7 @@ const toFindDuplicates = (arry) => arry.filter((item, index) => arry.indexOf(ite
 
 const programRecomendationHandler = () => {
     store.isLoading = true
-
+    let membyIDsArray = []
     let resultArray = []
     resultArray = resultArray.concat(store.PROFILE1, store.PROFILE2, store.PROFILE3)
 
@@ -137,9 +137,9 @@ const programRecomendationHandler = () => {
                 console.log(item.values.Tag, store.TIER1)
                 console.log(item.values.Tag, store.TIER2)
                 console.log(item.values.Tag, store.TIER3)
-
+                console.log(item.values.Persona === 'Everyone')
                 switch (item.values.Tier) {
-                    case 0:
+                    case '0':
                         if (
                             item.values.Grade == Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
@@ -147,9 +147,13 @@ const programRecomendationHandler = () => {
                             store.selectedSubjects.includes(item.values.Subject)
                         ) {
                             store.recomendationsArrTIER0.push(item)
+                            membyIDsArray.push.item.values.MembyID
+                        }
+                        if (item.values.Persona === 'Everyone') {
+                            store.recomendationsArrTIER0.push(item)
                         }
                         break
-                    case 1:
+                    case '1':
                         if (
                             item.values.Grade === Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
@@ -157,9 +161,13 @@ const programRecomendationHandler = () => {
                             store.selectedSubjects.includes(item.values.Subject)
                         ) {
                             store.recomendationsArrTIER1.push(item)
+                            membyIDsArray.push.item.values.MembyID
+                        }
+                        if (item.values.Persona === 'Everyone') {
+                            store.recomendationsArrTIER1.push(item)
                         }
                         break
-                    case 2:
+                    case '2':
                         if (
                             item.values.Grade === Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
@@ -167,15 +175,23 @@ const programRecomendationHandler = () => {
                             store.selectedSubjects.includes(item.values.Subject)
                         ) {
                             store.recomendationsArrTIER2.push(item)
+                            membyIDsArray.push.item.values.MembyID
+                        }
+                        if (item.values.Persona === 'Everyone') {
+                            store.recomendationsArrTIER2.push(item)
                         }
                         break
-                    case 3:
+                    case '3':
                         if (
                             item.values.Grade === Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
                             item.values.Tag === store.TIER3 &&
                             store.selectedSubjects.includes(item.values.Subject)
                         ) {
+                            store.recomendationsArrTIER3.push(item)
+                            membyIDsArray.push.item.values.MembyID
+                        }
+                        if (item.values.Persona === 'Everyone') {
                             store.recomendationsArrTIER3.push(item)
                         }
                         break
@@ -197,8 +213,10 @@ const programRecomendationHandler = () => {
             d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000)
             let expires = 'expires=' + d.toUTCString()
 
+            const programs = JSON.stringify(membyIDsArray)
+
             document.cookie = `memby_quiz_persona=${store.selectedPersona} ; Domain=digiklase.lt ;  ${expires} ; path=/;`
-            document.cookie = `memby_quiz_programs=${'TO-DO'} ; Domain=digiklase.lt ;  ${expires} ; path=/;`
+            document.cookie = `memby_quiz_programs=${programs} ; Domain=digiklase.lt ;  ${expires} ; path=/;`
         })
         .then(() => {
             if (url.searchParams.has('app') && url.searchParams.get('app') === 'true') {

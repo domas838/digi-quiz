@@ -67,8 +67,12 @@ onMounted(() => {
         instance.get('/rows?useColumnNames=true').then((response) => {
             response.data.items.forEach((item) => {
                 console.log(item)
+                console.log(item.values.Persona === 'Everyone')
                 switch (item.values.Tier) {
                     case '0':
+                        if (item.values.Persona === 'Everyone') {
+                            store.recomendationsArrTIER0.push(item)
+                        }
                         if (
                             item.values.Grade == Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
@@ -79,6 +83,9 @@ onMounted(() => {
                         }
                         break
                     case '1':
+                        if (item.values.Persona === 'Everyone') {
+                            store.recomendationsArrTIER1.push(item)
+                        }
                         if (
                             item.values.Grade === Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
@@ -89,6 +96,9 @@ onMounted(() => {
                         }
                         break
                     case '2':
+                        if (item.values.Persona === 'Everyone') {
+                            store.recomendationsArrTIER2.push(item)
+                        }
                         if (
                             item.values.Grade === Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&
@@ -99,6 +109,9 @@ onMounted(() => {
                         }
                         break
                     case '3':
+                        if (item.values.Persona === 'Everyone') {
+                            store.recomendationsArrTIER3.push(item)
+                        }
                         if (
                             item.values.Grade === Number(store.selectedClass) &&
                             item.values.Persona === store.selectedPersona &&

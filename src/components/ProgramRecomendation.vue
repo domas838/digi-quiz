@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import { Collapse } from 'vue-collapsed'
 
 import { store } from '../store'
@@ -210,6 +210,78 @@ const questions = reactive([
         isExpanded: false
     }
 ])
+
+const isOnlyOneTier = () => {
+    if (
+        store.TIER0.length > 0 &&
+        store.TIER1.length === 0 &&
+        store.TIER2.length === 0 &&
+        store.TIER3.length === 0
+    ) {
+        return true
+    }
+
+    if (
+        store.TIER0.length === 0 &&
+        store.TIER1.length > 0 &&
+        store.TIER2.length === 0 &&
+        store.TIER3.length === 0
+    ) {
+        return true
+    }
+
+    if (
+        store.TIER0.length === 0 &&
+        store.TIER1.length === 0 &&
+        store.TIER2.length > 0 &&
+        store.TIER3.length === 0
+    ) {
+        return true
+    }
+
+    if (
+        store.TIER0.length === 0 &&
+        store.TIER1.length === 0 &&
+        store.TIER2.length === 0 &&
+        store.TIER3.length > 0
+    ) {
+        return true
+    }
+    return false
+}
+const isTopRecomendation = computed(() => {
+    const TIER0 = () => {
+        if (isOnlyOneTier()) {
+            return true
+        }
+    }
+    const TIER1 = () => {
+        if (isOnlyOneTier()) {
+            return true
+        } else if (store.TIER0.length === 0 && store.TIER1.length > 0) {
+            return true
+        } else {
+            return false
+        }
+    }
+    const TIER2 = () => {
+        if (isOnlyOneTier()) {
+            return true
+        }
+    }
+    const TIER3 = () => {
+        if (isOnlyOneTier()) {
+            return true
+        }
+    }
+    return {
+        TIER0,
+        TIER1,
+        TIER2,
+        TIER3
+    }
+})
+
 switch (store.selectedPersona) {
     case 'Ambitious student':
         store.selectedPersonaLT = 'Ambicinga(-s)'
@@ -259,61 +331,56 @@ const getCurrentYear = () => {
         <div class="container">
             <h1>Rekomenduojame mokytis pagal šias programas:</h1>
             <carousel v-bind="settings" class="carousel">
-                <slide v-if="store.recomendationsArrTIER0.length">
-                    <div v-for="item in store.recomendationsArrTIER0" :key="item">
-                        <ProgramSlide
-                            :isTopRecomendation="true"
-                            :picture="item.values.Picture"
-                            :subject="item.values.Subject"
-                            :programTitle="item.values.ProgramName"
-                            :teacherName="item.values.TeacherName"
-                            :teacherImage="item.values.TeacherImage"
-                            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
-                            :lessonsCount="item.values.LessonsPerWeek"
-                        />
-                    </div>
+                <slide v-for="item in store.recomendationsArrTIER0" :key="item">
+                    <ProgramSlide
+                        :isTopRecomendation="isTopRecomendation.TIER0"
+                        :picture="item.values.Picture"
+                        :subject="item.values.Subject"
+                        :programTitle="item.values.ProgramName"
+                        :teacherName="item.values.TeacherName"
+                        :teacherImage="item.values.TeacherImage"
+                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                        :lessonsCount="item.values.LessonsPerWeek"
+                    />
                 </slide>
-                <slide v-if="store.recomendationsArrTIER1.length">
-                    <div v-for="item in store.recomendationsArrTIER1" :key="item">
-                        <ProgramSlide
-                            :isTopRecomendation="true"
-                            :picture="item.values.Picture"
-                            :subject="item.values.Subject"
-                            :programTitle="item.values.ProgramName"
-                            :teacherName="item.values.TeacherName"
-                            :teacherImage="item.values.TeacherImage"
-                            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
-                            :lessonsCount="item.values.LessonsPerWeek"
-                        />
-                    </div>
+
+                <slide v-for="item in store.recomendationsArrTIER1" :key="item">
+                    <ProgramSlide
+                        :isTopRecomendation="isTopRecomendation.TIER1"
+                        :picture="item.values.Picture"
+                        :subject="item.values.Subject"
+                        :programTitle="item.values.ProgramName"
+                        :teacherName="item.values.TeacherName"
+                        :teacherImage="item.values.TeacherImage"
+                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                        :lessonsCount="item.values.LessonsPerWeek"
+                    />
                 </slide>
-                <slide v-if="store.recomendationsArrTIER2.length">
-                    <div v-for="item in store.recomendationsArrTIER2" :key="item">
-                        <ProgramSlide
-                            :isTopRecomendation="true"
-                            :picture="item.values.Picture"
-                            :subject="item.values.Subject"
-                            :programTitle="item.values.ProgramName"
-                            :teacherName="item.values.TeacherName"
-                            :teacherImage="item.values.TeacherImage"
-                            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
-                            :lessonsCount="item.values.LessonsPerWeek"
-                        />
-                    </div>
+
+                <slide v-for="item in store.recomendationsArrTIER2" :key="item">
+                    <ProgramSlide
+                        :isTopRecomendation="isTopRecomendation.TIER2"
+                        :picture="item.values.Picture"
+                        :subject="item.values.Subject"
+                        :programTitle="item.values.ProgramName"
+                        :teacherName="item.values.TeacherName"
+                        :teacherImage="item.values.TeacherImage"
+                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                        :lessonsCount="item.values.LessonsPerWeek"
+                    />
                 </slide>
-                <slide v-if="store.recomendationsArrTIER3.length">
-                    <div v-for="item in store.recomendationsArrTIER3" :key="item">
-                        <ProgramSlide
-                            :isTopRecomendation="true"
-                            :picture="item.values.Picture"
-                            :subject="item.values.Subject"
-                            :programTitle="item.values.ProgramName"
-                            :teacherName="item.values.TeacherName"
-                            :teacherImage="item.values.TeacherImage"
-                            description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
-                            :lessonsCount="item.values.LessonsPerWeek"
-                        />
-                    </div>
+
+                <slide v-for="item in store.recomendationsArrTIER3" :key="item">
+                    <ProgramSlide
+                        :isTopRecomendation="isTopRecomendation.TIER3"
+                        :picture="item.values.Picture"
+                        :subject="item.values.Subject"
+                        :programTitle="item.values.ProgramName"
+                        :teacherName="item.values.TeacherName"
+                        :teacherImage="item.values.TeacherImage"
+                        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur magnam impedit voluptates nihil consectetur, expedita nulla nostrum sed voluptate facere soluta earum dolores nesciunt ut."
+                        :lessonsCount="item.values.LessonsPerWeek"
+                    />
                 </slide>
 
                 <!-- <slide v-for="slide in fakeArr" :key="slide">
