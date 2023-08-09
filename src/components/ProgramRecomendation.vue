@@ -10,6 +10,8 @@ import ProgramSlide from './ProgramSlide.vue'
 import { ref } from 'vue'
 import { vElementVisibility } from '@vueuse/components'
 
+const props = defineProps(['random'])
+
 const allPlansURL = 'https://app.digiklase.lt/plans/choose'
 
 const selectedPlanURL = () => {
@@ -261,6 +263,7 @@ const getCurrentYear = () => {
             <carousel v-bind="settings" class="carousel">
                 <slide v-for="item in store.recomendationsArrTIER0" :key="item">
                     <ProgramSlide
+                        :key="item"
                         :isTopRecomendation="store.TIER0isRecomended"
                         :picture="item.values.Picture"
                         :subject="item.values.Subject"
@@ -269,11 +272,13 @@ const getCurrentYear = () => {
                         :teacherImage="item.values.TeacherImage"
                         :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
+                        :random="props.random"
                     />
                 </slide>
 
                 <slide v-for="item in store.recomendationsArrTIER1" :key="item">
                     <ProgramSlide
+                        :key="item"
                         :isTopRecomendation="store.TIER1isRecomended"
                         :picture="item.values.Picture"
                         :subject="item.values.Subject"
@@ -282,11 +287,13 @@ const getCurrentYear = () => {
                         :teacherImage="item.values.TeacherImage"
                         :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
+                        :random="props.random"
                     />
                 </slide>
 
                 <slide v-for="item in store.recomendationsArrTIER2" :key="item">
                     <ProgramSlide
+                        :key="item"
                         :isTopRecomendation="store.TIER2isRecomended"
                         :picture="item.values.Picture"
                         :subject="item.values.Subject"
@@ -295,11 +302,13 @@ const getCurrentYear = () => {
                         :teacherImage="item.values.TeacherImage"
                         :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
+                        :random="props.random"
                     />
                 </slide>
 
                 <slide v-for="item in store.recomendationsArrTIER3" :key="item">
                     <ProgramSlide
+                        :key="item"
                         :isTopRecomendation="store.TIER3isRecomended"
                         :picture="item.values.Picture"
                         :subject="item.values.Subject"
@@ -308,11 +317,13 @@ const getCurrentYear = () => {
                         :teacherImage="item.values.TeacherImage"
                         :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
+                        :random="props.random"
                     />
                 </slide>
                 <slide v-for="item in store.recomendationsArrEVERYONE" :key="item">
                     <ProgramSlide
-                        :isTopRecomendation="false"
+                        :key="item"
+                        :isTopRecomendation="store.EVERYONEisRecomended"
                         :picture="item.values.Picture"
                         :subject="item.values.Subject"
                         :programTitle="item.values.ProgramName"
@@ -320,6 +331,7 @@ const getCurrentYear = () => {
                         :teacherImage="item.values.TeacherImage"
                         :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
+                        :random="props.random"
                     />
                 </slide>
 
@@ -1499,6 +1511,9 @@ ul li::before {
 .testimonials-carousel .carousel__slide--active {
     opacity: 1;
     transform: scale(1.1);
+}
+.carousel__viewport {
+    padding-bottom: 22px;
 }
 @media screen and (max-width: 768px) {
     .testimonial {

@@ -13,6 +13,7 @@ export const store = reactive({
     TIER1isRecomended: false,
     TIER2isRecomended: false,
     TIER3isRecomended: false,
+    EVERYONEisRecomended: false,
     respondent: null,
     selectedClass: null,
     showFirstBenefit: false,

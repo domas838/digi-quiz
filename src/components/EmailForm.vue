@@ -1,7 +1,6 @@
 <script setup>
 import { store } from '../store'
 import { computed } from 'vue'
-
 const submitChildEmail = (event) => {
     event.preventDefault()
     store.isChildEmailEntered = true
@@ -48,22 +47,9 @@ const submitChildAndParentHandler = (event) => {
     store.showRecomendations = true
     klaviyoRequestHandler()
 }
-const makeExternalID = (length) => {
-    let result = ''
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    const charactersLength = characters.length
-    let counter = 0
-    while (counter < length) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength))
-        counter += 1
-    }
-    return result
-}
 
 const klaviyoRequestHandler = () => {
-    console.log('SUBMIT EMAILS')
     // let date = new Date()
-
     // const options = {
     //     method: 'POST',
     //     headers: {
@@ -78,7 +64,7 @@ const klaviyoRequestHandler = () => {
     //             type: 'profile',
     //             attributes: {
     //                 email: store.childEmail ? store.childEmail : store.parentEmail,
-    //                 external_id: makeExternalID(28),
+    //                 external_id: makeRandomID(28),
     //                 properties: {
     //                     ResultURL: store.resultUrl,
     //                     Persona: store.selectedPersona,
@@ -92,7 +78,6 @@ const klaviyoRequestHandler = () => {
     //         }
     //     })
     // }
-
     // fetch('https://a.klaviyo.com/api/profiles/', options)
     //     .then((response) => response.json())
     //     .then((response) => console.log(response))

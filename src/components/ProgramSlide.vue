@@ -1,4 +1,5 @@
 <script setup>
+import { reactive } from 'vue'
 const props = defineProps([
     'picture',
     'isTopRecomendation',
@@ -7,11 +8,25 @@ const props = defineProps([
     'teacherImage',
     'teacherName',
     'description',
-    'lessonsCount'
+    'lessonsCount',
+    'random'
 ])
+
+const activeMap = reactive({})
+
+const toggleAccordion = (index) => {
+    activeMap[index] = !activeMap[index]
+}
 </script>
 
 <template>
+    <div class="read-more-modal" :class="{ open: !!activeMap[index] }">
+        <button @click="() => toggleAccordion(props.key)">
+            <img src="../assets/images/close-x.svg" alt="X" />
+        </button>
+        <h3>{{ props.programTitle }}</h3>
+        <p>{{ props.description }}</p>
+    </div>
     <div class="slide-wrapper">
         <div class="slide-header">
             <div class="slide-badge top-result" v-if="isTopRecomendation">
@@ -20,11 +35,10 @@ const props = defineProps([
             <div class="slide-badge recommend-result" v-if="!isTopRecomendation">
                 <p>📌 Tau taip pat gali patikti</p>
             </div>
-            <img v-if="props.picture" class="background" :src="props.picture" alt="" />
             <img
-                v-if="!props.picture"
+                v-if="props.picture"
                 class="background"
-                src="../assets/images/slider-header.jpg"
+                :src="'/programImages/' + props.picture"
                 alt=""
             />
 
@@ -118,7 +132,9 @@ const props = defineProps([
             </h4>
             <p>
                 {{ props.description.substr(0, 60) }}...
-                <a href="javascript:void(0)">Skaityti daugiau</a>
+                <a href="javascript:void(0)" @click="() => toggleAccordion(props.key)"
+                    >Skaityti daugiau</a
+                >
             </p>
         </div>
         <div class="slide-separator"></div>
@@ -228,6 +244,30 @@ const props = defineProps([
 .slide-subject.Chemija {
     background-color: #dc0078;
 }
+.slide-subject.Geografija {
+    background-color: #ff4e4e;
+}
+.slide-subject.Istorija {
+    background-color: #a86311;
+}
+.slide-subject.Biologija {
+    background-color: #0896db;
+}
+.slide-subject.Anglų {
+    background-color: #43a93b;
+}
+.slide-subject.Lietuvių {
+    background-color: #d85252;
+}
+.slide-subject.Pasaulio {
+    background-color: #0059a7;
+}
+.slide-subject.Gamta {
+    background-color: #667f00;
+}
+.slide-subject.Įdomusis {
+    background-color: #ec6b00;
+}
 .slide-content {
     background-color: #ffffff;
     padding: 15px;
@@ -302,5 +342,52 @@ h4 {
 }
 h4 span {
     font-weight: 700;
+}
+.read-more-modal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: tomato;
+    width: 95%;
+    height: 97%;
+
+    z-index: 20;
+    background-color: #fff;
+    padding: 40px;
+    text-align: left;
+    border-radius: 12px;
+    overflow-y: auto;
+    display: none;
+    box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.08);
+}
+.read-more-modal button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+.read-more-modal h3 {
+    margin-bottom: 22px;
+}
+.read-more-modal p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.read-more-modal .close {
+    text-align: right;
+    cursor: pointer;
+}
+.read-more-modal.open {
+    display: block;
 }
 </style>

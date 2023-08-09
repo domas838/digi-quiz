@@ -17,6 +17,17 @@ const instance = axios.create({
     baseURL: 'https://coda.io/apis/v1/docs/otYeYWMX9e/tables/grid-8XN2uCh13U/',
     headers: { Authorization: 'Bearer ' + token }
 })
+const makeRandomID = (length) => {
+    let result = ''
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    const charactersLength = characters.length
+    let counter = 0
+    while (counter < length) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength))
+        counter += 1
+    }
+    return result
+}
 const generateProgramRecomendations = (item) => {
     switch (item.values.Tier) {
         case '0':
@@ -143,6 +154,19 @@ const selectMostRecommendedPrograms = () => {
     } else {
         store.TIER3isRecomended = false
     }
+
+    if (
+        store.recomendationsArrTIER0.length === 0 &&
+        store.recomendationsArrTIER1.length === 0 &&
+        store.recomendationsArrTIER2.length === 0 &&
+        store.recomendationsArrTIER3.length === 0 &&
+        store.recomendationsArrEVERYONE.length > 0
+    ) {
+        store.EVERYONEisRecomended = true
+    } else {
+        store.EVERYONEisRecomended = false
+    }
+
     // console.log(store.TIER0isRecomended)
     // console.log(store.TIER1isRecomended)
     // console.log(store.TIER2isRecomended)
@@ -365,7 +389,7 @@ const completeness = (step) => {
             :generateProgramRecomendations="generateProgramRecomendations"
             :selectMostRecommendedPrograms="selectMostRecommendedPrograms"
         />
-        <EmailForm v-if="store.step === 9" />
+        <EmailForm v-if="store.step === 9" :random="makeRandomID" />
     </div>
     <img
         src="./assets/images/bottomVector.svg"
@@ -379,5 +403,8 @@ const completeness = (step) => {
         class="line-behind-classroom"
         v-if="store.showSecondBenefit && store.step === 5"
     />
-    <ProgramRecomendation v-if="store.step === 10 && store.showRecomendations" />
+    <ProgramRecomendation
+        v-if="store.step === 10 && store.showRecomendations"
+        :random="makeRandomID"
+    />
 </template>
