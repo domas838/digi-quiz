@@ -373,6 +373,9 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
 .benefit-container {
     width: 50%;
 }
+.benefit-container .benefit-btn {
+    margin-left: 0;
+}
 .benefit-row {
     display: flex;
     margin-bottom: 20px;
