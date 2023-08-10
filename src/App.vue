@@ -17,17 +17,7 @@ const instance = axios.create({
     baseURL: 'https://coda.io/apis/v1/docs/otYeYWMX9e/tables/grid-8XN2uCh13U/',
     headers: { Authorization: 'Bearer ' + token }
 })
-const makeRandomID = (length) => {
-    let result = ''
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    const charactersLength = characters.length
-    let counter = 0
-    while (counter < length) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength))
-        counter += 1
-    }
-    return result
-}
+
 const generateProgramRecomendations = (item) => {
     switch (item.values.Tier) {
         case '0':
@@ -393,12 +383,11 @@ const completeness = (step) => {
         <SecondBenefit />
         <ProgramsLoader
             v-if="store.step === 8"
-            :baseUrl="url"
             :instance="instance"
             :generateProgramRecomendations="generateProgramRecomendations"
             :selectMostRecommendedPrograms="selectMostRecommendedPrograms"
         />
-        <EmailForm v-if="store.step === 9" :random="makeRandomID" />
+        <EmailForm v-if="store.step === 9" />
     </div>
     <img
         src="./assets/images/bottomVector.svg"
@@ -412,8 +401,5 @@ const completeness = (step) => {
         class="line-behind-classroom"
         v-if="store.showSecondBenefit && store.step === 5"
     />
-    <ProgramRecomendation
-        v-if="store.step === 10 && store.showRecomendations"
-        :random="makeRandomID"
-    />
+    <ProgramRecomendation v-if="store.step === 10 && store.showRecomendations" />
 </template>

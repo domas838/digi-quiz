@@ -9,19 +9,19 @@ const props = defineProps([
     'teacherName',
     'description',
     'lessonsCount',
-    'random'
+    'index'
 ])
 
 const activeMap = reactive({})
 
-const toggleAccordion = (index) => {
+const toggleReadMore = (index) => {
     activeMap[index] = !activeMap[index]
 }
 </script>
 
 <template>
     <div class="read-more-modal" :class="{ open: !!activeMap[index] }">
-        <button @click="() => toggleAccordion(props.key)">
+        <button @click="() => toggleReadMore(props.index)">
             <img src="../assets/images/close-x.svg" alt="X" />
         </button>
         <h3>{{ props.programTitle }}</h3>
@@ -132,7 +132,7 @@ const toggleAccordion = (index) => {
             </h4>
             <p>
                 {{ props.description.substr(0, 60) }}...
-                <a href="javascript:void(0)" @click="() => toggleAccordion(props.key)"
+                <a href="javascript:void(0)" @click="() => toggleReadMore(props.index)"
                     >Skaityti daugiau</a
                 >
             </p>

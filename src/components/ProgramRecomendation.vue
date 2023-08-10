@@ -11,8 +11,6 @@ import { ref } from 'vue'
 import { vElementVisibility } from '@vueuse/components'
 import AccordionFAQ from './AccordionFAQ.vue'
 
-const props = defineProps(['random'])
-
 const allPlansURL = 'https://app.digiklase.lt/plans/choose'
 
 const selectedPlanURL = () => {
@@ -286,17 +284,17 @@ const faqLV = reactive([
 ])
 switch (store.selectedPersona) {
     case 'Ambitious student':
-        store.selectedPersonaLT = 'Ambicinga(-s)'
+        store.selectedPersonaLT = 'Ambicingasis'
         break
     case 'Exam-oriented':
-        store.selectedPersonaLT = 'Orientuota(-s) į egzaminus'
+        store.selectedPersonaLT = 'Būsimas šimtukininkas'
         break
 
     case 'Busy multitasker':
-        store.selectedPersonaLT = 'Užsiėmusi(-ęs) devyndarbė(-is)'
+        store.selectedPersonaLT = 'Amžinai užsiėmęs'
         break
     case 'Struggling':
-        store.selectedPersonaLT = 'Sunkiai sekasi'
+        store.selectedPersonaLT = 'Atkaklius siekėjas'
         break
     default:
         break
@@ -333,9 +331,9 @@ const getCurrentYear = () => {
         <div class="container">
             <h1>Rekomenduojame mokytis pagal šias programas:</h1>
             <carousel v-bind="settings" class="carousel">
-                <slide v-for="item in store.recomendationsArrTIER0" :key="item">
+                <slide v-for="(item, index) in store.recomendationsArrTIER0" :key="index">
                     <ProgramSlide
-                        :key="item"
+                        :index="index"
                         :isTopRecomendation="store.TIER0isRecomended"
                         :picture="item.values.Picture"
                         :subject="item.values.Subject"
@@ -344,13 +342,12 @@ const getCurrentYear = () => {
                         :teacherImage="item.values.TeacherImage"
                         :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
-                        :random="props.random"
                     />
                 </slide>
 
-                <slide v-for="item in store.recomendationsArrTIER1" :key="item">
+                <slide v-for="(item, index) in store.recomendationsArrTIER1" :key="index">
                     <ProgramSlide
-                        :key="item"
+                        :index="index"
                         :isTopRecomendation="store.TIER1isRecomended"
                         :picture="item.values.Picture"
                         :subject="item.values.Subject"
@@ -359,13 +356,12 @@ const getCurrentYear = () => {
                         :teacherImage="item.values.TeacherImage"
                         :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
-                        :random="props.random"
                     />
                 </slide>
 
-                <slide v-for="item in store.recomendationsArrTIER2" :key="item">
+                <slide v-for="(item, index) in store.recomendationsArrTIER2" :key="index">
                     <ProgramSlide
-                        :key="item"
+                        :index="index"
                         :isTopRecomendation="store.TIER2isRecomended"
                         :picture="item.values.Picture"
                         :subject="item.values.Subject"
@@ -374,13 +370,12 @@ const getCurrentYear = () => {
                         :teacherImage="item.values.TeacherImage"
                         :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
-                        :random="props.random"
                     />
                 </slide>
 
-                <slide v-for="item in store.recomendationsArrTIER3" :key="item">
+                <slide v-for="(item, index) in store.recomendationsArrTIER3" :key="index">
                     <ProgramSlide
-                        :key="item"
+                        :index="index"
                         :isTopRecomendation="store.TIER3isRecomended"
                         :picture="item.values.Picture"
                         :subject="item.values.Subject"
@@ -389,12 +384,11 @@ const getCurrentYear = () => {
                         :teacherImage="item.values.TeacherImage"
                         :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
-                        :random="props.random"
                     />
                 </slide>
-                <slide v-for="item in store.recomendationsArrEVERYONE" :key="item">
+                <slide v-for="(item, index) in store.recomendationsArrEVERYONE" :key="index">
                     <ProgramSlide
-                        :key="item"
+                        :index="index"
                         :isTopRecomendation="store.EVERYONEisRecomended"
                         :picture="item.values.Picture"
                         :subject="item.values.Subject"
@@ -403,7 +397,6 @@ const getCurrentYear = () => {
                         :teacherImage="item.values.TeacherImage"
                         :description="item.values.Description"
                         :lessonsCount="item.values.LessonsPerWeek"
-                        :random="props.random"
                     />
                 </slide>
 
@@ -508,37 +501,73 @@ const getCurrentYear = () => {
             <h2 class="section-title--small">
                 Remdamiesi apklausa nustatėme ir tavo asmenybės tipą:
             </h2>
-            <img src="../assets/images/personality.svg" alt="Personality" class="personality-img" />
+            <img
+                v-if="store.selectedPersona === 'Ambitious student'"
+                src="../assets/images/personality-ambitious.svg"
+                alt="Personality"
+                class="personality-img"
+            />
+            <img
+                v-if="store.selectedPersona === 'Exam-oriented'"
+                src="../assets/images/exam-oriented.svg"
+                alt="Personality"
+                class="personality-img"
+            />
+            <img
+                v-if="store.selectedPersona === 'Busy multitasker'"
+                src="../assets/images/personality-busy-multitasker.svg"
+                alt="Personality"
+                class="personality-img"
+            />
+            <img
+                v-if="store.selectedPersona === 'Busy multitasker'"
+                src="../assets/images/personality-busy-multitasker.svg"
+                alt="Personality"
+                class="personality-img"
+            />
             <h2 class="section-title blue">{{ store.selectedPersonaLT }}</h2>
-            <p class="p-narrow" v-if="store.selectedPersona === 'Ambitious student'">
-                You are the Ambitious Student, passionate about science subjects and mathematics.
-                Your ambition drives you to seek academic success and personal growth, fueled by
-                discipline and determination. You aim for top exam scores and acceptance into your
-                dream school or university, using online resources and extracurricular activities to
-                pursue your goals.
+            <p
+                class="p-narrow"
+                v-if="store.lang === 'LT' && store.selectedPersona === 'Ambitious student'"
+            >
+                Tu esi ambicingasis, mėgstantis gamtos mokslus ir matematiką. Tavo ambicijos skatina
+                siekti aukščiausių rezultatų ir nuolatinio asmeninio tobulėjimo. Tam pasitelkiama
+                disciplina ir ryžtas. Sieki geriausių egzaminų rezultatų ir įstoti į savo svajonių
+                mokyklą ar universitetą. Siekdamas savo tikslų naudojies internetiniais šaltiniais
+                ir resursais ar užklasine veikla.
             </p>
-            <p class="p-narrow" v-if="store.selectedPersona === 'Exam-oriented'">
-                The Exam Achiever is focused on scoring high marks in exams and getting accepted
-                into a dream school or university. Valuing academic success, discipline, and
-                self-improvement, they are often frustrated by limited access to quality resources
-                and teachers. Actively participating in online sessions and group discussions, they
-                seek to excel despite the challenges, blending a love for science, mathematics, and
-                non-fiction with a determination to achieve their goals.
+            <p
+                class="p-narrow"
+                v-if="store.lang === 'LT' && store.selectedPersona === 'Exam-oriented'"
+            >
+                Būsimas šimtukininkas siekia gauti aukštus egzaminų įvertinimus ir įstoti į svajonių
+                mokyklą ar universitetą. Vertina akademinę sėkmę, discipliną ir nuolatinį savęs
+                tobulinimą. Jie dažnai nusivilia ribotomis galimybėmis gauti kokybiškus resursus ar
+                nekvalifikuotą mokytojų pagalbą. Aktyviai dalyvaudami internetiniuose užsiėmimuose
+                ir grupinėse diskusijose, jie siekia tobulėti, nepaisydami iššūkių. Meilę gamtos
+                mokslams, matematikai ir negrožinei literatūrai derina su ryžtu siekti savo tikslų.
             </p>
 
-            <p class="p-narrow" v-if="store.selectedPersona === 'Busy multitasker'">
-                You're the Busy Multitasker, always juggling various activities, clubs, and hobbies
-                outside of your academics. Success in your interests and passions fuels you, but
-                balancing academics can be a challenge. With so much on your plate, efficient
-                learning and time management are essential to go from average to high grades. Your
-                driven spirit is admirable, but remember, focusing on the quality of what you do can
-                sometimes be more beneficial than the quantity.
+            <p
+                class="p-narrow"
+                v-if="store.lang === 'LT' && store.selectedPersona === 'Busy multitasker'"
+            >
+                Amžinai užsiėmęs, nuolat žongliruoja įvairiomis veiklomis, būreliais ir pomėgiais -
+                dažniai, nesusijusiais su mokslais. Sėkmė tavo pomėgiuose ir užsiėmimuose tave
+                skatina tobulėti, tačiau tai suderinti su mokslais gali būti iššūkis. Turint tiek
+                daug veiklų, efektyvus mokymasis ir laiko planavimas yra būtinas, kad nuo vidutinių
+                pažymių pereitum prie aukštų. Tavo užsidegimas yra žavintis, tačiau nepamiršk, kad
+                kartais daugiau dėmesio reikėtų skirti to, ką darai, kokybei, o ne kiekybei.
             </p>
-            <p class="p-narrow" v-if="store.selectedPersona === 'Struggling'">
-                The Aspiring Achiever seeks academic success but often feels lost without clear
-                guidance. They are quick to join lessons if relevant but may lose interest without
-                continuous engagement. Balancing a love for gaming or spending time with friends
-                with a desire to improve, they need targeted support to thrive.
+            <p
+                class="p-narrow"
+                v-if="store.lang === 'LT' && store.selectedPersona === 'Struggling'"
+            >
+                Atkaklus siekėjas siekia akademinės sėkmės, bet dažnai jaučiasi pasimetęs, kai
+                neturi aiškių gairių. Jie greitai įsitraukia į pamokas, jei jos yra svarbios ir
+                įdomios, tačiau be nuolatinio skatinimo gali greitai prarasti susidomėjimą.
+                Subalansuojant meilę žaidimams ar leidžiant laiką su draugais siekiant tobulėti
+                kartu, jiems vis tiek reikės tikslinės pagalbos, kad pasiektų savo tikslų.
             </p>
         </div>
     </div>
