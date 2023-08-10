@@ -481,8 +481,17 @@ const getCurrentYear = () => {
             </div>
             <div class="content">
                 <div class="title">
-                    <h3>„Visi mokykliniai dalykai ir visi būreliai“</h3>
+                    <h3 v-if="store.lang === 'LT' && store.selectedSubjects.length === 1">
+                        „1 dalyko planas“
+                    </h3>
+                    <h3 v-if="store.lang === 'LT' && store.selectedSubjects.length === 2">
+                        „2 dalykų planas“
+                    </h3>
+                    <h3 v-if="store.lang === 'LT' && store.selectedSubjects.length >= 3">
+                        „Visi mokykliniai dalykai ir visi būreliai“
+                    </h3>
                 </div>
+                {{ console.log(store.selectedSubjects.length) }}
                 <div class="price">
                     <p>Nuo &nbsp;</p>
                     <p><span>49,00 </span>€/mėn.</p>
