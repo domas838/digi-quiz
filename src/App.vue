@@ -148,6 +148,8 @@ const selectMostRecommendedPrograms = () => {
     }
 }
 onMounted(() => {
+    console.log(window.location.hostname)
+
     if (url.searchParams.has('role')) {
         if (url.searchParams.get('role') === 'parent') {
             store.respondent = 'parent'
