@@ -1,6 +1,6 @@
 <script setup>
 import { store } from '../store'
-import { computed } from 'vue'
+import { computed, reactive } from 'vue'
 import axios from 'axios'
 const submitChildEmail = (event) => {
     event.preventDefault()
@@ -48,7 +48,12 @@ const submitChildAndParentHandler = (event) => {
     store.showRecomendations = true
     klaviyoRequestHandler()
 }
-
+const localization = reactive({
+    continue: 'Tęsti'
+})
+if (store.lang === 'LV') {
+    localization.continue = 'Turpināt'
+}
 const klaviyoRequestHandler = () => {
     const options = {
         method: 'POST',
@@ -95,21 +100,37 @@ const klaviyoRequestHandler = () => {
     >
         <img src="../assets/images/close-x.svg" width="48" height="48" />
     </button>
-    <h1 v-if="store.respondent === 'child' && !store.isChildEmailEntered">
+    <h1 v-if="store.lang === 'LT' && store.respondent === 'child' && !store.isChildEmailEntered">
         Rekomenduosime planą, kuris padėtų pasiekti visų užsibrėžtų tikslų
     </h1>
-    <p v-if="store.respondent === 'child' && !store.isChildEmailEntered">
+    <h1 v-if="store.lang === 'LV' && store.respondent === 'child' && !store.isChildEmailEntered">
+        Mēs esam izveidojuši personalizētu mācību programmu, kas palīdzēs Tev sasniegt savus mērķus.
+    </h1>
+    <p v-if="store.lang === 'LT' && store.respondent === 'child' && !store.isChildEmailEntered">
         Kur atsiųsti rezultatus?
     </p>
-    <h1 v-if="store.respondent === 'child' && store.isChildEmailEntered">
+    <p v-if="store.lang === 'LV' && store.respondent === 'child' && !store.isChildEmailEntered">
+        Kādu e-pastu Tu vēlies izmantot, lai pieslēgtos?
+    </p>
+    <h1 v-if="store.lang === 'LT' && store.respondent === 'child' && store.isChildEmailEntered">
         Pasidalink rezultatais su tėveliais/globėjais ir gauk <span>15 EUR nuolaidą</span> narystei
         įsigyti!
     </h1>
-    <h1 v-if="store.respondent === 'parent'">
+    <h1 v-if="store.lang === 'LV' && store.respondent === 'child' && store.isChildEmailEntered">
+        Aizsūti vecākiem savus rezultātus un saņem <span>15 EUR atlaides</span> kodu abonementam!
+    </h1>
+    <h1 v-if="store.lang === 'LT' && store.respondent === 'parent'">
         Rekomenduosime planą, kuris padėtų pasiekti visų užsibrėžtų tikslų
     </h1>
-    <p v-if="store.respondent === 'parent'">Kur atsiųsti rezultatus?</p>
-    <div v-if="store.respondent === 'child'">
+    <h1 v-if="store.lang === 'LV' && store.respondent === 'parent'">
+        Mēs esam izveidojuši personalizētu mācīšanās programmu, kura palīdzēs Jūsu bērnam sasniegt
+        mērķus.
+    </h1>
+    <p v-if="store.lang === 'LT' && store.respondent === 'parent'">Kur atsiųsti rezultatus?</p>
+    <p v-if="store.lang === 'LV' && store.respondent === 'parent'">
+        Kādu e-pastu Jūs vēlaties izmantot, lai pieslēgtos?
+    </p>
+    <div v-if="store.lang === 'LT' && store.respondent === 'child'">
         <input
             v-if="!store.isChildEmailEntered"
             class="digi-input"
@@ -180,7 +201,79 @@ const klaviyoRequestHandler = () => {
             </p>
         </div>
     </div>
-    <div v-if="store.respondent === 'parent'">
+    <div v-if="store.lang === 'LV' && store.respondent === 'child'">
+        <input
+            v-if="!store.isChildEmailEntered"
+            class="digi-input"
+            type="email"
+            name="child-email"
+            id="child-email"
+            placeholder="E-pasts"
+            v-model="store.childEmail"
+            style="margin-bottom: 1rem"
+        />
+        <input
+            v-if="store.isChildEmailEntered"
+            class="digi-input"
+            type="email"
+            name="parent-email"
+            id="parent-email"
+            placeholder="Vecāku / aizbildņa e-pasts"
+            v-model="store.parentEmail"
+            style="margin-bottom: 1rem"
+        />
+        <div class="privacy-notice">
+            <img src="../assets/images/Lock.svg" alt="Lock" />
+            <p>
+                Tavi personīgie dati ir drošībā ar mums. Kā arī mēs nesūtām SPAM ziņas un nedalāmies
+                ar e-pastu adresēm, ar trešajām personām.
+            </p>
+        </div>
+        <div class="aggree-row" v-if="!store.isChildEmailEntered">
+            <input
+                type="checkbox"
+                name="privacy"
+                id="privacy"
+                value="Es piekrītu privātuma politikai un lietošanas noteikumiem"
+                v-model="store.aggreeWithPrivacy"
+            />
+            <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
+            <img
+                src="../assets/images/checkbox-checked.svg"
+                alt=""
+                class="custom-checkbox-checked"
+            />
+            <label for="privacy" class="aggree-label"
+                >Es piekrītu
+                <a href="https://memby.lv/privatuma-politika" target="_blank"
+                    >privātuma politikai un lietošanas noteikumiem</a
+                ></label
+            >
+        </div>
+        <div class="aggree-row" v-if="!store.isChildEmailEntered">
+            <input
+                type="checkbox"
+                name="age"
+                id="age"
+                value="Es esmu jau 13 gadus vecs"
+                v-model="store.olderThanThirteen"
+            />
+            <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
+            <img
+                src="../assets/images/checkbox-checked.svg"
+                alt=""
+                class="custom-checkbox-checked"
+            />
+            <label for="age" class="aggree-label">Es esmu jau 13 gadus vecs</label>
+        </div>
+        <div class="aggree-row" v-if="!store.isChildEmailEntered">
+            <p>
+                *Ja Tev ir zem 13 gadiem, palūdz saviem vecākiem/ aizbildnim palīdzēt Tev aizpildīt
+                aptauju
+            </p>
+        </div>
+    </div>
+    <div v-if="store.lang === 'LT' && store.respondent === 'parent'">
         <input
             class="digi-input"
             type="email"
@@ -191,7 +284,18 @@ const klaviyoRequestHandler = () => {
             style="margin-bottom: 1rem"
         />
     </div>
-    <div class="aggree-row" v-if="store.respondent === 'parent'">
+    <div v-if="store.lang === 'LV' && store.respondent === 'parent'">
+        <input
+            class="digi-input"
+            type="email"
+            name="parent-email"
+            id="parent-email"
+            placeholder="E-pasts"
+            v-model="store.parentEmail"
+            style="margin-bottom: 1rem"
+        />
+    </div>
+    <div class="aggree-row" v-if="store.lang === 'LT' && store.respondent === 'parent'">
         <input
             type="checkbox"
             name="privacy"
@@ -208,6 +312,23 @@ const klaviyoRequestHandler = () => {
             ></label
         >
     </div>
+    <div class="aggree-row" v-if="store.lang === 'LV' && store.respondent === 'parent'">
+        <input
+            type="checkbox"
+            name="privacy"
+            id="privacy"
+            value="Sutinku su privatumo politika ir naudojimosi taisyklėmis"
+            v-model="store.aggreeWithPrivacy"
+        />
+        <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
+        <img src="../assets/images/checkbox-checked.svg" alt="" class="custom-checkbox-checked" />
+        <label for="privacy" class="aggree-label"
+            >Es piekrītu
+            <a href="https://memby.lv/privatuma-politika" target="_blank"
+                >privātuma politikai un lietošanas noteikumiem.</a
+            ></label
+        >
+    </div>
     <button
         v-if="store.respondent === 'child' && !store.isChildEmailEntered"
         type="submit"
@@ -216,7 +337,7 @@ const klaviyoRequestHandler = () => {
         @click="submitChildEmail($event)"
         :disabled="isChildProceedDisabled"
     >
-        Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
+        {{ localization.continue }} <img src="../assets/images/arrow-right.svg" alt="" />
     </button>
 
     <button
@@ -227,7 +348,7 @@ const klaviyoRequestHandler = () => {
         @click="submitHandler($event)"
         :disabled="isParentProceedDisabled"
     >
-        Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
+        {{ localization.continue }} <img src="../assets/images/arrow-right.svg" alt="" />
     </button>
     <div class="submit-container" v-if="store.respondent === 'child' && store.isChildEmailEntered">
         <button
@@ -236,9 +357,14 @@ const klaviyoRequestHandler = () => {
             @click="submitChildAndParentHandler($event)"
             :disabled="isParentProceedDisabled"
         >
-            Tęsti <img src="../assets/images/arrow-right.svg" alt="" />
+            {{ localization.continue }} <img src="../assets/images/arrow-right.svg" alt="" />
         </button>
-        <a href="javascript:void(0)" @click="cancelEmailHandler">Praleisti</a>
+        <a href="javascript:void(0)" v-if="store.lang === 'LT'" @click="cancelEmailHandler"
+            >Praleisti</a
+        >
+        <a href="javascript:void(0)" v-if="store.lang === 'LV'" @click="cancelEmailHandler"
+            >Izlaist</a
+        >
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <script setup>
 import { store } from '../store'
-
+import { reactive } from 'vue'
 const acceptSecondBenefit = () => {
     store.showSecondBenefit = false
     store.step += 1
@@ -13,20 +13,49 @@ const benefits = [
     '<strong>Individualūs testai</strong> pamokų metu žinioms patikrinti',
     'Visų transliacijų <strong>įrašų archyvas</strong>'
 ]
+const benefitsLV = [
+    '<strong>Nodarbības notiek tiešraidē</strong>',
+    '<strong>Dažādu līmeņu grūtības pakāpes, lai vari mācīties savā tempā</strong>',
+    '<strong>Gudras, iesaistošas tehnoloģijas un tiešsaistes čati</strong>',
+    '<strong>Individuāli testi nodarbības laikā, lai pārbaudītu zināšanas</strong>',
+    '<strong>Ierakstu pieeja visām iepriekšējām nodarbībām</strong>'
+]
+const localization = reactive({
+    continue: 'Tęsti'
+})
+if (store.lang === 'LV') {
+    localization.continue = 'Turpināt'
+}
 </script>
 
 <template>
     <div v-if="store.showSecondBenefit && store.step === 5">
         <div class="benefit-container">
-            <h1 class="benefit-heading">Pamokos, kurių nesinorės pramiegoti</h1>
-            <div class="benefit-row" v-for="(b, index) in benefits" v-bind:key="index">
-                <div class="icon"><img src="../assets/images/Description.svg" alt="" /></div>
-                <div class="content">
-                    <p v-html="b"></p>
+            <h1 class="benefit-heading" v-if="store.lang === 'LT'">
+                Pamokos, kurių nesinorės pramiegoti
+            </h1>
+            <h1 class="benefit-heading" v-if="store.lang === 'LV'">
+                Nodarbības, kuras Tu negribēsi palaist garām
+            </h1>
+            <div v-if="store.lang === 'LT'">
+                <div class="benefit-row" v-for="(b, index) in benefits" v-bind:key="index">
+                    <div class="icon"><img src="../assets/images/Description.svg" alt="" /></div>
+                    <div class="content">
+                        <p v-html="b"></p>
+                    </div>
+                </div>
+            </div>
+            <div v-if="store.lang === 'LV'">
+                <div class="benefit-row" v-for="(b, index) in benefitsLV" v-bind:key="index">
+                    <div class="icon"><img src="../assets/images/Description.svg" alt="" /></div>
+                    <div class="content">
+                        <p v-html="b"></p>
+                    </div>
                 </div>
             </div>
             <button @click="acceptSecondBenefit()" class="benefit-btn">
-                Tęsti <img src="../assets/images/arrow-right.svg" alt="Next" />
+                {{ localization.continue }}
+                <img src="../assets/images/arrow-right.svg" alt="Next" />
             </button>
 
             <img src="../assets/images/classroom.png" alt="" class="classroom-visual" />

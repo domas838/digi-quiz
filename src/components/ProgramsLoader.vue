@@ -260,5 +260,6 @@ onMounted(() => {
     <div class="spinner" v-if="store.isLoading">
         <img src="../assets/images/spinner.svg" alt="" />
     </div>
-    <h1 v-if="store.isLoading">Skaičiuojame rezultatus...</h1>
+    <h1 v-if="store.lang === 'LT' && store.isLoading">Skaičiuojame rezultatus...</h1>
+    <h1 v-if="store.lang === 'LV' && store.isLoading">Rezultāti tiek aprēķināti......</h1>
 </template>

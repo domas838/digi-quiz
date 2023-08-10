@@ -13,8 +13,12 @@ import ProgramsLoader from './components/ProgramsLoader.vue'
 const url = new URL(window.location.href)
 const token = 'a29826cb-670e-4b25-9669-35f67b2e3e3b'
 
-const instance = axios.create({
+const instanceLT = axios.create({
     baseURL: 'https://coda.io/apis/v1/docs/otYeYWMX9e/tables/grid-8XN2uCh13U/',
+    headers: { Authorization: 'Bearer ' + token }
+})
+const instanceLV = axios.create({
+    baseURL: 'https://coda.io/apis/v1/docs/otYeYWMX9e/tables/grid-I_8YD1oJ_N/',
     headers: { Authorization: 'Bearer ' + token }
 })
 
@@ -155,11 +159,14 @@ const localization = reactive({
     childBtnLabel: 'Esu mokinys',
     parentBtnLabel: 'Esu tėvelis/globėjas'
 })
+
+if (store.lang === 'LV') {
+    localization.childBtnLabel = 'Esmu skolēns'
+    localization.parentBtnLabel = 'Esmu vecāks/ aizbildnis'
+}
 onMounted(() => {
     if (window.location.hostname === 'quiz.memby.lv') {
         store.lang = 'LV'
-        localization.childBtnLabel = 'Esmu skolēns'
-        localization.parentBtnLabel = 'Esmu vecāks/ aizbildnis'
     }
 
     if (url.searchParams.has('role')) {
@@ -217,18 +224,34 @@ onMounted(() => {
             store.recomendationsArrTIER3 = JSON.parse(url.searchParams.get('TIER3'))
         }
 
-        instance
-            .get('/rows?useColumnNames=true')
-            .then((response) => {
-                response.data.items.forEach((item) => {
-                    generateProgramRecomendations(item)
-                })
+        if (store.lang === 'LT') {
+            instanceLT
+                .get('/rows?useColumnNames=true')
+                .then((response) => {
+                    response.data.items.forEach((item) => {
+                        generateProgramRecomendations(item)
+                    })
 
-                return response.data.items
-            })
-            .then(() => {
-                selectMostRecommendedPrograms()
-            })
+                    return response.data.items
+                })
+                .then(() => {
+                    selectMostRecommendedPrograms()
+                })
+        }
+        if (store.lang === 'LV') {
+            instanceLV
+                .get('/rows?useColumnNames=true')
+                .then((response) => {
+                    response.data.items.forEach((item) => {
+                        generateProgramRecomendations(item)
+                    })
+
+                    return response.data.items
+                })
+                .then(() => {
+                    selectMostRecommendedPrograms()
+                })
+        }
     }
 })
 
@@ -293,7 +316,12 @@ const completeness = (step) => {
     <!-- Intro -->
     <div class="container--intro" v-if="store.step === 0">
         <div class="brand-logo brand-logo--mobile">
-            <img src="./assets/images/digiklase.svg" alt="digiklase logo" />
+            <img
+                v-if="store.lang === 'LT'"
+                src="./assets/images/digiklase.svg"
+                alt="Digiklase logo"
+            />
+            <img v-if="store.lang === 'LV'" src="./assets/images/memby.svg" alt="Memby logo" />
         </div>
         <img src="./assets/images/skateboard.svg" alt="" class="intro-visual" />
         <h1 class="intro-heading" v-if="store.lang === 'LT'">
@@ -327,7 +355,12 @@ const completeness = (step) => {
             </div>
         </div>
         <div class="brand-logo">
-            <img src="./assets/images/digiklase.svg" alt="digiklase logo" />
+            <img
+                v-if="store.lang === 'LT'"
+                src="./assets/images/digiklase.svg"
+                alt="Digiklase logo"
+            />
+            <img v-if="store.lang === 'LV'" src="./assets/images/memby.svg" alt="Memby logo" />
         </div>
     </div>
     <div class="container" v-if="store.step !== 0 && store.step !== 10">
@@ -340,7 +373,12 @@ const completeness = (step) => {
                 !store.showSecondBenefit
             "
         >
-            <img src="./assets/images/digiklase.svg" alt="digiklase logo" />
+            <img
+                v-if="store.lang === 'LT'"
+                src="./assets/images/digiklase.svg"
+                alt="Digiklase logo"
+            />
+            <img v-if="store.lang === 'LV'" src="./assets/images/memby.svg" alt="Memby logo" />
         </div>
         <div
             class="progress__wrapper"
@@ -408,8 +446,14 @@ const completeness = (step) => {
         <FirstBenefit />
         <SecondBenefit />
         <ProgramsLoader
-            v-if="store.step === 8"
-            :instance="instance"
+            v-if="store.lang === 'LT' && store.step === 8"
+            :instance="instanceLT"
+            :generateProgramRecomendations="generateProgramRecomendations"
+            :selectMostRecommendedPrograms="selectMostRecommendedPrograms"
+        />
+        <ProgramsLoader
+            v-if="store.lang === 'LV' && store.step === 8"
+            :instance="instanceLV"
             :generateProgramRecomendations="generateProgramRecomendations"
             :selectMostRecommendedPrograms="selectMostRecommendedPrograms"
         />

@@ -152,7 +152,7 @@ h2 {
 }
 .brand-logo {
     display: block;
-    margin: 90px auto 50px auto;
+    margin: 50px auto;
     width: 100%;
 }
 .brand-logo--mobile {
@@ -247,7 +247,7 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
     margin-top: 112px;
     margin-bottom: 112px;
     margin-left: 127px;
-    height: calc(100vh - 224px);
+    min-height: calc(100vh - 224px);
     width: 50%;
     max-width: 700px;
 }

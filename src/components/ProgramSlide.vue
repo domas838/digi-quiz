@@ -1,5 +1,6 @@
 <script setup>
 import { reactive } from 'vue'
+import { store } from '../store'
 const props = defineProps([
     'picture',
     'isTopRecomendation',
@@ -17,6 +18,13 @@ const activeMap = reactive({})
 const toggleReadMore = (index) => {
     activeMap[index] = !activeMap[index]
 }
+const localization = reactive({
+    readMore: 'Skaityti daugiau'
+})
+
+if (store.lang === 'LV') {
+    localization.readMore = 'Read more'
+}
 </script>
 
 <template>
@@ -30,10 +38,12 @@ const toggleReadMore = (index) => {
     <div class="slide-wrapper">
         <div class="slide-header">
             <div class="slide-badge top-result" v-if="isTopRecomendation">
-                <p>⭐️ Labiausiai tinkanti programa</p>
+                <p v-if="store.lang === 'LT'">⭐️ Labiausiai tinkanti programa</p>
+                <p v-if="store.lang === 'LV'">⭐️ Visatbilstošākā programma</p>
             </div>
             <div class="slide-badge recommend-result" v-if="!isTopRecomendation">
-                <p>📌 Tau taip pat gali patikti</p>
+                <p v-if="store.lang === 'LT'">📌 Tau taip pat gali patikti</p>
+                <p v-if="store.lang === 'LV'">📌 Šis Tev arī varētu noderēt</p>
             </div>
             <img
                 v-if="props.picture"
@@ -127,14 +137,14 @@ const toggleReadMore = (index) => {
                         src="../assets/images/teacher-fallback.svg"
                     />
                 </span>
-                Teacher
+
                 <span> {{ props.teacherName }}</span>
             </h4>
             <p>
                 {{ props.description.substr(0, 60) }}...
-                <a href="javascript:void(0)" @click="() => toggleReadMore(props.index)"
-                    >Skaityti daugiau</a
-                >
+                <a href="javascript:void(0)" @click="() => toggleReadMore(props.index)">{{
+                    localization.readMore
+                }}</a>
             </p>
         </div>
         <div class="slide-separator"></div>

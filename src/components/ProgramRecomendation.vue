@@ -314,17 +314,37 @@ if (store.lang === 'LV') {
 }
 switch (store.selectedPersona) {
     case 'Ambitious student':
-        store.selectedPersonaLT = 'Ambicingasis'
+        if (store.lang === 'LT') {
+            store.selectedPersonaTranslation = 'Ambicingasis'
+        }
+        if (store.lang === 'LV') {
+            store.selectedPersonaTranslation = 'Ambitious student'
+        }
         break
     case 'Exam-oriented':
-        store.selectedPersonaLT = 'Būsimas šimtukininkas'
+        if (store.lang === 'LT') {
+            store.selectedPersonaTranslation = 'Būsimas šimtukininkas'
+        }
+        if (store.lang === 'LV') {
+            store.selectedPersonaTranslation = 'Exam-oriented'
+        }
         break
 
     case 'Busy multitasker':
-        store.selectedPersonaLT = 'Amžinai užsiėmęs'
+        if (store.lang === 'LT') {
+            store.selectedPersonaTranslation = 'Amžinai užsiėmęs'
+        }
+        if (store.lang === 'LV') {
+            store.selectedPersonaTranslation = 'Busy multitasker'
+        }
         break
     case 'Struggling':
-        store.selectedPersonaLT = 'Atkaklius siekėjas'
+        if (store.lang === 'LT') {
+            store.selectedPersonaTranslation = 'Atkaklius siekėjas'
+        }
+        if (store.lang === 'LV') {
+            store.selectedPersonaTranslation = 'Struggling'
+        }
         break
     default:
         break
@@ -448,12 +468,39 @@ const getCurrentYear = () => {
                     <img src="../assets/images/your-level-A.svg" class="level-image" alt="" />
                 </div>
             </div>
-            <div class="content--flex last-section-block" v-if="store.childLevel === 'B'">
+            <div
+                class="content--flex last-section-block"
+                v-if="store.lang === 'LV' && store.childLevel === 'A'"
+            >
+                <div class="content--left">
+                    <h2>
+                        <span>Mēs uzlabosim Tavas zināšanas</span> ar daudz interesantāku un
+                        nestandarta saturu.
+                    </h2>
+                    <p>
+                        Tavas atzīmes jau ir augstas. Tāpēc mūsu mērķis būs noturēt Tavu interesi un
+                        iesaistīt mācīties ar jauniem materiāliem.
+                    </p>
+                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
+                    /></a>
+                </div>
+                <div class="content--right">
+                    <img src="../assets/images/your-level-A-LV.svg" class="level-image" alt="" />
+                </div>
+            </div>
+            <div
+                class="content--flex last-section-block"
+                v-if="store.lang === 'LT' && store.childLevel === 'B'"
+            >
                 <div class="content--left">
                     <h2>
                         Pasieksi <span>0,5-2 balų geresnius pažymius,</span> vos per 3 mėnesius!
                     </h2>
-                    <p>Tavo rezultatą apskaičiavome remdamiesi 7348 panašių mokinių atsakymais</p>
+                    <p>
+                        Tavo rezultatą apskaičiavome remdamiesi <strong>7348</strong> panašių
+                        mokinių atsakymais
+                    </p>
                     <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
                         >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                     /></a>
@@ -462,12 +509,39 @@ const getCurrentYear = () => {
                     <img src="../assets/images/your-level-B.svg" class="level-image" alt="" />
                 </div>
             </div>
-            <div class="content--flex last-section-block" v-if="store.childLevel === 'C'">
+            <div
+                class="content--flex last-section-block"
+                v-if="store.lang === 'LV' && store.childLevel === 'B'"
+            >
+                <div class="content--left">
+                    <h2>
+                        Tu sasniegsi par <span>0.5-2 atzīmēm augstākus vērtējumus,</span> tikai 3
+                        mēnešu laikā!
+                    </h2>
+                    <p>
+                        Mēs izrēķinājām Tavu rezultātu balstoties uz atbildēm no
+                        <strong>7348</strong> līdzīgiem skolēniem.
+                    </p>
+                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
+                    /></a>
+                </div>
+                <div class="content--right">
+                    <img src="../assets/images/your-level-B-LV.svg" class="level-image" alt="" />
+                </div>
+            </div>
+            <div
+                class="content--flex last-section-block"
+                v-if="store.lang === 'LT' && store.childLevel === 'C'"
+            >
                 <div class="content--left">
                     <h2>
                         Pasieksi <span>iki 2 balų geresnius pažymius,</span> vos per 2 mėnesius!
                     </h2>
-                    <p>Tavo rezultatą apskaičiavome remdamiesi 5124 panašių mokinių atsakymais</p>
+                    <p>
+                        Tavo rezultatą apskaičiavome remdamiesi <strong>5124</strong> panašių
+                        mokinių atsakymais
+                    </p>
                     <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
                         >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                     /></a>
@@ -476,22 +550,53 @@ const getCurrentYear = () => {
                     <img src="../assets/images/your-level-C.svg" class="level-image" alt="" />
                 </div>
             </div>
+            <div
+                class="content--flex last-section-block"
+                v-if="store.lang === 'LV' && store.childLevel === 'C'"
+            >
+                <div class="content--left">
+                    <h2>
+                        Tu sasniegsi <span>par 2 atzīmēm augstākus vērtējumus,</span> tikai 2 mēnešu
+                        laikā!
+                    </h2>
+                    <p>
+                        Mēs izrēķinājām Tavu rezultātu balstoties uz atbildēm no
+                        <strong>5124</strong> līdzīgiem skolēniem.
+                    </p>
+                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
+                    /></a>
+                </div>
+                <div class="content--right">
+                    <img src="../assets/images/your-level-C-LV.svg" class="level-image" alt="" />
+                </div>
+            </div>
         </div>
         <img src="../assets/images/bottomVector.svg" class="bottom-vector" alt="Vector" />
     </div>
     <div class="wrapper light">
         <div class="flex-container cards-wrapper">
             <div class="card card--left">
-                <h3>Tau reikės:</h3>
+                <h3 v-if="store.lang === 'LT'">Tau reikės:</h3>
+                <h3 v-if="store.lang === 'LV'">Tev vajadzēs</h3>
 
-                <p>Bent <span>2 val./sav.</span>papildomų grupinių pamokų</p>
+                <p v-if="store.lang === 'LT'">
+                    Bent <span>2 val./sav.</span>papildomų grupinių pamokų
+                </p>
+                <p v-if="store.lang === 'LV'">Vismaz <span>2h/ nedēļā</span>grupu nodarbībām</p>
                 <img src="../assets/images/heart.svg" alt="Heart" />
             </div>
             <div class="card card--middle">
-                <p>Bent <span>1 val./sav.</span>praeėjusių pamokų vaizdo įrašų peržiūrėjimo</p>
+                <p v-if="store.lang === 'LT'">
+                    Bent <span>1 val./sav.</span>praeėjusių pamokų vaizdo įrašų peržiūrėjimo
+                </p>
+                <p v-if="store.lang === 'LV'">
+                    Vismaz <span>1h/ nedēļā</span>skatīties nodarbību ierakstu video
+                </p>
             </div>
             <div class="card card--right">
-                <p>Iki <span>1 val./sav.</span>darbo su asistentais</p>
+                <p v-if="store.lang === 'LT'">Iki <span>1 val./sav.</span>darbo su asistentais</p>
+                <p v-if="store.lang === 'LV'">Līdz <span>1h/ nedēļā</span>strādāt ar asistentiem</p>
                 <img src="../assets/images/time.svg" alt="Time" />
             </div>
         </div>
@@ -545,8 +650,11 @@ const getCurrentYear = () => {
     </div>
     <div class="wrapper light">
         <div class="container">
-            <h2 class="section-title--small">
+            <h2 class="section-title--small" v-if="store.lang === 'LT'">
                 Remdamiesi apklausa nustatėme ir tavo asmenybės tipą:
+            </h2>
+            <h2 class="section-title--small" v-if="store.lang === 'LV'">
+                Balstoties uz aptauju, mēs arī noteicām Tavu personības tipu:
             </h2>
             <img
                 v-if="store.selectedPersona === 'Ambitious student'"
@@ -572,7 +680,7 @@ const getCurrentYear = () => {
                 alt="Personality"
                 class="personality-img"
             />
-            <h2 class="section-title blue">{{ store.selectedPersonaLT }}</h2>
+            <h2 class="section-title blue">{{ store.selectedPersonaTranslation }}</h2>
             <p
                 class="p-narrow"
                 v-if="store.lang === 'LT' && store.selectedPersona === 'Ambitious student'"
@@ -585,6 +693,16 @@ const getCurrentYear = () => {
             </p>
             <p
                 class="p-narrow"
+                v-if="store.lang === 'LV' && store.selectedPersona === 'Ambitious student'"
+            >
+                You are the Ambitious Student, passionate about science subjects and mathematics.
+                Your ambition drives you to seek academic success and personal growth, fueled by
+                discipline and determination. You aim for top exam scores and acceptance into your
+                dream school or university, using online resources and extracurricular activities to
+                pursue your goals.
+            </p>
+            <p
+                class="p-narrow"
                 v-if="store.lang === 'LT' && store.selectedPersona === 'Exam-oriented'"
             >
                 Būsimas šimtukininkas siekia gauti aukštus egzaminų įvertinimus ir įstoti į svajonių
@@ -593,6 +711,17 @@ const getCurrentYear = () => {
                 nekvalifikuotą mokytojų pagalbą. Aktyviai dalyvaudami internetiniuose užsiėmimuose
                 ir grupinėse diskusijose, jie siekia tobulėti, nepaisydami iššūkių. Meilę gamtos
                 mokslams, matematikai ir negrožinei literatūrai derina su ryžtu siekti savo tikslų.
+            </p>
+            <p
+                class="p-narrow"
+                v-if="store.lang === 'LV' && store.selectedPersona === 'Exam-oriented'"
+            >
+                The Exam Achiever is focused on scoring high marks in exams and getting accepted
+                into a dream school or university. Valuing academic success, discipline, and
+                self-improvement, they are often frustrated by limited access to quality resources
+                and teachers. Actively participating in online sessions and group discussions, they
+                seek to excel despite the challenges, blending a love for science, mathematics, and
+                non-fiction with a determination to achieve their goals.
             </p>
 
             <p
@@ -608,6 +737,14 @@ const getCurrentYear = () => {
             </p>
             <p
                 class="p-narrow"
+                v-if="store.lang === 'LV' && store.selectedPersona === 'Busy multitasker'"
+            >
+                Busy multitasker is a well-rounded high school student who's active in
+                extracurricular activities and values success in her hobbies, but struggles with
+                balancing academic demands and achieving high grades in a limited time frame.
+            </p>
+            <p
+                class="p-narrow"
                 v-if="store.lang === 'LT' && store.selectedPersona === 'Struggling'"
             >
                 Atkaklus siekėjas siekia akademinės sėkmės, bet dažnai jaučiasi pasimetęs, kai
@@ -616,12 +753,27 @@ const getCurrentYear = () => {
                 Subalansuojant meilę žaidimams ar leidžiant laiką su draugais siekiant tobulėti
                 kartu, jiems vis tiek reikės tikslinės pagalbos, kad pasiektų savo tikslų.
             </p>
+            <p
+                class="p-narrow"
+                v-if="store.lang === 'LV' && store.selectedPersona === 'Struggling'"
+            >
+                The Aspiring Achiever seeks academic success but often feels lost without clear
+                guidance. They are quick to join lessons if relevant but may lose interest without
+                continuous engagement. Balancing a love for gaming or spending time with friends
+                with a desire to improve, they need targeted support to thrive.
+            </p>
         </div>
     </div>
     <div class="wrapper light">
         <div class="container pb0">
-            <h2 class="section-title">Kaip tai veikia?</h2>
-            <p>Šis vaizdo įrašas trumpai ir aiškiai papasakos, kaip veikia Digiklasė</p>
+            <h2 class="section-title" v-if="store.lang === 'LT'">Kaip tai veikia?</h2>
+            <h2 class="section-title" v-if="store.lang === 'LV'">Kā strādā Memby?</h2>
+            <p v-if="store.lang === 'LT'">
+                Šis vaizdo įrašas trumpai ir aiškiai papasakos, kaip veikia Digiklasė
+            </p>
+            <p v-if="store.lang === 'LV'">
+                Šis video īsi un skaidri izskaidros, kā darbojas Memby.
+            </p>
             <div class="video-wrapper">
                 <div class="play-btn" @click="playVideoHandler">
                     <img
@@ -648,13 +800,21 @@ const getCurrentYear = () => {
                 <img src="../assets/images/pupil.svg" alt="" />
             </div>
             <div class="content--right list-content">
-                <h3>Papildomos grupinės<br />pamokos internetu:</h3>
-                <ul>
+                <h3 v-if="store.lang === 'LT'">Papildomos grupinės<br />pamokos internetu:</h3>
+                <h3 v-if="store.lang === 'LV'">Tiešsaistes grupu apmācību nodarbības:</h3>
+                <ul v-if="store.lang === 'LT'">
                     <li>Įtraukiantys mokytojai</li>
                     <li>Individualus mokymosi planas</li>
                     <li>Pamokų vaizdo įrašai</li>
                     <li>Prizai už mokymąsi</li>
                     <li>Draugiška kaina</li>
+                </ul>
+                <ul v-if="store.lang === 'LV'">
+                    <li>Iesaistoši pasniedzēji</li>
+                    <li>Individuāls mācīšanās plāns</li>
+                    <li>Nodarbību video ieraksti</li>
+                    <li>Apbalvojumi par mācīšanos</li>
+                    <li>Draudzīga cena</li>
                 </ul>
                 <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="selectedPlanURL" />
                 <div class="testimonial">
@@ -662,11 +822,18 @@ const getCurrentYear = () => {
                         <img src="../assets/images/testimonial-author.svg" alt="" />
                     </div>
                     <div class="text">
-                        <p>
+                        <p v-if="store.lang === 'LT'">
                             „Vos per mėnesį sugebėjau savo matematikos pažymį pasikelti net trimis
                             balais“
                         </p>
-                        <p><strong>11-okė Sibilė, Panevėžys</strong></p>
+                        <p v-if="store.lang === 'LV'">
+                            Man sanāca uzlabot savu matemātikas vidējo atzīmi par 3 ballēm tikai
+                            mēneša laikā
+                        </p>
+                        <p v-if="store.lang === 'LT'"><strong>11-okė Sibilė, Panevėžys</strong></p>
+                        <p v-if="store.lang === 'LV'">
+                            <strong>Sibilė, 11 grade, Panevėžys</strong>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -675,8 +842,17 @@ const getCurrentYear = () => {
     <div class="wrapper yellow overflow-hidden">
         <img class="blue-vector-left-top" src="../assets/images/blue-line-left.svg" alt="" />
         <div class="container container--narrow teachers">
-            <h2 class="section-title">Susipažink, tavo būsimi mokytojai:</h2>
-            <carousel v-bind="singleSlideSettings" class="teacher-carousel">
+            <h2 class="section-title" v-if="store.lang === 'LT'">
+                Susipažink, tavo būsimi mokytojai:
+            </h2>
+            <h2 class="section-title" v-if="store.lang === 'LV'">
+                Iepazīsties ar saviem nākotnes pasniedzējiem:
+            </h2>
+            <carousel
+                v-bind="singleSlideSettings"
+                class="teacher-carousel"
+                v-if="store.lang === 'LT'"
+            >
                 <slide :key="0">
                     <picture>
                         <source
@@ -742,6 +918,56 @@ const getCurrentYear = () => {
                         <img src="../assets/images/teachers/Algis.png" alt="Algis" />
                     </picture>
                 </slide>
+                <template #addons>
+                    <navigation />
+                    <pagination />
+                </template>
+            </carousel>
+            <carousel
+                v-bind="singleSlideSettings"
+                class="teacher-carousel"
+                v-if="store.lang === 'LV'"
+            >
+                <slide :key="0">
+                    <picture>
+                        <source
+                            media="(min-width: 768px)"
+                            srcset="../assets/images/teachersLV/Raivis.png"
+                        />
+                        <source
+                            media="(min-width: 100px)"
+                            srcset="../assets/images/teachersLV/Raivis-mobile.png"
+                        />
+                        <img src="../assets/images/teachersLV/Raivis.png" alt="Raivis" />
+                    </picture>
+                </slide>
+                <slide :key="1">
+                    <picture>
+                        <source
+                            media="(min-width: 768px)"
+                            srcset="../assets/images/teachersLV/Virginija.png"
+                        />
+                        <source
+                            media="(min-width: 100px)"
+                            srcset="../assets/images/teachersLV/Virginija-mobile.png"
+                        />
+                        <img src="../assets/images/teachersLV/Virginija.png" alt="Virginija" />
+                    </picture>
+                </slide>
+                <slide :key="2">
+                    <picture>
+                        <source
+                            media="(min-width: 768px)"
+                            srcset="../assets/images/teachersLV/Liga.png"
+                        />
+                        <source
+                            media="(min-width: 100px)"
+                            srcset="../assets/images/teachersLV/Liga-mobile.png"
+                        />
+                        <img src="../assets/images/teachersLV/Liga.png" alt="Liga" />
+                    </picture>
+                </slide>
+
                 <template #addons>
                     <navigation />
                     <pagination />
@@ -1000,10 +1226,12 @@ const getCurrentYear = () => {
     <footer ref="footerTarget" v-element-visibility="onFooterVisibility">
         <div class="container d-flex">
             <div>
-                <p v-if="store.lang === ' LT'">
+                <p v-if="store.lang === 'LT'">
                     © {{ getCurrentYear() }} Digiklasė. Visos teisės saugomos
                 </p>
-                <p v-if="store.lang === ' LV'">© {{ getCurrentYear() }} TO-DO</p>
+                <p v-if="store.lang === 'LV'">
+                    © {{ getCurrentYear() }} Memby. All rights reserved
+                </p>
             </div>
             <div class="footer-nav" v-if="store.lang === 'LT'">
                 <a
@@ -1017,14 +1245,11 @@ const getCurrentYear = () => {
                 >
             </div>
             <div class="footer-nav" v-if="store.lang === 'LV'">
-                <a
-                    href="https://digiklase.lt/privatumo-politika"
-                    target="_blank"
-                    class="footer-link"
-                    >Privatumo politika TO-DO</a
+                <a href="https://memby.lv/privatuma-politika" target="_blank" class="footer-link"
+                    >Privātuma politika</a
                 >
-                <a href="https://digiklase.lt/slapukai" target="_blank" class="footer-link"
-                    >Slapukų politika TO-DO</a
+                <a href="https://memby.lv/sikdatnu-politika" target="_blank" class="footer-link"
+                    >Sīkdatņu politika</a
                 >
             </div>
         </div>
