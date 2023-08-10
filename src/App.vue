@@ -163,13 +163,14 @@ const localization = reactive({
     parentBtnLabel: 'Esu tėvelis/globėjas'
 })
 
-if (store.lang === 'LV') {
-    localization.childBtnLabel = 'Esmu skolēns'
-    localization.parentBtnLabel = 'Esmu vecāks/ aizbildnis'
-}
 onMounted(() => {
     if (window.location.hostname === 'quiz.memby.lv') {
         store.lang = 'LV'
+    }
+
+    if (store.lang === 'LV') {
+        localization.childBtnLabel = 'Esmu skolēns'
+        localization.parentBtnLabel = 'Esmu vecāks/ aizbildnis'
     }
 
     if (url.searchParams.has('role')) {
