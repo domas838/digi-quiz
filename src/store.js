@@ -41,6 +41,11 @@ export const store = reactive({
     recomendationsArrEVERYONE: [],
     membyIDsArray: [],
     resultUrl: '',
+    klaviyoGoal: '',
+    klaviyoMotivation: '',
+    klaviyoIntensity: '',
+    klaviyoStudentLevel: '',
+    klaviyoNeededLessons: '',
     quiz: {
         LT: {
             child: [

@@ -74,7 +74,11 @@ const klaviyoRequestHandler = () => {
                             Respondent: store.respondent,
                             ParentEmail: store.parentEmail,
                             ChildEmail: store.childEmail,
-                            Motivation: store.childLevel
+                            Goal: store.klaviyoGoal,
+                            Motivation: store.klaviyoMotivation,
+                            Intensity: store.klaviyoIntensity,
+                            StudentLevel: store.klaviyoStudentLevel,
+                            NeededLessons: store.klaviyoNeededLessons
                         }
                     }
                 }
@@ -85,6 +89,7 @@ const klaviyoRequestHandler = () => {
     axios
         .request(options)
         .then(function (response) {
+            console.log(response)
             console.log(response.data)
         })
         .catch(function (error) {

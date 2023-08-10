@@ -13,12 +13,15 @@ import ProgramsLoader from './components/ProgramsLoader.vue'
 const url = new URL(window.location.href)
 const token = 'a29826cb-670e-4b25-9669-35f67b2e3e3b'
 
-const instanceLT = axios.create({
-    baseURL: 'https://coda.io/apis/v1/docs/otYeYWMX9e/tables/grid-8XN2uCh13U/',
-    headers: { Authorization: 'Bearer ' + token }
+const table = reactive({
+    ID: 'grid-8XN2uCh13U' // LT
 })
-const instanceLV = axios.create({
-    baseURL: 'https://coda.io/apis/v1/docs/otYeYWMX9e/tables/grid-I_8YD1oJ_N/',
+
+if (store.lang === 'LV') {
+    table.ID = 'grid-I_8YD1oJ_N' // LV
+}
+const instance = axios.create({
+    baseURL: `https://coda.io/apis/v1/docs/otYeYWMX9e/tables/${table.ID}/`,
     headers: { Authorization: 'Bearer ' + token }
 })
 
@@ -224,34 +227,18 @@ onMounted(() => {
             store.recomendationsArrTIER3 = JSON.parse(url.searchParams.get('TIER3'))
         }
 
-        if (store.lang === 'LT') {
-            instanceLT
-                .get('/rows?useColumnNames=true')
-                .then((response) => {
-                    response.data.items.forEach((item) => {
-                        generateProgramRecomendations(item)
-                    })
+        instance
+            .get('/rows?useColumnNames=true')
+            .then((response) => {
+                response.data.items.forEach((item) => {
+                    generateProgramRecomendations(item)
+                })
 
-                    return response.data.items
-                })
-                .then(() => {
-                    selectMostRecommendedPrograms()
-                })
-        }
-        if (store.lang === 'LV') {
-            instanceLV
-                .get('/rows?useColumnNames=true')
-                .then((response) => {
-                    response.data.items.forEach((item) => {
-                        generateProgramRecomendations(item)
-                    })
-
-                    return response.data.items
-                })
-                .then(() => {
-                    selectMostRecommendedPrograms()
-                })
-        }
+                return response.data.items
+            })
+            .then(() => {
+                selectMostRecommendedPrograms()
+            })
     }
 })
 
@@ -446,17 +433,12 @@ const completeness = (step) => {
         <FirstBenefit />
         <SecondBenefit />
         <ProgramsLoader
-            v-if="store.lang === 'LT' && store.step === 8"
-            :instance="instanceLT"
+            v-if="store.step === 8"
+            :instance="instance"
             :generateProgramRecomendations="generateProgramRecomendations"
             :selectMostRecommendedPrograms="selectMostRecommendedPrograms"
         />
-        <ProgramsLoader
-            v-if="store.lang === 'LV' && store.step === 8"
-            :instance="instanceLV"
-            :generateProgramRecomendations="generateProgramRecomendations"
-            :selectMostRecommendedPrograms="selectMostRecommendedPrograms"
-        />
+
         <EmailForm v-if="store.step === 9" />
     </div>
     <img

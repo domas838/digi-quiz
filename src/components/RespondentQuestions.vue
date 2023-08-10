@@ -18,14 +18,20 @@ const selectAnswer = (answerIndex) => {
                 case 1:
                     store.PROFILE1 = ['Ambitious student', 'Exam-oriented']
                     store.childLevel = 'A'
+                    store.klaviyoStudentLevel =
+                        'aukštesnis (dirbsime su įdomesniu ir nestandartiniu turiniu)'
                     break
                 case 2:
                     store.PROFILE1 = ['Exam-oriented', 'Busy multitasker']
                     store.childLevel = 'B'
+                    store.klaviyoStudentLevel =
+                        'vidutinis (planuojama pasiekti iki 2 balų geresnį pažymį per 3 mėnesius)'
                     break
                 case 3:
                     store.PROFILE1 = ['Struggling', 'Busy multitasker']
                     store.childLevel = 'C'
+                    store.klaviyoStudentLevel =
+                        'žemesnis (planuojama pasiekti 2 balais geresnius pažymius, vos per 2 mėnesius)'
                     break
 
                 default:
@@ -37,15 +43,23 @@ const selectAnswer = (answerIndex) => {
             switch (answerIndex) {
                 case 1:
                     store.PROFILE2 = ['Ambitious student']
+                    store.klaviyoGoal = 'pasiruošti egzaminams'
                     break
                 case 2:
                     store.PROFILE2 = ['Exam-oriented']
+                    store.klaviyoGoal = 'pagerinti pažymius ir ištaisyti spragas'
+
                     break
                 case 3:
                     store.PROFILE2 = ['Struggling']
+                    store.klaviyoGoal = 'tobulėti dominančiuose dalykuose'
+
                     break
                 case 4:
                     store.PROFILE2 = ['Busy multitasker']
+                    store.klaviyoGoal =
+                        'subalansuoti papildomą mokymąsi su hobiais ir kitais užsiėmimais'
+
                     break
 
                 default:
@@ -62,15 +76,26 @@ const selectAnswer = (answerIndex) => {
             switch (answerIndex) {
                 case 1:
                     store.PROFILE3 = ['Ambitious student']
+                    store.klaviyoMotivation = 'ideali (nuolat ieškoma kažko naujo)'
+
                     break
                 case 2:
                     store.PROFILE3 = ['Exam-oriented']
+                    if (store.lang === 'LT') {
+                        store.klaviyoMotivation =
+                            'gera (daugiau dėmesio skiriama testams, egzaminų rezultatams)'
+                    }
                     break
                 case 3:
                     store.PROFILE3 = ['Struggling']
+                    store.klaviyoMotivation =
+                        'vidutiniška (norima pasigerinti pažymius, bet ne visada randama noro)'
+
                     break
                 case 4:
                     store.PROFILE3 = ['Busy multitasker']
+                    store.klaviyoMotivation =
+                        'žemesnė, nei vidutinė (priklauso nuo to, kiek laisvo turima)'
                     break
                 case 5:
                     store.PROFILE3 = ['Socializer']
@@ -107,16 +132,22 @@ const selectAnswer = (answerIndex) => {
                     if (store.TIER !== 'TIER0') {
                         store.TIER = 'TIER1'
                     }
+                    store.klaviyoIntensity = 'maždaug 1 valandą per savaitę'
+
                     break
                 case 2:
                     if (store.TIER !== 'TIER0') {
                         store.TIER = 'TIER2'
                     }
+                    store.klaviyoIntensity = 'apie 2 valandas per savaitę'
+
                     break
                 case 3:
                     if (store.TIER !== 'TIER0') {
                         store.TIER = 'TIER3'
                     }
+                    store.klaviyoIntensity = 'daugiau nei 3 valandas per savaitę'
+
                     break
 
                 default:
@@ -147,6 +178,7 @@ const selectMultipleAnswers = (event) => {
 }
 
 const proceedWithMultipleSelection = () => {
+    store.selectedSubjects = []
     const selectedInputs = document.querySelectorAll("input[name='subjects']:checked")
     if (selectedInputs.length) {
         store.step += 1
@@ -156,7 +188,7 @@ const proceedWithMultipleSelection = () => {
         })
     }
 
-    console.log(store.selectedSubjects)
+    store.klaviyoNeededLessons = store.selectedSubjects.toString().toLowerCase()
 }
 
 const localization = reactive({
