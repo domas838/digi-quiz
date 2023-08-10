@@ -249,7 +249,7 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
     margin-left: 127px;
     height: calc(100vh - 224px);
     width: 50%;
-    max-width: 600px;
+    max-width: 700px;
 }
 .container--intro .brand-logo {
     margin-bottom: 0;

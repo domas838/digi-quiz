@@ -1,6 +1,6 @@
 <script setup>
 import { store } from './store.js'
-import { onMounted } from 'vue'
+import { onMounted, reactive } from 'vue'
 import axios from 'axios'
 
 import RespondentQuestions from './components/RespondentQuestions.vue'
@@ -72,7 +72,11 @@ const generateProgramRecomendations = (item) => {
         default:
             break
     }
-    if (item.values.Persona === 'Everyone' && item.values.Grade == Number(store.selectedClass)) {
+    if (
+        item.values.Persona === 'Everyone' &&
+        item.values.Grade == Number(store.selectedClass) &&
+        store.selectedSubjects.includes(item.values.Subject)
+    ) {
         store.recomendationsArrEVERYONE.push(item)
         store.membyIDsArray.push(item.values.MembyID)
     }
@@ -147,8 +151,16 @@ const selectMostRecommendedPrograms = () => {
         store.EVERYONEisRecomended = false
     }
 }
+const localization = reactive({
+    childBtnLabel: 'Esu mokinys',
+    parentBtnLabel: 'Esu tėvelis/globėjas'
+})
 onMounted(() => {
-    console.log(window.location.hostname)
+    if (window.location.hostname === 'quiz.memby.lv') {
+        store.lang = 'LV'
+        localization.childBtnLabel = 'Esmu skolēns'
+        localization.parentBtnLabel = 'Esmu vecāks/ aizbildnis'
+    }
 
     if (url.searchParams.has('role')) {
         if (url.searchParams.get('role') === 'parent') {
@@ -162,21 +174,21 @@ onMounted(() => {
         }
     }
 
-    if (url.searchParams.has('Class') || url.searchParams.has('subject')) {
+    if (url.searchParams.has('class') || url.searchParams.has('subject')) {
         // praleidžiame INTRO, Q1 langą, Q4, BENEFIT, CTA langus.
         store.step = 2
         store.showCTA = false
     }
-    if (url.searchParams.has('Class')) {
+    if (url.searchParams.has('class')) {
         store.respondent = 'child'
     }
 
     // Redirect straight to results
     if (
-        (url.searchParams.has('Persona') &&
-            url.searchParams.has('Class') &&
-            url.searchParams.has('Level') &&
-            url.searchParams.has('Subjects') &&
+        (url.searchParams.has('persona') &&
+            url.searchParams.has('class') &&
+            url.searchParams.has('level') &&
+            url.searchParams.has('subjects') &&
             url.searchParams.has('TIER0')) ||
         url.searchParams.has('TIER1') ||
         url.searchParams.has('TIER2') ||
@@ -187,10 +199,11 @@ onMounted(() => {
         store.showRecomendations = true
 
         // Set Data Values
-        store.selectedPersona = url.searchParams.get('Persona')
-        store.selectedClass = url.searchParams.get('Class')
-        store.childLevel = url.searchParams.get('Level')
-        store.selectedSubjects = JSON.parse(url.searchParams.get('Subjects'))
+        store.selectedPersona = url.searchParams.get('persona')
+        store.selectedClass = url.searchParams.get('class')
+        store.childLevel = url.searchParams.get('level')
+        store.selectedSubjects = JSON.parse(url.searchParams.get('subjects'))
+        console.log(store.selectedSubjects)
         if (url.searchParams.has('TIER0')) {
             store.recomendationsArrTIER0 = JSON.parse(url.searchParams.get('TIER0'))
         }
@@ -240,7 +253,7 @@ const prevStep = () => {
 }
 const nextStep = () => {
     if (store.step === 3 && store.showFirstBenefit === false) {
-        if (!url.searchParams.has('Class')) {
+        if (!url.searchParams.has('class')) {
             store.step = 3
             store.showFirstBenefit = true
         } else {
@@ -248,7 +261,7 @@ const nextStep = () => {
             store.showFirstBenefit = false
         }
     } else if (store.step === 5 && store.showSecondBenefit === false) {
-        if (!url.searchParams.has('Class')) {
+        if (!url.searchParams.has('class')) {
             store.step = 5
             store.showSecondBenefit = true
         } else {
@@ -258,7 +271,7 @@ const nextStep = () => {
     } else {
         store.step += 1
     }
-    if (url.searchParams.has('Class') || url.searchParams.has('subject')) {
+    if (url.searchParams.has('class') || url.searchParams.has('subject')) {
         store.showFirstBenefit = false
         if (store.step === 4) {
             store.step = 5
@@ -283,7 +296,7 @@ const completeness = (step) => {
             <img src="./assets/images/digiklase.svg" alt="digiklase logo" />
         </div>
         <img src="./assets/images/skateboard.svg" alt="" class="intro-visual" />
-        <h1 class="intro-heading">
+        <h1 class="intro-heading" v-if="store.lang === 'LT'">
             Užpildykite trumpą klausimyną ir <br />
             gaukite specialiai JUMS pritaikytą
             <span
@@ -291,14 +304,25 @@ const completeness = (step) => {
                 pasiūlymą</span
             >
         </h1>
+        <h1 class="intro-heading" v-if="store.lang === 'LV'">
+            Šī ir visefektīvākā mācību programma, <br />
+            lai uzlabotu savas atzīmes
+            <span
+                >par 2 atzīmēm <br />
+                augstāk, 2 mēnešu laikā</span
+            >
+        </h1>
         <div class="intro-selection">
-            <h2>Pasirinkite, kas esate</h2>
+            <h2 v-if="store.lang === 'LT'">Pasirinkite, kas esate</h2>
+            <h2 v-if="store.lang === 'LV'">Izveido mācību plānu</h2>
             <div class="intro-selection__buttons">
                 <button class="button--child" @click="respondentChildHandler()">
-                    <img src="./assets/images/emoji/INTRO_backback.svg" alt="" /> Esu mokinys
+                    <img src="./assets/images/emoji/INTRO_backback.svg" alt="" />
+                    {{ localization.childBtnLabel }}
                 </button>
                 <button class="button--parent" @click="respondentParentHandler()">
-                    <img src="./assets/images/emoji/INTRO_parent.svg" alt="" /> Esu tėvelis/globėjas
+                    <img src="./assets/images/emoji/INTRO_parent.svg" alt="" />
+                    {{ localization.parentBtnLabel }}
                 </button>
             </div>
         </div>

@@ -1,16 +1,20 @@
 <script setup>
 import { reactive } from 'vue'
 import { Collapse } from 'vue-collapsed'
+import { store } from '../store'
 
 const props = defineProps(['content'])
 
-const isFaqHidden = reactive({
-    isFaqHidden: true
+const faqState = reactive({
+    isFaqHidden: true,
+    btnLabel: 'Žiūrėti visus'
 })
-
+if (store.lang === 'LV') {
+    faqState.btnLabel = 'Apskatīt visus'
+}
 const showAllFaqs = (event) => {
     event.target.style.display = 'none'
-    isFaqHidden.isFaqHidden = false
+    faqState.isFaqHidden = false
 }
 
 const handleAccordion = (selectedIndex, items) => {
@@ -25,7 +29,7 @@ const handleAccordion = (selectedIndex, items) => {
         v-for="(question, index) in props.content"
         :key="question.title"
         class="faq-accordion"
-        :class="{ hidden: index >= 3 && isFaqHidden.isFaqHidden }"
+        :class="{ hidden: index >= 3 && faqState.isFaqHidden }"
     >
         <button @click="() => handleAccordion(index, props.content)" class="faq-header">
             <div>
@@ -39,7 +43,7 @@ const handleAccordion = (selectedIndex, items) => {
             <div class="faq-body" v-html="question.answer"></div>
         </Collapse>
     </div>
-    <button class="btn--secondary" @click="showAllFaqs">Žiūrėti visus</button>
+    <button class="btn--secondary" @click="showAllFaqs">{{ faqState.btnLabel }}</button>
 </template>
 
 <style scoped>

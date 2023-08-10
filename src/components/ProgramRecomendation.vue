@@ -1,7 +1,5 @@
 <script setup>
 import { reactive } from 'vue'
-// import { Collapse } from 'vue-collapsed'
-
 import { store } from '../store'
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
@@ -24,11 +22,14 @@ const selectedPlanURL = () => {
     } else {
         planID = 4
     }
-    if (store.selectedSubjects.length >= 3) {
-        url = `https://app.digiklase.lt/plans/choose?class=${store.selectedClass}&plan=${planID}`
+    if (store.selectedSubjects.length === 1) {
+        subjectsString = store.selectedSubjects[0]
+        url = `https://app.digiklase.lt/plans/choose?class=${store.selectedClass}&planId=${planID}&subject[]=${subjectsString}`
+    } else if (store.selectedSubjects.length === 2) {
+        subjectsString = store.selectedSubjects.join('&subject[]=')
+        url = `https://app.digiklase.lt/plans/choose?class=${store.selectedClass}&planId=${planID}&subject[]=${subjectsString}`
     } else {
-        subjectsString = store.selectedSubjects.join(',')
-        url = `https://app.digiklase.lt/plans/choose?class=${store.selectedClass}&plan=${planID}&subjects=${subjectsString}`
+        url = `https://app.digiklase.lt/plans/choose?class=${store.selectedClass}&planId=${planID}`
     }
 
     return url
@@ -134,10 +135,28 @@ const storiesArray = [
         foot: 'Paulius, 11 klasė, Panevėžio Juozo Miltinio gimnazija'
     }
 ]
-
-// const isFaqHidden = reactive({
-//     isFaqHidden: true
-// })
+const storiesArrayLV = [
+    {
+        head: 'Anija:',
+        body: 'Liela daļa zina, ka attālinātās mācības nav vieglas un tur ir vajadzīga liela motivācija. Pirms pāris gadiem pie mums ieradās kovids. Es biju spiesta iet mācīties attālināti, un pēdējā gadā (12klase) lielas grūtības sagādāja matemātika, bet par laimi es ieraudzīju reklāmu par matemātikas apgūšanu platformā Memby. Manuprāt, bez šo pasniedzēju palīdzības es nebūtu nokārtojusi valsts eksāmenus. Viņi iemācīja man visnesaprotamākos piemērus un formulas. Saku viņiem lielu paldies un iesaku ik vienam, kuram ir grūtības ar matemātikas piemēriem pamēģināt! Mēneša laikā jau vari apgūt diezgan daudz!',
+        foot: '- Anija Apermane'
+    },
+    {
+        head: 'Elīna:',
+        body: 'Pasniedzēji ir jauki, atsaucīgi un izpalīdzīgi. Vienmēr pārliecinājās vai visi saprot tēmu.b Brīžos kad kāds no mācekļiem nesaprot, nebija grūtības izskaidrot tēmu daudz reizes līdz ir iebraucis. Man, kā 12. klases absolventam, ļoti viegli mācīšanos padarija sastādītais grafiks, kas bija 3x nedēļa un ierakstītās stundas, kuras pēc tam pastāvīgi varēju skatīties',
+        foot: '- Elīna Gailuma'
+    },
+    {
+        head: 'Miks:',
+        body: 'Mana pieredze ar Memby ir bijusi ļoti patīkama. Tiešsaistes stundas bijušas aktīvas, saprotamas, interesantas. Pasniedzēji vienmēr paskaidroja katru uzdevumu, ja nu tas nebija skaidrs. Izcils serviss',
+        foot: '- Miks Kelle'
+    },
+    {
+        head: 'Anija:',
+        body: 'Manas zināšanas un pašpārliecība matemātikā uzlabojās ievērojami, kā arī es esmu pārliecināta, ka, bez skolotāja Rolanda palīdzības, man nebūtu izdevies tik veiksmīgi nokārtot matemātikas eksāmenu. Es ļoti novērtēju šīs nodarbības un patiešām priecājos, ka tās izvēlējos!',
+        foot: '- Anija Siksna, Zentas Mauriņas Grobiņas vidusskola, 12. klase'
+    }
+]
 const faqLT = reactive([
     {
         title: 'Kiek kainuoja „Digiklasės“ pamokos?',
@@ -282,6 +301,17 @@ const faqLV = reactive([
         isExpanded: false
     }
 ])
+
+const btnLabel = reactive({
+    buyNow: 'Įsigyti narystę',
+    showAll: 'Žiūrėti visus planus'
+})
+console.log(btnLabel.buyNow)
+console.log(store.lang)
+if (store.lang === 'LV') {
+    btnLabel.buyNow = 'Pirkt abonementu'
+    btnLabel.showAll = 'Apskatīt visus'
+}
 switch (store.selectedPersona) {
     case 'Ambitious student':
         store.selectedPersonaLT = 'Ambicingasis'
@@ -300,15 +330,6 @@ switch (store.selectedPersona) {
         break
 }
 
-// const handleAccordion = (selectedIndex, items) => {
-//     items.forEach((_, index) => {
-//         items[index].isExpanded = index === selectedIndex ? !items[index].isExpanded : false
-//     })
-// }
-// const showAllFaqs = (event) => {
-//     event.target.style.display = 'none'
-//     isFaqHidden.isFaqHidden = false
-// }
 const getCurrentYear = () => {
     const dateobj = new Date()
 
@@ -322,14 +343,17 @@ const getCurrentYear = () => {
             <img class="logo" src="../assets/images/digiklase.svg" alt="" />
             <div>
                 <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
-                    >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
+                    >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                 /></a>
             </div>
         </div>
     </header>
     <div class="wrapper yellow">
         <div class="container">
-            <h1>Rekomenduojame mokytis pagal šias programas:</h1>
+            <h1 v-if="store.lang === 'LT'">Rekomenduojame mokytis pagal šias programas:</h1>
+            <h1 v-if="store.lang === 'LV'">
+                Mēs iesakam mācīties atbilstoši sekojošām programmām:
+            </h1>
             <carousel v-bind="settings" class="carousel">
                 <slide v-for="(item, index) in store.recomendationsArrTIER0" :key="index">
                     <ProgramSlide
@@ -404,7 +428,10 @@ const getCurrentYear = () => {
                     <navigation />
                 </template>
             </carousel>
-            <div class="content--flex last-section-block" v-if="store.childLevel === 'A'">
+            <div
+                class="content--flex last-section-block"
+                v-if="store.lang === 'LT' && store.childLevel === 'A'"
+            >
                 <div class="content--left">
                     <h2>
                         <span>Pagerinsime tavo žinias</span> su įdomesniu ir nestandartiniu turiniu
@@ -414,7 +441,7 @@ const getCurrentYear = () => {
                         sudominti ir įtraukti į mokslą su nauja mokymosi medžiaga
                     </p>
                     <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
-                        >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
+                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                     /></a>
                 </div>
                 <div class="content--right">
@@ -428,7 +455,7 @@ const getCurrentYear = () => {
                     </h2>
                     <p>Tavo rezultatą apskaičiavome remdamiesi 7348 panašių mokinių atsakymais</p>
                     <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
-                        >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
+                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                     /></a>
                 </div>
                 <div class="content--right">
@@ -442,7 +469,7 @@ const getCurrentYear = () => {
                     </h2>
                     <p>Tavo rezultatą apskaičiavome remdamiesi 5124 panašių mokinių atsakymais</p>
                     <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
-                        >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
+                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                     /></a>
                 </div>
                 <div class="content--right">
@@ -477,30 +504,41 @@ const getCurrentYear = () => {
     >
         <div class="cta-card">
             <div class="header">
-                <p>Rekomenduojamas planas:</p>
+                <p v-if="store.lang === 'LT'">Rekomenduojamas planas:</p>
+                <p v-if="store.lang === 'LV'">Abonements, ko iesakām</p>
             </div>
             <div class="content">
-                <div class="title">
-                    <h3 v-if="store.lang === 'LT' && store.selectedSubjects.length === 1">
-                        „1 dalyko planas“
-                    </h3>
-                    <h3 v-if="store.lang === 'LT' && store.selectedSubjects.length === 2">
-                        „2 dalykų planas“
-                    </h3>
-                    <h3 v-if="store.lang === 'LT' && store.selectedSubjects.length >= 3">
+                <div class="title" v-if="store.lang === 'LT'">
+                    <h3 v-if="store.selectedSubjects.length === 1">„1 dalyko planas“</h3>
+                    <h3 v-if="store.selectedSubjects.length === 2">„2 dalykų planas“</h3>
+                    <h3 v-if="store.selectedSubjects.length >= 3">
                         „Visi mokykliniai dalykai ir visi būreliai“
                     </h3>
                 </div>
-                {{ console.log(store.selectedSubjects.length) }}
-                <div class="price">
+                <div class="title" v-if="store.lang === 'LV'">
+                    <h3 v-if="store.selectedSubjects.length === 1">„1 TO-DO“</h3>
+                    <h3 v-if="store.selectedSubjects.length === 2">„2 To-DO“</h3>
+                    <h3 v-if="store.selectedSubjects.length >= 3">„Visi mokykliniai TO-DO“</h3>
+                </div>
+                <div class="price" v-if="store.lang === 'LT'">
                     <p>Nuo &nbsp;</p>
-                    <p><span>49,00 </span>€/mėn.</p>
+                    <p v-if="store.selectedSubjects.length === 1"><span>24,45 </span>€/mėn.</p>
+                    <p v-if="store.selectedSubjects.length === 2"><span>48,90 </span>€/mėn.</p>
+                    <p v-if="store.selectedSubjects.length >= 3"><span>54,90 </span>€/mėn.</p>
+                </div>
+                <div class="price" v-if="store.lang === 'LV'">
+                    <p>No &nbsp;</p>
+                    <p v-if="store.selectedSubjects.length === 1"><span>24,45 </span>€/mēnesī</p>
+                    <p v-if="store.selectedSubjects.length === 2"><span>48,90 </span>€/mēnesī</p>
+                    <p v-if="store.selectedSubjects.length >= 3"><span>54,90 </span>€/mēnesī</p>
                 </div>
                 <div class="action">
                     <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
-                        >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
+                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                     /></a>
-                    <a :href="allPlansURL" target="_blank" class="cta-link">Žiūrėti visus planus</a>
+                    <a :href="allPlansURL" target="_blank" class="cta-link">{{
+                        btnLabel.showAll
+                    }}</a>
                 </div>
             </div>
         </div>
@@ -529,8 +567,8 @@ const getCurrentYear = () => {
                 class="personality-img"
             />
             <img
-                v-if="store.selectedPersona === 'Busy multitasker'"
-                src="../assets/images/personality-busy-multitasker.svg"
+                v-if="store.selectedPersona === 'Struggling'"
+                src="../assets/images/personality-struggling.svg"
                 alt="Personality"
                 class="personality-img"
             />
@@ -714,7 +752,7 @@ const getCurrentYear = () => {
     </div>
     <div class="wrapper light-grey">
         <div class="container container--narrow">
-            <div class="review">
+            <div class="review" v-if="store.lang === 'LT'">
                 <div class="image">
                     <img src="../assets/images/reviewer.svg" alt="" />
                 </div>
@@ -736,13 +774,38 @@ const getCurrentYear = () => {
                     </p>
                 </div>
             </div>
+            <div class="review" v-if="store.lang === 'LV'">
+                <div class="image">
+                    <img src="../assets/images/reviewerLV.svg" alt="" />
+                </div>
+                <div class="content">
+                    <p>
+                        „Es biju pārsteigta par to, cik pozitīva un produktīva pieredze man bija ar
+                        Memby tiešsaistes matemātikas nodarbībām. Skolotājs Rolands ne tikai bija
+                        ļoti prasmīgs un rūpīgs, bet arī radīja ērtu un atklātu vidi, kas ļāva man
+                        justies droši, lai uzdotu jautājumus un izprastu sarežģītākās matemātikas
+                        tēmas. Katram audzēknim tika pievērsta ļoti individuāla uzmanība un tika
+                        atbildēts uz katru pat vismuļķīgāko jautājumu. Manas zināšanas un
+                        pašpārliecība matemātikā uzlabojās ievērojami, kā arī es esmu pārliecināta,
+                        ka, bez skolotāja Rolanda palīdzības, man nebūtu izdevies tik veiksmīgi
+                        nokārtot matemātikas eksāmenu. Es ļoti novērtēju šīs nodarbības un patiešām
+                        priecājos, ka tās izvēlējos!“
+                    </p>
+                    <p>
+                        <strong
+                            >Anija Siksna, Zentas Mauriņas Grobiņas vidusskola, 12. klase</strong
+                        >
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="wrapper dark">
         <img src="../assets/images/oval-vector.svg" class="oval-vector" alt="" />
         <img src="../assets/images/vector-arrow.svg" class="vector-arrow" alt="" />
         <div class="container pb">
-            <h2 class="section-title">Į narystę telpa tiek daug!</h2>
+            <h2 class="section-title" v-if="store.lang === 'LT'">Į narystę telpa tiek daug!</h2>
+            <h2 class="section-title" v-if="store.lang === 'LV'">Abonements ir visērtākais!</h2>
         </div>
         <div class="flex-container container--narrow">
             <div class="membership-card">
@@ -750,7 +813,8 @@ const getCurrentYear = () => {
                     <img src="../assets/images/emoji/icon-play.svg" alt="" />
                 </div>
                 <div class="membership-content">
-                    <h3>Individualus mokymosi planas</h3>
+                    <h3 v-if="store.lang === 'LT'">Individualus mokymosi planas</h3>
+                    <h3 v-if="store.lang === 'LV'">Individuāls mācīšanās plāns</h3>
                 </div>
             </div>
             <div class="membership-card">
@@ -758,7 +822,8 @@ const getCurrentYear = () => {
                     <img src="../assets/images/emoji/icon-book.svg" alt="" />
                 </div>
                 <div class="membership-content">
-                    <h3>Namų darbų pagalba</h3>
+                    <h3 v-if="store.lang === 'LT'">Namų darbų pagalba</h3>
+                    <h3 v-if="store.lang === 'LV'">Palīdzība ar mājasdarbiem</h3>
                 </div>
             </div>
             <div class="membership-card">
@@ -766,7 +831,8 @@ const getCurrentYear = () => {
                     <img src="../assets/images/emoji/icon-video.svg" alt="" />
                 </div>
                 <div class="membership-content">
-                    <h3>Pamokų įrašai</h3>
+                    <h3 v-if="store.lang === 'LT'">Pamokų įrašai</h3>
+                    <h3 v-if="store.lang === 'LV'">Nodarbību video ieraksti</h3>
                 </div>
             </div>
             <div class="membership-card">
@@ -774,7 +840,8 @@ const getCurrentYear = () => {
                     <img src="../assets/images/emoji/icon-stats.svg" alt="" />
                 </div>
                 <div class="membership-content">
-                    <h3>Lankomumo peržiūra</h3>
+                    <h3 v-if="store.lang === 'LT'">Lankomumo peržiūra</h3>
+                    <h3 v-if="store.lang === 'LV'">Apmeklējuma apskats</h3>
                 </div>
             </div>
             <div class="membership-card">
@@ -782,7 +849,8 @@ const getCurrentYear = () => {
                     <img src="../assets/images/emoji/icon-prize.svg" alt="" />
                 </div>
                 <div class="membership-content">
-                    <h3>Taškai ir apdovanojimai</h3>
+                    <h3 v-if="store.lang === 'LT'">Taškai ir apdovanojimai</h3>
+                    <h3 v-if="store.lang === 'LV'">Punkti un balvas</h3>
                 </div>
             </div>
             <div class="membership-card">
@@ -790,12 +858,13 @@ const getCurrentYear = () => {
                     <img src="../assets/images/emoji/icon-hands.svg" alt="" />
                 </div>
                 <div class="membership-content">
-                    <h3>Motyvuojanti bendruomenė</h3>
+                    <h3 v-if="store.lang === 'LT'">Motyvuojanti bendruomenė</h3>
+                    <h3 v-if="store.lang === 'LV'">Motivējoša kopiena</h3>
                 </div>
             </div>
         </div>
         <div class="container container--narrow stories-carousel">
-            <carousel v-bind="storiesCarousel">
+            <carousel v-bind="storiesCarousel" v-if="store.lang === 'LT'">
                 <slide v-for="(item, index) in storiesArray" :key="item">
                     <div class="story-slide">
                         <div class="story-image">
@@ -819,16 +888,44 @@ const getCurrentYear = () => {
                     </navigation>
                 </template>
             </carousel>
+            <carousel v-bind="storiesCarousel" v-if="store.lang === 'LV'">
+                <slide v-for="(item, index) in storiesArrayLV" :key="item">
+                    <div class="story-slide">
+                        <div class="story-image">
+                            <img :src="'/storiesImagesLV/story-' + index + '.png'" alt="" />
+                        </div>
+                        <div class="story-body">
+                            <h4>{{ item.head }}</h4>
+                            <p>{{ item.body }}</p>
+                            <h5>{{ item.foot }}</h5>
+                        </div>
+                    </div>
+                </slide>
+                <template #addons>
+                    <navigation>
+                        <template #next>
+                            <img src="../assets/images/next-carousel.svg" alt="" />
+                        </template>
+                        <template #prev>
+                            <img src="../assets/images/prev-carousel.svg" alt="" />
+                        </template>
+                    </navigation>
+                </template>
+            </carousel>
         </div>
         <div class="container container--narrow">
-            <h2 class="section-title">
+            <h2 class="section-title" v-if="store.lang === 'LT'">
                 <span>Net 98% mokinių sako,</span> kad „Digiklasė“ – veiksmingas būdas efektyviai
                 pagerinti akademinius rezultatus.
+            </h2>
+            <h2 class="section-title" v-if="store.lang === 'LV'">
+                <span>98% skolēnu apgalvo,</span> ka Memby ir visefektīvākais veids kā uzlabot savas
+                mācību sekmes.
             </h2>
         </div>
     </div>
     <div class="wrapper dark inner">
-        <carousel v-bind="testimSettings" class="testimonials-carousel">
+        <carousel v-bind="testimSettings" class="testimonials-carousel" v-if="store.lang === 'LT'">
             <slide :key="1">
                 <img src="../assets/images/reviews/Review-1.svg" alt="" />
             </slide>
@@ -851,6 +948,27 @@ const getCurrentYear = () => {
                 <pagination />
             </template>
         </carousel>
+        <carousel v-bind="testimSettings" class="testimonials-carousel" v-if="store.lang === 'LV'">
+            <slide :key="1">
+                <img src="../assets/images/reviewsLV/Review-1.svg" alt="" />
+            </slide>
+            <slide :key="2">
+                <img src="../assets/images/reviewsLV/Review-2.svg" alt="" />
+            </slide>
+            <slide :key="3">
+                <img src="../assets/images/reviewsLV/Review-3.svg" alt="" />
+            </slide>
+            <slide :key="4">
+                <img src="../assets/images/reviewsLV/Review-4.svg" alt="" />
+            </slide>
+            <slide :key="5">
+                <img src="../assets/images/reviewsLV/Review-5.svg" alt="" />
+            </slide>
+
+            <template #addons>
+                <pagination />
+            </template>
+        </carousel>
     </div>
     <div class="wrapper dark inner">
         <div class="container container--narrow pb">
@@ -859,31 +977,19 @@ const getCurrentYear = () => {
     </div>
     <div class="wrapper light pt page-bottom">
         <div class="container container--narrow">
-            <h2 class="section-title">
+            <h2 class="section-title" v-if="store.lang === 'LT'">
                 Atsakymai į <span>Dažniausiai <br />Užduodamus Klausimus (D.U.K.)</span>
             </h2>
-            <AccordionFAQ :content="faqLT" />
-            <!-- <div
-                v-for="(question, index) in faqLT"
-                :key="question.title"
-                class="faq-accordion"
-                :class="{ hidden: index >= 3 && isFaqHidden.isFaqHidden }"
-            >
-                <button @click="() => handleAccordion(index, faqLT)" class="faq-header">
-                    <div>
-                        <p>{{ question.title }}</p>
-                    </div>
-                    <div>
-                        <img src="../assets/images/arrow-bottom.svg" alt="V" />
-                    </div>
-                </button>
-                <Collapse :when="faqLT[index].isExpanded" class="collapse">
-                    <div class="faq-body" v-html="question.answer"></div>
-                </Collapse>
-            </div> 
-            <button class="btn--secondary" @click="showAllFaqs">Žiūrėti visus</button> -->
-            <h2 class="section-title last-section">
+            <h2 class="section-title" v-if="store.lang === 'LV'">
+                Atbildes uz biežāk uzdotajiem jautājumiem
+            </h2>
+            <AccordionFAQ :content="faqLT" v-if="store.lang === 'LT'" />
+            <AccordionFAQ :content="faqLV" v-if="store.lang === 'LV'" />
+            <h2 class="section-title last-section" v-if="store.lang === 'LT'">
                 Prisijunk prie daugiau nei <span>15 000 bendraminčių</span> bendruomenės!
+            </h2>
+            <h2 class="section-title last-section" v-if="store.lang === 'LV'">
+                Pievienojies kopienai ar vairāk kā <span>15,000</span> līdzīgi domājošiem cilvēkiem!
             </h2>
             <div class="pb">
                 <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="selectedPlanURL" />
@@ -894,9 +1000,12 @@ const getCurrentYear = () => {
     <footer ref="footerTarget" v-element-visibility="onFooterVisibility">
         <div class="container d-flex">
             <div>
-                <p>© {{ getCurrentYear() }} Digiklasė. Visos teisės saugomos</p>
+                <p v-if="store.lang === ' LT'">
+                    © {{ getCurrentYear() }} Digiklasė. Visos teisės saugomos
+                </p>
+                <p v-if="store.lang === ' LV'">© {{ getCurrentYear() }} TO-DO</p>
             </div>
-            <div class="footer-nav">
+            <div class="footer-nav" v-if="store.lang === 'LT'">
                 <a
                     href="https://digiklase.lt/privatumo-politika"
                     target="_blank"
@@ -905,6 +1014,17 @@ const getCurrentYear = () => {
                 >
                 <a href="https://digiklase.lt/slapukai" target="_blank" class="footer-link"
                     >Slapukų politika</a
+                >
+            </div>
+            <div class="footer-nav" v-if="store.lang === 'LV'">
+                <a
+                    href="https://digiklase.lt/privatumo-politika"
+                    target="_blank"
+                    class="footer-link"
+                    >Privatumo politika TO-DO</a
+                >
+                <a href="https://digiklase.lt/slapukai" target="_blank" class="footer-link"
+                    >Slapukų politika TO-DO</a
                 >
             </div>
         </div>
