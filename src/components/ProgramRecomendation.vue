@@ -3,7 +3,7 @@ import { reactive } from 'vue'
 import { store } from '../store'
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
-import SectionCTA from './SecondBenefit.vue'
+import SectionCTA from './SectionCTA.vue'
 import ProgramSlide from './ProgramSlide.vue'
 import { ref } from 'vue'
 import { vElementVisibility } from '@vueuse/components'
@@ -306,8 +306,7 @@ const btnLabel = reactive({
     buyNow: 'Įsigyti narystę',
     showAll: 'Žiūrėti visus planus'
 })
-console.log(btnLabel.buyNow)
-console.log(store.lang)
+
 if (store.lang === 'LV') {
     btnLabel.buyNow = 'Pirkt abonementu'
     btnLabel.showAll = 'Apskatīt visus'
@@ -1230,7 +1229,7 @@ const getCurrentYear = () => {
                     © {{ getCurrentYear() }} Digiklasė. Visos teisės saugomos
                 </p>
                 <p v-if="store.lang === 'LV'">
-                    © {{ getCurrentYear() }} Memby. All rights reserved
+                    © {{ getCurrentYear() }} Memby. Visas tiesības aizsargātas.
                 </p>
             </div>
             <div class="footer-nav" v-if="store.lang === 'LT'">

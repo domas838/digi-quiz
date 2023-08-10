@@ -1,12 +1,23 @@
 <script setup>
+import { reactive } from 'vue'
+import { store } from '../store'
 const props = defineProps(['allPlansURL', 'selectedPlanURL'])
+
+const btnLabel = reactive({
+    buyNow: 'Įsigyti narystę',
+    showAll: 'Žiūrėti visus planus'
+})
+if (store.lang === 'LV') {
+    btnLabel.buyNow = 'Pirkt abonementu'
+    btnLabel.showAll = 'Apskatīt visus'
+}
 </script>
 <template>
     <div class="d-flex justify-center cta-buttons">
         <a :href="props.selectedPlanURL()" target="_blank" class="cta-btn"
-            >Įsigyti narystę<img src="../assets/images/arrow-right.svg" alt=""
+            >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
         /></a>
-        <a :href="props.allPlansURL" target="_blank" class="cta-link">Žiūrėti visus planus</a>
+        <a :href="props.allPlansURL" target="_blank" class="cta-link">{{ btnLabel.showAll }}</a>
     </div>
 </template>
 
