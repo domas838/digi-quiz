@@ -227,7 +227,12 @@ const programRecomendationHandler = () => {
         })
         .then(() => {
             if (url.searchParams.has('app') && url.searchParams.get('app') === 'true') {
-                window.location = 'http://app.digiklase.lt/v2/quiz-recommendations'
+                if (store.lang === 'LT') {
+                    window.location = 'http://app.digiklase.lt/v2/quiz-recommendations'
+                }
+                if (store.lang === 'LV') {
+                    window.location = 'TO-DO'
+                }
             } else {
                 store.isLoading = false
 

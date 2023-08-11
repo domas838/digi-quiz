@@ -126,16 +126,7 @@ if (store.lang === 'LV') {
             <h3>{{ props.programTitle }}</h3>
             <h4>
                 <span
-                    ><img
-                        v-if="props.teacherImage"
-                        class="teacher-image"
-                        :src="'/teacherPortraits/' + props.teacherImage"
-                    />
-                    <img
-                        v-if="!props.teacherImage"
-                        class="teacher-image"
-                        src="../assets/images/teacher-fallback.svg"
-                    />
+                    ><img class="teacher-image" :src="'/teacherPortraits/' + props.teacherImage" />
                 </span>
 
                 <span> {{ props.teacherName }}</span>

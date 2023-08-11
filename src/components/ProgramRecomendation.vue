@@ -15,21 +15,44 @@ const selectedPlanURL = () => {
     let subjectsString
     let url
     let planID
+    let baseDomain
     if (store.selectedSubjects.length === 1) {
-        planID = 1
+        if (store.lang === 'LT') {
+            planID = 1
+        }
+        if (store.lang === 'LV') {
+            planID = 3
+        }
     } else if (store.selectedSubjects.length === 2) {
-        planID = 5
+        if (store.lang === 'LT') {
+            planID = 5
+        }
+        if (store.lang === 'LV') {
+            planID = 4
+        }
     } else {
-        planID = 4
+        if (store.lang === 'LT') {
+            planID = 4
+        }
+        if (store.lang === 'LV') {
+            planID = 6
+        }
+    }
+
+    if (store.lang === 'LT') {
+        baseDomain = 'https://app.digiklase.lt'
+    }
+    if (store.lang === 'LV') {
+        baseDomain = 'https://app.memby.lv'
     }
     if (store.selectedSubjects.length === 1) {
         subjectsString = store.selectedSubjects[0]
-        url = `https://app.digiklase.lt/plans/choose?class=${store.selectedClass}&planId=${planID}&subject[]=${subjectsString}`
+        url = `${baseDomain}/plans/choose?class=${store.selectedClass}&planId=${planID}&subject[]=${subjectsString}`
     } else if (store.selectedSubjects.length === 2) {
         subjectsString = store.selectedSubjects.join('&subject[]=')
-        url = `https://app.digiklase.lt/plans/choose?class=${store.selectedClass}&planId=${planID}&subject[]=${subjectsString}`
+        url = `${baseDomain}/plans/choose?class=${store.selectedClass}&planId=${planID}&subject[]=${subjectsString}`
     } else {
-        url = `https://app.digiklase.lt/plans/choose?class=${store.selectedClass}&planId=${planID}`
+        url = `${baseDomain}/plans/choose?class=${store.selectedClass}&planId=${planID}`
     }
 
     return url
