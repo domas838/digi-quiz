@@ -34,6 +34,15 @@ const generateProgramRecomendations = (item) => {
                 item.values.Persona === store.selectedPersona &&
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
+                console.log(item.values.Tier)
+
+                console.log(
+                    (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER0) &&
+                        item.values.Grade == Number(store.selectedClass) &&
+                        item.values.Persona === store.selectedPersona &&
+                        store.selectedSubjects.includes(item.values.Subject)
+                )
+
                 store.recomendationsArrTIER0.push(item)
                 store.membyIDsArray.push(item.values.MembyID)
             }
@@ -46,6 +55,15 @@ const generateProgramRecomendations = (item) => {
                 item.values.Persona === store.selectedPersona &&
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
+                console.log(item.values.Tier)
+
+                console.log(
+                    (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER1) &&
+                        item.values.Grade === Number(store.selectedClass) &&
+                        item.values.Persona === store.selectedPersona &&
+                        store.selectedSubjects.includes(item.values.Subject)
+                )
+
                 store.recomendationsArrTIER1.push(item)
                 store.membyIDsArray.push(item.values.MembyID)
             }
@@ -58,6 +76,15 @@ const generateProgramRecomendations = (item) => {
                 item.values.Persona === store.selectedPersona &&
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
+                console.log(item.values.Tier)
+
+                console.log(
+                    (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER2) &&
+                        item.values.Grade === Number(store.selectedClass) &&
+                        item.values.Persona === store.selectedPersona &&
+                        store.selectedSubjects.includes(item.values.Subject)
+                )
+
                 store.recomendationsArrTIER2.push(item)
                 store.membyIDsArray.push(item.values.MembyID)
             }
@@ -67,9 +94,17 @@ const generateProgramRecomendations = (item) => {
             if (
                 (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER3) &&
                 item.values.Grade === Number(store.selectedClass) &&
-                item.values.Grade === Number(store.selectedClass) &&
+                item.values.Persona === store.selectedPersona &&
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
+                console.log(item.values.Tier)
+
+                console.log(
+                    (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER3) &&
+                        item.values.Grade === Number(store.selectedClass) &&
+                        item.values.Persona === store.selectedPersona &&
+                        store.selectedSubjects.includes(item.values.Subject)
+                )
                 store.recomendationsArrTIER3.push(item)
                 store.membyIDsArray.push(item.values.MembyID)
             }
@@ -214,6 +249,12 @@ onMounted(() => {
         store.selectedClass = url.searchParams.get('class')
         store.childLevel = url.searchParams.get('level')
         store.selectedSubjects = JSON.parse(url.searchParams.get('subjects'))
+
+        store.TIER0 = url.searchParams.get('TIER0TAG')
+        store.TIER1 = url.searchParams.get('TIER1TAG')
+        store.TIER2 = url.searchParams.get('TIER2TAG')
+        store.TIER3 = url.searchParams.get('TIER3TAG')
+
         console.log(store.selectedSubjects)
         if (url.searchParams.has('TIER0')) {
             store.recomendationsArrTIER0 = JSON.parse(url.searchParams.get('TIER0'))
@@ -228,18 +269,7 @@ onMounted(() => {
             store.recomendationsArrTIER3 = JSON.parse(url.searchParams.get('TIER3'))
         }
 
-        instance
-            .get('/rows?useColumnNames=true')
-            .then((response) => {
-                response.data.items.forEach((item) => {
-                    generateProgramRecomendations(item)
-                })
-
-                return response.data.items
-            })
-            .then(() => {
-                selectMostRecommendedPrograms()
-            })
+        selectMostRecommendedPrograms()
     }
 })
 

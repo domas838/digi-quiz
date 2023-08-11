@@ -28,9 +28,9 @@ const programRecomendationHandler = () => {
     } else if (result.length == 1) {
         store.selectedPersona = duplicated[0]
     } else if (result.length == 2) {
-        // if (result.includes('Busy multitasker') && result.includes('Struggling')) {
-        //     store.selectedPersona = 'Struggling'
-        // }
+        if (result.includes('Busy multitasker') && result.includes('Struggling')) {
+            store.selectedPersona = 'Struggling'
+        }
         if (result.includes('Exam-oriented') && result.includes('Ambitious student')) {
             store.selectedPersona = 'Ambitious student'
         }
@@ -54,82 +54,6 @@ const programRecomendationHandler = () => {
         }
     }
 
-    // BEFORE REFACTOR TO "ADVANCED"
-    // switch (store.selectedPersona) {
-    //     case 'Ambitious student':
-    //         if (store.TIER === 'TIER0') {
-    //             store.TIER0 = 'Textbook, flexible'
-    //         }
-    //         store.TIER1 = 'Advanced'
-    //         store.TIER2 = 'Exam prep'
-    //         store.TIER3 = 'School prep'
-    //         break
-    //     case 'Exam-oriented':
-    //         if (store.TIER === 'TIER0') {
-    //             store.TIER0 = 'Textbook, flexible'
-    //         }
-    //         store.TIER1 = 'Exam prep'
-    //         if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
-    //             store.TIER2 = 'Exam advanced prep'
-    //             store.TIER3 = 'Advanced school prep'
-    //         } else {
-    //             store.TIER2 = 'School prep'
-    //             store.TIER3 = 'Textbook, flexible'
-    //         }
-
-    //         break
-    //     case 'Busy multitasker':
-    //         if (store.TIER === 'TIER0') {
-    //             store.TIER0 = 'Textbook, flexible'
-    //         }
-    //         if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
-    //             store.TIER1 = 'Exam advanced prep'
-    //         } else {
-    //             store.TIER1 = 'Exam prep'
-    //         }
-    //         store.TIER2 = 'School prep'
-    //         store.TIER3 = 'Textbook, flexible'
-
-    //         break
-    //     case 'Struggling':
-    //         if (store.TIER === 'TIER0') {
-    //             store.TIER0 = 'Textbook, flexible'
-    //         }
-    //         store.TIER1 = 'Textbook, flexible'
-    //         store.TIER2 = 'School prep'
-    //         store.TIER3 = 'Exam prep'
-
-    //         break
-    //     case 'Socializer':
-    //         if (store.TIER === 'TIER0') {
-    //             store.TIER0 = 'Textbook, flexible'
-    //         }
-    //         store.TIER1 = 'Non-formal'
-    //         if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
-    //             store.TIER2 = 'Exam prep'
-    //         } else {
-    //             store.TIER2 = 'School prep'
-    //         }
-    //         if (store.PROFILE2 === 'Exam-oriented') {
-    //             if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
-    //                 store.TIER3 = 'Advanced exam prep'
-    //             } else {
-    //                 store.TIER3 = 'School prep'
-    //             }
-    //         } else {
-    //             if (store.PROFILE1 === ['Ambitious student', 'Exam-oriented']) {
-    //                 store.TIER3 = 'Advanced school prep'
-    //             } else {
-    //                 store.TIER3 = 'Textbook, flexible'
-    //             }
-    //         }
-    //         break
-
-    //     default:
-    //         break
-    // }
-
-    // AFTER REFACTOR TO "ADVANCED"
     switch (store.selectedPersona) {
         case 'Ambitious student':
             if (store.TIER === 'TIER0') {
@@ -236,7 +160,6 @@ const programRecomendationHandler = () => {
             } else {
                 store.isLoading = false
 
-                console.log(store.selectedSubjects)
                 // Set query params for returning visitors from the same URL
                 url.searchParams.set('persona', store.selectedPersona)
                 url.searchParams.set('class', store.selectedClass)
@@ -246,6 +169,10 @@ const programRecomendationHandler = () => {
                 url.searchParams.set('TIER1', JSON.stringify(store.recomendationsArrTIER1))
                 url.searchParams.set('TIER2', JSON.stringify(store.recomendationsArrTIER2))
                 url.searchParams.set('TIER3', JSON.stringify(store.recomendationsArrTIER3))
+                url.searchParams.set('TIER0TAG', store.TIER0)
+                url.searchParams.set('TIER1TAG', store.TIER1)
+                url.searchParams.set('TIER2TAG', store.TIER2)
+                url.searchParams.set('TIER3TAG', store.TIER3)
                 window.history.replaceState(null, null, url)
                 store.resultUrl = url
                 if (store.showCTA) {
