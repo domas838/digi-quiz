@@ -340,7 +340,7 @@ switch (store.selectedPersona) {
             store.selectedPersonaTranslation = 'Ambicingasis'
         }
         if (store.lang === 'LV') {
-            store.selectedPersonaTranslation = 'Ambitious student'
+            store.selectedPersonaTranslation = 'Ambiciozs skolēns'
         }
         break
     case 'Exam-oriented':
@@ -348,7 +348,7 @@ switch (store.selectedPersona) {
             store.selectedPersonaTranslation = 'Būsimas šimtukininkas'
         }
         if (store.lang === 'LV') {
-            store.selectedPersonaTranslation = 'Exam-oriented'
+            store.selectedPersonaTranslation = 'Eksāmenu iekarotājs'
         }
         break
 
@@ -357,7 +357,7 @@ switch (store.selectedPersona) {
             store.selectedPersonaTranslation = 'Amžinai užsiėmęs'
         }
         if (store.lang === 'LV') {
-            store.selectedPersonaTranslation = 'Busy multitasker'
+            store.selectedPersonaTranslation = 'Vienlaikus vairāku uzdevumu darītājs'
         }
         break
     case 'Struggling':
@@ -365,7 +365,7 @@ switch (store.selectedPersona) {
             store.selectedPersonaTranslation = 'Atkaklius siekėjas'
         }
         if (store.lang === 'LV') {
-            store.selectedPersonaTranslation = 'Struggling'
+            store.selectedPersonaTranslation = 'Centīgais mērķu sasniedzējs'
         }
         break
     default:
@@ -717,11 +717,12 @@ const getCurrentYear = () => {
                 class="p-narrow"
                 v-if="store.lang === 'LV' && store.selectedPersona === 'Ambitious student'"
             >
-                You are the Ambitious Student, passionate about science subjects and mathematics.
-                Your ambition drives you to seek academic success and personal growth, fueled by
-                discipline and determination. You aim for top exam scores and acceptance into your
-                dream school or university, using online resources and extracurricular activities to
-                pursue your goals.
+                Tu esi ambiciozs skolēns, kas aizraujas ar dabaszinātņu priekšmetiem un matemātiku.
+                Tavas ambīcijas mudina Tevi tiekties pēc augstiem mācību sasniegumiem un personīgās
+                izaugsmes, ko papildina disciplīna un apņēmība. Tavs mērķis ir iegūt maksimāli
+                augstākos eksāmenu rezultātus un tikt uzņemtam savā sapņu skolā vai universitātē,
+                izmantojot tiešsaistes mācīšanos un papildus skolai nodarbības, lai sasniegtu
+                mērķus.
             </p>
             <p
                 class="p-narrow"
@@ -738,12 +739,13 @@ const getCurrentYear = () => {
                 class="p-narrow"
                 v-if="store.lang === 'LV' && store.selectedPersona === 'Exam-oriented'"
             >
-                The Exam Achiever is focused on scoring high marks in exams and getting accepted
-                into a dream school or university. Valuing academic success, discipline, and
-                self-improvement, they are often frustrated by limited access to quality resources
-                and teachers. Actively participating in online sessions and group discussions, they
-                seek to excel despite the challenges, blending a love for science, mathematics, and
-                non-fiction with a determination to achieve their goals.
+                Eksāmenu iekarotājs ir fokusēts sasniegt augstus rezultātus eksāmenos, lai tiktu
+                pieņemts savā sapņu skolā vai universitātē. Augstu vērtē mācību panākumus,
+                disciplīnu un sevis pilnveidošanu. Bieži ir neapmierinātība, ja nav plaša pieeja
+                kvalitatīviem mācīšanās materiāliem un skolotājiem. Aktīvi piedalās tiešsaistes
+                nodarbībās un grupu diskusijās. Bieži cenšas izcelties, neskatoties uz
+                izaicinājumiem. Apvieno mīlestību pret zinātni, matemātiku, zinātnisko literatūru,
+                ar milzīgu apņemšanos sasniegt savus mērķus.
             </p>
 
             <p
@@ -761,9 +763,13 @@ const getCurrentYear = () => {
                 class="p-narrow"
                 v-if="store.lang === 'LV' && store.selectedPersona === 'Busy multitasker'"
             >
-                Busy multitasker is a well-rounded high school student who's active in
-                extracurricular activities and values success in her hobbies, but struggles with
-                balancing academic demands and achieving high grades in a limited time frame.
+                Tu esi vienlaikus vairāku uzdevumu darītājs, kas vienmēr dara vairākas aktivitātes
+                vienlaikus, kā ārpusskolas pulciņi un dažādi hobiji. Panākumi šajās aktivitātēs
+                piepilda Tevi, bet apvienot to visu ar mācībām var būt izaicinājums. Tā kā Tev ir
+                daudz šo nodarbošanos, efektīva mācīšanās un laika plānošana ir ļoti būtiska, lai no
+                viduvējām skolas atzīmēm varētu sasniegt augsta vērtējuma atzīmes. Tava
+                nenogurdināmā personība ir apbrīnojama, taču atceries, ka fokusējoties darīt lietas
+                kvalitatīvi, var būt vērtīgāk kā uz kvantitāti.
             </p>
             <p
                 class="p-narrow"
@@ -779,10 +785,12 @@ const getCurrentYear = () => {
                 class="p-narrow"
                 v-if="store.lang === 'LV' && store.selectedPersona === 'Struggling'"
             >
-                The Aspiring Achiever seeks academic success but often feels lost without clear
-                guidance. They are quick to join lessons if relevant but may lose interest without
-                continuous engagement. Balancing a love for gaming or spending time with friends
-                with a desire to improve, they need targeted support to thrive.
+                Centīgais mērķu sasniedzējs tiecas pēc labiem mācību sasniegumiem, taču bieži
+                pazaudē uzmanību, ja nav skaidri norādījumi. Ātri spēj pieslēgties mācību procesam,
+                taču var pazaudēt interesi, ja nav nepieciešama nepārtraukta iesaiste. Spēj apvienot
+                mīlestību pret datorspēlēm ar kvalitatīvu laika pavadīšanu ar draugiem. Ir konstanta
+                vēlme sevi pilnveidot, tikai ik pa laikam vajadzīgs mērķtiecīga cilvēka atbalsts,
+                lai lietas attīstītos uz priekšu.
             </p>
         </div>
     </div>
