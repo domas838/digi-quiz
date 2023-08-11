@@ -796,7 +796,7 @@ const getCurrentYear = () => {
             <p v-if="store.lang === 'LV'">
                 Šis video īsi un skaidri izskaidros, kā darbojas Memby.
             </p>
-            <div class="video-wrapper">
+            <div class="video-wrapper" v-if="store.lang === 'LT'">
                 <div class="play-btn" @click="playVideoHandler">
                     <img
                         src="../assets/images/play-btn.svg"
@@ -808,8 +808,20 @@ const getCurrentYear = () => {
                     <source src="../assets/video/demo.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
+
                 <div class="pause-btn" @click="pauseVideoHandler">
                     <img src="../assets/images/pause-btn.svg" alt="" />
+                </div>
+            </div>
+            <div class="video-wrapper" v-if="store.lang === 'LV'">
+                <div style="padding: 56.25% 0 0 0; position: relative">
+                    <iframe
+                        src="https://player.vimeo.com/video/853296489?h=2614aa7483&color=FF714B&title=0&byline=0&portrait=0"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"
+                        frameborder="0"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowfullscreen
+                    ></iframe>
                 </div>
             </div>
         </div>
