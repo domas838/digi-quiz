@@ -2,7 +2,7 @@ import { reactive } from 'vue'
 
 export const store = reactive({
     step: 0,
-    lang: 'LV',
+    lang: 'LT',
     showCTA: true,
     showRecomendations: false,
     isLoading: false,
