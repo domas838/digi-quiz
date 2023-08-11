@@ -89,7 +89,6 @@ const klaviyoRequestHandler = () => {
     axios
         .request(options)
         .then(function (response) {
-            console.log(response)
             console.log(response.data)
         })
         .catch(function (error) {

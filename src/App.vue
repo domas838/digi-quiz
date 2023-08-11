@@ -2,7 +2,6 @@
 import { store } from './store.js'
 import { onMounted, reactive } from 'vue'
 import axios from 'axios'
-
 import RespondentQuestions from './components/RespondentQuestions.vue'
 import FirstBenefit from './components/FirstBenefit.vue'
 import SecondBenefit from './components/SecondBenefit.vue'
@@ -34,15 +33,6 @@ const generateProgramRecomendations = (item) => {
                 item.values.Persona === store.selectedPersona &&
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
-                console.log(item.values.Tier)
-
-                console.log(
-                    (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER0) &&
-                        item.values.Grade == Number(store.selectedClass) &&
-                        item.values.Persona === store.selectedPersona &&
-                        store.selectedSubjects.includes(item.values.Subject)
-                )
-
                 store.recomendationsArrTIER0.push(item)
                 store.membyIDsArray.push(item.values.MembyID)
             }
@@ -55,15 +45,6 @@ const generateProgramRecomendations = (item) => {
                 item.values.Persona === store.selectedPersona &&
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
-                console.log(item.values.Tier)
-
-                console.log(
-                    (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER1) &&
-                        item.values.Grade === Number(store.selectedClass) &&
-                        item.values.Persona === store.selectedPersona &&
-                        store.selectedSubjects.includes(item.values.Subject)
-                )
-
                 store.recomendationsArrTIER1.push(item)
                 store.membyIDsArray.push(item.values.MembyID)
             }
@@ -76,15 +57,6 @@ const generateProgramRecomendations = (item) => {
                 item.values.Persona === store.selectedPersona &&
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
-                console.log(item.values.Tier)
-
-                console.log(
-                    (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER2) &&
-                        item.values.Grade === Number(store.selectedClass) &&
-                        item.values.Persona === store.selectedPersona &&
-                        store.selectedSubjects.includes(item.values.Subject)
-                )
-
                 store.recomendationsArrTIER2.push(item)
                 store.membyIDsArray.push(item.values.MembyID)
             }
@@ -97,14 +69,6 @@ const generateProgramRecomendations = (item) => {
                 item.values.Persona === store.selectedPersona &&
                 store.selectedSubjects.includes(item.values.Subject)
             ) {
-                console.log(item.values.Tier)
-
-                console.log(
-                    (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER3) &&
-                        item.values.Grade === Number(store.selectedClass) &&
-                        item.values.Persona === store.selectedPersona &&
-                        store.selectedSubjects.includes(item.values.Subject)
-                )
                 store.recomendationsArrTIER3.push(item)
                 store.membyIDsArray.push(item.values.MembyID)
             }
@@ -206,6 +170,9 @@ onMounted(() => {
     if (store.lang === 'LV') {
         localization.childBtnLabel = 'Esmu skolēns'
         localization.parentBtnLabel = 'Esmu vecāks/ aizbildnis'
+        window.document.title = 'Memby'
+        window.document.querySelector("meta[name='description']").content =
+            'Šī ir visefektīvākā mācību programma, lai uzlabotu savas atzīmes par 2 atzīmēm augstāk, 2 mēnešu laikā'
     }
 
     if (url.searchParams.has('role')) {
@@ -255,7 +222,6 @@ onMounted(() => {
         store.TIER2 = url.searchParams.get('TIER2TAG')
         store.TIER3 = url.searchParams.get('TIER3TAG')
 
-        console.log(store.selectedSubjects)
         if (url.searchParams.has('TIER0')) {
             store.recomendationsArrTIER0 = JSON.parse(url.searchParams.get('TIER0'))
         }
