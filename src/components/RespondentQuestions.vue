@@ -250,68 +250,68 @@ if (store.lang === 'LV') {
         >
             <h1>
                 {{ q.Q }}
-                <span class="emoji-wrapper">
-                    <img
-                        v-if="store.step === 2"
-                        src="../assets/images/emoji/Q2_text1.svg"
-                        class="emoji"
-                        alt=""
-                    />
-                    <img
-                        v-if="store.step === 2"
-                        src="../assets/images/emoji/Q2_text2.svg"
-                        class="emoji"
-                        alt=""
-                    />
-                </span>
-                <img
-                    v-if="store.step === 4"
-                    src="../assets/images/emoji/Q7_text1.svg"
-                    class="emoji"
-                    alt=""
-                />
-                <span class="emoji-wrapper">
-                    <img
-                        v-if="store.step === 5"
-                        src="../assets/images/emoji/Q5_text1.svg"
-                        class="emoji"
-                        alt=""
-                    />
-                    <img
-                        v-if="store.step === 5"
-                        src="../assets/images/emoji/Q5_text2.svg"
-                        class="emoji"
-                        alt=""
-                    />
-                </span>
-                <span class="emoji-wrapper">
-                    <img
-                        v-if="store.step === 6"
-                        src="../assets/images/emoji/Q6_text1.svg"
-                        class="emoji"
-                        alt=""
-                    />
-                    <img
-                        v-if="store.step === 6"
-                        src="../assets/images/emoji/Q6_text2.svg"
-                        class="emoji"
-                        alt=""
-                    />
-                </span>
-                <span class="emoji-wrapper">
-                    <img
-                        v-if="store.step === 7"
-                        src="../assets/images/emoji/Q7_text1.svg"
-                        class="emoji"
-                        alt=""
-                    />
-                    <img
-                        v-if="store.step === 7"
-                        src="../assets/images/emoji/Q7_text2.svg"
-                        class="emoji"
-                        alt=""
-                    />
-                </span>
+<!--                <span class="emoji-wrapper">-->
+<!--                    <img-->
+<!--                        v-if="store.step === 2"-->
+<!--                        src="../assets/images/emoji/Q2_text1.svg"-->
+<!--                        class="emoji"-->
+<!--                        alt=""-->
+<!--                    />-->
+<!--                    <img-->
+<!--                        v-if="store.step === 2"-->
+<!--                        src="../assets/images/emoji/Q2_text2.svg"-->
+<!--                        class="emoji"-->
+<!--                        alt=""-->
+<!--                    />-->
+<!--                </span>-->
+<!--                <img-->
+<!--                    v-if="store.step === 4"-->
+<!--                    src="../assets/images/emoji/Q7_text1.svg"-->
+<!--                    class="emoji"-->
+<!--                    alt=""-->
+<!--                />-->
+<!--                <span class="emoji-wrapper">-->
+<!--                    <img-->
+<!--                        v-if="store.step === 5"-->
+<!--                        src="../assets/images/emoji/Q5_text1.svg"-->
+<!--                        class="emoji"-->
+<!--                        alt=""-->
+<!--                    />-->
+<!--                    <img-->
+<!--                        v-if="store.step === 5"-->
+<!--                        src="../assets/images/emoji/Q5_text2.svg"-->
+<!--                        class="emoji"-->
+<!--                        alt=""-->
+<!--                    />-->
+<!--                </span>-->
+<!--                <span class="emoji-wrapper">-->
+<!--                    <img-->
+<!--                        v-if="store.step === 6"-->
+<!--                        src="../assets/images/emoji/Q6_text1.svg"-->
+<!--                        class="emoji"-->
+<!--                        alt=""-->
+<!--                    />-->
+<!--                    <img-->
+<!--                        v-if="store.step === 6"-->
+<!--                        src="../assets/images/emoji/Q6_text2.svg"-->
+<!--                        class="emoji"-->
+<!--                        alt=""-->
+<!--                    />-->
+<!--                </span>-->
+<!--                <span class="emoji-wrapper">-->
+<!--                    <img-->
+<!--                        v-if="store.step === 7"-->
+<!--                        src="../assets/images/emoji/Q7_text1.svg"-->
+<!--                        class="emoji"-->
+<!--                        alt=""-->
+<!--                    />-->
+<!--                    <img-->
+<!--                        v-if="store.step === 7"-->
+<!--                        src="../assets/images/emoji/Q7_text2.svg"-->
+<!--                        class="emoji"-->
+<!--                        alt=""-->
+<!--                    />-->
+<!--                </span>-->
             </h1>
 
             <div class="answer__container" v-if="!store.showFirstBenefit">

@@ -5,6 +5,9 @@ import axios from 'axios'
 const submitChildEmail = (event) => {
     event.preventDefault()
     store.isChildEmailEntered = true
+    store.step += 1
+    store.showRecomendations = true
+    klaviyoRequestHandler()
 }
 // Klaviyo API KEY
 // pk_5a1e956f717f7efdc37cbdf9ca124b1986

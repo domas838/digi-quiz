@@ -8,6 +8,7 @@ import SecondBenefit from './components/SecondBenefit.vue'
 import EmailForm from './components/EmailForm.vue'
 import ProgramRecomendation from './components/ProgramRecomendation.vue'
 import ProgramsLoader from './components/ProgramsLoader.vue'
+import i18n from "./i18n";
 
 const url = new URL(window.location.href)
 const token = 'a29826cb-670e-4b25-9669-35f67b2e3e3b'
@@ -164,7 +165,8 @@ const localization = reactive({
 
 onMounted(() => {
     if (window.location.hostname === 'quiz.memby.lv') {
-        store.lang = 'LV'
+      i18n.global.locale = 'lv';
+      store.lang = 'LV'
     }
 
     if (store.lang === 'LV') {

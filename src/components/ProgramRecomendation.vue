@@ -8,8 +8,11 @@ import ProgramSlide from './ProgramSlide.vue'
 import { ref } from 'vue'
 import { vElementVisibility } from '@vueuse/components'
 import AccordionFAQ from './AccordionFAQ.vue'
+import SuggestedPlan from "./SuggestedPlan.vue";
 
 const allPlansURL = 'https://app.digiklase.lt/plans/choose'
+
+const url = new URL(window.location.href)
 
 const selectedPlanURL = () => {
     let subjectsString
@@ -58,6 +61,11 @@ const selectedPlanURL = () => {
     return url
 }
 const target = ref(null)
+const isVisible = ref(false)
+
+function onElementVisibility(state) {
+  isVisible.value = state
+}
 const isOfferVisible = ref(false)
 function onOfferVisibility(state) {
     isOfferVisible.value = state
@@ -327,12 +335,14 @@ const faqLV = reactive([
 
 const btnLabel = reactive({
     buyNow: 'Įsigyti narystę',
-    showAll: 'Žiūrėti visus planus'
+    showAll: 'Žiūrėti visus planus',
+    btnLink: selectedPlanURL()
 })
 
 if (store.lang === 'LV') {
-    btnLabel.buyNow = 'Pirkt abonementu'
+    btnLabel.buyNow = url.searchParams.has('lmt') ? 'TODO Buy trial' : 'Pirkt abonementu'
     btnLabel.showAll = 'Apskatīt visus'
+    btnLabel.btnLink = selectedPlanURL()
 }
 switch (store.selectedPersona) {
     case 'Ambitious student':
@@ -380,6 +390,7 @@ const getCurrentYear = () => {
 </script>
 
 <template>
+  <div>
     <header>
         <div class="content">
             <img class="logo" src="../assets/images/digiklase.svg" alt="" />
@@ -623,53 +634,67 @@ const getCurrentYear = () => {
             </div>
         </div>
     </div>
-    <div
-        class="wrapper light sticky"
-        :class="{ hidden: isFooterVisible }"
-        ref="target"
-        v-element-visibility="onOfferVisibility"
-    >
-        <div class="cta-card">
-            <div class="header">
-                <p v-if="store.lang === 'LT'">Rekomenduojamas planas:</p>
-                <p v-if="store.lang === 'LV'">Abonements, ko iesakām</p>
-            </div>
-            <div class="content">
-                <div class="title" v-if="store.lang === 'LT'">
-                    <h3 v-if="store.selectedSubjects.length === 1">„1 dalyko planas“</h3>
-                    <h3 v-if="store.selectedSubjects.length === 2">„2 dalykų planas“</h3>
-                    <h3 v-if="store.selectedSubjects.length >= 3">
-                        „Visi mokykliniai dalykai ir visi būreliai“
-                    </h3>
-                </div>
-                <div class="title" v-if="store.lang === 'LV'">
-                    <h3 v-if="store.selectedSubjects.length === 1">„1 TO-DO“</h3>
-                    <h3 v-if="store.selectedSubjects.length === 2">„2 To-DO“</h3>
-                    <h3 v-if="store.selectedSubjects.length >= 3">„Visi mokykliniai TO-DO“</h3>
-                </div>
-                <div class="price" v-if="store.lang === 'LT'">
-                    <p>Nuo &nbsp;</p>
-                    <p v-if="store.selectedSubjects.length === 1"><span>24,45 </span>€/mėn.</p>
-                    <p v-if="store.selectedSubjects.length === 2"><span>48,90 </span>€/mėn.</p>
-                    <p v-if="store.selectedSubjects.length >= 3"><span>54,90 </span>€/mėn.</p>
-                </div>
-                <div class="price" v-if="store.lang === 'LV'">
-                    <p>No &nbsp;</p>
-                    <p v-if="store.selectedSubjects.length === 1"><span>24,45 </span>€/mēnesī</p>
-                    <p v-if="store.selectedSubjects.length === 2"><span>48,90 </span>€/mēnesī</p>
-                    <p v-if="store.selectedSubjects.length >= 3"><span>54,90 </span>€/mēnesī</p>
-                </div>
-                <div class="action">
-                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
-                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                    /></a>
-                    <a :href="allPlansURL" target="_blank" class="cta-link">{{
-                        btnLabel.showAll
-                    }}</a>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
+
+  <div>
+
+  <SuggestedPlan
+      ref="target"
+      :btn="btnLabel"
+      v-element-visibility="onElementVisibility"
+      :selected-subjects-length="store.selectedSubjects.length"
+      heading="Mūsų siūlomas planas atitinkantis tavo poreikius:"
+  />
+
+<!--  <div class="wrapper light">-->
+<!--    <div-->
+<!--        class="container"-->
+<!--        :class="{ sticky: isVisible }"-->
+<!--        ref="target"-->
+<!--        v-element-visibility="onElementVisibility"-->
+<!--    >-->
+<!--        <div class="cta-card">-->
+<!--            <div class="header">-->
+<!--                <p v-if="store.lang === 'LT'">Rekomenduojamas planas:</p>-->
+<!--                <p v-if="store.lang === 'LV'">Abonements, ko iesakām</p>-->
+<!--            </div>-->
+<!--            <div class="content">-->
+<!--                <div class="title" v-if="store.lang === 'LT'">-->
+<!--                    <h3 v-if="store.selectedSubjects.length === 1">„1 dalyko planas“</h3>-->
+<!--                    <h3 v-if="store.selectedSubjects.length === 2">„2 dalykų planas“</h3>-->
+<!--                    <h3 v-if="store.selectedSubjects.length >= 3">-->
+<!--                        „Visi mokykliniai dalykai ir visi būreliai“-->
+<!--                    </h3>-->
+<!--                </div>-->
+<!--                <div class="title" v-if="store.lang === 'LV'">-->
+<!--                    <h3 v-if="store.selectedSubjects.length === 1">„1 TO-DO“</h3>-->
+<!--                    <h3 v-if="store.selectedSubjects.length === 2">„2 To-DO“</h3>-->
+<!--                    <h3 v-if="store.selectedSubjects.length >= 3">„Visi mokykliniai TO-DO“</h3>-->
+<!--                </div>-->
+<!--                <div class="price" v-if="store.lang === 'LT'">-->
+<!--                    <p>Nuo &nbsp;</p>-->
+<!--                    <p v-if="store.selectedSubjects.length === 1"><span>24,45 </span>€/mėn.</p>-->
+<!--                    <p v-if="store.selectedSubjects.length === 2"><span>48,90 </span>€/mėn.</p>-->
+<!--                    <p v-if="store.selectedSubjects.length >= 3"><span>54,90 </span>€/mėn.</p>-->
+<!--                </div>-->
+<!--                <div class="price" v-if="store.lang === 'LV'">-->
+<!--                    <p>No &nbsp;</p>-->
+<!--                    <p v-if="store.selectedSubjects.length === 1"><span>24,45 </span>€/mēnesī</p>-->
+<!--                    <p v-if="store.selectedSubjects.length === 2"><span>48,90 </span>€/mēnesī</p>-->
+<!--                    <p v-if="store.selectedSubjects.length >= 3"><span>54,90 </span>€/mēnesī</p>-->
+<!--                </div>-->
+<!--                <div class="action">-->
+<!--                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"-->
+<!--                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""-->
+<!--                    /></a>-->
+<!--                    <a :href="allPlansURL" target="_blank" class="cta-link">{{-->
+<!--                        btnLabel.showAll-->
+<!--                    }}</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--  </div>-->
     <div class="wrapper light">
         <div class="container">
             <h2 class="section-title--small" v-if="store.lang === 'LT'">
@@ -813,7 +838,7 @@ const getCurrentYear = () => {
                     />
                 </div>
                 <video id="videoHow" width="100%" height="100%" preload="none">
-                    <source src="../assets/video/demo.mp4" type="video/mp4" />
+                    <source src="https://player.vimeo.com/progressive_redirect/playback/675895976/rendition/1080p/file.mp4?loc=external&log_user=0&signature=3eebbf6e5f7292607f082f979d4781f7d57ddb7e374eb8b052c15e901c485822" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
 
@@ -822,15 +847,21 @@ const getCurrentYear = () => {
                 </div>
             </div>
             <div class="video-wrapper" v-if="store.lang === 'LV'">
-                <div style="padding: 56.25% 0 0 0; position: relative">
-                    <iframe
-                        src="https://player.vimeo.com/video/853296489?h=2614aa7483&color=FF714B&title=0&byline=0&portrait=0"
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"
-                        frameborder="0"
-                        allow="autoplay; fullscreen; picture-in-picture"
-                        allowfullscreen
-                    ></iframe>
-                </div>
+              <div class="play-btn" @click="playVideoHandler">
+                <img
+                    src="../assets/images/play-btn.svg"
+                    alt="Video Placeholder"
+                    loading="lazy"
+                />
+              </div>
+              <video id="videoHow" width="100%" height="100%" preload="none">
+                <source src="https://player.vimeo.com/progressive_redirect/playback/853296489/rendition/1080p/file.mp4?loc=external&log_user=0&signature=ec359ee8b0e2f1fd8a34a49d24f215ad11002514507daa97b6ae49372321e18d" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+
+              <div class="pause-btn" @click="pauseVideoHandler">
+                <img src="../assets/images/pause-btn.svg" alt="" />
+              </div>
             </div>
         </div>
 
@@ -1296,6 +1327,7 @@ const getCurrentYear = () => {
             </div>
         </div>
     </footer>
+  </div>
 </template>
 
 <style scoped>
@@ -1618,12 +1650,10 @@ video {
 }
 @media (min-width: 767.99px) {
     .sticky {
-        position: fixed !important;
+        position: sticky !important;
         bottom: 0px;
         z-index: 100;
         margin-bottom: 0;
-        margin: 0 auto;
-        width: 100%;
         background-color: transparent !important;
         padding-bottom: 0;
     }
@@ -1638,8 +1668,6 @@ video {
 }
 
 .cta-card {
-    background: #fff;
-    box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.1);
     padding: 28px 36px;
     z-index: 10;
     position: relative;
