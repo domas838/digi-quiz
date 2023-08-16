@@ -63,7 +63,7 @@ const resolvePrice = (selectedSubjectsLength) => {
           </div>
 
           <div class="basis-1/4 mb-4 md:mb-0">
-            <div class="inline mr-2 md:block md:mr-0">Nuo</div>
+            <div class="inline mr-2 md:block md:mr-0">{{ $t('From') }}</div>
             <div class="font-bold self-end inline-flex">
               <Heading level="1">{{ resolvePrice(selectedSubjectsLength) }}</Heading>
               <span class="font-normal self-end mb-1 ml-1">{{ $t('CurrencyMonth') }}</span>
