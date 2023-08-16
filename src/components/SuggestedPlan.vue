@@ -27,11 +27,11 @@ onUnmounted(() => {
 const resolvePlan = (selectedSubjectsLength) => {
   switch (selectedSubjectsLength) {
     case 1:
-      return '„1 dalyko planas“' ;
+      return 'OneSubjectPlan' ;
     case 2:
-      return '„2 dalykų planas“';
+      return 'TwoSubjectsPlan';
     case 3:
-      return '„Visi mokykliniai dalykai ir visi būreliai“';
+      return 'AllSubjectsPlan';
   }
 }
 
@@ -59,7 +59,7 @@ const resolvePrice = (selectedSubjectsLength) => {
         <div class="z-[100] bg-white flex flex-col text-center w-full md:flex-row md:gap-5 md:text-left md:inline-flex md:justify-between">
           <div class="basis-1/2">
             <div>{{ $t('RecommendedPlan') }}</div>
-            <Heading level="3">{{ resolvePlan(selectedSubjectsLength) }}</Heading>
+            <Heading level="3">{{ $t(resolvePlan(selectedSubjectsLength)) }}</Heading>
           </div>
 
           <div class="basis-1/4 mb-4 md:mb-0">
