@@ -51,18 +51,18 @@ const resolvePrice = (selectedSubjectsLength) => {
 <template>
   <Transition>
     <div v-if="showComponent" class="bg-white rounded z-[100]">
-      <div class="max-w-[1200px] w-full rounded-xl drop-shadow-md bg-white fixed z-[100] left-1/2 px-8 py-5 transform -translate-x-1/2 bottom-0 lg:bottom-10">
+      <div class="max-w-[1200px] w-full rounded-xl drop-shadow-md bg-white fixed z-[100] left-1/2 px-8 py-2 md:py-5 transform -translate-x-1/2 bottom-0 lg:bottom-10">
   <!--      <div class="text-center mb-8 md:mb-16">-->
   <!--        <Heading tw="max-w-[750px] m-auto" level="1">{{ heading }}</Heading>-->
   <!--      </div>-->
 
         <div class="z-[100] bg-white flex flex-col text-center w-full md:flex-row md:gap-5 md:text-left md:inline-flex md:justify-between">
           <div class="basis-1/2">
-            <div>{{ $t('RecommendedPlan') }}</div>
+            <div class="text-[12px] md:text-[16px]">{{ $t('RecommendedPlan') }}</div>
             <Heading level="3">{{ $t(resolvePlan(selectedSubjectsLength)) }}</Heading>
           </div>
 
-          <div class="basis-1/4 mb-4 md:mb-0">
+          <div class="basis-1/4 md:mb-4 md:mb-0">
             <div class="inline mr-2 md:block md:mr-0">{{ $t('From') }}</div>
             <div class="font-bold self-end inline-flex">
               <Heading level="1">{{ resolvePrice(selectedSubjectsLength) }}</Heading>
