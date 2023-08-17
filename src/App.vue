@@ -21,7 +21,7 @@ if (store.lang === 'LV') {
     table.ID = 'grid-I_8YD1oJ_N' // LV
 }
 const instance = axios.create({
-    baseURL: store.lang === 'LT' ? `https://coda.io/apis/v1/docs/otYeYWMX9e/tables/grid-8XN2uCh13U/` : 'https://coda.io/apis/v1/docs/otYeYWMX9e/tables/grid-I_8YD1oJ_N/',
+    baseURL: `https://coda.io/apis/v1/docs/otYeYWMX9e/tables/${table.ID}/`,
     headers: { Authorization: 'Bearer ' + token }
 })
 
