@@ -650,10 +650,9 @@ const getCurrentYear = () => {
   <SuggestedPlan
       ref="target"
       :btn="btnLabel"
-      :is-paid-trial="true"
+      :is-paid-trial="url.searchParams.has('lmt')"
       v-element-visibility="onElementVisibility"
       :selected-subjects-length="store.selectedSubjects.length"
-      heading="Mūsų siūlomas planas atitinkantis tavo poreikius:"
   />
 
 <!--  <div class="wrapper light">-->
