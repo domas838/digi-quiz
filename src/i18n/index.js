@@ -11,7 +11,8 @@ const i18n = createI18n({
             OneSubjectPlan: '„1 dalyko planas“',
             TwoSubjectsPlan: '„2 dalykų planas“',
             AllSubjectsPlan: '„Visi mokykliniai dalykai ir visi būreliai“',
-            From: 'Nuo'
+            From: 'Nuo',
+            SevenDaysTrial: '7 dienu izmēģinājums'
         },
         lv: {
             RecommendedPlan: 'Abonements, ko iesakām',
@@ -19,7 +20,8 @@ const i18n = createI18n({
             OneSubjectPlan: '„1 mācību priekšmets“',
             TwoSubjectsPlan: '„2 mācību priekšmeti“',
             AllSubjectsPlan: '„Visi mācību priekšmeti“',
-            From: 'No'
+            From: 'No',
+            SevenDaysTrial: '7 dienu izmēģinājums'
         },
     },
 })

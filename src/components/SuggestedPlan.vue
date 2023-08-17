@@ -3,11 +3,11 @@ import Heading from "./Typography/Heading.vue";
 import { ref, onMounted, onUnmounted } from 'vue';
 
 defineProps({
-  heading: String,
   plan: Object,
   selectedSubjectsLength: Number,
   isVisible: Boolean,
-  btn: Object
+  btn: Object,
+  isPaidTrial: Boolean
 })
 
 const showComponent = ref(false);
@@ -24,7 +24,11 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
 
-const resolvePlan = (selectedSubjectsLength) => {
+const resolvePlan = (selectedSubjectsLength, isPaidTrial) => {
+  if (isPaidTrial) {
+    return 'AllSubjectsPlan';
+  }
+
   switch (selectedSubjectsLength) {
     case 1:
       return 'OneSubjectPlan' ;
@@ -35,7 +39,11 @@ const resolvePlan = (selectedSubjectsLength) => {
   }
 }
 
-const resolvePrice = (selectedSubjectsLength) => {
+const resolvePrice = (selectedSubjectsLength, isPaidTrial) => {
+  if (isPaidTrial) {
+    return '1,00 €';
+  }
+
   switch (selectedSubjectsLength) {
     case 1:
       return '24,45' ;
@@ -52,21 +60,18 @@ const resolvePrice = (selectedSubjectsLength) => {
   <Transition>
     <div v-if="showComponent" class="bg-white rounded z-[100]">
       <div class="max-w-[1200px] w-full rounded-xl drop-shadow-md bg-white fixed z-[100] left-1/2 px-8 py-2 md:py-5 transform -translate-x-1/2 bottom-0 lg:bottom-10">
-  <!--      <div class="text-center mb-8 md:mb-16">-->
-  <!--        <Heading tw="max-w-[750px] m-auto" level="1">{{ heading }}</Heading>-->
-  <!--      </div>-->
 
         <div class="z-[100] bg-white flex flex-col text-center w-full md:flex-row md:gap-5 md:text-left md:inline-flex md:justify-between">
           <div class="basis-1/2">
-            <div class="text-[12px] md:text-[16px]">{{ $t('RecommendedPlan') }}</div>
-            <Heading level="3">{{ $t(resolvePlan(selectedSubjectsLength)) }}</Heading>
+            <div class="text-[12px] md:text-[16px]">{{ isPaidTrial ? $t('SevenDaysTrial') : $t('RecommendedPlan') }}</div>
+            <Heading level="3">{{ $t(resolvePlan(selectedSubjectsLength, isPaidTrial)) }}</Heading>
           </div>
 
-          <div class="basis-1/4 md:mb-4 md:mb-0">
-            <div class="inline mr-2 md:block md:mr-0">{{ $t('From') }}</div>
+          <div class="basis-1/4 md:mb-4 md:mb-0" :class="{'md:self-end': isPaidTrial}">
+            <div v-if="! isPaidTrial" class="inline mr-2 md:block md:mr-0">{{ $t('From') }}</div>
             <div class="font-bold self-end inline-flex">
-              <Heading level="1">{{ resolvePrice(selectedSubjectsLength) }}</Heading>
-              <span class="font-normal self-end mb-1 ml-1">{{ $t('CurrencyMonth') }}</span>
+              <Heading level="1">{{ resolvePrice(selectedSubjectsLength, isPaidTrial) }}</Heading>
+              <span v-if="! isPaidTrial" class="font-normal self-end mb-1 ml-1">{{ $t('CurrencyMonth') }}</span>
             </div>
           </div>
 

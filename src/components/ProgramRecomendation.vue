@@ -349,7 +349,7 @@ const btnLabel = reactive({
 })
 
 if (store.lang === 'LV') {
-    btnLabel.buyNow = url.searchParams.has('lmt') ? 'Uzzini vairāk' : 'Pirkt abonementu'
+    btnLabel.buyNow = url.searchParams.has('lmt') ? 'Izmēģināt par 1 EUR' : 'Pirkt abonementu'
     btnLabel.showAll = 'Apskatīt visus'
     btnLabel.btnLink = url.searchParams.has('lmt') ? 'https://app.memby.lv/trial' : selectedPlanURL()
 }
@@ -650,6 +650,7 @@ const getCurrentYear = () => {
   <SuggestedPlan
       ref="target"
       :btn="btnLabel"
+      :is-paid-trial="true"
       v-element-visibility="onElementVisibility"
       :selected-subjects-length="store.selectedSubjects.length"
       heading="Mūsų siūlomas planas atitinkantis tavo poreikius:"
@@ -898,7 +899,7 @@ const getCurrentYear = () => {
                     <li>Apbalvojumi par mācīšanos</li>
                     <li>Draudzīga cena</li>
                 </ul>
-                <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="selectedPlanURL" />
+                <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="btnLabel.btnLink" />
                 <div class="testimonial">
                     <div class="author">
                         <img src="../assets/images/testimonial-author.svg" alt="" />
@@ -1055,7 +1056,7 @@ const getCurrentYear = () => {
                     <pagination />
                 </template>
             </carousel>
-            <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="selectedPlanURL" />
+            <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="btnLabel.btnLink" />
         </div>
     </div>
     <div class="wrapper light-grey">
@@ -1288,7 +1289,7 @@ const getCurrentYear = () => {
     </div>
     <div class="wrapper dark inner">
         <div class="container container--narrow pb">
-            <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="selectedPlanURL" />
+            <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="btnLabel.btnLink" />
         </div>
     </div>
     <div class="wrapper light pt page-bottom">
@@ -1308,7 +1309,7 @@ const getCurrentYear = () => {
                 Pievienojies kopienai ar vairāk kā <span>15,000</span> līdzīgi domājošiem cilvēkiem!
             </h2>
             <div class="pb">
-                <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="selectedPlanURL" />
+                <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="btnLabel.btnLink" />
             </div>
         </div>
         <img src="../assets/images/elipses.svg" class="footer-elipses" alt="" />
