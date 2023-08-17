@@ -21,7 +21,7 @@ if (store.lang === 'LV') {
     table.ID = 'grid-I_8YD1oJ_N' // LV
 }
 const instance = axios.create({
-    baseURL: `https://coda.io/apis/v1/docs/otYeYWMX9e/tables/${table.ID}/`,
+    baseURL: store.lang === 'LT' ? `https://coda.io/apis/v1/docs/otYeYWMX9e/tables/grid-8XN2uCh13U/` : 'https://coda.io/apis/v1/docs/otYeYWMX9e/tables/grid-I_8YD1oJ_N/',
     headers: { Authorization: 'Bearer ' + token }
 })
 
@@ -167,7 +167,6 @@ onMounted(() => {
     if (window.location.hostname === 'quiz.memby.lv') {
       i18n.global.locale = 'lv';
       store.lang = 'LV'
-      table.ID = 'grid-I_8YD1oJ_N'
     }
 
     if (store.lang === 'LV') {
