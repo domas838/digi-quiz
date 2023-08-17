@@ -342,7 +342,7 @@ const btnLabel = reactive({
 if (store.lang === 'LV') {
     btnLabel.buyNow = url.searchParams.has('lmt') ? 'TODO Buy trial' : 'Pirkt abonementu'
     btnLabel.showAll = 'Apskatīt visus'
-    btnLabel.btnLink = selectedPlanURL()
+    btnLabel.btnLink = url.searchParams.has('lmt') ? 'TODO PAID TRIAL LINK' : selectedPlanURL()
 }
 switch (store.selectedPersona) {
     case 'Ambitious student':
