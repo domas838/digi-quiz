@@ -167,6 +167,7 @@ onMounted(() => {
     if (window.location.hostname === 'quiz.memby.lv') {
       i18n.global.locale = 'lv';
       store.lang = 'LV'
+      table.ID = 'grid-I_8YD1oJ_N'
     }
 
     if (store.lang === 'LV') {
