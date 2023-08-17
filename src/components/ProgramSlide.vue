@@ -150,7 +150,7 @@ if (store.lang === 'LV') {
                 <div class="icon">
                     <img src="../assets/images/icon-live-lessons.svg" alt="" />
                 </div>
-                <div class="title">{{ props.lessonsCount }} GYVOS pam./sav</div>
+                <div class="title">{{ props.lessonsCount }} {{ $t('LiveLessonsPerWeek') }}</div>
             </div>
             <!-- <div class="slide-summary-line">
                 <div class="icon">
