@@ -34,7 +34,7 @@ const resolvePlan = (selectedSubjectsLength, isPaidTrial) => {
       return 'OneSubjectPlan' ;
     case 2:
       return 'TwoSubjectsPlan';
-    case 3:
+    default:
       return 'AllSubjectsPlan';
   }
 }
@@ -49,7 +49,7 @@ const resolvePrice = (selectedSubjectsLength, isPaidTrial) => {
       return '24,45' ;
     case 2:
       return '48,90';
-    case 3:
+    default:
       return '54,90';
   }
 }
