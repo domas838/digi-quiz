@@ -37,7 +37,8 @@ const i18n = createI18n({
             KlaviyoIntensityTier1: 'maždaug 1 valandą per savaitę',
             KlaviyoIntensityTier2: 'apie 2 valandas per savaitę',
             KlaviyoIntensityTier3: 'daugiau nei 3 valandas per savaitę',
-            LiveLessonsPerWeek: 'GYVOS pam./sav'
+            LiveLessonsPerWeek: 'GYVOS pam./sav',
+             ReadMore: 'Daugiau'
         },
         lv: {
             RecommendedPlan: 'Abonements, ko iesakām',
@@ -47,9 +48,9 @@ const i18n = createI18n({
             AllSubjectsPlan: '„Visi mācību priekšmeti“',
             From: 'No',
             SevenDaysTrial: '7 dienu izmēģinājums',
-            AKlaviyoStudentLevel: 'viss lieliski, bez problēmām!',
-            BKlaviyoStudentLevel: 'viss ir kārtībā, taču dažreiz rodas problēmas.',
-            CKlaviyoStudentLevel: 'viss slikti, man turpina neveikties.',
+            AKlaviyoStudentLevel: 'augstāks (mēs strādāsim ar interesantāku un nestandarta saturu)',
+            BKlaviyoStudentLevel: 'vidējs (3 mēnešu laikā mēs plānojam sasniegt līdz 2 atzīmēm augstāku rezultātu)',
+            CKlaviyoStudentLevel: 'zemāks (plāno sasniegt atzīmju uzlabošanos par 2 tikai 2 mēnešos)',
             KlaviyoAmbitiousGoal: 'sagatavojieties eksāmeniem',
             KlaviyoExamOrientedGoal: 'lai uzlabotu atzīmes un aizpildītu zināšanu robus',
             KlaviyoStrugglingGoal: 'lai uzlabotu interesējošos priekšmetus',
@@ -61,7 +62,8 @@ const i18n = createI18n({
             KlaviyoIntensityTier1: 'augstāks (mēs strādāsim ar interesantāku un nestandarta saturu)',
             KlaviyoIntensityTier2: 'vidējs (3 mēnešu laikā mēs plānojam sasniegt līdz 2 atzīmēm augstāku rezultātu)',
             KlaviyoIntensityTier3: 'zemāks (plāno sasniegt atzīmju uzlabošanos par 2 tikai 2 mēnešos)',
-            LiveLessonsPerWeek: 'tiešraides nedēļā'
+            LiveLessonsPerWeek: 'tiešraides nedēļā',
+            ReadMore: 'Lasīt vairāk'
         },
     },
 })

@@ -18,13 +18,7 @@ const activeMap = reactive({})
 const toggleReadMore = (index) => {
     activeMap[index] = !activeMap[index]
 }
-const localization = reactive({
-    readMore: 'Skaityti daugiau'
-})
 
-if (store.lang === 'LV') {
-    localization.readMore = 'Read more'
-}
 </script>
 
 <template>
@@ -133,9 +127,9 @@ if (store.lang === 'LV') {
             </h4>
             <p>
                 {{ props.description.substr(0, 60) }}...
-                <a href="javascript:void(0)" @click="() => toggleReadMore(props.index)">{{
-                    localization.readMore
-                }}</a>
+                <a href="javascript:void(0)" @click="() => toggleReadMore(props.index)">
+                    {{ $t('ReadMore') }}
+                </a>
             </p>
         </div>
         <div class="slide-separator"></div>
