@@ -374,14 +374,20 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
 }
 @media (max-width: 576px) {
     .benefit-heading {
-        font-size: 32px;
+        font-size: 35px;
         line-height: 1.3;
+    }
+
+    .benefit-row .content p {
+        font-size: 16px !important;
+        line-height: 24px !important;
     }
 }
 .benefit-container {
     width: 50%;
 }
 .benefit-container .benefit-btn {
+    margin-top: 40px;
     margin-left: 0;
 }
 .benefit-row {
@@ -391,6 +397,7 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
     z-index: 20;
 }
 .benefit-row .icon {
+    align-self: center;
     padding-right: 20px;
 }
 
