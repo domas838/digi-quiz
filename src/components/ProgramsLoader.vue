@@ -1,14 +1,29 @@
 <script setup>
-import { onMounted } from 'vue'
+import {onMounted, reactive} from 'vue'
 
 import { store } from '../store'
+import axios from "axios";
 const url = new URL(window.location.href)
 
 const props = defineProps([
-    'instance',
     'generateProgramRecomendations',
     'selectMostRecommendedPrograms'
 ])
+
+const token = 'a29826cb-670e-4b25-9669-35f67b2e3e3b'
+
+const table = reactive({
+  ID: 'grid-8XN2uCh13U' // LT
+})
+
+if (store.lang === 'LV') {
+  table.ID = 'grid-I_8YD1oJ_N' // LV
+}
+
+const instance = axios.create({
+  baseURL: `https://coda.io/apis/v1/docs/otYeYWMX9e/tables/${table.ID}/`,
+  headers: { Authorization: 'Bearer ' + token }
+});
 
 const toFindDuplicates = (arry) => arry.filter((item, index) => arry.indexOf(item) !== index)
 
@@ -127,7 +142,7 @@ const programRecomendationHandler = () => {
         default:
             break
     }
-    props.instance
+    instance
         .get('/rows?useColumnNames=true')
         .then((response) => {
             response.data.items.forEach((item) => {

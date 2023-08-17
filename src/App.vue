@@ -1,7 +1,6 @@
 <script setup>
 import { store } from './store.js'
 import { onMounted, reactive } from 'vue'
-import axios from 'axios'
 import RespondentQuestions from './components/RespondentQuestions.vue'
 import FirstBenefit from './components/FirstBenefit.vue'
 import SecondBenefit from './components/SecondBenefit.vue'
@@ -11,19 +10,6 @@ import ProgramsLoader from './components/ProgramsLoader.vue'
 import i18n from "./i18n";
 
 const url = new URL(window.location.href)
-const token = 'a29826cb-670e-4b25-9669-35f67b2e3e3b'
-
-const table = reactive({
-    ID: 'grid-8XN2uCh13U' // LT
-})
-
-if (store.lang === 'LV') {
-    table.ID = 'grid-I_8YD1oJ_N' // LV
-}
-const instance = axios.create({
-    baseURL: `https://coda.io/apis/v1/docs/otYeYWMX9e/tables/${table.ID}/`,
-    headers: { Authorization: 'Bearer ' + token }
-})
 
 const generateProgramRecomendations = (item) => {
     switch (item.values.Tier) {
@@ -433,7 +419,6 @@ const completeness = (step) => {
         <SecondBenefit />
         <ProgramsLoader
             v-if="store.step === 8"
-            :instance="instance"
             :generateProgramRecomendations="generateProgramRecomendations"
             :selectMostRecommendedPrograms="selectMostRecommendedPrograms"
         />
