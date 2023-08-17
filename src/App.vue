@@ -7,7 +7,7 @@ import SecondBenefit from './components/SecondBenefit.vue'
 import EmailForm from './components/EmailForm.vue'
 import ProgramRecomendation from './components/ProgramRecomendation.vue'
 import ProgramsLoader from './components/ProgramsLoader.vue'
-import i18n from "./i18n";
+import { pageview } from 'vue-gtag'
 
 const url = new URL(window.location.href)
 
@@ -150,8 +150,9 @@ const localization = reactive({
 })
 
 onMounted(() => {
+    pageview(window.location.pathname);
+
     if (window.location.hostname === 'quiz.memby.lv') {
-      //i18n.global.locale = 'lv';
       store.lang = 'LV'
     }
 

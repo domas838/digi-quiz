@@ -9,6 +9,15 @@ const app = createApp(App);
 
 app.use(i18n)
 
+const host = window.location.hostname;
+const analyticsMap = {
+    'quiz.memby.lv': 'G-QFS0LJGESV',
+    'quiz.digiklase.lt': 'G-L98Z3SJY5M',
+    'localhost': ''
+};
+
+const detectedAnalytics = analyticsMap[host] || '';
+
 app.use(VueGtag, {
-    config: { id: "G-L98Z3SJY5M" }
+    config: { id: detectedAnalytics }
 }).mount('#app')
