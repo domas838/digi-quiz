@@ -143,49 +143,58 @@ const storiesArray = [
     {
         head: 'Patricijos mama:',
         body: 'Labai noriu pasidžiaugti atradusi Digiklasę. Po kelių Digiklasės pamokų mūsų Patricija mokykloje gavo pirmą dešimtuką iš matematikos. Rodės, kad iš laimės pakils iki dangaus, sakė, kad tai tik dėka Digiklasės. Mokytojai labai aiškiai išaiškina, moka įdomiai vesti pamokas, kurias tikrai įdomu klausytis! Aš, kaip mama, matydama vyresnėlės pažangą moksluose, užregistruosiu dar ir mažylę į Digiklasę. Ačiū Digiklasės mokytojams, kurie moka gerai išaiškinti, ko nesupranta vaikai ir motyvuoja kuo geriau mokytis.',
-        foot: 'Patricijos (7 klasė) mama Vita'
+      bodyMobile: '„Po kelių Digiklasės pamokų mūsų Patricija mokykloje gavo pirmą dešimtuką iš matematikos. Digiklasės mokytojai labai aiškiai išaiškina, moka įdomiai vesti pamokas, kurias tikrai įdomu klausytis! Aš, kaip mama, matydama vyresnėlės pažangą moksluose, užregistruosiu dar ir mažylę į Digiklasę. Ačiū Digiklasės mokytojams, kurie moka gerai išaiškinti, ko nesupranta vaikai ir motyvuoja kuo geriau mokytis.',
+      foot: 'Patricijos (7 klasė) mama Vita'
     },
     {
         head: 'Ievos istorija',
         body: 'Per 2 metus išmokau labai daug, to net neįmanoma nusakyti žodžiais. Per visą laikotarpį man digiklasė tapo ne tik mokymosi priemone, bet ir viena didele šeima. Ne tik pagerinau savo pažymius ir tikrai padidinau savo egzaminų rezultatus, bet taip pat išmokau kai ko, kas yra daug vertingiau negu rezultatai ar skaičiai. Per tuos 2 metus išmokau vertinti mažus dalykus gyvenime, pasidžiaugti savo sėkme ir nenuvertinti savęs, net jei viskas vyksta ne pagal planą. Sutikau begalę nuostabių ir šiltų žmonių, kurie mane motyvavo kiekvieną dieną nepasiduoti ir siekti daugiau, negu pati galiu įsivaizduoti. Dar kartelį noriu iš visos širdies padėkoti visiems mokytojams už pagalbą, atsidavimą 1000% ir nuolatinį tikėjimą savo mokiniais.',
-        foot: 'Ieva, Palangos senoji gimnazija, buvusi Digiklasės mokinė'
+      bodyMobile: '„Per 2 metus išmokau labai daug, to net neįmanoma nusakyti žodžiais. Per visą laikotarpį man digiklasė tapo ne tik mokymosi priemone, bet ir viena didele šeima. Ne tik pagerinau savo pažymius ir tikrai padidinau savo egzaminų rezultatus, bet taip pat išmokau kai ko, kas yra daug vertingiau negu rezultatai ar skaičiai.“',
+      foot: 'Ieva, Palangos senoji gimnazija, buvusi Digiklasės mokinė'
     },
     {
         head: 'Sibilės istorija',
         body: 'Šarūno matematikos pamokos mane įkvėpė nepasiduoti ir siekti geresnių rezultatų mokantis. Dėka šio mokytojo, vos per mėnesį sugebėjau savo matematikos pažymį pasikelti net trimis balais. Matydama tokius rezultatus, nusprendžiau mokytis daugiau dalykų Digiklasėje, o mokytojai mokykloje pastebėjo mano gerėjančius rezultatus. Digiklasėje ne tik įgyjau daugiau žinių, bet ir sutikau fainus žmones, kurie mane priimė kaip šeima.',
-        foot: '11-okė Sibilė, Panevėžio Juozo Miltinio gimnazija'
+        bodyMobile: '„Šarūno matematikos pamokos mane įkvėpė nepasiduoti ir siekti geresnių rezultatų mokantis. Dėka šio mokytojo, vos per mėnesį sugebėjau savo matematikos pažymį pasikelti net trimis balais. Digiklasėje ne tik įgyjau daugiau žinių, bet ir sutikau fainus žmones, kurie mane priimė kaip šeima.”',
+      foot: '11-okė Sibilė, Panevėžio Juozo Miltinio gimnazija'
     },
     {
         head: 'Karolis dalinasi',
         body: 'Devintoje klasėje pradėjau svajoti apie medicinos studijas, todėl labai džiaugiuosi, kad tokia motyvuotų ir išsilavinusių mokytojų komanda buvo šalia nuo pat pradžių. Įvairūs konspektai, virtualios pamokos ir jauki digiklasiečių kompanija tapo mano laisvalaikiu! Pauliaus pamokose dėstomais biologijos universitetinio lygio pagrindais buvo tikras malonumas, o į Austėjos sveikatos mokslų pamokas jungiausi iš įvairiausių pasaulio kraštų, kad tik galėčiau išnagrinėti dar vieno paciento ligą.',
-        foot: 'Karolis, Kaišiadorių Algirdo Brazausko gimnazija, buvęs Digiklasės mokinys'
+      bodyMobile: '„Pauliaus pamokose dėstomais biologijos universitetinio lygio pagrindais buvo tikras malonumas, o į Austėjos sveikatos mokslų pamokas jungiausi iš įvairiausių pasaulio kraštų, kad tik galėčiau išnagrinėti dar vieno paciento ligą.”',
+      foot: 'Karolis, Kaišiadorių Algirdo Brazausko gimnazija, buvęs Digiklasės mokinys'
     },
     {
         head: 'Pauliaus istorija',
         body: 'Digiklasė yra nepakeičiamas mokymosi įrankis, kurį naudoju jau tris metus. Ši platforma padėjo man atrasti savo ateities karjerą ir rasti mane dominančias sritis, leisdama mokytis savo tempu. Jos interaktyvumas ir modernios technologijos pagerino mano pažymius - džiaugiuosi, kad per naudojimąsi Digiklase mano pažymiai pakilo net per du balus.',
-        foot: 'Paulius, 11 klasė, Panevėžio Juozo Miltinio gimnazija'
+      bodyMobile: '„Digiklasė yra nepakeičiamas mokymosi įrankis, kurį naudoju jau tris metus. Ši platforma padėjo man atrasti savo ateities karjerą ir rasti mane dominančias sritis, leisdama mokytis savo tempu. Jos interaktyvumas ir modernios technologijos pagerino mano pažymius - džiaugiuosi, kad per naudojimąsi Digiklase mano pažymiai pakilo net per du balus.”',
+      foot: 'Paulius, 11 klasė, Panevėžio Juozo Miltinio gimnazija'
     }
 ]
 const storiesArrayLV = [
     {
         head: 'Anija:',
         body: 'Liela daļa zina, ka attālinātās mācības nav vieglas un tur ir vajadzīga liela motivācija. Pirms pāris gadiem pie mums ieradās kovids. Es biju spiesta iet mācīties attālināti, un pēdējā gadā (12klase) lielas grūtības sagādāja matemātika, bet par laimi es ieraudzīju reklāmu par matemātikas apgūšanu platformā Memby. Manuprāt, bez šo pasniedzēju palīdzības es nebūtu nokārtojusi valsts eksāmenus. Viņi iemācīja man visnesaprotamākos piemērus un formulas. Saku viņiem lielu paldies un iesaku ik vienam, kuram ir grūtības ar matemātikas piemēriem pamēģināt! Mēneša laikā jau vari apgūt diezgan daudz!',
-        foot: '- Anija Apermane'
+      bodyMobile: '“Manuprāt, bez šo pasniedzēju palīdzības es nebūtu nokārtojusi valsts eksāmenus. Viņi iemācīja man visnesaprotamākos piemērus un formulas. Saku viņiem lielu paldies un iesaku ik vienam, kuram ir grūtības ar matemātikas piemēriem pamēģināt! Mēneša laikā jau vari apgūt diezgan daudz!”',
+      foot: '- Anija Apermane'
     },
     {
         head: 'Elīna:',
         body: 'Pasniedzēji ir jauki, atsaucīgi un izpalīdzīgi. Vienmēr pārliecinājās vai visi saprot tēmu.b Brīžos kad kāds no mācekļiem nesaprot, nebija grūtības izskaidrot tēmu daudz reizes līdz ir iebraucis. Man, kā 12. klases absolventam, ļoti viegli mācīšanos padarija sastādītais grafiks, kas bija 3x nedēļa un ierakstītās stundas, kuras pēc tam pastāvīgi varēju skatīties',
-        foot: '- Elīna Gailuma'
+      bodyMobile: '“Pasniedzēji ir jauki, atsaucīgi un izpalīdzīgi. Brīžos kad kāds no mācekļiem nesaprot, nebija grūtības izskaidrot tēmu daudz reizes līdz ir iebraucis. Man, kā 12. klases absolventam, ļoti viegli mācīšanos padarija sastādītais grafiks, kas bija 3x nedēļa un ierakstītās stundas, kuras pēc tam pastāvīgi varēju skatīties”',
+      foot: '- Elīna Gailuma'
     },
     {
         head: 'Miks:',
         body: 'Mana pieredze ar Memby ir bijusi ļoti patīkama. Tiešsaistes stundas bijušas aktīvas, saprotamas, interesantas. Pasniedzēji vienmēr paskaidroja katru uzdevumu, ja nu tas nebija skaidrs. Izcils serviss',
-        foot: '- Miks Kelle'
+      bodyMobile: '“Mana pieredze ar Memby ir bijusi ļoti patīkama. Tiešsaistes stundas bijušas aktīvas, saprotamas, interesantas. Pasniedzēji vienmēr paskaidroja katru uzdevumu, ja nu tas nebija skaidrs. Izcils serviss”',
+      foot: '- Miks Kelle'
     },
     {
         head: 'Anija:',
         body: 'Manas zināšanas un pašpārliecība matemātikā uzlabojās ievērojami, kā arī es esmu pārliecināta, ka, bez skolotāja Rolanda palīdzības, man nebūtu izdevies tik veiksmīgi nokārtot matemātikas eksāmenu. Es ļoti novērtēju šīs nodarbības un patiešām priecājos, ka tās izvēlējos!',
-        foot: '- Anija Siksna, Zentas Mauriņas Grobiņas vidusskola, 12. klase'
+      bodyMobile: '“Manas zināšanas un pašpārliecība matemātikā uzlabojās ievērojami, kā arī es esmu pārliecināta, ka, bez skolotāja Rolanda palīdzības, man nebūtu izdevies tik veiksmīgi nokārtot matemātikas eksāmenu. Es ļoti novērtēju šīs nodarbības un patiešām priecājos, ka tās izvēlējos!”',
+      foot: '- Anija Siksna, Zentas Mauriņas Grobiņas vidusskola, 12. klase'
     }
 ]
 const faqLT = reactive([
@@ -1166,12 +1175,16 @@ const getCurrentYear = () => {
             <carousel v-bind="storiesCarousel" v-if="store.lang === 'LT'">
                 <slide v-for="(item, index) in storiesArray" :key="item">
                     <div class="story-slide">
-                        <div class="story-image">
+                        <div class="story-image hidden md:block">
                             <img :src="'/storiesImages/story-' + index + '.png'" alt="" />
+                        </div>
+                        <div class="story-image md:hidden">
+                          <img :src="'/storiesImages/story-mobile-' + index + '.png'" alt="" />
                         </div>
                         <div class="story-body">
                             <h4>{{ item.head }}</h4>
-                            <p>{{ item.body }}</p>
+                            <p class="hidden md:block">{{ item.body }}</p>
+                            <p class="md:hidden">{{ item.bodyMobile }}</p>
                             <h5>{{ item.foot }}</h5>
                         </div>
                     </div>
@@ -1190,12 +1203,16 @@ const getCurrentYear = () => {
             <carousel v-bind="storiesCarousel" v-if="store.lang === 'LV'">
                 <slide v-for="(item, index) in storiesArrayLV" :key="item">
                     <div class="story-slide">
-                        <div class="story-image">
-                            <img :src="'/storiesImagesLV/story-' + index + '.png'" alt="" />
-                        </div>
+                      <div class="story-image hidden md:block">
+                        <img :src="'/storiesImagesLV/story-' + index + '.png'" alt="" />
+                      </div>
+                      <div class="story-image md:hidden">
+                        <img :src="'/storiesImagesLV/story-mobile-' + index + '.png'" alt="" />
+                      </div>
                         <div class="story-body">
                             <h4>{{ item.head }}</h4>
-                            <p>{{ item.body }}</p>
+                            <p class="hidden md:block">{{ item.body }}</p>
+                            <p class="md:hidden">{{ item.bodyMobile }}</p>
                             <h5>{{ item.foot }}</h5>
                         </div>
                     </div>
