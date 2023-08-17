@@ -1,9 +1,18 @@
 import { createI18n } from 'vue-i18n'
 
+const host = window.location.hostname;
+const domainLocaleMap = {
+    'quiz.memby.lv': 'lv',
+    'quiz.digiklase.lt': 'lt',
+    'localhost': 'lt'
+};
+
+const detectedLocale = domainLocaleMap[host] || 'lt';
+
 const i18n = createI18n({
     legacy: false,
     // default locale
-    locale: 'lt',
+    locale: detectedLocale,
     // translations
     messages: {
         lt: {
@@ -38,16 +47,16 @@ const i18n = createI18n({
             AllSubjectsPlan: '„Visi mācību priekšmeti“',
             From: 'No',
             SevenDaysTrial: '7 dienu izmēģinājums',
-            AKlaviyoStudentLevel: 'ideāls (vienmēr meklē kaut ko jaunu)',
-            BKlaviyoStudentLevel: 'labs (vairāk koncentrējas uz testiem, eksāmenu rezultātiem)',
-            CKlaviyoStudentLevel: 'viduvējs (vēlas uzlabot atzīmes, bet ne vienmēr ir vēlme)',
+            AKlaviyoStudentLevel: 'viss lieliski, bez problēmām!',
+            BKlaviyoStudentLevel: 'viss ir kārtībā, taču dažreiz rodas problēmas.',
+            CKlaviyoStudentLevel: 'viss slikti, man turpina neveikties.',
             KlaviyoAmbitiousGoal: 'sagatavojieties eksāmeniem',
             KlaviyoExamOrientedGoal: 'lai uzlabotu atzīmes un aizpildītu zināšanu robus',
             KlaviyoStrugglingGoal: 'lai uzlabotu interesējošos priekšmetus',
             KlaviyoBusyMultiTaskerGoal: 'papildu mācīšanās līdzsvarošana ar hobijiem un citām aktivitātēm',
             KlaviyoAmbitiousMotivation: 'ideāls (vienmēr meklē kaut ko jaunu)',
-            KlaviyoExamOrientedMotivation: 'labs (vairāk koncentrējas uz testiem, eksāmenu rezultātiem)',
-            KlaviyoStrugglingMotivation: 'viduvējs (vēlas uzlabot atzīmes, bet ne vienmēr ir vēlme)',
+            KlaviyoExamOrientedMotivation: 'viduvējs (vēlas uzlabot atzīmes, bet ne vienmēr ir vēlme)',
+            KlaviyoStrugglingMotivation: 'zem vidējā līmeņa (atkarīgs no tā, cik daudz brīvā laika ir pieejams)',
             KlaviyoBusyMultiTaskerMotivation: 'zem vidējā līmeņa (atkarīgs no tā, cik daudz brīvā laika ir pieejams)',
             KlaviyoIntensityTier1: 'augstāks (mēs strādāsim ar interesantāku un nestandarta saturu)',
             KlaviyoIntensityTier2: 'vidējs (3 mēnešu laikā mēs plānojam sasniegt līdz 2 atzīmēm augstāku rezultātu)',

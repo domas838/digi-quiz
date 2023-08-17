@@ -151,7 +151,7 @@ const localization = reactive({
 
 onMounted(() => {
     if (window.location.hostname === 'quiz.memby.lv') {
-      i18n.global.locale = 'lv';
+      //i18n.global.locale = 'lv';
       store.lang = 'LV'
     }
 
