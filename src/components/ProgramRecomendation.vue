@@ -340,9 +340,9 @@ const btnLabel = reactive({
 })
 
 if (store.lang === 'LV') {
-    btnLabel.buyNow = url.searchParams.has('lmt') ? 'TODO Buy trial' : 'Pirkt abonementu'
+    btnLabel.buyNow = url.searchParams.has('lmt') ? 'Uzzini vairāk' : 'Pirkt abonementu'
     btnLabel.showAll = 'Apskatīt visus'
-    btnLabel.btnLink = url.searchParams.has('lmt') ? 'TODO PAID TRIAL LINK' : selectedPlanURL()
+    btnLabel.btnLink = url.searchParams.has('lmt') ? 'https://app.memby.lv/trial' : selectedPlanURL()
 }
 switch (store.selectedPersona) {
     case 'Ambitious student':
