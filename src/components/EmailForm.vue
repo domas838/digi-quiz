@@ -8,7 +8,7 @@ const submitChildEmail = (event) => {
     store.isChildEmailEntered = true
     store.step += 1
     store.showRecomendations = true
-    //klaviyoRequestHandler()
+    klaviyoRequestHandler()
 }
 // Klaviyo API KEY
 // pk_5a1e956f717f7efdc37cbdf9ca124b1986
