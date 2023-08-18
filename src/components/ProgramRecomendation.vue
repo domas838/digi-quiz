@@ -402,7 +402,8 @@ const getCurrentYear = () => {
   <div>
     <header>
         <div class="content">
-            <img class="logo" src="../assets/images/digiklase.svg" alt="" />
+            <img v-if="store.lang === 'LT'" class="logo" src="../assets/images/digiklase.svg" alt="" />
+            <img v-if="store.lang === 'LV'" class="logo" src="../assets/images/memby.svg" alt="" />
             <div>
                 <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
                     >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
