@@ -634,12 +634,12 @@ const getCurrentYear = () => {
                     Bent <span>1 val./sav.</span>praeėjusių pamokų vaizdo įrašų peržiūrėjimo
                 </p>
                 <p v-if="store.lang === 'LV'">
-                    Vismaz <span>1h/ nedēļā</span>skatīties nodarbību ierakstu video
+                    Vismaz <span>1h/ nedēļā</span>lai skatītos nodarbību ierakstu video
                 </p>
             </div>
             <div class="card card--right">
                 <p v-if="store.lang === 'LT'">Iki <span>1 val./sav.</span>darbo su asistentais</p>
-                <p v-if="store.lang === 'LV'">Līdz <span>1h/ nedēļā</span>strādāt ar asistentiem</p>
+                <p v-if="store.lang === 'LV'">Līdz <span>1h/ nedēļā</span>lai strādātu ar asistentiem</p>
                 <img src="../assets/images/time.svg" alt="Time" />
             </div>
         </div>

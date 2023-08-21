@@ -47,6 +47,10 @@ const handleAccordion = (selectedIndex, items) => {
 </template>
 
 <style scoped>
+.collapse {
+  visibility: unset;
+}
+
 .faq-accordion:first-of-type {
     margin-top: 80px;
 }
