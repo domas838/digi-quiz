@@ -1062,7 +1062,7 @@ const getCurrentYear = () => {
     <div class="wrapper light-grey">
         <div class="container container--narrow">
             <div class="review" v-if="store.lang === 'LT'">
-                <div class="image">
+                <div class="image min-w-[100px]">
                     <img src="../assets/images/reviewer.svg" alt="" />
                 </div>
                 <div class="content">
