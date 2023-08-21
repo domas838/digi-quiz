@@ -435,7 +435,7 @@ const completeness = (step) => {
     <img
         src="./assets/images/Line.svg"
         alt=""
-        class="line-behind-classroom"
+        class="line-behind-classroom hidden lg:block"
         v-if="store.showSecondBenefit && store.step === 5"
     />
     <ProgramRecomendation v-if="store.step === 10 && store.showRecomendations" />

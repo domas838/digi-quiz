@@ -35,7 +35,9 @@ if (store.lang === 'LV') {
         </h1>
         <div v-if="store.lang === 'LT'">
             <div class="benefit-row" v-for="(b, index) in benefits" v-bind:key="index">
-                <div class="icon"><img src="../assets/images/Description.svg" alt="" /></div>
+                <div class="icon">
+                  <img class="min-w-[30px]" src="../assets/images/Description.svg" alt="" />
+                </div>
                 <div class="content">
                     <p v-html="b"></p>
                 </div>
@@ -43,7 +45,9 @@ if (store.lang === 'LV') {
         </div>
         <div v-if="store.lang === 'LV'">
             <div class="benefit-row" v-for="(b, index) in benefitsLV" v-bind:key="index">
-                <div class="icon"><img src="../assets/images/Description.svg" alt="" /></div>
+                <div class="icon">
+                  <img class="min-w-[30px]" src="../assets/images/Description.svg" alt="" />
+                </div>
                 <div class="content">
                     <p v-html="b"></p>
                 </div>

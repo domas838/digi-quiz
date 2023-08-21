@@ -839,40 +839,44 @@ const getCurrentYear = () => {
             <p v-if="store.lang === 'LV'">
                 Šis video īsi un skaidri izskaidros, kā darbojas Memby.
             </p>
-            <div class="video-wrapper" v-if="store.lang === 'LT'">
-                <div class="play-btn" @click="playVideoHandler">
-                    <img
-                        src="../assets/images/play-btn.svg"
-                        alt="Video Placeholder"
-                        loading="lazy"
-                    />
-                </div>
-                <video id="videoHow" width="100%" height="100%" preload="none">
-                    <source src="https://player.vimeo.com/progressive_redirect/playback/675895976/rendition/1080p/file.mp4?loc=external&log_user=0&signature=3eebbf6e5f7292607f082f979d4781f7d57ddb7e374eb8b052c15e901c485822" type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
 
-                <div class="pause-btn" @click="pauseVideoHandler">
-                    <img src="../assets/images/pause-btn.svg" alt="" />
-                </div>
+            <div class="mt-16 rounded-lg">
+              <div style="padding:56.25% 0 0 0;position:relative;"><iframe :src="$t('VimeoExplainerLink')" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Memby - aiskinamasis video - video - 5.0v.mp4"></iframe></div>
             </div>
-            <div class="video-wrapper" v-if="store.lang === 'LV'">
-              <div class="play-btn" @click="playVideoHandler">
-                <img
-                    src="../assets/images/play-btn.svg"
-                    alt="Video Placeholder"
-                    loading="lazy"
-                />
-              </div>
-              <video id="videoHow" width="100%" height="100%" preload="none">
-                <source src="https://player.vimeo.com/progressive_redirect/playback/853296489/rendition/1080p/file.mp4?loc=external&log_user=0&signature=ec359ee8b0e2f1fd8a34a49d24f215ad11002514507daa97b6ae49372321e18d" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+<!--            <div class="video-wrapper" v-if="store.lang === 'LT'">-->
+<!--                <div class="play-btn" @click="playVideoHandler">-->
+<!--                    <img-->
+<!--                        src="../assets/images/play-btn.svg"-->
+<!--                        alt="Video Placeholder"-->
+<!--                        loading="lazy"-->
+<!--                    />-->
+<!--                </div>-->
+<!--                <video id="videoHow" width="100%" height="100%" preload="none">-->
+<!--                    <source src="https://player.vimeo.com/progressive_redirect/playback/675895976/rendition/1080p/file.mp4?loc=external&log_user=0&signature=3eebbf6e5f7292607f082f979d4781f7d57ddb7e374eb8b052c15e901c485822" type="video/mp4" />-->
+<!--                    Your browser does not support the video tag.-->
+<!--                </video>-->
 
-              <div class="pause-btn" @click="pauseVideoHandler">
-                <img src="../assets/images/pause-btn.svg" alt="" />
-              </div>
-            </div>
+<!--                <div class="pause-btn" @click="pauseVideoHandler">-->
+<!--                    <img src="../assets/images/pause-btn.svg" alt="" />-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="video-wrapper" v-if="store.lang === 'LV'">-->
+<!--              <div class="play-btn" @click="playVideoHandler">-->
+<!--                <img-->
+<!--                    src="../assets/images/play-btn.svg"-->
+<!--                    alt="Video Placeholder"-->
+<!--                    loading="lazy"-->
+<!--                />-->
+<!--              </div>-->
+<!--              <video id="videoHow" width="100%" height="100%" preload="none">-->
+<!--                <source src="https://player.vimeo.com/progressive_redirect/playback/853296489/rendition/1080p/file.mp4?loc=external&log_user=0&signature=ec359ee8b0e2f1fd8a34a49d24f215ad11002514507daa97b6ae49372321e18d" type="video/mp4" />-->
+<!--                Your browser does not support the video tag.-->
+<!--              </video>-->
+
+<!--              <div class="pause-btn" @click="pauseVideoHandler">-->
+<!--                <img src="../assets/images/pause-btn.svg" alt="" />-->
+<!--              </div>-->
+<!--            </div>-->
         </div>
 
         <img class="blue-line-vector" src="../assets/images/blue-line-vector.svg" alt="" />
@@ -913,9 +917,11 @@ const getCurrentYear = () => {
                             Man sanāca uzlabot savu matemātikas vidējo atzīmi par 3 ballēm tikai
                             mēneša laikā
                         </p>
-                        <p v-if="store.lang === 'LT'"><strong>11-okė Sibilė, Panevėžys</strong></p>
+                        <p v-if="store.lang === 'LT'">
+                          <strong>11-okė Sibilė, Panevėžys</strong>
+                        </p>
                         <p v-if="store.lang === 'LV'">
-                            <strong>Sibilė, 11 grade, Panevėžys</strong>
+                            <strong>Sibile, 11. kl.</strong>
                         </p>
                     </div>
                 </div>

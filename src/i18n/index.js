@@ -38,7 +38,8 @@ const i18n = createI18n({
             KlaviyoIntensityTier2: 'apie 2 valandas per savaitę',
             KlaviyoIntensityTier3: 'daugiau nei 3 valandas per savaitę',
             LiveLessonsPerWeek: 'GYVOS pam./sav',
-             ReadMore: 'Daugiau'
+            ReadMore: 'Daugiau',
+            VimeoExplainerLink: 'https://player.vimeo.com/video/675895976?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479'
         },
         lv: {
             RecommendedPlan: 'Abonements, ko iesakām',
@@ -63,7 +64,8 @@ const i18n = createI18n({
             KlaviyoIntensityTier2: 'vidējs (3 mēnešu laikā mēs plānojam sasniegt līdz 2 atzīmēm augstāku rezultātu)',
             KlaviyoIntensityTier3: 'zemāks (plāno sasniegt atzīmju uzlabošanos par 2 tikai 2 mēnešos)',
             LiveLessonsPerWeek: 'tiešraides nedēļā',
-            ReadMore: 'Lasīt vairāk'
+            ReadMore: 'Lasīt vairāk',
+            VimeoExplainerLink: 'https://player.vimeo.com/video/853296489?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479'
         },
     },
 })

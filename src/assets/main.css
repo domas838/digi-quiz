@@ -330,6 +330,7 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
     position: relative;
 }
 .answer__btn span img {
+    min-width: 50px;
     z-index: 1;
 }
 .digi-input {
