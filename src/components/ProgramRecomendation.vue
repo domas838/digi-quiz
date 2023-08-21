@@ -271,73 +271,73 @@ const faqLT = reactive([
 ])
 const faqLV = reactive([
     {
-        title: 'Cik maksā Memby nodarbības?',
-        answer: '<p>Izmēģinājuma nodarbība maksā 5 eiro. Mēneša abonements maksā 30 eiro. Slēdzot līgumu uz 9 mēnešiem, maksa ir 25 eiro mēnesī.</p>',
-        isExpanded: false
-    },
-    {
-        title: 'Kas ir iekļauts abonementa cenā?',
-        answer: '<p>Abonements nodrošina piekļuvi 8-16 nodarbībām mēnesī.</p>',
-        isExpanded: false
-    },
-    {
-        title: 'Kas ir regulārie maksājumi?',
-        answer: '<p>Memby ir pieejami periodiskie maksājumi. Tas nozīmē, ka nauda tiek ieturēta automātiski ik pēc 30 dienām. Automātisko maksājumu ir iespējams atcelt.</p>',
-        isExpanded: false
-    },
-    {
-        title: 'Kā no kartes tiek atskaitīta nauda?',
-        answer: '<p>Izvēloties viena mēneša plānu, pēc 30 dienām plāns tiks atjaunots un nauda izņemta automātiski. Lai to pārtrauktu, iestatījumos ir jāatceļ automātiskais maksājums. Ja izvēlētais plāns ir noteikta termiņa (9 mēnešiem), nauda tiks automātiski atskaitīta ik pēc 30 dienām līdz plāna beigām. Kad noteikta termiņa plāns beigsies, varēsi pārtraukt automātisko maksājumu vai turpināt vēl vienu mēnesi par to pašu mēneša cenu!</p><p>P.S. nekas no tā neattiecas uz Paysera maksājumiem.</p>',
-        isExpanded: false
-    },
-    {
-        title: 'Kur var redzēt, kāds plāns ir izvēlēts un cik ilgi tas ir derīgs?',
-        answer: '<p>To var pārbaudīt sava konta iestatījumos, ja tas nedarbojas – droši raksti mums un mēs palīdzēsim.</p>',
-        isExpanded: false
-    },
-    {
-        title: 'Vai varu mainīt izvēlēto plānu?',
-        answer: '<p>Var mainīt tikai no lētāka plāna uz dārgāku. Nav iespēju pāriet no dārgāka plāna uz lētāku.</p>',
-        isExpanded: false
-    },
-    {
-        title: 'Vai Memby mācīta viela sakrīt ar skolas vielu?',
-        answer: '<p>Nodarbību laikā izejam cauri vispārējai mācību programmai. Kā arī bieži vien skolēniem tiek dota iespēja balsot par nākamās nodarbības tēmu – tādā veidā pielāgojamies skolēnu vajadzībām. Ja pamanām, ka balsu sadalījums ir pārāk liels, vadām vairākas nodarbības, lai apmierinātu visu grupu vajadzības.</p>',
-        isExpanded: false
-    },
-    {
-        title: 'Vai es varu uzdot jautājumus nodarbību laikā?',
-        answer: '<p>Jā! Ir 2 veidi:</p><p>1) Vari uzdot jautājumu tērzēšanas logā.</p><p>2) Vari pacelt roku un uzdot skolotājam jautājumu tiešsaistē.</p>',
-        isExpanded: false
-    },
-    {
-        title: 'Kā pievienoties Memby?',
-        answer: '<p>1. Mūsu cenu lapā izvēlies sev tīkamāko plānu.</p><p>2. Veic drošu un vienkāršu maksājumu un pabeidz reģistrāciju.</p><p>3. Pievienojies nodarbībām un sasniedz labākus rezultātus.</p>',
-        isExpanded: false
-    },
-    {
-        title: 'No kuras klases var mācīties Memby?',
-        answer: '<p>Mācām 5.-12. klašu skolēnus.</p>',
-        isExpanded: false
-    },
-    {
-        title: 'Vai par aizvadīto nodarbību ierakstiem jāmaksā papildus?',
-        answer: '<p>Nē, viss ir iekļauts plānā, tāpēc vari droši skatīties nodarbību ierakstus.</p>',
+        title: 'Kad ir vispiemērotākais laiks sākt mācīties Memby?',
+        answer: '<p>Tam pavisam nav nozīmes! Memby vari pievienoties mācību sākumā, vidū vai pat uz pašām mācību gada beigām. Mūsu tiešsaistes nodarbības notiek saskaņā ar skolas mācību programmu, taču ir iespēja piekļūt arī iepriekšējo nodarbību ierakstiem pēc nepieciešamības.</p>',
         isExpanded: false
     },
     {
         title: 'Vai nodarbības notiek grupās vai individuāli?',
-        answer: '<p>Nodarbības notiek nelielās grupās.</p>',
+        answer: '<p>Nodarbības notiek mazās grupās.</p>',
         isExpanded: false
     },
     {
-        title: 'Vai sagatavojat valsts centralizētajam matemātikas eksāmeniem?',
-        answer: '<p>Jā, 11.-12. klašu skolēni pie mums var gatavoties matemātikas eksāmenam.</p>',
+        title: 'Vai Memby apgūstamās tēmas atbilst skolā mācītajam?',
+        answer: '<p>Mācību gada laikā mēs Memby ejam cauri visai vispārējai programmai. Tomēr, šis ir jautājums individuāli katram skolēnam atsevišķi. Viss ir atkarīgs no skolas un kādu programmu tā izmanto.</p>',
         isExpanded: false
     },
     {
-        title: 'Kādos laikos ir nodarbības?',
-        answer: '<p>Nodarbības notiek darba dienās no plkst. 16.00 līdz 20.00. Lai iegūtu sīkāku informāciju, skaties mūsu grafiku! Sestdienās veicam papildus nodarbības eksāmena sagatavošanai. To laikā risinām un analizējam eksāmena uzdevumus.</p>',
+        title: 'Vai es varu mainīt iegādāto abonementu uz kādu citu?',
+        answer: '<p>Ir iespējams samainīt tikai no lētākā abonementa uz dārgāku. Nav opciju samainīt dārgāko abonementu uz lētāku.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Kā tiek nauda noņemta no kartes?',
+        answer: '<p>Izvēloties 1 mēneša abonementu, pēc 30 dienām tas tiks atjaunots un nauda tiks automātiski noskaitīta. Lai apturētu abonementu, to nepieciešams atcelt iestatījumos. Ja Jūsu abonements ir fiksēts (3 vai 9 mēneši), tad nauda tiks noskaitīta automātiski ik pēc 30 dienām, līdz beigsies fiksētais termiņš. Kad Jūsu abonements beidzas, Jūs varat apturēt automātisko samaksas ieturēšanu vai turpināt uz vēl vienu mēnesi, par to pašu cenu (kamēr Jūs to apturēsiet)!</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Cikos notiek nodarbības?',
+        answer: '<p>Nodarbības notiek darba dienās no 16:00 līdz 20:00. Apskati mūsu grafiku plašākai informācijai. Sestdienās notiek centralizēto eksāmenu gatavošanās nodarbības, kur tiek risināti un analizēti eksāmenu uzdevumi.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Vai mēs sagatavojam valsts centralizētajiem eksāmeniem?',
+        answer: '<p>Jā, protams, mēs sagatavojam. 12. klases skolēni var sagatavoties ar mums ar speciālizētām CE nodarbībām, priekš bioloģijas, ķīmijas, fizikas, vēstures, latviešu valodas un matemātikas eksāmena.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Vai nodarbību ieraksti, kas ir jau notikuši, ir par papildus samaksu?',
+        answer: '<p>Nē, tas viss ir iekļauts abonementā, lai pēc tam droši varētu atkārtoti skatīties iegādātās nodarbības.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Kā es varu pievienoties Discord kopienai?',
+        answer: '<p>Kad būsi pieslēdzies ar savu profilu, lapas augšdaļā atradīsi Discord aplikāciju un pogu ‘’pieslēgties’’ pa labi.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Vai ir iespējams mācīties ar Memby no pirmās klases?',
+        answer: '<p>Mēs apmācām skolēnus 5.-12. klasei.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Kā pievienoties Memby?',
+        answer: '<p>1.Izvēlies, kuras nodarbības vēlēsies apgūt un kurš abonementa veids uzrunā vislabāk mūsu izcenojuma lapā.</p><p>2.Veic drošu, vienkāršu maksājumu un pabeidz ar reģistrēšanos mācīšanās platformā.</p><p>3.Pievienojies nodarbībām un izbaudi kā tas ir - uzlabot rezultātus.</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Vai es drīkstu uzdot jautājumus nodarbības laikā?',
+        answer: '<p>Jā! Tam ir divi veidi:</p><p>1)Tu vari uzdot jautājumu ziņojumu lodziņā.</p><p>2)Tu vari pacelt roku un uzdot pasniedzējam jautājumu tiešraidē (ar balsi).</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Kādi ir periodiskie maksājumi?',
+        answer: '<p>Memby ir pieejami periodiskie maksājumi, kad nauda tiek automātiski noskaitīta ik pēc 30 dienām, ja tiek veikta samaksa ar karti. Protams, automātiskie maksājumi var tikt atcelti. Mēs esam izvēlējušies šādu modeli, jo kad Jūs veicat Memby abonementa pirkumu un izvēlaties apmaksāt to ar karti, tad Jums vairs nebūs jāuztraucas par maksājumiem un</p>',
+        isExpanded: false
+    },
+    {
+        title: 'Cik maksā nodarbības?',
+        answer: '<p>Ir 3 dažādi plāni, no kuriem varat izvēlēties:</p><p>- Viens priekšmets (no EUR 22.00/mēnesī)</p><p>-Divi priekšmeti (no EUR 44.00/mēnesī)</p><p>-Neierobežots skaits priekšmetu ( no EUR 49.00/mēnesī)</p><p>Cenā ir iekļauti arī nodarbību ieraksti un skolēnam individuāla palīdzība pēc nepieciešamības.</p><p>Ņem vērā, ka, ja izvēlies maksāt ar karti, nauda tik noskaitīta automātiski ik pēc 30 dienām. Automātisko maksājumu var atcelt.</p>',
         isExpanded: false
     }
 ])
