@@ -76,9 +76,8 @@ const selectAnswer = (answerIndex) => {
                     break
                 case 2:
                     store.PROFILE3 = ['Exam-oriented']
-                    if (store.lang === 'LT') {
-                        store.klaviyoMotivation = t('KlaviyoExamOrientedMotivation')
-                    }
+                    store.klaviyoMotivation = t('KlaviyoExamOrientedMotivation')
+
                     break
                 case 3:
                     store.PROFILE3 = ['Struggling']
