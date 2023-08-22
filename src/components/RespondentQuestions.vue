@@ -3,6 +3,7 @@ import { store } from '../store'
 
 import { reactive } from 'vue'
 import {useI18n} from "vue-i18n";
+import { Personas } from "../helpers";
 
 const props = defineProps(['questions', 'next'])
 
@@ -13,23 +14,24 @@ const selectClass = (classNumber) => {
 
     props.next()
 }
+
 const selectAnswer = (answerIndex) => {
     switch (store.step) {
-        // PROFILE1
+        // PROFILE1 LEVEL QUESTION
         case 2:
             switch (answerIndex) {
                 case 1:
-                    store.PROFILE1 = ['Ambitious student', 'Exam-oriented']
+                    store.PROFILE1 = [Personas.AMBITIOUS, Personas.EXAM_ORIENTED] //+1 AMBITIOUS +1 EXAM
                     store.childLevel = 'A'
                     store.klaviyoStudentLevel = t('AKlaviyoStudentLevel')
                     break
                 case 2:
-                    store.PROFILE1 = ['Exam-oriented', 'Busy multitasker']
+                    store.PROFILE1 = [Personas.EXAM_ORIENTED, Personas.BUSY_MULTI_TASKER] //+1 BUSYMULTITASKER +1 EXAM
                     store.childLevel = 'B'
                     store.klaviyoStudentLevel = t('BKlaviyoStudentLevel')
                     break
                 case 3:
-                    store.PROFILE1 = ['Struggling', 'Busy multitasker']
+                    store.PROFILE1 = [Personas.STRUGGLING, Personas.BUSY_MULTI_TASKER] //+1 BUSYMULTITASKER +1 STRUGGLING
                     store.childLevel = 'C'
                     store.klaviyoStudentLevel = t('CKlaviyoStudentLevel')
                     break
@@ -38,23 +40,24 @@ const selectAnswer = (answerIndex) => {
                     break
             }
             break
-        // PROFILE2
+
+        // PROFILE2 GOAL QUESTION
         case 3:
             switch (answerIndex) {
                 case 1:
-                    store.PROFILE2 = ['Ambitious student']
+                    store.PROFILE2 = [Personas.AMBITIOUS] //+1 EXAM ORIENTED
                     store.klaviyoGoal = t('KlaviyoAmbitiousGoal')
                     break
                 case 2:
-                    store.PROFILE2 = ['Exam-oriented']
+                    store.PROFILE2 = [Personas.EXAM_ORIENTED] //+1 STRUGGLING
                     store.klaviyoGoal = t('KlaviyoExamOrientedGoal')
                     break
                 case 3:
-                    store.PROFILE2 = ['Struggling']
+                    store.PROFILE2 = [Personas.STRUGGLING] //0 POINTS
                     store.klaviyoGoal = t('KlaviyoStrugglingGoal')
                     break
                 case 4:
-                    store.PROFILE2 = ['Busy multitasker']
+                    store.PROFILE2 = [Personas.BUSY_MULTI_TASKER] //+1 BUSY MULTI-TASKER
                     store.klaviyoGoal = t('KlaviyoBusyMultiTaskerGoal')
                     break
                 default:
@@ -66,27 +69,29 @@ const selectAnswer = (answerIndex) => {
         case 4:
             break
 
-        // PROFILE 3
+        // PROFILE 3 MOTIVATION QUESTION
         case 5:
             switch (answerIndex) {
                 case 1:
-                    store.PROFILE3 = ['Ambitious student']
+                    store.PROFILE3 = [Personas.AMBITIOUS] // +1 POINT AMBITIOUS
                     store.klaviyoMotivation = t('KlaviyoAmbitiousMotivation')
 
                     break
                 case 2:
-                    store.PROFILE3 = ['Exam-oriented']
+                    store.PROFILE3 = [Personas.EXAM_ORIENTED] // +1 EXAM ORIENTED
                     store.klaviyoMotivation = t('KlaviyoExamOrientedMotivation')
 
                     break
                 case 3:
-                    store.PROFILE3 = ['Struggling']
+                    store.PROFILE3 = [Personas.EXAM_ORIENTED] // +1 EXAM ORIENTED
                     store.klaviyoMotivation = t('KlaviyoStrugglingMotivation')
                     break
                 case 4:
-                    store.PROFILE3 = ['Busy multitasker']
+                    store.PROFILE3 = [Personas.STRUGGLING] // +1 STRUGGLING
                     store.klaviyoMotivation = t('KlaviyoBusyMultiTaskerMotivation')
                     break
+
+                //DELETED ANSWER
                 case 5:
                     store.PROFILE3 = ['Socializer']
                     break
@@ -100,15 +105,19 @@ const selectAnswer = (answerIndex) => {
         case 6:
             switch (answerIndex) {
                 case 1:
-                    props.next()
+                    store.PROFILE4 = [Personas.AMBITIOUS, Personas.EXAM_ORIENTED]
+
+                    props.next() // +1 AMBITIOUS STUDENT +1 EXAM ORIENTED
                     return
-                case 2:
-                    store.TIER = 'TIER0'
+                case 2: // +1 STRUGGLING
+                    store.PROFILE4 = [Personas.STRUGGLING]
+                    // store.TIER = 'TIER0'
                     break
-                case 3:
+                case 3: // +1 BUSY MULTITASKER
+                    store.PROFILE4 = [Personas.BUSY_MULTI_TASKER]
                     props.next()
                     return
-                case 4:
+                case 4: // +0 niekam neduoda
                     props.next()
                     return
                 default:
@@ -116,26 +125,21 @@ const selectAnswer = (answerIndex) => {
             }
             break
 
+      //NUSAKO TIER
         case 7:
             switch (answerIndex) {
                 case 1:
-                    if (store.TIER !== 'TIER0') {
-                        store.TIER = 'TIER1'
-                    }
+                  store.TIER = '1'
                     store.klaviyoIntensity = t('KlaviyoIntensityTier1')
 
                     break
                 case 2:
-                    if (store.TIER !== 'TIER0') {
-                        store.TIER = 'TIER2'
-                    }
+                    store.TIER = '2'
                     store.klaviyoIntensity = t('KlaviyoIntensityTier2')
 
                     break
                 case 3:
-                    if (store.TIER !== 'TIER0') {
-                        store.TIER = 'TIER3'
-                    }
+                    store.TIER = '3'
                     store.klaviyoIntensity = t('KlaviyoIntensityTier3')
 
                     break

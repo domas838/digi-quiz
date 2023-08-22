@@ -11,139 +11,6 @@ import { pageview } from 'vue-gtag'
 
 const url = new URL(window.location.href)
 
-const generateProgramRecomendations = (item) => {
-    switch (item.values.Tier) {
-        case '0':
-            if (
-                (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER0) &&
-                item.values.Grade == Number(store.selectedClass) &&
-                item.values.Persona === store.selectedPersona &&
-                store.selectedSubjects.includes(item.values.Subject)
-            ) {
-                store.recomendationsArrTIER0.push(item)
-                store.membyIDsArray.push(item.values.MembyID)
-            }
-
-            break
-        case '1':
-            if (
-                (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER1) &&
-                item.values.Grade === Number(store.selectedClass) &&
-                item.values.Persona === store.selectedPersona &&
-                store.selectedSubjects.includes(item.values.Subject)
-            ) {
-                store.recomendationsArrTIER1.push(item)
-                store.membyIDsArray.push(item.values.MembyID)
-            }
-
-            break
-        case '2':
-            if (
-                (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER2) &&
-                item.values.Grade === Number(store.selectedClass) &&
-                item.values.Persona === store.selectedPersona &&
-                store.selectedSubjects.includes(item.values.Subject)
-            ) {
-                store.recomendationsArrTIER2.push(item)
-                store.membyIDsArray.push(item.values.MembyID)
-            }
-
-            break
-        case '3':
-            if (
-                (item.values.Tag === 'Advanced' || item.values.Tag === store.TIER3) &&
-                item.values.Grade === Number(store.selectedClass) &&
-                item.values.Persona === store.selectedPersona &&
-                store.selectedSubjects.includes(item.values.Subject)
-            ) {
-                store.recomendationsArrTIER3.push(item)
-                store.membyIDsArray.push(item.values.MembyID)
-            }
-
-            break
-
-        default:
-            break
-    }
-    if (
-        item.values.Persona === 'Everyone' &&
-        item.values.Grade == Number(store.selectedClass) &&
-        store.selectedSubjects.includes(item.values.Subject)
-    ) {
-        store.recomendationsArrEVERYONE.push(item)
-        store.membyIDsArray.push(item.values.MembyID)
-    }
-}
-const selectMostRecommendedPrograms = () => {
-    if (
-        store.recomendationsArrTIER0.length > 0 &&
-        store.recomendationsArrTIER1.length === 0 &&
-        store.recomendationsArrTIER2.length === 0 &&
-        store.recomendationsArrTIER3.length === 0
-    ) {
-        store.TIER0isRecomended = true
-    } else {
-        store.TIER0isRecomended = true
-    }
-
-    if (
-        store.recomendationsArrTIER0.length === 0 &&
-        store.recomendationsArrTIER1.length > 0 &&
-        store.recomendationsArrTIER2.length === 0 &&
-        store.recomendationsArrTIER3.length === 0
-    ) {
-        store.TIER1isRecomended = true
-    } else if (
-        store.recomendationsArrTIER0.length === 0 &&
-        store.recomendationsArrTIER1.length > 0
-    ) {
-        store.TIER1isRecomended = true
-    } else {
-        store.TIER1isRecomended = false
-    }
-    if (
-        store.recomendationsArrTIER0.length === 0 &&
-        store.recomendationsArrTIER1.length === 0 &&
-        store.recomendationsArrTIER2.length > 0 &&
-        store.recomendationsArrTIER3.length === 0
-    ) {
-        store.TIER2isRecomended = true
-    } else if (
-        store.recomendationsArrTIER1.length === 0 &&
-        store.recomendationsArrTIER2.length > 0
-    ) {
-        store.TIER2isRecomended = true
-    } else {
-        store.TIER2isRecomended = false
-    }
-    if (
-        store.recomendationsArrTIER0.length === 0 &&
-        store.recomendationsArrTIER1.length === 0 &&
-        store.recomendationsArrTIER2.length === 0 &&
-        store.recomendationsArrTIER3.length > 0
-    ) {
-        store.TIER3isRecomended = true
-    } else if (
-        store.recomendationsArrTIER2.length === 0 &&
-        store.recomendationsArrTIER3.length > 0
-    ) {
-        store.TIER3isRecomended = true
-    } else {
-        store.TIER3isRecomended = false
-    }
-
-    if (
-        store.recomendationsArrTIER0.length === 0 &&
-        store.recomendationsArrTIER1.length === 0 &&
-        store.recomendationsArrTIER2.length === 0 &&
-        store.recomendationsArrTIER3.length === 0 &&
-        store.recomendationsArrEVERYONE.length > 0
-    ) {
-        store.EVERYONEisRecomended = true
-    } else {
-        store.EVERYONEisRecomended = false
-    }
-}
 const localization = reactive({
     childBtnLabel: 'Esu mokinys',
     parentBtnLabel: 'Esu tėvelis/globėjas'
@@ -191,10 +58,7 @@ onMounted(() => {
             url.searchParams.has('class') &&
             url.searchParams.has('level') &&
             url.searchParams.has('subjects') &&
-            url.searchParams.has('TIER0')) ||
-        url.searchParams.has('TIER1') ||
-        url.searchParams.has('TIER2') ||
-        url.searchParams.has('TIER3')
+            url.searchParams.has('tier'))
     ) {
         // Display results
         store.step = 10
@@ -205,26 +69,7 @@ onMounted(() => {
         store.selectedClass = url.searchParams.get('class')
         store.childLevel = url.searchParams.get('level')
         store.selectedSubjects = JSON.parse(url.searchParams.get('subjects'))
-
-        store.TIER0 = url.searchParams.get('TIER0TAG')
-        store.TIER1 = url.searchParams.get('TIER1TAG')
-        store.TIER2 = url.searchParams.get('TIER2TAG')
-        store.TIER3 = url.searchParams.get('TIER3TAG')
-
-        if (url.searchParams.has('TIER0')) {
-            store.recomendationsArrTIER0 = JSON.parse(url.searchParams.get('TIER0'))
-        }
-        if (url.searchParams.has('TIER1')) {
-            store.recomendationsArrTIER1 = JSON.parse(url.searchParams.get('TIER1'))
-        }
-        if (url.searchParams.has('TIER2')) {
-            store.recomendationsArrTIER2 = JSON.parse(url.searchParams.get('TIER2'))
-        }
-        if (url.searchParams.has('TIER3')) {
-            store.recomendationsArrTIER3 = JSON.parse(url.searchParams.get('TIER3'))
-        }
-
-        selectMostRecommendedPrograms()
+        store.TIER = url.searchParams.get('tier')
     }
 })
 
@@ -336,7 +181,7 @@ const completeness = (step) => {
             <img v-if="store.lang === 'LV'" src="./assets/images/memby.svg" alt="Memby logo" />
         </div>
     </div>
-    <div class="container" v-if="store.step !== 0 && store.step !== 10">
+    <div class="container" v-if="store.step !== 0 && ! store.showRecomendations">
         <div
             class="brand-logo"
             v-if="
@@ -387,7 +232,7 @@ const completeness = (step) => {
         </div>
         <div
             class="answer__container answer__container--wide"
-            v-if="store.respondent === 'child' && store.step !== 10"
+            v-if="store.respondent === 'child' && ! store.showRecomendations"
         >
             <RespondentQuestions
                 v-if="store.lang === 'LT'"
@@ -402,7 +247,7 @@ const completeness = (step) => {
         </div>
         <div
             class="answer__container answer__container--wide"
-            v-if="store.respondent === 'parent' && store.step !== 10"
+            v-if="store.respondent === 'parent' && ! store.showRecomendations"
         >
             <RespondentQuestions
                 v-if="store.lang === 'LT'"
@@ -438,5 +283,5 @@ const completeness = (step) => {
         class="line-behind-classroom hidden lg:block"
         v-if="store.showSecondBenefit && store.step === 5"
     />
-    <ProgramRecomendation v-if="store.step === 10 && store.showRecomendations" />
+    <ProgramRecomendation v-if="store.showRecomendations" />
 </template>

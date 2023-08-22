@@ -39,7 +39,10 @@ const i18n = createI18n({
             KlaviyoIntensityTier3: 'daugiau nei 3 valandas per savaitę',
             LiveLessonsPerWeek: 'GYVOS pam./sav',
             ReadMore: 'Daugiau',
-            VimeoExplainerLink: 'https://player.vimeo.com/video/675895976?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479'
+            VimeoExplainerLink: 'https://player.vimeo.com/video/675895976?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479',
+            CalculatingResults: 'Skaičiuojame rezultatus...',
+            WeRecommendingThesePrograms: 'Rekomenduojame mokytis pagal šias programas:',
+            AllPlansUrl: 'https://app.digiklase.lt/plans/choose'
         },
         lv: {
             RecommendedPlan: 'Abonements, ko iesakām',
@@ -65,7 +68,10 @@ const i18n = createI18n({
             KlaviyoIntensityTier3: 'zemāks (plāno sasniegt atzīmju uzlabošanos par 2 tikai 2 mēnešos)',
             LiveLessonsPerWeek: 'tiešraides nedēļā',
             ReadMore: 'Lasīt vairāk',
-            VimeoExplainerLink: 'https://player.vimeo.com/video/853296489?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479'
+            VimeoExplainerLink: 'https://player.vimeo.com/video/853296489?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479',
+            CalculatingResults: 'Rezultāti tiek aprēķināti......',
+            WeRecommendingThesePrograms: 'Mēs iesakam mācīties atbilstoši sekojošām programmām:',
+            AllPlansUrl: 'https://app.memby.lv/plans/choose'
         },
     },
 })

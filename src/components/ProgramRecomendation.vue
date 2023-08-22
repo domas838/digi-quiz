@@ -2,15 +2,13 @@
 import { reactive } from 'vue'
 import { store } from '../store'
 import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import SectionCTA from './SectionCTA.vue'
-import ProgramSlide from './ProgramSlide.vue'
+import ProgramsSlider from '../components/ProgramsSlider.vue'
 import { ref } from 'vue'
 import { vElementVisibility } from '@vueuse/components'
+import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import AccordionFAQ from './AccordionFAQ.vue'
 import SuggestedPlan from "./SuggestedPlan.vue";
-
-const allPlansURL = 'https://app.digiklase.lt/plans/choose'
 
 const url = new URL(window.location.href)
 
@@ -66,32 +64,13 @@ const isVisible = ref(false)
 function onElementVisibility(state) {
   isVisible.value = state
 }
-const isOfferVisible = ref(false)
-function onOfferVisibility(state) {
-    isOfferVisible.value = state
-}
+
 const footerTarget = ref(null)
 const isFooterVisible = ref(false)
 function onFooterVisibility(state) {
     isFooterVisible.value = state
 }
-const settings = {
-    itemsToShow: 4,
-    snapAlign: 'start',
-    breakpoints: {
-        0: {
-            itemsToShow: 1
-        },
-        // 700px and up
-        700: {
-            itemsToShow: 2
-        },
-        // 1024 and up
-        1024: {
-            itemsToShow: 4
-        }
-    }
-}
+
 const singleSlideSettings = {
     itemsToShow: 1,
     snapAlign: 'start',
@@ -124,19 +103,6 @@ const testimSettings = {
             itemsToShow: 3.8
         }
     }
-}
-
-const playVideoHandler = () => {
-    if (!document.getElementById('videoHow').playing) {
-        document.querySelector('.play-btn').classList.add('isPlaying')
-        document.querySelector('.pause-btn').classList.add('isPlaying')
-        document.getElementById('videoHow').play()
-    }
-}
-const pauseVideoHandler = () => {
-    document.querySelector('.play-btn').classList.remove('isPlaying')
-    document.querySelector('.pause-btn').classList.remove('isPlaying')
-    document.getElementById('videoHow').pause()
 }
 
 const storiesArray = [
@@ -381,7 +347,7 @@ switch (store.selectedPersona) {
         break
     case 'Struggling':
         if (store.lang === 'LT') {
-            store.selectedPersonaTranslation = 'Atkaklius siekėjas'
+            store.selectedPersonaTranslation = 'Atkaklus siekėjas'
         }
         if (store.lang === 'LV') {
             store.selectedPersonaTranslation = 'Centīgais mērķu sasniedzējs'
@@ -413,84 +379,9 @@ const getCurrentYear = () => {
     </header>
     <div class="wrapper yellow">
         <div class="container">
-            <h1 v-if="store.lang === 'LT'">Rekomenduojame mokytis pagal šias programas:</h1>
-            <h1 v-if="store.lang === 'LV'">
-                Mēs iesakam mācīties atbilstoši sekojošām programmām:
-            </h1>
-            <carousel v-bind="settings" class="carousel">
-                <slide v-for="(item, index) in store.recomendationsArrTIER0" :key="index">
-                    <ProgramSlide
-                        :index="index"
-                        :isTopRecomendation="store.TIER0isRecomended"
-                        :picture="item.values.Picture"
-                        :subject="item.values.Subject"
-                        :programTitle="item.values.ProgramName"
-                        :teacherName="item.values.TeacherName"
-                        :teacherImage="item.values.TeacherImage"
-                        :description="item.values.Description"
-                        :lessonsCount="item.values.LessonsPerWeek"
-                    />
-                </slide>
 
-                <slide v-for="(item, index) in store.recomendationsArrTIER1" :key="index">
-                    <ProgramSlide
-                        :index="index"
-                        :isTopRecomendation="store.TIER1isRecomended"
-                        :picture="item.values.Picture"
-                        :subject="item.values.Subject"
-                        :programTitle="item.values.ProgramName"
-                        :teacherName="item.values.TeacherName"
-                        :teacherImage="item.values.TeacherImage"
-                        :description="item.values.Description"
-                        :lessonsCount="item.values.LessonsPerWeek"
-                    />
-                </slide>
+          <ProgramsSlider />
 
-                <slide v-for="(item, index) in store.recomendationsArrTIER2" :key="index">
-                    <ProgramSlide
-                        :index="index"
-                        :isTopRecomendation="store.TIER2isRecomended"
-                        :picture="item.values.Picture"
-                        :subject="item.values.Subject"
-                        :programTitle="item.values.ProgramName"
-                        :teacherName="item.values.TeacherName"
-                        :teacherImage="item.values.TeacherImage"
-                        :description="item.values.Description"
-                        :lessonsCount="item.values.LessonsPerWeek"
-                    />
-                </slide>
-
-                <slide v-for="(item, index) in store.recomendationsArrTIER3" :key="index">
-                    <ProgramSlide
-                        :index="index"
-                        :isTopRecomendation="store.TIER3isRecomended"
-                        :picture="item.values.Picture"
-                        :subject="item.values.Subject"
-                        :programTitle="item.values.ProgramName"
-                        :teacherName="item.values.TeacherName"
-                        :teacherImage="item.values.TeacherImage"
-                        :description="item.values.Description"
-                        :lessonsCount="item.values.LessonsPerWeek"
-                    />
-                </slide>
-                <slide v-for="(item, index) in store.recomendationsArrEVERYONE" :key="index">
-                    <ProgramSlide
-                        :index="index"
-                        :isTopRecomendation="store.EVERYONEisRecomended"
-                        :picture="item.values.Picture"
-                        :subject="item.values.Subject"
-                        :programTitle="item.values.ProgramName"
-                        :teacherName="item.values.TeacherName"
-                        :teacherImage="item.values.TeacherImage"
-                        :description="item.values.Description"
-                        :lessonsCount="item.values.LessonsPerWeek"
-                    />
-                </slide>
-
-                <template #addons>
-                    <navigation />
-                </template>
-            </carousel>
             <div
                 class="content--flex last-section-block"
                 v-if="store.lang === 'LT' && store.childLevel === 'A'"
@@ -655,56 +546,6 @@ const getCurrentYear = () => {
       v-element-visibility="onElementVisibility"
       :selected-subjects-length="store.selectedSubjects.length"
   />
-
-<!--  <div class="wrapper light">-->
-<!--    <div-->
-<!--        class="container"-->
-<!--        :class="{ sticky: isVisible }"-->
-<!--        ref="target"-->
-<!--        v-element-visibility="onElementVisibility"-->
-<!--    >-->
-<!--        <div class="cta-card">-->
-<!--            <div class="header">-->
-<!--                <p v-if="store.lang === 'LT'">Rekomenduojamas planas:</p>-->
-<!--                <p v-if="store.lang === 'LV'">Abonements, ko iesakām</p>-->
-<!--            </div>-->
-<!--            <div class="content">-->
-<!--                <div class="title" v-if="store.lang === 'LT'">-->
-<!--                    <h3 v-if="store.selectedSubjects.length === 1">„1 dalyko planas“</h3>-->
-<!--                    <h3 v-if="store.selectedSubjects.length === 2">„2 dalykų planas“</h3>-->
-<!--                    <h3 v-if="store.selectedSubjects.length >= 3">-->
-<!--                        „Visi mokykliniai dalykai ir visi būreliai“-->
-<!--                    </h3>-->
-<!--                </div>-->
-<!--                <div class="title" v-if="store.lang === 'LV'">-->
-<!--                    <h3 v-if="store.selectedSubjects.length === 1">„1 TO-DO“</h3>-->
-<!--                    <h3 v-if="store.selectedSubjects.length === 2">„2 To-DO“</h3>-->
-<!--                    <h3 v-if="store.selectedSubjects.length >= 3">„Visi mokykliniai TO-DO“</h3>-->
-<!--                </div>-->
-<!--                <div class="price" v-if="store.lang === 'LT'">-->
-<!--                    <p>Nuo &nbsp;</p>-->
-<!--                    <p v-if="store.selectedSubjects.length === 1"><span>24,45 </span>€/mėn.</p>-->
-<!--                    <p v-if="store.selectedSubjects.length === 2"><span>48,90 </span>€/mėn.</p>-->
-<!--                    <p v-if="store.selectedSubjects.length >= 3"><span>54,90 </span>€/mėn.</p>-->
-<!--                </div>-->
-<!--                <div class="price" v-if="store.lang === 'LV'">-->
-<!--                    <p>No &nbsp;</p>-->
-<!--                    <p v-if="store.selectedSubjects.length === 1"><span>24,45 </span>€/mēnesī</p>-->
-<!--                    <p v-if="store.selectedSubjects.length === 2"><span>48,90 </span>€/mēnesī</p>-->
-<!--                    <p v-if="store.selectedSubjects.length >= 3"><span>54,90 </span>€/mēnesī</p>-->
-<!--                </div>-->
-<!--                <div class="action">-->
-<!--                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"-->
-<!--                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""-->
-<!--                    /></a>-->
-<!--                    <a :href="allPlansURL" target="_blank" class="cta-link">{{-->
-<!--                        btnLabel.showAll-->
-<!--                    }}</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--  </div>-->
     <div class="wrapper light">
         <div class="container">
             <h2 class="section-title--small" v-if="store.lang === 'LT'">
@@ -843,40 +684,6 @@ const getCurrentYear = () => {
             <div class="mt-16 rounded-lg">
               <div style="padding:56.25% 0 0 0;position:relative;"><iframe :src="$t('VimeoExplainerLink')" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Memby - aiskinamasis video - video - 5.0v.mp4"></iframe></div>
             </div>
-<!--            <div class="video-wrapper" v-if="store.lang === 'LT'">-->
-<!--                <div class="play-btn" @click="playVideoHandler">-->
-<!--                    <img-->
-<!--                        src="../assets/images/play-btn.svg"-->
-<!--                        alt="Video Placeholder"-->
-<!--                        loading="lazy"-->
-<!--                    />-->
-<!--                </div>-->
-<!--                <video id="videoHow" width="100%" height="100%" preload="none">-->
-<!--                    <source src="https://player.vimeo.com/progressive_redirect/playback/675895976/rendition/1080p/file.mp4?loc=external&log_user=0&signature=3eebbf6e5f7292607f082f979d4781f7d57ddb7e374eb8b052c15e901c485822" type="video/mp4" />-->
-<!--                    Your browser does not support the video tag.-->
-<!--                </video>-->
-
-<!--                <div class="pause-btn" @click="pauseVideoHandler">-->
-<!--                    <img src="../assets/images/pause-btn.svg" alt="" />-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="video-wrapper" v-if="store.lang === 'LV'">-->
-<!--              <div class="play-btn" @click="playVideoHandler">-->
-<!--                <img-->
-<!--                    src="../assets/images/play-btn.svg"-->
-<!--                    alt="Video Placeholder"-->
-<!--                    loading="lazy"-->
-<!--                />-->
-<!--              </div>-->
-<!--              <video id="videoHow" width="100%" height="100%" preload="none">-->
-<!--                <source src="https://player.vimeo.com/progressive_redirect/playback/853296489/rendition/1080p/file.mp4?loc=external&log_user=0&signature=ec359ee8b0e2f1fd8a34a49d24f215ad11002514507daa97b6ae49372321e18d" type="video/mp4" />-->
-<!--                Your browser does not support the video tag.-->
-<!--              </video>-->
-
-<!--              <div class="pause-btn" @click="pauseVideoHandler">-->
-<!--                <img src="../assets/images/pause-btn.svg" alt="" />-->
-<!--              </div>-->
-<!--            </div>-->
         </div>
 
         <img class="blue-line-vector" src="../assets/images/blue-line-vector.svg" alt="" />
@@ -903,7 +710,7 @@ const getCurrentYear = () => {
                     <li>Apbalvojumi par mācīšanos</li>
                     <li>Draudzīga cena</li>
                 </ul>
-                <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="btnLabel.btnLink" />
+                <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
                 <div class="testimonial">
                     <div class="author">
                         <img src="../assets/images/testimonial-author.svg" alt="" />
@@ -1062,7 +869,7 @@ const getCurrentYear = () => {
                     <pagination />
                 </template>
             </carousel>
-            <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="btnLabel.btnLink" />
+            <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
         </div>
     </div>
     <div class="wrapper light-grey">
@@ -1295,7 +1102,7 @@ const getCurrentYear = () => {
     </div>
     <div class="wrapper dark inner">
         <div class="container container--narrow pb">
-            <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="btnLabel.btnLink" />
+            <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
         </div>
     </div>
     <div class="wrapper light pt page-bottom">
@@ -1315,7 +1122,7 @@ const getCurrentYear = () => {
                 Pievienojies kopienai ar vairāk kā <span>15,000</span> līdzīgi domājošiem cilvēkiem!
             </h2>
             <div class="pb">
-                <SectionCTA :allPlansURL="allPlansURL" :selectedPlanURL="btnLabel.btnLink" />
+                <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
             </div>
         </div>
         <img src="../assets/images/elipses.svg" class="footer-elipses" alt="" />
