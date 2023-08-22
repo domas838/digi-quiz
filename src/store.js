@@ -169,7 +169,7 @@ export const store = reactive({
                     Q: 'Kurš no šiem mērķiem ir vairāk par Tevi?',
                     Ans: [
                         'Gatavoties eksāmenam',
-                        'Uzlabot atzīmes un aizlāpīt citus caurumus',
+                        'Uzlabot atzīmes un aizlāpīt zināšanu robus',
                         'Personīgā izaugsme lietās, kas mani tiešām interesē',
                         'Balansēt skolu ar citām aktivitātēm - mācēt plānot savu laiku ir atslēga visam!'
                     ]
