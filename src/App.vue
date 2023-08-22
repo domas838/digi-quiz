@@ -8,6 +8,7 @@ import EmailForm from './components/EmailForm.vue'
 import ProgramRecomendation from './components/ProgramRecomendation.vue'
 import ProgramsLoader from './components/ProgramsLoader.vue'
 import { pageview } from 'vue-gtag'
+import { useFavicon } from '@vueuse/core'
 
 const url = new URL(window.location.href)
 
@@ -21,6 +22,8 @@ onMounted(() => {
 
     if (window.location.hostname === 'quiz.memby.lv') {
       store.lang = 'LV'
+      const favicon = useFavicon();
+      favicon.value = 'memby-fav.webp';
     }
 
     if (store.lang === 'LV') {
