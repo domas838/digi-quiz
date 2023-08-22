@@ -303,7 +303,7 @@ const faqLV = reactive([
     },
     {
         title: 'Cik maksā nodarbības?',
-        answer: '<p>Ir 3 dažādi plāni, no kuriem varat izvēlēties:</p><p>- Viens priekšmets (no EUR 22.00/mēnesī)</p><p>-Divi priekšmeti (no EUR 44.00/mēnesī)</p><p>-Neierobežots skaits priekšmetu ( no EUR 49.00/mēnesī)</p><p>Cenā ir iekļauti arī nodarbību ieraksti un skolēnam individuāla palīdzība pēc nepieciešamības.</p><p>Ņem vērā, ka, ja izvēlies maksāt ar karti, nauda tik noskaitīta automātiski ik pēc 30 dienām. Automātisko maksājumu var atcelt.</p>',
+        answer: '<div style="outline: none; display: flex; flex-direction: column; justify-content: flex-start; flex-shrink: 0; --framer-paragraph-spacing: 0px; transform: none; transform-origin: 50% 50% 0px; opacity: 1;"><p>Ir 3 dažādi plāni, no kuriem varat izvēlēties:</p><ul><li data-preset-tag="p"><p>Viens priekšmets (no EUR 24.45/mēnesī)</p></li><li data-preset-tag="p"><p>Divi priekšmeti (no EUR 48.90/mēnesī)</p></li><li data-preset-tag="p"><p>Neierobežots skaits priekšmetu (no EUR 54.90/mēnesī)</p></li></ul><p>Cenā ir iekļauti arī nodarbību ieraksti un skolēnam individuāla palīdzība pēc nepieciešamības.</p><p>Ņem vērā, ka, ja izvēlies maksāt ar karti, nauda tik noskaitīta automātiski ik pēc 30 dienām. Automātisko maksājumu var atcelt.</p></div>',
         isExpanded: false
     }
 ])
