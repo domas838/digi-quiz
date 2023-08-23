@@ -19,7 +19,7 @@ const localization = reactive({
 
 onMounted(() => {
     pageview(window.location.pathname);
-    event('quiz_started'); //TEST
+    event('quiz_started');
 
     if (window.location.hostname === 'quiz.memby.lv') {
       store.lang = 'LV'

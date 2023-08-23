@@ -1,7 +1,8 @@
 <script setup>
 import { store } from '../store'
-import { computed, reactive } from 'vue'
+import {computed, onMounted, reactive} from 'vue'
 import axios from 'axios'
+import {event} from "vue-gtag";
 
 const submitChildEmail = (event) => {
     event.preventDefault()
@@ -101,6 +102,11 @@ const klaviyoRequestHandler = () => {
             console.error(error)
         })
 }
+
+onMounted(() => {
+  event('quiz_email_form');
+});
+
 </script>
 <template>
     <button

@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from 'vue'
+import {onMounted, reactive} from 'vue'
 import { store } from '../store'
 import 'vue3-carousel/dist/carousel.css'
 import SectionCTA from './SectionCTA.vue'
@@ -9,6 +9,7 @@ import { vElementVisibility } from '@vueuse/components'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import AccordionFAQ from './AccordionFAQ.vue'
 import SuggestedPlan from "./SuggestedPlan.vue";
+import {event} from "vue-gtag";
 
 const url = new URL(window.location.href)
 
@@ -362,6 +363,10 @@ const getCurrentYear = () => {
 
     return dateobj.getFullYear()
 }
+
+onMounted(() => {
+  event('quiz_results');
+});
 </script>
 
 <template>
