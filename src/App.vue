@@ -7,7 +7,7 @@ import SecondBenefit from './components/SecondBenefit.vue'
 import EmailForm from './components/EmailForm.vue'
 import ProgramRecomendation from './components/ProgramRecomendation.vue'
 import ProgramsLoader from './components/ProgramsLoader.vue'
-import { pageview } from 'vue-gtag'
+import { pageview, event } from 'vue-gtag'
 import { useFavicon } from '@vueuse/core'
 
 const url = new URL(window.location.href)
@@ -19,6 +19,7 @@ const localization = reactive({
 
 onMounted(() => {
     pageview(window.location.pathname);
+    event('quiz_started'); //TEST
 
     if (window.location.hostname === 'quiz.memby.lv') {
       store.lang = 'LV'
