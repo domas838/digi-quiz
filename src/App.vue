@@ -220,13 +220,13 @@ const completeness = (step) => {
             </button>
             <div
                 class="progress__count"
-                v-if="store.lang === 'LT' && store.step <= store.quiz.LT.child.length"
+                v-if="store.step <= store.quiz.LT.child.length"
             >
                 <span>{{ store.step }} / {{ store.quiz.LT.child.length }}</span>
             </div>
             <div
                 class="progress"
-                v-if="store.lang === 'LT' && store.step <= store.quiz.LT.child.length"
+                v-if="store.step <= store.quiz.LT.child.length"
             >
                 <span
                     class="completeness"
