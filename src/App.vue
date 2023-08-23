@@ -54,6 +54,7 @@ onMounted(() => {
     }
     if (url.searchParams.has('class')) {
         store.respondent = 'child'
+        store.selectedClass = url.searchParams.get('class');
     }
 
     // Redirect straight to results
@@ -64,16 +65,16 @@ onMounted(() => {
             url.searchParams.has('subjects') &&
             url.searchParams.has('tier'))
     ) {
-        // Display results
-        store.step = 10
-        store.showRecomendations = true
-
         // Set Data Values
         store.selectedPersona = url.searchParams.get('persona')
         store.selectedClass = url.searchParams.get('class')
         store.childLevel = url.searchParams.get('level')
         store.selectedSubjects = JSON.parse(url.searchParams.get('subjects'))
         store.TIER = url.searchParams.get('tier')
+
+        // Display results
+        store.step = 10
+        store.showRecomendations = url.searchParams.get('app') !== 'true';
     }
 })
 
@@ -122,7 +123,7 @@ const nextStep = () => {
             store.step = 5
         }
         if (store.step > 7) {
-            store.showRecomendations = true
+            store.showRecomendations = false
         }
     }
 }
@@ -287,12 +288,7 @@ const completeness = (step) => {
 
         <FirstBenefit />
         <SecondBenefit />
-        <ProgramsLoader
-            v-if="store.step === 8"
-            :generateProgramRecomendations="generateProgramRecomendations"
-            :selectMostRecommendedPrograms="selectMostRecommendedPrograms"
-        />
-
+        <ProgramsLoader v-if="store.step === 8"/>
         <EmailForm v-if="store.step === 9" />
     </div>
     <img

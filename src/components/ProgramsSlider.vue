@@ -2,7 +2,7 @@
 import { store } from '../store'
 import axios from "axios";
 import {onMounted, reactive} from "vue";
-import {Personas, pluck, SUBJECTS} from "../helpers"
+import {pluck, SUBJECTS} from "../helpers"
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import ProgramSlide from './ProgramSlide.vue'
@@ -52,7 +52,7 @@ const mutateProgramsFromResponse = (response) => {
 
     const subjectsString = url.searchParams.get('subjects');
     const subjectsArray = JSON.parse(subjectsString);
-    const subjectsCondition = subjectsArray.includes(program.Subject);
+    const subjectsCondition = subjectsArray.includes(program.Subject) || subjectsArray.length < 1;
 
     return gradeCondition && personaCondition && subjectsCondition;
   });
@@ -100,6 +100,8 @@ const setCookies = () => {
 
   const programsIds = JSON.stringify(pluck(store.filteredPrograms, 'MembyID'))
 
+  console.log(programsIds);
+
   const domains = {
     'LT': 'digiklase.lt',
     'LV': 'memby.lv'
@@ -112,10 +114,10 @@ const setCookies = () => {
 const resolveNextStep = () => {
   if (url.searchParams.has('app') && url.searchParams.get('app') === 'true') {
     if (store.lang === 'LT') {
-      window.location = 'http://app.digiklase.lt/v2/quiz-recommendations'
+      window.location = 'https://app.digiklase.lt/v2/quiz-recommendations'
     }
     if (store.lang === 'LV') {
-      window.location = 'http://app.memby.lv/v2/quiz-recommendations'
+      window.location = 'https://app.memby.lv/v2/quiz-recommendations'
     }
   } else {
     store.isLoading = false
@@ -124,7 +126,7 @@ const resolveNextStep = () => {
       store.step += 1
     } else {
       store.step += 2
-      store.showRecomendations = true
+      store.showRecomendations = url.searchParams.get('app') !== 'true';
     }
   }
 }

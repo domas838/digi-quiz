@@ -370,799 +370,804 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <header>
-        <div class="content">
-            <img v-if="store.lang === 'LT'" class="logo" src="../assets/images/digiklase.svg" alt="" />
-            <img v-if="store.lang === 'LV'" class="logo" src="../assets/images/memby.svg" alt="" />
-            <div>
-                <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
-                    >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                /></a>
-            </div>
-        </div>
-    </header>
-    <div class="wrapper yellow">
-        <div class="container">
-
-          <ProgramsSlider />
-
-            <div
-                class="content--flex last-section-block"
-                v-if="store.lang === 'LT' && store.childLevel === 'A'"
-            >
-                <div class="content--left">
-                    <h2>
-                        <span>Pagerinsime tavo žinias</span> su įdomesniu ir nestandartiniu turiniu
-                    </h2>
-                    <p>
-                        Tavo pažymiai jau dabar yra neblogi. Todėl mūsų tikslas bus tave dar labiau
-                        sudominti ir įtraukti į mokslą su nauja mokymosi medžiaga
-                    </p>
-                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
-                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                    /></a>
-                </div>
-                <div class="content--right">
-                    <img src="../assets/images/your-level-A.svg" class="level-image" alt="" />
-                </div>
-            </div>
-            <div
-                class="content--flex last-section-block"
-                v-if="store.lang === 'LV' && store.childLevel === 'A'"
-            >
-                <div class="content--left">
-                    <h2>
-                        <span>Mēs uzlabosim Tavas zināšanas</span> ar daudz interesantāku un
-                        nestandarta saturu.
-                    </h2>
-                    <p>
-                        Tavas atzīmes jau ir augstas. Tāpēc mūsu mērķis būs noturēt Tavu interesi un
-                        iesaistīt mācīties ar jauniem materiāliem.
-                    </p>
-                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
-                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                    /></a>
-                </div>
-                <div class="content--right">
-                    <img src="../assets/images/your-level-A-LV.svg" class="level-image" alt="" />
-                </div>
-            </div>
-            <div
-                class="content--flex last-section-block"
-                v-if="store.lang === 'LT' && store.childLevel === 'B'"
-            >
-                <div class="content--left">
-                    <h2>
-                        Pasieksi <span>0,5-2 balų geresnius pažymius,</span> vos per 3 mėnesius!
-                    </h2>
-                    <p>
-                        Tavo rezultatą apskaičiavome remdamiesi <strong>7348</strong> panašių
-                        mokinių atsakymais
-                    </p>
-                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
-                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                    /></a>
-                </div>
-                <div class="content--right">
-                    <img src="../assets/images/your-level-B.svg" class="level-image" alt="" />
-                </div>
-            </div>
-            <div
-                class="content--flex last-section-block"
-                v-if="store.lang === 'LV' && store.childLevel === 'B'"
-            >
-                <div class="content--left">
-                    <h2>
-                        Tu sasniegsi par <span>0.5-2 atzīmēm augstākus vērtējumus,</span> tikai 3
-                        mēnešu laikā!
-                    </h2>
-                    <p>
-                        Mēs izrēķinājām Tavu rezultātu balstoties uz atbildēm no
-                        <strong>7348</strong> līdzīgiem skolēniem.
-                    </p>
-                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
-                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                    /></a>
-                </div>
-                <div class="content--right">
-                    <img src="../assets/images/your-level-B-LV.svg" class="level-image" alt="" />
-                </div>
-            </div>
-            <div
-                class="content--flex last-section-block"
-                v-if="store.lang === 'LT' && store.childLevel === 'C'"
-            >
-                <div class="content--left">
-                    <h2>
-                        Pasieksi <span>iki 2 balų geresnius pažymius,</span> vos per 2 mėnesius!
-                    </h2>
-                    <p>
-                        Tavo rezultatą apskaičiavome remdamiesi <strong>5124</strong> panašių
-                        mokinių atsakymais
-                    </p>
-                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
-                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                    /></a>
-                </div>
-                <div class="content--right">
-                    <img src="../assets/images/your-level-C.svg" class="level-image" alt="" />
-                </div>
-            </div>
-            <div
-                class="content--flex last-section-block"
-                v-if="store.lang === 'LV' && store.childLevel === 'C'"
-            >
-                <div class="content--left">
-                    <h2>
-                        Tu sasniegsi <span>par 2 atzīmēm augstākus vērtējumus,</span> tikai 2 mēnešu
-                        laikā!
-                    </h2>
-                    <p>
-                        Mēs izrēķinājām Tavu rezultātu balstoties uz atbildēm no
-                        <strong>5124</strong> līdzīgiem skolēniem.
-                    </p>
-                    <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
-                        >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                    /></a>
-                </div>
-                <div class="content--right">
-                    <img src="../assets/images/your-level-C-LV.svg" class="level-image" alt="" />
-                </div>
-            </div>
-        </div>
-        <img src="../assets/images/bottomVector.svg" class="bottom-vector" alt="Vector" />
-    </div>
-    <div class="wrapper light">
-        <div class="flex-container cards-wrapper">
-            <div class="card card--left">
-                <h3 v-if="store.lang === 'LT'">Tau reikės:</h3>
-                <h3 v-if="store.lang === 'LV'">Tev vajadzēs</h3>
-
-                <p v-if="store.lang === 'LT'">
-                    Bent <span>2 val./sav.</span>papildomų grupinių pamokų
-                </p>
-                <p v-if="store.lang === 'LV'">Vismaz <span>2h/ nedēļā</span>grupu nodarbībām</p>
-                <img src="../assets/images/heart.svg" alt="Heart" />
-            </div>
-            <div class="card card--middle">
-                <p v-if="store.lang === 'LT'">
-                    Bent <span>1 val./sav.</span>praeėjusių pamokų vaizdo įrašų peržiūrėjimo
-                </p>
-                <p v-if="store.lang === 'LV'">
-                    Vismaz <span>1h/ nedēļā</span>lai skatītos nodarbību ierakstu video
-                </p>
-            </div>
-            <div class="card card--right">
-                <p v-if="store.lang === 'LT'">Iki <span>1 val./sav.</span>darbo su asistentais</p>
-                <p v-if="store.lang === 'LV'">Līdz <span>1h/ nedēļā</span>lai strādātu ar asistentiem</p>
-                <img src="../assets/images/time.svg" alt="Time" />
-            </div>
-        </div>
-    </div>
+  <div v-if="url.searchParams.has('app')" class="spinner mt-48">
+    <img class="!w-[150px]" src="../assets/images/spinner.svg" alt="" />
   </div>
+  <div v-show="!url.searchParams.has('app')">
+    <div>
+      <header>
+          <div class="content">
+              <img v-if="store.lang === 'LT'" class="logo" src="../assets/images/digiklase.svg" alt="" />
+              <img v-if="store.lang === 'LV'" class="logo" src="../assets/images/memby.svg" alt="" />
+              <div>
+                  <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                      >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
+                  /></a>
+              </div>
+          </div>
+      </header>
+      <div class="wrapper yellow">
+          <div class="container">
 
-  <div>
+            <ProgramsSlider />
 
-  <SuggestedPlan
-      ref="target"
-      :btn="btnLabel"
-      :is-paid-trial="url.searchParams.has('lmt')"
-      v-element-visibility="onElementVisibility"
-      :selected-subjects-length="store.selectedSubjects.length"
-  />
-    <div class="wrapper light">
-        <div class="container">
-            <h2 class="section-title--small" v-if="store.lang === 'LT'">
-                Remdamiesi apklausa nustatėme ir tavo asmenybės tipą:
-            </h2>
-            <h2 class="section-title--small" v-if="store.lang === 'LV'">
-                Balstoties uz aptauju, mēs arī noteicām Tavu personības tipu:
-            </h2>
-            <img
-                v-if="store.selectedPersona === 'Ambitious student'"
-                src="../assets/images/personality-ambitious.svg"
-                alt="Personality"
-                class="personality-img"
-            />
-            <img
-                v-if="store.selectedPersona === 'Exam-oriented'"
-                src="../assets/images/exam-oriented.svg"
-                alt="Personality"
-                class="personality-img"
-            />
-            <img
-                v-if="store.selectedPersona === 'Busy multitasker'"
-                src="../assets/images/personality-busy-multitasker.svg"
-                alt="Personality"
-                class="personality-img"
-            />
-            <img
-                v-if="store.selectedPersona === 'Struggling'"
-                src="../assets/images/personality-struggling.svg"
-                alt="Personality"
-                class="personality-img"
-            />
-            <h2 class="section-title blue">{{ store.selectedPersonaTranslation }}</h2>
-            <p
-                class="p-narrow"
-                v-if="store.lang === 'LT' && store.selectedPersona === 'Ambitious student'"
-            >
-                Tu esi ambicingasis, mėgstantis gamtos mokslus ir matematiką. Tavo ambicijos skatina
-                siekti aukščiausių rezultatų ir nuolatinio asmeninio tobulėjimo. Tam pasitelkiama
-                disciplina ir ryžtas. Sieki geriausių egzaminų rezultatų ir įstoti į savo svajonių
-                mokyklą ar universitetą. Siekdamas savo tikslų naudojies internetiniais šaltiniais
-                ir resursais ar užklasine veikla.
-            </p>
-            <p
-                class="p-narrow"
-                v-if="store.lang === 'LV' && store.selectedPersona === 'Ambitious student'"
-            >
-                Tu esi ambiciozs skolēns, kas aizraujas ar dabaszinātņu priekšmetiem un matemātiku.
-                Tavas ambīcijas mudina Tevi tiekties pēc augstiem mācību sasniegumiem un personīgās
-                izaugsmes, ko papildina disciplīna un apņēmība. Tavs mērķis ir iegūt maksimāli
-                augstākos eksāmenu rezultātus un tikt uzņemtam savā sapņu skolā vai universitātē,
-                izmantojot tiešsaistes mācīšanos un papildus skolai nodarbības, lai sasniegtu
-                mērķus.
-            </p>
-            <p
-                class="p-narrow"
-                v-if="store.lang === 'LT' && store.selectedPersona === 'Exam-oriented'"
-            >
-                Būsimas šimtukininkas siekia gauti aukštus egzaminų įvertinimus ir įstoti į svajonių
-                mokyklą ar universitetą. Vertina akademinę sėkmę, discipliną ir nuolatinį savęs
-                tobulinimą. Jie dažnai nusivilia ribotomis galimybėmis gauti kokybiškus resursus ar
-                nekvalifikuotą mokytojų pagalbą. Aktyviai dalyvaudami internetiniuose užsiėmimuose
-                ir grupinėse diskusijose, jie siekia tobulėti, nepaisydami iššūkių. Meilę gamtos
-                mokslams, matematikai ir negrožinei literatūrai derina su ryžtu siekti savo tikslų.
-            </p>
-            <p
-                class="p-narrow"
-                v-if="store.lang === 'LV' && store.selectedPersona === 'Exam-oriented'"
-            >
-                Eksāmenu iekarotājs ir fokusēts sasniegt augstus rezultātus eksāmenos, lai tiktu
-                pieņemts savā sapņu skolā vai universitātē. Augstu vērtē mācību panākumus,
-                disciplīnu un sevis pilnveidošanu. Bieži ir neapmierinātība, ja nav plaša pieeja
-                kvalitatīviem mācīšanās materiāliem un skolotājiem. Aktīvi piedalās tiešsaistes
-                nodarbībās un grupu diskusijās. Bieži cenšas izcelties, neskatoties uz
-                izaicinājumiem. Apvieno mīlestību pret zinātni, matemātiku, zinātnisko literatūru,
-                ar milzīgu apņemšanos sasniegt savus mērķus.
-            </p>
+              <div
+                  class="content--flex last-section-block"
+                  v-if="store.lang === 'LT' && store.childLevel === 'A'"
+              >
+                  <div class="content--left">
+                      <h2>
+                          <span>Pagerinsime tavo žinias</span> su įdomesniu ir nestandartiniu turiniu
+                      </h2>
+                      <p>
+                          Tavo pažymiai jau dabar yra neblogi. Todėl mūsų tikslas bus tave dar labiau
+                          sudominti ir įtraukti į mokslą su nauja mokymosi medžiaga
+                      </p>
+                      <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                          >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
+                      /></a>
+                  </div>
+                  <div class="content--right">
+                      <img src="../assets/images/your-level-A.svg" class="level-image" alt="" />
+                  </div>
+              </div>
+              <div
+                  class="content--flex last-section-block"
+                  v-if="store.lang === 'LV' && store.childLevel === 'A'"
+              >
+                  <div class="content--left">
+                      <h2>
+                          <span>Mēs uzlabosim Tavas zināšanas</span> ar daudz interesantāku un
+                          nestandarta saturu.
+                      </h2>
+                      <p>
+                          Tavas atzīmes jau ir augstas. Tāpēc mūsu mērķis būs noturēt Tavu interesi un
+                          iesaistīt mācīties ar jauniem materiāliem.
+                      </p>
+                      <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                          >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
+                      /></a>
+                  </div>
+                  <div class="content--right">
+                      <img src="../assets/images/your-level-A-LV.svg" class="level-image" alt="" />
+                  </div>
+              </div>
+              <div
+                  class="content--flex last-section-block"
+                  v-if="store.lang === 'LT' && store.childLevel === 'B'"
+              >
+                  <div class="content--left">
+                      <h2>
+                          Pasieksi <span>0,5-2 balų geresnius pažymius,</span> vos per 3 mėnesius!
+                      </h2>
+                      <p>
+                          Tavo rezultatą apskaičiavome remdamiesi <strong>7348</strong> panašių
+                          mokinių atsakymais
+                      </p>
+                      <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                          >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
+                      /></a>
+                  </div>
+                  <div class="content--right">
+                      <img src="../assets/images/your-level-B.svg" class="level-image" alt="" />
+                  </div>
+              </div>
+              <div
+                  class="content--flex last-section-block"
+                  v-if="store.lang === 'LV' && store.childLevel === 'B'"
+              >
+                  <div class="content--left">
+                      <h2>
+                          Tu sasniegsi par <span>0.5-2 atzīmēm augstākus vērtējumus,</span> tikai 3
+                          mēnešu laikā!
+                      </h2>
+                      <p>
+                          Mēs izrēķinājām Tavu rezultātu balstoties uz atbildēm no
+                          <strong>7348</strong> līdzīgiem skolēniem.
+                      </p>
+                      <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                          >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
+                      /></a>
+                  </div>
+                  <div class="content--right">
+                      <img src="../assets/images/your-level-B-LV.svg" class="level-image" alt="" />
+                  </div>
+              </div>
+              <div
+                  class="content--flex last-section-block"
+                  v-if="store.lang === 'LT' && store.childLevel === 'C'"
+              >
+                  <div class="content--left">
+                      <h2>
+                          Pasieksi <span>iki 2 balų geresnius pažymius,</span> vos per 2 mėnesius!
+                      </h2>
+                      <p>
+                          Tavo rezultatą apskaičiavome remdamiesi <strong>5124</strong> panašių
+                          mokinių atsakymais
+                      </p>
+                      <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                          >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
+                      /></a>
+                  </div>
+                  <div class="content--right">
+                      <img src="../assets/images/your-level-C.svg" class="level-image" alt="" />
+                  </div>
+              </div>
+              <div
+                  class="content--flex last-section-block"
+                  v-if="store.lang === 'LV' && store.childLevel === 'C'"
+              >
+                  <div class="content--left">
+                      <h2>
+                          Tu sasniegsi <span>par 2 atzīmēm augstākus vērtējumus,</span> tikai 2 mēnešu
+                          laikā!
+                      </h2>
+                      <p>
+                          Mēs izrēķinājām Tavu rezultātu balstoties uz atbildēm no
+                          <strong>5124</strong> līdzīgiem skolēniem.
+                      </p>
+                      <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                          >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
+                      /></a>
+                  </div>
+                  <div class="content--right">
+                      <img src="../assets/images/your-level-C-LV.svg" class="level-image" alt="" />
+                  </div>
+              </div>
+          </div>
+          <img src="../assets/images/bottomVector.svg" class="bottom-vector" alt="Vector" />
+      </div>
+      <div class="wrapper light">
+          <div class="flex-container cards-wrapper">
+              <div class="card card--left">
+                  <h3 v-if="store.lang === 'LT'">Tau reikės:</h3>
+                  <h3 v-if="store.lang === 'LV'">Tev vajadzēs</h3>
 
-            <p
-                class="p-narrow"
-                v-if="store.lang === 'LT' && store.selectedPersona === 'Busy multitasker'"
-            >
-                Amžinai užsiėmęs, nuolat žongliruoja įvairiomis veiklomis, būreliais ir pomėgiais -
-                dažniai, nesusijusiais su mokslais. Sėkmė tavo pomėgiuose ir užsiėmimuose tave
-                skatina tobulėti, tačiau tai suderinti su mokslais gali būti iššūkis. Turint tiek
-                daug veiklų, efektyvus mokymasis ir laiko planavimas yra būtinas, kad nuo vidutinių
-                pažymių pereitum prie aukštų. Tavo užsidegimas yra žavintis, tačiau nepamiršk, kad
-                kartais daugiau dėmesio reikėtų skirti to, ką darai, kokybei, o ne kiekybei.
-            </p>
-            <p
-                class="p-narrow"
-                v-if="store.lang === 'LV' && store.selectedPersona === 'Busy multitasker'"
-            >
-                Tu esi vienlaikus vairāku uzdevumu darītājs, kas vienmēr dara vairākas aktivitātes
-                vienlaikus, kā ārpusskolas pulciņi un dažādi hobiji. Panākumi šajās aktivitātēs
-                piepilda Tevi, bet apvienot to visu ar mācībām var būt izaicinājums. Tā kā Tev ir
-                daudz šo nodarbošanos, efektīva mācīšanās un laika plānošana ir ļoti būtiska, lai no
-                viduvējām skolas atzīmēm varētu sasniegt augsta vērtējuma atzīmes. Tava
-                nenogurdināmā personība ir apbrīnojama, taču atceries, ka fokusējoties darīt lietas
-                kvalitatīvi, var būt vērtīgāk kā uz kvantitāti.
-            </p>
-            <p
-                class="p-narrow"
-                v-if="store.lang === 'LT' && store.selectedPersona === 'Struggling'"
-            >
-                Atkaklus siekėjas siekia akademinės sėkmės, bet dažnai jaučiasi pasimetęs, kai
-                neturi aiškių gairių. Jie greitai įsitraukia į pamokas, jei jos yra svarbios ir
-                įdomios, tačiau be nuolatinio skatinimo gali greitai prarasti susidomėjimą.
-                Subalansuojant meilę žaidimams ar leidžiant laiką su draugais siekiant tobulėti
-                kartu, jiems vis tiek reikės tikslinės pagalbos, kad pasiektų savo tikslų.
-            </p>
-            <p
-                class="p-narrow"
-                v-if="store.lang === 'LV' && store.selectedPersona === 'Struggling'"
-            >
-                Centīgais mērķu sasniedzējs tiecas pēc labiem mācību sasniegumiem, taču bieži
-                pazaudē uzmanību, ja nav skaidri norādījumi. Ātri spēj pieslēgties mācību procesam,
-                taču var pazaudēt interesi, ja nav nepieciešama nepārtraukta iesaiste. Spēj apvienot
-                mīlestību pret datorspēlēm ar kvalitatīvu laika pavadīšanu ar draugiem. Ir konstanta
-                vēlme sevi pilnveidot, tikai ik pa laikam vajadzīgs mērķtiecīga cilvēka atbalsts,
-                lai lietas attīstītos uz priekšu.
-            </p>
-        </div>
+                  <p v-if="store.lang === 'LT'">
+                      Bent <span>2 val./sav.</span>papildomų grupinių pamokų
+                  </p>
+                  <p v-if="store.lang === 'LV'">Vismaz <span>2h/ nedēļā</span>grupu nodarbībām</p>
+                  <img src="../assets/images/heart.svg" alt="Heart" />
+              </div>
+              <div class="card card--middle">
+                  <p v-if="store.lang === 'LT'">
+                      Bent <span>1 val./sav.</span>praeėjusių pamokų vaizdo įrašų peržiūrėjimo
+                  </p>
+                  <p v-if="store.lang === 'LV'">
+                      Vismaz <span>1h/ nedēļā</span>lai skatītos nodarbību ierakstu video
+                  </p>
+              </div>
+              <div class="card card--right">
+                  <p v-if="store.lang === 'LT'">Iki <span>1 val./sav.</span>darbo su asistentais</p>
+                  <p v-if="store.lang === 'LV'">Līdz <span>1h/ nedēļā</span>lai strādātu ar asistentiem</p>
+                  <img src="../assets/images/time.svg" alt="Time" />
+              </div>
+          </div>
+      </div>
     </div>
-    <div class="wrapper light">
-        <div class="container pb0">
-            <h2 class="section-title" v-if="store.lang === 'LT'">Kaip tai veikia?</h2>
-            <h2 class="section-title" v-if="store.lang === 'LV'">Kā strādā Memby?</h2>
-            <p v-if="store.lang === 'LT'">
-                Šis vaizdo įrašas trumpai ir aiškiai papasakos, kaip veikia Digiklasė
-            </p>
-            <p v-if="store.lang === 'LV'">
-                Šis video īsi un skaidri izskaidros, kā darbojas Memby.
-            </p>
 
-            <div class="mt-16 rounded-lg">
-              <div style="padding:56.25% 0 0 0;position:relative;"><iframe :src="$t('VimeoExplainerLink')" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Memby - aiskinamasis video - video - 5.0v.mp4"></iframe></div>
-            </div>
-        </div>
+    <div>
 
-        <img class="blue-line-vector" src="../assets/images/blue-line-vector.svg" alt="" />
-    </div>
-    <div class="wrapper light">
-        <div class="flex-container list-section">
-            <div class="content--left">
-                <img src="../assets/images/pupil.svg" alt="" />
-            </div>
-            <div class="content--right list-content">
-                <h3 v-if="store.lang === 'LT'">Papildomos grupinės<br />pamokos internetu:</h3>
-                <h3 v-if="store.lang === 'LV'">Tiešsaistes grupu apmācību nodarbības:</h3>
-                <ul v-if="store.lang === 'LT'">
-                    <li>Įtraukiantys mokytojai</li>
-                    <li>Individualus mokymosi planas</li>
-                    <li>Pamokų vaizdo įrašai</li>
-                    <li>Prizai už mokymąsi</li>
-                    <li>Draugiška kaina</li>
-                </ul>
-                <ul v-if="store.lang === 'LV'">
-                    <li>Iesaistoši pasniedzēji</li>
-                    <li>Individuāls mācīšanās plāns</li>
-                    <li>Nodarbību video ieraksti</li>
-                    <li>Apbalvojumi par mācīšanos</li>
-                    <li>Draudzīga cena</li>
-                </ul>
-                <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
-                <div class="testimonial">
-                    <div class="author">
-                        <img src="../assets/images/testimonial-author.svg" alt="" />
-                    </div>
-                    <div class="text">
-                        <p v-if="store.lang === 'LT'">
-                            „Vos per mėnesį sugebėjau savo matematikos pažymį pasikelti net trimis
-                            balais“
-                        </p>
-                        <p v-if="store.lang === 'LV'">
-                            Man sanāca uzlabot savu matemātikas vidējo atzīmi par 3 ballēm tikai
-                            mēneša laikā
-                        </p>
-                        <p v-if="store.lang === 'LT'">
-                          <strong>11-okė Sibilė, Panevėžys</strong>
-                        </p>
-                        <p v-if="store.lang === 'LV'">
-                            <strong>Sibile, 11. kl.</strong>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="wrapper yellow overflow-hidden">
-        <img class="blue-vector-left-top" src="../assets/images/blue-line-left.svg" alt="" />
-        <div class="container container--narrow teachers">
-            <h2 class="section-title" v-if="store.lang === 'LT'">
-                Susipažink, tavo būsimi mokytojai:
-            </h2>
-            <h2 class="section-title" v-if="store.lang === 'LV'">
-                Iepazīsties ar saviem nākotnes pasniedzējiem:
-            </h2>
-            <carousel
-                v-bind="singleSlideSettings"
-                class="teacher-carousel"
-                v-if="store.lang === 'LT'"
-            >
-                <slide :key="0">
-                    <picture>
-                        <source
-                            media="(min-width: 768px)"
-                            srcset="../assets/images/teachers/Sarunas.png"
-                        />
-                        <source
-                            media="(min-width: 100px)"
-                            srcset="../assets/images/teachers/Sarunas-mobile.png"
-                        />
-                        <img src="../assets/images/teachers/Sarunas.png" alt="Sarunas" />
-                    </picture>
-                </slide>
-                <slide :key="1">
-                    <picture>
-                        <source
-                            media="(min-width: 768px)"
-                            srcset="../assets/images/teachers/Alius.png"
-                        />
-                        <source
-                            media="(min-width: 100px)"
-                            srcset="../assets/images/teachers/Alius-mobile.png"
-                        />
-                        <img src="../assets/images/teachers/Alius.png" alt="Alius" />
-                    </picture>
-                </slide>
-                <slide :key="2">
-                    <picture>
-                        <source
-                            media="(min-width: 768px)"
-                            srcset="../assets/images/teachers/Paulius.png"
-                        />
-                        <source
-                            media="(min-width: 100px)"
-                            srcset="../assets/images/teachers/Paulius-mobile.png"
-                        />
-                        <img src="../assets/images/teachers/Paulius.png" alt="Paulius" />
-                    </picture>
-                </slide>
-                <slide :key="3">
-                    <picture>
-                        <source
-                            media="(min-width: 768px)"
-                            srcset="../assets/images/teachers/Egle.png"
-                        />
-                        <source
-                            media="(min-width: 100px)"
-                            srcset="../assets/images/teachers/Egle-mobile.png"
-                        />
-                        <img src="../assets/images/teachers/Egle.png" alt="Egle" />
-                    </picture>
-                </slide>
-                <slide :key="4">
-                    <picture>
-                        <source
-                            media="(min-width: 768px)"
-                            srcset="../assets/images/teachers/Algis.png"
-                        />
-                        <source
-                            media="(min-width: 100px)"
-                            srcset="../assets/images/teachers/Algis-mobile.png"
-                        />
-                        <img src="../assets/images/teachers/Algis.png" alt="Algis" />
-                    </picture>
-                </slide>
-                <template #addons>
-                    <navigation />
-                    <pagination />
-                </template>
-            </carousel>
-            <carousel
-                v-bind="singleSlideSettings"
-                class="teacher-carousel"
-                v-if="store.lang === 'LV'"
-            >
-                <slide :key="0">
-                    <picture>
-                        <source
-                            media="(min-width: 768px)"
-                            srcset="../assets/images/teachersLV/Raivis.png"
-                        />
-                        <source
-                            media="(min-width: 100px)"
-                            srcset="../assets/images/teachersLV/Raivis-mobile.png"
-                        />
-                        <img src="../assets/images/teachersLV/Raivis.png" alt="Raivis" />
-                    </picture>
-                </slide>
-                <slide :key="1">
-                    <picture>
-                        <source
-                            media="(min-width: 768px)"
-                            srcset="../assets/images/teachersLV/Virginija.png"
-                        />
-                        <source
-                            media="(min-width: 100px)"
-                            srcset="../assets/images/teachersLV/Virginija-mobile.png"
-                        />
-                        <img src="../assets/images/teachersLV/Virginija.png" alt="Virginija" />
-                    </picture>
-                </slide>
-                <slide :key="2">
-                    <picture>
-                        <source
-                            media="(min-width: 768px)"
-                            srcset="../assets/images/teachersLV/Liga.png"
-                        />
-                        <source
-                            media="(min-width: 100px)"
-                            srcset="../assets/images/teachersLV/Liga-mobile.png"
-                        />
-                        <img src="../assets/images/teachersLV/Liga.png" alt="Liga" />
-                    </picture>
-                </slide>
+    <SuggestedPlan
+        ref="target"
+        :btn="btnLabel"
+        :is-paid-trial="url.searchParams.has('lmt')"
+        v-element-visibility="onElementVisibility"
+        :selected-subjects-length="store.selectedSubjects.length"
+    />
+      <div class="wrapper light">
+          <div class="container">
+              <h2 class="section-title--small" v-if="store.lang === 'LT'">
+                  Remdamiesi apklausa nustatėme ir tavo asmenybės tipą:
+              </h2>
+              <h2 class="section-title--small" v-if="store.lang === 'LV'">
+                  Balstoties uz aptauju, mēs arī noteicām Tavu personības tipu:
+              </h2>
+              <img
+                  v-if="store.selectedPersona === 'Ambitious student'"
+                  src="../assets/images/personality-ambitious.svg"
+                  alt="Personality"
+                  class="personality-img"
+              />
+              <img
+                  v-if="store.selectedPersona === 'Exam-oriented'"
+                  src="../assets/images/exam-oriented.svg"
+                  alt="Personality"
+                  class="personality-img"
+              />
+              <img
+                  v-if="store.selectedPersona === 'Busy multitasker'"
+                  src="../assets/images/personality-busy-multitasker.svg"
+                  alt="Personality"
+                  class="personality-img"
+              />
+              <img
+                  v-if="store.selectedPersona === 'Struggling'"
+                  src="../assets/images/personality-struggling.svg"
+                  alt="Personality"
+                  class="personality-img"
+              />
+              <h2 class="section-title blue">{{ store.selectedPersonaTranslation }}</h2>
+              <p
+                  class="p-narrow"
+                  v-if="store.lang === 'LT' && store.selectedPersona === 'Ambitious student'"
+              >
+                  Tu esi ambicingasis, mėgstantis gamtos mokslus ir matematiką. Tavo ambicijos skatina
+                  siekti aukščiausių rezultatų ir nuolatinio asmeninio tobulėjimo. Tam pasitelkiama
+                  disciplina ir ryžtas. Sieki geriausių egzaminų rezultatų ir įstoti į savo svajonių
+                  mokyklą ar universitetą. Siekdamas savo tikslų naudojies internetiniais šaltiniais
+                  ir resursais ar užklasine veikla.
+              </p>
+              <p
+                  class="p-narrow"
+                  v-if="store.lang === 'LV' && store.selectedPersona === 'Ambitious student'"
+              >
+                  Tu esi ambiciozs skolēns, kas aizraujas ar dabaszinātņu priekšmetiem un matemātiku.
+                  Tavas ambīcijas mudina Tevi tiekties pēc augstiem mācību sasniegumiem un personīgās
+                  izaugsmes, ko papildina disciplīna un apņēmība. Tavs mērķis ir iegūt maksimāli
+                  augstākos eksāmenu rezultātus un tikt uzņemtam savā sapņu skolā vai universitātē,
+                  izmantojot tiešsaistes mācīšanos un papildus skolai nodarbības, lai sasniegtu
+                  mērķus.
+              </p>
+              <p
+                  class="p-narrow"
+                  v-if="store.lang === 'LT' && store.selectedPersona === 'Exam-oriented'"
+              >
+                  Būsimas šimtukininkas siekia gauti aukštus egzaminų įvertinimus ir įstoti į svajonių
+                  mokyklą ar universitetą. Vertina akademinę sėkmę, discipliną ir nuolatinį savęs
+                  tobulinimą. Jie dažnai nusivilia ribotomis galimybėmis gauti kokybiškus resursus ar
+                  nekvalifikuotą mokytojų pagalbą. Aktyviai dalyvaudami internetiniuose užsiėmimuose
+                  ir grupinėse diskusijose, jie siekia tobulėti, nepaisydami iššūkių. Meilę gamtos
+                  mokslams, matematikai ir negrožinei literatūrai derina su ryžtu siekti savo tikslų.
+              </p>
+              <p
+                  class="p-narrow"
+                  v-if="store.lang === 'LV' && store.selectedPersona === 'Exam-oriented'"
+              >
+                  Eksāmenu iekarotājs ir fokusēts sasniegt augstus rezultātus eksāmenos, lai tiktu
+                  pieņemts savā sapņu skolā vai universitātē. Augstu vērtē mācību panākumus,
+                  disciplīnu un sevis pilnveidošanu. Bieži ir neapmierinātība, ja nav plaša pieeja
+                  kvalitatīviem mācīšanās materiāliem un skolotājiem. Aktīvi piedalās tiešsaistes
+                  nodarbībās un grupu diskusijās. Bieži cenšas izcelties, neskatoties uz
+                  izaicinājumiem. Apvieno mīlestību pret zinātni, matemātiku, zinātnisko literatūru,
+                  ar milzīgu apņemšanos sasniegt savus mērķus.
+              </p>
 
-                <template #addons>
-                    <navigation />
-                    <pagination />
-                </template>
-            </carousel>
-            <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
-        </div>
-    </div>
-    <div class="wrapper light-grey">
-        <div class="container container--narrow">
-            <div class="review" v-if="store.lang === 'LT'">
-                <div class="image min-w-[100px]">
-                    <img src="../assets/images/reviewer.svg" alt="" />
-                </div>
-                <div class="content">
-                    <p>
-                        „Devintoje klasėje pradėjau svajoti apie medicinos studijas, todėl labai
-                        džiaugiuosi, kad tokia motyvuotų ir išsilavinusių mokytojų komanda buvo
-                        šalia nuo pat pradžių. Įvairūs konspektai, virtualios pamokos ir jauki
-                        digiklasiečių kompanija tapo mano laisvalaikiu! Pauliaus pamokose dėstomais
-                        biologijos universitetinio lygio pagrindais buvo tikras malonumas, o į
-                        Austėjos sveikatos mokslų pamokas jungiausi iš įvairiausių pasaulio kraštų,
-                        kad tik galėčiau išnagrinėti dar vieno paciento ligą.“
-                    </p>
-                    <p>
-                        <strong
-                            >Karolis, Kaišiadorių Algirdo Brazausko gimnazija, buvęs Digiklasės
-                            mokinys</strong
-                        >
-                    </p>
-                </div>
-            </div>
-            <div class="review" v-if="store.lang === 'LV'">
-                <div class="image min-w-[100px]">
-                    <img src="../assets/images/reviewerLV.svg" alt="" />
-                </div>
-                <div class="content">
-                    <p>
-                        „Es biju pārsteigta par to, cik pozitīva un produktīva pieredze man bija ar
-                        Memby tiešsaistes matemātikas nodarbībām. Skolotājs Rolands ne tikai bija
-                        ļoti prasmīgs un rūpīgs, bet arī radīja ērtu un atklātu vidi, kas ļāva man
-                        justies droši, lai uzdotu jautājumus un izprastu sarežģītākās matemātikas
-                        tēmas. Katram audzēknim tika pievērsta ļoti individuāla uzmanība un tika
-                        atbildēts uz katru pat vismuļķīgāko jautājumu. Manas zināšanas un
-                        pašpārliecība matemātikā uzlabojās ievērojami, kā arī es esmu pārliecināta,
-                        ka, bez skolotāja Rolanda palīdzības, man nebūtu izdevies tik veiksmīgi
-                        nokārtot matemātikas eksāmenu. Es ļoti novērtēju šīs nodarbības un patiešām
-                        priecājos, ka tās izvēlējos!“
-                    </p>
-                    <p>
-                        <strong
-                            >Anija Siksna, Zentas Mauriņas Grobiņas vidusskola, 12. klase</strong
-                        >
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="wrapper dark">
-        <img src="../assets/images/oval-vector.svg" class="oval-vector" alt="" />
-        <img src="../assets/images/vector-arrow.svg" class="vector-arrow" alt="" />
-        <div class="container pb">
-            <h2 class="section-title" v-if="store.lang === 'LT'">Į narystę telpa tiek daug!</h2>
-            <h2 class="section-title" v-if="store.lang === 'LV'">Abonements ir visērtākais!</h2>
-        </div>
-        <div class="flex-container container--narrow">
-            <div class="membership-card">
-                <div class="membership-icon">
-                    <img src="../assets/images/emoji/icon-play.svg" alt="" />
-                </div>
-                <div class="membership-content">
-                    <h3 v-if="store.lang === 'LT'">Individualus mokymosi planas</h3>
-                    <h3 v-if="store.lang === 'LV'">Individuāls mācīšanās plāns</h3>
-                </div>
-            </div>
-            <div class="membership-card">
-                <div class="membership-icon">
-                    <img src="../assets/images/emoji/icon-book.svg" alt="" />
-                </div>
-                <div class="membership-content">
-                    <h3 v-if="store.lang === 'LT'">Namų darbų pagalba</h3>
-                    <h3 v-if="store.lang === 'LV'">Palīdzība ar mājasdarbiem</h3>
-                </div>
-            </div>
-            <div class="membership-card">
-                <div class="membership-icon">
-                    <img src="../assets/images/emoji/icon-video.svg" alt="" />
-                </div>
-                <div class="membership-content">
-                    <h3 v-if="store.lang === 'LT'">Pamokų įrašai</h3>
-                    <h3 v-if="store.lang === 'LV'">Nodarbību video ieraksti</h3>
-                </div>
-            </div>
-            <div class="membership-card">
-                <div class="membership-icon">
-                    <img src="../assets/images/emoji/icon-stats.svg" alt="" />
-                </div>
-                <div class="membership-content">
-                    <h3 v-if="store.lang === 'LT'">Lankomumo peržiūra</h3>
-                    <h3 v-if="store.lang === 'LV'">Apmeklējuma apskats</h3>
-                </div>
-            </div>
-            <div class="membership-card">
-                <div class="membership-icon">
-                    <img src="../assets/images/emoji/icon-prize.svg" alt="" />
-                </div>
-                <div class="membership-content">
-                    <h3 v-if="store.lang === 'LT'">Taškai ir apdovanojimai</h3>
-                    <h3 v-if="store.lang === 'LV'">Punkti un balvas</h3>
-                </div>
-            </div>
-            <div class="membership-card">
-                <div class="membership-icon">
-                    <img src="../assets/images/emoji/icon-hands.svg" alt="" />
-                </div>
-                <div class="membership-content">
-                    <h3 v-if="store.lang === 'LT'">Motyvuojanti bendruomenė</h3>
-                    <h3 v-if="store.lang === 'LV'">Motivējoša kopiena</h3>
-                </div>
-            </div>
-        </div>
-        <div class="container container--narrow stories-carousel">
-            <carousel v-bind="storiesCarousel" v-if="store.lang === 'LT'">
-                <slide v-for="(item, index) in storiesArray" :key="item">
-                    <div class="story-slide">
+              <p
+                  class="p-narrow"
+                  v-if="store.lang === 'LT' && store.selectedPersona === 'Busy multitasker'"
+              >
+                  Amžinai užsiėmęs, nuolat žongliruoja įvairiomis veiklomis, būreliais ir pomėgiais -
+                  dažniai, nesusijusiais su mokslais. Sėkmė tavo pomėgiuose ir užsiėmimuose tave
+                  skatina tobulėti, tačiau tai suderinti su mokslais gali būti iššūkis. Turint tiek
+                  daug veiklų, efektyvus mokymasis ir laiko planavimas yra būtinas, kad nuo vidutinių
+                  pažymių pereitum prie aukštų. Tavo užsidegimas yra žavintis, tačiau nepamiršk, kad
+                  kartais daugiau dėmesio reikėtų skirti to, ką darai, kokybei, o ne kiekybei.
+              </p>
+              <p
+                  class="p-narrow"
+                  v-if="store.lang === 'LV' && store.selectedPersona === 'Busy multitasker'"
+              >
+                  Tu esi vienlaikus vairāku uzdevumu darītājs, kas vienmēr dara vairākas aktivitātes
+                  vienlaikus, kā ārpusskolas pulciņi un dažādi hobiji. Panākumi šajās aktivitātēs
+                  piepilda Tevi, bet apvienot to visu ar mācībām var būt izaicinājums. Tā kā Tev ir
+                  daudz šo nodarbošanos, efektīva mācīšanās un laika plānošana ir ļoti būtiska, lai no
+                  viduvējām skolas atzīmēm varētu sasniegt augsta vērtējuma atzīmes. Tava
+                  nenogurdināmā personība ir apbrīnojama, taču atceries, ka fokusējoties darīt lietas
+                  kvalitatīvi, var būt vērtīgāk kā uz kvantitāti.
+              </p>
+              <p
+                  class="p-narrow"
+                  v-if="store.lang === 'LT' && store.selectedPersona === 'Struggling'"
+              >
+                  Atkaklus siekėjas siekia akademinės sėkmės, bet dažnai jaučiasi pasimetęs, kai
+                  neturi aiškių gairių. Jie greitai įsitraukia į pamokas, jei jos yra svarbios ir
+                  įdomios, tačiau be nuolatinio skatinimo gali greitai prarasti susidomėjimą.
+                  Subalansuojant meilę žaidimams ar leidžiant laiką su draugais siekiant tobulėti
+                  kartu, jiems vis tiek reikės tikslinės pagalbos, kad pasiektų savo tikslų.
+              </p>
+              <p
+                  class="p-narrow"
+                  v-if="store.lang === 'LV' && store.selectedPersona === 'Struggling'"
+              >
+                  Centīgais mērķu sasniedzējs tiecas pēc labiem mācību sasniegumiem, taču bieži
+                  pazaudē uzmanību, ja nav skaidri norādījumi. Ātri spēj pieslēgties mācību procesam,
+                  taču var pazaudēt interesi, ja nav nepieciešama nepārtraukta iesaiste. Spēj apvienot
+                  mīlestību pret datorspēlēm ar kvalitatīvu laika pavadīšanu ar draugiem. Ir konstanta
+                  vēlme sevi pilnveidot, tikai ik pa laikam vajadzīgs mērķtiecīga cilvēka atbalsts,
+                  lai lietas attīstītos uz priekšu.
+              </p>
+          </div>
+      </div>
+      <div class="wrapper light">
+          <div class="container pb0">
+              <h2 class="section-title" v-if="store.lang === 'LT'">Kaip tai veikia?</h2>
+              <h2 class="section-title" v-if="store.lang === 'LV'">Kā strādā Memby?</h2>
+              <p v-if="store.lang === 'LT'">
+                  Šis vaizdo įrašas trumpai ir aiškiai papasakos, kaip veikia Digiklasė
+              </p>
+              <p v-if="store.lang === 'LV'">
+                  Šis video īsi un skaidri izskaidros, kā darbojas Memby.
+              </p>
+
+              <div class="mt-16 rounded-lg">
+                <div style="padding:56.25% 0 0 0;position:relative;"><iframe :src="$t('VimeoExplainerLink')" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Memby - aiskinamasis video - video - 5.0v.mp4"></iframe></div>
+              </div>
+          </div>
+
+          <img class="blue-line-vector" src="../assets/images/blue-line-vector.svg" alt="" />
+      </div>
+      <div class="wrapper light">
+          <div class="flex-container list-section">
+              <div class="content--left">
+                  <img src="../assets/images/pupil.svg" alt="" />
+              </div>
+              <div class="content--right list-content">
+                  <h3 v-if="store.lang === 'LT'">Papildomos grupinės<br />pamokos internetu:</h3>
+                  <h3 v-if="store.lang === 'LV'">Tiešsaistes grupu apmācību nodarbības:</h3>
+                  <ul v-if="store.lang === 'LT'">
+                      <li>Įtraukiantys mokytojai</li>
+                      <li>Individualus mokymosi planas</li>
+                      <li>Pamokų vaizdo įrašai</li>
+                      <li>Prizai už mokymąsi</li>
+                      <li>Draugiška kaina</li>
+                  </ul>
+                  <ul v-if="store.lang === 'LV'">
+                      <li>Iesaistoši pasniedzēji</li>
+                      <li>Individuāls mācīšanās plāns</li>
+                      <li>Nodarbību video ieraksti</li>
+                      <li>Apbalvojumi par mācīšanos</li>
+                      <li>Draudzīga cena</li>
+                  </ul>
+                  <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
+                  <div class="testimonial">
+                      <div class="author">
+                          <img src="../assets/images/testimonial-author.svg" alt="" />
+                      </div>
+                      <div class="text">
+                          <p v-if="store.lang === 'LT'">
+                              „Vos per mėnesį sugebėjau savo matematikos pažymį pasikelti net trimis
+                              balais“
+                          </p>
+                          <p v-if="store.lang === 'LV'">
+                              Man sanāca uzlabot savu matemātikas vidējo atzīmi par 3 ballēm tikai
+                              mēneša laikā
+                          </p>
+                          <p v-if="store.lang === 'LT'">
+                            <strong>11-okė Sibilė, Panevėžys</strong>
+                          </p>
+                          <p v-if="store.lang === 'LV'">
+                              <strong>Sibile, 11. kl.</strong>
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="wrapper yellow overflow-hidden">
+          <img class="blue-vector-left-top" src="../assets/images/blue-line-left.svg" alt="" />
+          <div class="container container--narrow teachers">
+              <h2 class="section-title" v-if="store.lang === 'LT'">
+                  Susipažink, tavo būsimi mokytojai:
+              </h2>
+              <h2 class="section-title" v-if="store.lang === 'LV'">
+                  Iepazīsties ar saviem nākotnes pasniedzējiem:
+              </h2>
+              <carousel
+                  v-bind="singleSlideSettings"
+                  class="teacher-carousel"
+                  v-if="store.lang === 'LT'"
+              >
+                  <slide :key="0">
+                      <picture>
+                          <source
+                              media="(min-width: 768px)"
+                              srcset="../assets/images/teachers/Sarunas.png"
+                          />
+                          <source
+                              media="(min-width: 100px)"
+                              srcset="../assets/images/teachers/Sarunas-mobile.png"
+                          />
+                          <img src="../assets/images/teachers/Sarunas.png" alt="Sarunas" />
+                      </picture>
+                  </slide>
+                  <slide :key="1">
+                      <picture>
+                          <source
+                              media="(min-width: 768px)"
+                              srcset="../assets/images/teachers/Alius.png"
+                          />
+                          <source
+                              media="(min-width: 100px)"
+                              srcset="../assets/images/teachers/Alius-mobile.png"
+                          />
+                          <img src="../assets/images/teachers/Alius.png" alt="Alius" />
+                      </picture>
+                  </slide>
+                  <slide :key="2">
+                      <picture>
+                          <source
+                              media="(min-width: 768px)"
+                              srcset="../assets/images/teachers/Paulius.png"
+                          />
+                          <source
+                              media="(min-width: 100px)"
+                              srcset="../assets/images/teachers/Paulius-mobile.png"
+                          />
+                          <img src="../assets/images/teachers/Paulius.png" alt="Paulius" />
+                      </picture>
+                  </slide>
+                  <slide :key="3">
+                      <picture>
+                          <source
+                              media="(min-width: 768px)"
+                              srcset="../assets/images/teachers/Egle.png"
+                          />
+                          <source
+                              media="(min-width: 100px)"
+                              srcset="../assets/images/teachers/Egle-mobile.png"
+                          />
+                          <img src="../assets/images/teachers/Egle.png" alt="Egle" />
+                      </picture>
+                  </slide>
+                  <slide :key="4">
+                      <picture>
+                          <source
+                              media="(min-width: 768px)"
+                              srcset="../assets/images/teachers/Algis.png"
+                          />
+                          <source
+                              media="(min-width: 100px)"
+                              srcset="../assets/images/teachers/Algis-mobile.png"
+                          />
+                          <img src="../assets/images/teachers/Algis.png" alt="Algis" />
+                      </picture>
+                  </slide>
+                  <template #addons>
+                      <navigation />
+                      <pagination />
+                  </template>
+              </carousel>
+              <carousel
+                  v-bind="singleSlideSettings"
+                  class="teacher-carousel"
+                  v-if="store.lang === 'LV'"
+              >
+                  <slide :key="0">
+                      <picture>
+                          <source
+                              media="(min-width: 768px)"
+                              srcset="../assets/images/teachersLV/Raivis.png"
+                          />
+                          <source
+                              media="(min-width: 100px)"
+                              srcset="../assets/images/teachersLV/Raivis-mobile.png"
+                          />
+                          <img src="../assets/images/teachersLV/Raivis.png" alt="Raivis" />
+                      </picture>
+                  </slide>
+                  <slide :key="1">
+                      <picture>
+                          <source
+                              media="(min-width: 768px)"
+                              srcset="../assets/images/teachersLV/Virginija.png"
+                          />
+                          <source
+                              media="(min-width: 100px)"
+                              srcset="../assets/images/teachersLV/Virginija-mobile.png"
+                          />
+                          <img src="../assets/images/teachersLV/Virginija.png" alt="Virginija" />
+                      </picture>
+                  </slide>
+                  <slide :key="2">
+                      <picture>
+                          <source
+                              media="(min-width: 768px)"
+                              srcset="../assets/images/teachersLV/Liga.png"
+                          />
+                          <source
+                              media="(min-width: 100px)"
+                              srcset="../assets/images/teachersLV/Liga-mobile.png"
+                          />
+                          <img src="../assets/images/teachersLV/Liga.png" alt="Liga" />
+                      </picture>
+                  </slide>
+
+                  <template #addons>
+                      <navigation />
+                      <pagination />
+                  </template>
+              </carousel>
+              <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
+          </div>
+      </div>
+      <div class="wrapper light-grey">
+          <div class="container container--narrow">
+              <div class="review" v-if="store.lang === 'LT'">
+                  <div class="image min-w-[100px]">
+                      <img src="../assets/images/reviewer.svg" alt="" />
+                  </div>
+                  <div class="content">
+                      <p>
+                          „Devintoje klasėje pradėjau svajoti apie medicinos studijas, todėl labai
+                          džiaugiuosi, kad tokia motyvuotų ir išsilavinusių mokytojų komanda buvo
+                          šalia nuo pat pradžių. Įvairūs konspektai, virtualios pamokos ir jauki
+                          digiklasiečių kompanija tapo mano laisvalaikiu! Pauliaus pamokose dėstomais
+                          biologijos universitetinio lygio pagrindais buvo tikras malonumas, o į
+                          Austėjos sveikatos mokslų pamokas jungiausi iš įvairiausių pasaulio kraštų,
+                          kad tik galėčiau išnagrinėti dar vieno paciento ligą.“
+                      </p>
+                      <p>
+                          <strong
+                              >Karolis, Kaišiadorių Algirdo Brazausko gimnazija, buvęs Digiklasės
+                              mokinys</strong
+                          >
+                      </p>
+                  </div>
+              </div>
+              <div class="review" v-if="store.lang === 'LV'">
+                  <div class="image min-w-[100px]">
+                      <img src="../assets/images/reviewerLV.svg" alt="" />
+                  </div>
+                  <div class="content">
+                      <p>
+                          „Es biju pārsteigta par to, cik pozitīva un produktīva pieredze man bija ar
+                          Memby tiešsaistes matemātikas nodarbībām. Skolotājs Rolands ne tikai bija
+                          ļoti prasmīgs un rūpīgs, bet arī radīja ērtu un atklātu vidi, kas ļāva man
+                          justies droši, lai uzdotu jautājumus un izprastu sarežģītākās matemātikas
+                          tēmas. Katram audzēknim tika pievērsta ļoti individuāla uzmanība un tika
+                          atbildēts uz katru pat vismuļķīgāko jautājumu. Manas zināšanas un
+                          pašpārliecība matemātikā uzlabojās ievērojami, kā arī es esmu pārliecināta,
+                          ka, bez skolotāja Rolanda palīdzības, man nebūtu izdevies tik veiksmīgi
+                          nokārtot matemātikas eksāmenu. Es ļoti novērtēju šīs nodarbības un patiešām
+                          priecājos, ka tās izvēlējos!“
+                      </p>
+                      <p>
+                          <strong
+                              >Anija Siksna, Zentas Mauriņas Grobiņas vidusskola, 12. klase</strong
+                          >
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="wrapper dark">
+          <img src="../assets/images/oval-vector.svg" class="oval-vector" alt="" />
+          <img src="../assets/images/vector-arrow.svg" class="vector-arrow" alt="" />
+          <div class="container pb">
+              <h2 class="section-title" v-if="store.lang === 'LT'">Į narystę telpa tiek daug!</h2>
+              <h2 class="section-title" v-if="store.lang === 'LV'">Abonements ir visērtākais!</h2>
+          </div>
+          <div class="flex-container container--narrow">
+              <div class="membership-card">
+                  <div class="membership-icon">
+                      <img src="../assets/images/emoji/icon-play.svg" alt="" />
+                  </div>
+                  <div class="membership-content">
+                      <h3 v-if="store.lang === 'LT'">Individualus mokymosi planas</h3>
+                      <h3 v-if="store.lang === 'LV'">Individuāls mācīšanās plāns</h3>
+                  </div>
+              </div>
+              <div class="membership-card">
+                  <div class="membership-icon">
+                      <img src="../assets/images/emoji/icon-book.svg" alt="" />
+                  </div>
+                  <div class="membership-content">
+                      <h3 v-if="store.lang === 'LT'">Namų darbų pagalba</h3>
+                      <h3 v-if="store.lang === 'LV'">Palīdzība ar mājasdarbiem</h3>
+                  </div>
+              </div>
+              <div class="membership-card">
+                  <div class="membership-icon">
+                      <img src="../assets/images/emoji/icon-video.svg" alt="" />
+                  </div>
+                  <div class="membership-content">
+                      <h3 v-if="store.lang === 'LT'">Pamokų įrašai</h3>
+                      <h3 v-if="store.lang === 'LV'">Nodarbību video ieraksti</h3>
+                  </div>
+              </div>
+              <div class="membership-card">
+                  <div class="membership-icon">
+                      <img src="../assets/images/emoji/icon-stats.svg" alt="" />
+                  </div>
+                  <div class="membership-content">
+                      <h3 v-if="store.lang === 'LT'">Lankomumo peržiūra</h3>
+                      <h3 v-if="store.lang === 'LV'">Apmeklējuma apskats</h3>
+                  </div>
+              </div>
+              <div class="membership-card">
+                  <div class="membership-icon">
+                      <img src="../assets/images/emoji/icon-prize.svg" alt="" />
+                  </div>
+                  <div class="membership-content">
+                      <h3 v-if="store.lang === 'LT'">Taškai ir apdovanojimai</h3>
+                      <h3 v-if="store.lang === 'LV'">Punkti un balvas</h3>
+                  </div>
+              </div>
+              <div class="membership-card">
+                  <div class="membership-icon">
+                      <img src="../assets/images/emoji/icon-hands.svg" alt="" />
+                  </div>
+                  <div class="membership-content">
+                      <h3 v-if="store.lang === 'LT'">Motyvuojanti bendruomenė</h3>
+                      <h3 v-if="store.lang === 'LV'">Motivējoša kopiena</h3>
+                  </div>
+              </div>
+          </div>
+          <div class="container container--narrow stories-carousel">
+              <carousel v-bind="storiesCarousel" v-if="store.lang === 'LT'">
+                  <slide v-for="(item, index) in storiesArray" :key="item">
+                      <div class="story-slide">
+                          <div class="story-image hidden md:block">
+                              <img :src="'/storiesImages/story-' + index + '.png'" alt="" />
+                          </div>
+                          <div class="story-image md:hidden">
+                            <img :src="'/storiesImages/story-mobile-' + index + '.png'" alt="" />
+                          </div>
+                          <div class="story-body">
+                              <h4>{{ item.head }}</h4>
+                              <p class="hidden md:block">{{ item.body }}</p>
+                              <p class="md:hidden">{{ item.bodyMobile }}</p>
+                              <h5>{{ item.foot }}</h5>
+                          </div>
+                      </div>
+                  </slide>
+                  <template #addons>
+                      <navigation>
+                          <template #next>
+                              <img src="../assets/images/next-carousel.svg" alt="" />
+                          </template>
+                          <template #prev>
+                              <img src="../assets/images/prev-carousel.svg" alt="" />
+                          </template>
+                      </navigation>
+                  </template>
+              </carousel>
+              <carousel v-bind="storiesCarousel" v-if="store.lang === 'LV'">
+                  <slide v-for="(item, index) in storiesArrayLV" :key="item">
+                      <div class="story-slide">
                         <div class="story-image hidden md:block">
-                            <img :src="'/storiesImages/story-' + index + '.png'" alt="" />
+                          <img :src="'/storiesImagesLV/story-' + index + '.png'" alt="" />
                         </div>
                         <div class="story-image md:hidden">
-                          <img :src="'/storiesImages/story-mobile-' + index + '.png'" alt="" />
+                          <img :src="'/storiesImagesLV/story-mobile-' + index + '.png'" alt="" />
                         </div>
-                        <div class="story-body">
-                            <h4>{{ item.head }}</h4>
-                            <p class="hidden md:block">{{ item.body }}</p>
-                            <p class="md:hidden">{{ item.bodyMobile }}</p>
-                            <h5>{{ item.foot }}</h5>
-                        </div>
-                    </div>
-                </slide>
-                <template #addons>
-                    <navigation>
-                        <template #next>
-                            <img src="../assets/images/next-carousel.svg" alt="" />
-                        </template>
-                        <template #prev>
-                            <img src="../assets/images/prev-carousel.svg" alt="" />
-                        </template>
-                    </navigation>
-                </template>
-            </carousel>
-            <carousel v-bind="storiesCarousel" v-if="store.lang === 'LV'">
-                <slide v-for="(item, index) in storiesArrayLV" :key="item">
-                    <div class="story-slide">
-                      <div class="story-image hidden md:block">
-                        <img :src="'/storiesImagesLV/story-' + index + '.png'" alt="" />
+                          <div class="story-body">
+                              <h4>{{ item.head }}</h4>
+                              <p class="hidden md:block">{{ item.body }}</p>
+                              <p class="md:hidden">{{ item.bodyMobile }}</p>
+                              <h5>{{ item.foot }}</h5>
+                          </div>
                       </div>
-                      <div class="story-image md:hidden">
-                        <img :src="'/storiesImagesLV/story-mobile-' + index + '.png'" alt="" />
-                      </div>
-                        <div class="story-body">
-                            <h4>{{ item.head }}</h4>
-                            <p class="hidden md:block">{{ item.body }}</p>
-                            <p class="md:hidden">{{ item.bodyMobile }}</p>
-                            <h5>{{ item.foot }}</h5>
-                        </div>
-                    </div>
-                </slide>
-                <template #addons>
-                    <navigation>
-                        <template #next>
-                            <img src="../assets/images/next-carousel.svg" alt="" />
-                        </template>
-                        <template #prev>
-                            <img src="../assets/images/prev-carousel.svg" alt="" />
-                        </template>
-                    </navigation>
-                </template>
-            </carousel>
-        </div>
-        <div class="container container--narrow">
-            <h2 class="section-title" v-if="store.lang === 'LT'">
-                <span>Net 98% mokinių sako,</span> kad „Digiklasė“ – veiksmingas būdas efektyviai
-                pagerinti akademinius rezultatus.
-            </h2>
-            <h2 class="section-title" v-if="store.lang === 'LV'">
-                <span>98% skolēnu apgalvo,</span> ka Memby ir visefektīvākais veids kā uzlabot savas
-                mācību sekmes.
-            </h2>
-        </div>
-    </div>
-    <div class="wrapper dark inner">
-        <carousel v-bind="testimSettings" class="testimonials-carousel" v-if="store.lang === 'LT'">
-            <slide :key="1">
-                <img src="../assets/images/reviews/Review-1.svg" alt="" />
-            </slide>
-            <slide :key="2">
-                <img src="../assets/images/reviews/Review-2.svg" alt="" />
-            </slide>
-            <slide :key="3">
-                <img src="../assets/images/reviews/Review-3.svg" alt="" />
-            </slide>
-            <slide :key="4">
-                <img src="../assets/images/reviews/Review-4.svg" alt="" />
-            </slide>
-            <slide :key="5">
-                <img src="../assets/images/reviews/Review-5.svg" alt="" />
-            </slide>
-            <slide :key="6">
-                <img src="../assets/images/reviews/Review-6.svg" alt="" />
-            </slide>
-            <template #addons>
-                <pagination />
-            </template>
-        </carousel>
-        <carousel v-bind="testimSettings" class="testimonials-carousel" v-if="store.lang === 'LV'">
-            <slide :key="1">
-                <img src="../assets/images/reviewsLV/Review-1.svg" alt="" />
-            </slide>
-            <slide :key="2">
-                <img src="../assets/images/reviewsLV/Review-2.svg" alt="" />
-            </slide>
-            <slide :key="3">
-                <img src="../assets/images/reviewsLV/Review-3.svg" alt="" />
-            </slide>
-            <slide :key="4">
-                <img src="../assets/images/reviewsLV/Review-4.svg" alt="" />
-            </slide>
-            <slide :key="5">
-                <img src="../assets/images/reviewsLV/Review-5.svg" alt="" />
-            </slide>
+                  </slide>
+                  <template #addons>
+                      <navigation>
+                          <template #next>
+                              <img src="../assets/images/next-carousel.svg" alt="" />
+                          </template>
+                          <template #prev>
+                              <img src="../assets/images/prev-carousel.svg" alt="" />
+                          </template>
+                      </navigation>
+                  </template>
+              </carousel>
+          </div>
+          <div class="container container--narrow">
+              <h2 class="section-title" v-if="store.lang === 'LT'">
+                  <span>Net 98% mokinių sako,</span> kad „Digiklasė“ – veiksmingas būdas efektyviai
+                  pagerinti akademinius rezultatus.
+              </h2>
+              <h2 class="section-title" v-if="store.lang === 'LV'">
+                  <span>98% skolēnu apgalvo,</span> ka Memby ir visefektīvākais veids kā uzlabot savas
+                  mācību sekmes.
+              </h2>
+          </div>
+      </div>
+      <div class="wrapper dark inner">
+          <carousel v-bind="testimSettings" class="testimonials-carousel" v-if="store.lang === 'LT'">
+              <slide :key="1">
+                  <img src="../assets/images/reviews/Review-1.svg" alt="" />
+              </slide>
+              <slide :key="2">
+                  <img src="../assets/images/reviews/Review-2.svg" alt="" />
+              </slide>
+              <slide :key="3">
+                  <img src="../assets/images/reviews/Review-3.svg" alt="" />
+              </slide>
+              <slide :key="4">
+                  <img src="../assets/images/reviews/Review-4.svg" alt="" />
+              </slide>
+              <slide :key="5">
+                  <img src="../assets/images/reviews/Review-5.svg" alt="" />
+              </slide>
+              <slide :key="6">
+                  <img src="../assets/images/reviews/Review-6.svg" alt="" />
+              </slide>
+              <template #addons>
+                  <pagination />
+              </template>
+          </carousel>
+          <carousel v-bind="testimSettings" class="testimonials-carousel" v-if="store.lang === 'LV'">
+              <slide :key="1">
+                  <img src="../assets/images/reviewsLV/Review-1.svg" alt="" />
+              </slide>
+              <slide :key="2">
+                  <img src="../assets/images/reviewsLV/Review-2.svg" alt="" />
+              </slide>
+              <slide :key="3">
+                  <img src="../assets/images/reviewsLV/Review-3.svg" alt="" />
+              </slide>
+              <slide :key="4">
+                  <img src="../assets/images/reviewsLV/Review-4.svg" alt="" />
+              </slide>
+              <slide :key="5">
+                  <img src="../assets/images/reviewsLV/Review-5.svg" alt="" />
+              </slide>
 
-            <template #addons>
-                <pagination />
-            </template>
-        </carousel>
+              <template #addons>
+                  <pagination />
+              </template>
+          </carousel>
+      </div>
+      <div class="wrapper dark inner">
+          <div class="container container--narrow pb">
+              <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
+          </div>
+      </div>
+      <div class="wrapper light pt page-bottom">
+          <div class="container container--narrow">
+              <h2 class="section-title" v-if="store.lang === 'LT'">
+                  Atsakymai į <span>Dažniausiai <br />Užduodamus Klausimus (D.U.K.)</span>
+              </h2>
+              <h2 class="section-title" v-if="store.lang === 'LV'">
+                  Atbildes uz biežāk uzdotajiem jautājumiem
+              </h2>
+              <AccordionFAQ :content="faqLT" v-if="store.lang === 'LT'" />
+              <AccordionFAQ :content="faqLV" v-if="store.lang === 'LV'" />
+              <h2 class="section-title last-section" v-if="store.lang === 'LT'">
+                  Prisijunk prie daugiau nei <span>15 000 bendraminčių</span> bendruomenės!
+              </h2>
+              <h2 class="section-title last-section" v-if="store.lang === 'LV'">
+                  Pievienojies kopienai ar vairāk kā <span>15,000</span> līdzīgi domājošiem cilvēkiem!
+              </h2>
+              <div class="pb">
+                  <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
+              </div>
+          </div>
+          <img src="../assets/images/elipses.svg" class="footer-elipses" alt="" />
+      </div>
+      <footer ref="footerTarget" v-element-visibility="onFooterVisibility">
+          <div class="container d-flex">
+              <div>
+                  <p v-if="store.lang === 'LT'">
+                      © {{ getCurrentYear() }} Digiklasė. Visos teisės saugomos
+                  </p>
+                  <p v-if="store.lang === 'LV'">
+                      © {{ getCurrentYear() }} Memby. Visas tiesības aizsargātas.
+                  </p>
+              </div>
+              <div class="footer-nav" v-if="store.lang === 'LT'">
+                  <a
+                      href="https://digiklase.lt/privatumo-politika"
+                      target="_blank"
+                      class="footer-link"
+                      >Privatumo politika</a
+                  >
+                  <a href="https://digiklase.lt/slapukai" target="_blank" class="footer-link"
+                      >Slapukų politika</a
+                  >
+              </div>
+              <div class="footer-nav" v-if="store.lang === 'LV'">
+                  <a href="https://memby.lv/privatuma-politika" target="_blank" class="footer-link"
+                      >Privātuma politika</a
+                  >
+                  <a href="https://memby.lv/sikdatnu-politika" target="_blank" class="footer-link"
+                      >Sīkdatņu politika</a
+                  >
+              </div>
+          </div>
+      </footer>
     </div>
-    <div class="wrapper dark inner">
-        <div class="container container--narrow pb">
-            <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
-        </div>
-    </div>
-    <div class="wrapper light pt page-bottom">
-        <div class="container container--narrow">
-            <h2 class="section-title" v-if="store.lang === 'LT'">
-                Atsakymai į <span>Dažniausiai <br />Užduodamus Klausimus (D.U.K.)</span>
-            </h2>
-            <h2 class="section-title" v-if="store.lang === 'LV'">
-                Atbildes uz biežāk uzdotajiem jautājumiem
-            </h2>
-            <AccordionFAQ :content="faqLT" v-if="store.lang === 'LT'" />
-            <AccordionFAQ :content="faqLV" v-if="store.lang === 'LV'" />
-            <h2 class="section-title last-section" v-if="store.lang === 'LT'">
-                Prisijunk prie daugiau nei <span>15 000 bendraminčių</span> bendruomenės!
-            </h2>
-            <h2 class="section-title last-section" v-if="store.lang === 'LV'">
-                Pievienojies kopienai ar vairāk kā <span>15,000</span> līdzīgi domājošiem cilvēkiem!
-            </h2>
-            <div class="pb">
-                <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
-            </div>
-        </div>
-        <img src="../assets/images/elipses.svg" class="footer-elipses" alt="" />
-    </div>
-    <footer ref="footerTarget" v-element-visibility="onFooterVisibility">
-        <div class="container d-flex">
-            <div>
-                <p v-if="store.lang === 'LT'">
-                    © {{ getCurrentYear() }} Digiklasė. Visos teisės saugomos
-                </p>
-                <p v-if="store.lang === 'LV'">
-                    © {{ getCurrentYear() }} Memby. Visas tiesības aizsargātas.
-                </p>
-            </div>
-            <div class="footer-nav" v-if="store.lang === 'LT'">
-                <a
-                    href="https://digiklase.lt/privatumo-politika"
-                    target="_blank"
-                    class="footer-link"
-                    >Privatumo politika</a
-                >
-                <a href="https://digiklase.lt/slapukai" target="_blank" class="footer-link"
-                    >Slapukų politika</a
-                >
-            </div>
-            <div class="footer-nav" v-if="store.lang === 'LV'">
-                <a href="https://memby.lv/privatuma-politika" target="_blank" class="footer-link"
-                    >Privātuma politika</a
-                >
-                <a href="https://memby.lv/sikdatnu-politika" target="_blank" class="footer-link"
-                    >Sīkdatņu politika</a
-                >
-            </div>
-        </div>
-    </footer>
   </div>
 </template>
 
