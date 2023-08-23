@@ -47,7 +47,6 @@ const mutateProgramsFromResponse = (response) => {
 
   //FILTERING
   programs = programs.filter(program => {
-    const tierCondition = program.Tier <= parseInt(url.searchParams.get('tier'));
     const gradeCondition = program.Grade === parseInt(url.searchParams.get('class'));
     const personaCondition = program.Persona === url.searchParams.get('persona') || program.Persona === 'Everyone';
 
@@ -55,8 +54,23 @@ const mutateProgramsFromResponse = (response) => {
     const subjectsArray = JSON.parse(subjectsString);
     const subjectsCondition = subjectsArray.includes(program.Subject);
 
-    return tierCondition && gradeCondition && personaCondition && subjectsCondition;
+    return gradeCondition && personaCondition && subjectsCondition;
   });
+
+  const myTier = parseInt(url.searchParams.get('tier'));
+
+  //FILTER BY TIERS
+  let filteredByTier = programs.filter(program => {
+    return program.Tier <= myTier;
+  });
+
+  if (filteredByTier.length < 1) {
+    filteredByTier = programs.filter(program => {
+        return parseInt(program.Tier) >= myTier;
+      });
+  }
+
+  programs = filteredByTier;
 
   //SORTING
   return programs.sort((a, b) => {
