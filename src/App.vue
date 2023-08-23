@@ -131,6 +131,9 @@ const completeness = (step) => {
     if (store.lang === 'LT') {
         return (100 / store.quiz.LT.child.length) * step
     }
+    if (store.lang === 'LV') {
+      return (100 / store.quiz.LT.child.length) * step
+    }
 }
 </script>
 
