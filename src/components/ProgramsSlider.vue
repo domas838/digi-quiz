@@ -44,32 +44,38 @@ const instance = axios.create({
 
 const mutateProgramsFromResponse = (response) => {
   let programs = pluck(response.data.items, 'values');
+  const subjectsString = url.searchParams.get('subjects');
+  const subjectsArray = JSON.parse(subjectsString);
 
   //FILTERING
   programs = programs.filter(program => {
     const gradeCondition = program.Grade === parseInt(url.searchParams.get('class'));
     const personaCondition = program.Persona === url.searchParams.get('persona') || program.Persona === 'Everyone';
-
-    const subjectsString = url.searchParams.get('subjects');
-    const subjectsArray = JSON.parse(subjectsString);
     const subjectsCondition = subjectsArray.includes(program.Subject) || subjectsArray.length < 1;
 
     return gradeCondition && personaCondition && subjectsCondition;
   });
 
-  const myTier = parseInt(url.searchParams.get('tier'));
-
   //FILTER BY TIERS
-  let filteredByTier = programs.filter(program => {
-    return program.Tier <= myTier;
-  });
+  const myTier = parseInt(url.searchParams.get('tier'));
+  const filteredByTier = [];
 
-  if (filteredByTier.length < 1) {
-    filteredByTier = programs.filter(program => {
+  subjectsArray.forEach((subject) => {
+    let filtered = programs.filter(program => {
+      return program.Tier <= myTier && program.Subject === subject;
+    });
+
+    filteredByTier.push(...filtered)
+
+    if (filtered.length < 1) {
+      filtered = programs.filter(program => {
         return parseInt(program.Tier) >= myTier;
       });
-  }
 
+      filteredByTier.push(...filtered)
+    }
+  });
+  
   programs = filteredByTier;
 
   //SORTING
