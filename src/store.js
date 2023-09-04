@@ -166,12 +166,12 @@ export const store = reactive({
                 },
                 {
                     qNo: 3,
-                    Q: 'Kurš no šiem mērķiem ir vairāk par Tevi?',
+                    Q: 'Kurš no šiem mērķiem visvairāk atbilst Tev?',
                     Ans: [
-                        'Gatavoties eksāmenam',
-                        'Uzlabot atzīmes un aizlāpīt zināšanu robus',
-                        'Personīgā izaugsme lietās, kas mani tiešām interesē',
-                        'Balansēt skolu ar citām aktivitātēm - mācēt plānot savu laiku ir atslēga visam!'
+                        'Gribu gatavoties eksāmenam.',
+                        'Vēlos uzlabot atzīmes un aizlāpīt zināšanu robus.',
+                        'Vēlos veicināt personīgo izaugsmi mācību priekšmetā, kas mani tiešām interesē.',
+                        'Gribu mācēt saplānot savu laiku tā, lai skolas dzīve un citas aktivitātes būtu balansā.'
                     ]
                 },
                 {
@@ -181,12 +181,12 @@ export const store = reactive({
                 },
                 {
                     qNo: 5,
-                    Q: 'Kā Tu pats vērtē savu motivāciju mācīties?',
+                    Q: 'Kā Tu vērtē savu motivāciju mācīties?',
                     Ans: [
-                        'Ļoti augstu, es regulāri meklēju veidus, kā uzlabot zināšanas un iemācīties ko jaunu.',
-                        'Augstu, es pievēršu uzmanību un vienmēr mācos priekš kontroldarbiem un eksāmeniem',
-                        'Vidēji, es vēlos uzlabot savas atzīmes, bet citreiz slinkoju par daudz.',
-                        'Ne ļoti augstu, ja vien atliek kādreiz vairāk laika, lai mācītos.'
+                        'Ļoti augsta, es regulāri meklēju veidus, kā uzlabot zināšanas un iemācīties ko jaunu.',
+                        'Augsta, es stundās cītīgi mācos un vienmēr gatavojos kontroldabiem un eksāmeniem.',
+                        'Vidēja, es vēlos uzlabot savas atzīmes, bet dažreiz par daudz slinkoju.',
+                        'Ne pārāk augsta, jo bieži pietrūkst laika, lai mācītos.'
                         // 'Mācīties nav mana galvenā prioritāte.'
                     ]
                 },
@@ -194,19 +194,19 @@ export const store = reactive({
                     qNo: 6,
                     Q: 'Kāds mācīšanās formāts Tev der vislabāk?',
                     Ans: [
-                        'Mācīties pēc pasniedzēja sagatavotas programmas',
-                        'Mācīties atbilstoši tematiem, ko šobrīd mācos skolā',
-                        'Abas opcijas ir vienlīdz svarīgas',
-                        'Īsti nezinu'
+                        'Mācīties pēc skolotāja sagatavotas programmas.',
+                        'Mācīties atbilstoši tematiem, kas šobrīd tiek apgūti skolā.',
+                        'Abi augstāk minētie varianti ir vienlīdz labi.',
+                        'Īsti nezinu.'
                     ]
                 },
                 {
                     qNo: 7,
-                    Q: 'Cik daudz laika Tu varētu veltīt vienam priekšmetam nedēļā?',
+                    Q: 'Cik daudz laika Tu varētu veltīt vienam mācību priekšmetam nedēļā?',
                     Ans: [
-                        'Apmēram 1 stundu nedēļā',
-                        'Apmēram 2 stundas nedēļā',
-                        'Vairāk kā 3 stundas nedēļā'
+                        'Apmēram 1 stundu nedēļā.',
+                        'Apmēram 2 stundas nedēļā.',
+                        'Vairāk nekā 3 stundas nedēļā.'
                     ]
                 }
             ],

@@ -17,7 +17,7 @@ if (store.lang === 'LV') {
 </script>
 <template>
     <div class="d-flex justify-center cta-buttons">
-        <a :href="props.selectedPlanURL" target="_blank" class="cta-btn"
+        <a :href="props.selectedPlanURL" class="cta-btn"
             >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
         /></a>
         <a :href="props.allPlansURL" target="_blank" class="cta-link">{{ btnLabel.showAll }}</a>

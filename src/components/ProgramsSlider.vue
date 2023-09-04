@@ -75,7 +75,7 @@ const mutateProgramsFromResponse = (response) => {
       filteredByTier.push(...filtered)
     }
   });
-  
+
   programs = filteredByTier;
 
   //SORTING

@@ -144,7 +144,8 @@ const toggleReadMore = (index) => {
                 <div class="icon">
                     <img src="../assets/images/icon-live-lessons.svg" alt="" />
                 </div>
-                <div class="title">{{ props.lessonsCount }} {{ $t('LiveLessonsPerWeek') }}</div>
+                <div class="title" v-if="Number(props.lessonsCount) === 1">{{ props.lessonsCount }} {{ $t('LiveLessonsPerWeek') }}</div>
+                <div class="title" v-if="Number(props.lessonsCount) > 1">{{ props.lessonsCount }} {{ $t('LiveLessonsPerWeekPlural') }}</div>
             </div>
             <!-- <div class="slide-summary-line">
                 <div class="icon">

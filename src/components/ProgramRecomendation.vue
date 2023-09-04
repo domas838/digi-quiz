@@ -127,7 +127,7 @@ const storiesArray = [
     },
     {
         head: 'Karolis dalinasi',
-        body: 'Devintoje klasėje pradėjau svajoti apie medicinos studijas, todėl labai džiaugiuosi, kad tokia motyvuotų ir išsilavinusių mokytojų komanda buvo šalia nuo pat pradžių. Įvairūs konspektai, virtualios pamokos ir jauki digiklasiečių kompanija tapo mano laisvalaikiu! Pauliaus pamokose dėstomais biologijos universitetinio lygio pagrindais buvo tikras malonumas, o į Austėjos sveikatos mokslų pamokas jungiausi iš įvairiausių pasaulio kraštų, kad tik galėčiau išnagrinėti dar vieno paciento ligą.',
+        body: 'Devintoje klasėje pradėjau svajoti apie medicinos studijas, todėl labai džiaugiuosi, kad tokia motyvuotų ir išsilavinusių mokytojų komanda buvo šalia nuo pat pradžių.',
       bodyMobile: '„Pauliaus pamokose dėstomais biologijos universitetinio lygio pagrindais buvo tikras malonumas, o į Austėjos sveikatos mokslų pamokas jungiausi iš įvairiausių pasaulio kraštų, kad tik galėčiau išnagrinėti dar vieno paciento ligą.”',
       foot: 'Karolis, Kaišiadorių Algirdo Brazausko gimnazija, buvęs Digiklasės mokinys'
     },
@@ -380,7 +380,7 @@ onMounted(() => {
               <img v-if="store.lang === 'LT'" class="logo" src="../assets/images/digiklase.svg" alt="" />
               <img v-if="store.lang === 'LV'" class="logo" src="../assets/images/memby.svg" alt="" />
               <div>
-                  <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                  <a :href="selectedPlanURL()" class="cta-btn"
                       >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                   /></a>
               </div>
@@ -403,7 +403,7 @@ onMounted(() => {
                           Tavo pažymiai jau dabar yra neblogi. Todėl mūsų tikslas bus tave dar labiau
                           sudominti ir įtraukti į mokslą su nauja mokymosi medžiaga
                       </p>
-                      <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                      <a :href="selectedPlanURL()" class="cta-btn"
                           >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                       /></a>
                   </div>
@@ -424,7 +424,7 @@ onMounted(() => {
                           Tavas atzīmes jau ir augstas. Tāpēc mūsu mērķis būs noturēt Tavu interesi un
                           iesaistīt mācīties ar jauniem materiāliem.
                       </p>
-                      <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                      <a :href="selectedPlanURL()" class="cta-btn"
                           >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                       /></a>
                   </div>
@@ -444,7 +444,7 @@ onMounted(() => {
                           Tavo rezultatą apskaičiavome remdamiesi <strong>7348</strong> panašių
                           mokinių atsakymais
                       </p>
-                      <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                      <a :href="selectedPlanURL()" class="cta-btn"
                           >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                       /></a>
                   </div>
@@ -465,7 +465,7 @@ onMounted(() => {
                           Mēs izrēķinājām Tavu rezultātu balstoties uz atbildēm no
                           <strong>7348</strong> līdzīgiem skolēniem.
                       </p>
-                      <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                      <a :href="selectedPlanURL()" class="cta-btn"
                           >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                       /></a>
                   </div>
@@ -485,7 +485,7 @@ onMounted(() => {
                           Tavo rezultatą apskaičiavome remdamiesi <strong>5124</strong> panašių
                           mokinių atsakymais
                       </p>
-                      <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                      <a :href="selectedPlanURL()" class="cta-btn"
                           >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                       /></a>
                   </div>
@@ -506,7 +506,7 @@ onMounted(() => {
                           Mēs izrēķinājām Tavu rezultātu balstoties uz atbildēm no
                           <strong>5124</strong> līdzīgiem skolēniem.
                       </p>
-                      <a :href="selectedPlanURL()" target="_blank" class="cta-btn"
+                      <a :href="selectedPlanURL()" class="cta-btn"
                           >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                       /></a>
                   </div>
@@ -889,13 +889,7 @@ onMounted(() => {
                   </div>
                   <div class="content">
                       <p>
-                          „Devintoje klasėje pradėjau svajoti apie medicinos studijas, todėl labai
-                          džiaugiuosi, kad tokia motyvuotų ir išsilavinusių mokytojų komanda buvo
-                          šalia nuo pat pradžių. Įvairūs konspektai, virtualios pamokos ir jauki
-                          digiklasiečių kompanija tapo mano laisvalaikiu! Pauliaus pamokose dėstomais
-                          biologijos universitetinio lygio pagrindais buvo tikras malonumas, o į
-                          Austėjos sveikatos mokslų pamokas jungiausi iš įvairiausių pasaulio kraštų,
-                          kad tik galėčiau išnagrinėti dar vieno paciento ligą.“
+                          „Devintoje klasėje pradėjau svajoti apie medicinos studijas, todėl labai džiaugiuosi, kad tokia motyvuotų ir išsilavinusių mokytojų komanda buvo šalia nuo pat pradžių.“
                       </p>
                       <p>
                           <strong
@@ -911,16 +905,7 @@ onMounted(() => {
                   </div>
                   <div class="content">
                       <p>
-                          „Es biju pārsteigta par to, cik pozitīva un produktīva pieredze man bija ar
-                          Memby tiešsaistes matemātikas nodarbībām. Skolotājs Rolands ne tikai bija
-                          ļoti prasmīgs un rūpīgs, bet arī radīja ērtu un atklātu vidi, kas ļāva man
-                          justies droši, lai uzdotu jautājumus un izprastu sarežģītākās matemātikas
-                          tēmas. Katram audzēknim tika pievērsta ļoti individuāla uzmanība un tika
-                          atbildēts uz katru pat vismuļķīgāko jautājumu. Manas zināšanas un
-                          pašpārliecība matemātikā uzlabojās ievērojami, kā arī es esmu pārliecināta,
-                          ka, bez skolotāja Rolanda palīdzības, man nebūtu izdevies tik veiksmīgi
-                          nokārtot matemātikas eksāmenu. Es ļoti novērtēju šīs nodarbības un patiešām
-                          priecājos, ka tās izvēlējos!“
+                          „Es biju pārsteigta par to, cik pozitīva un produktīva pieredze man bija ar Memby tiešsaistes matemātikas nodarbībām. Manas zināšanas un pašpārliecība matemātikā uzlabojās ievērojami!“
                       </p>
                       <p>
                           <strong
@@ -1128,7 +1113,7 @@ onMounted(() => {
                   Prisijunk prie daugiau nei <span>15 000 bendraminčių</span> bendruomenės!
               </h2>
               <h2 class="section-title last-section" v-if="store.lang === 'LV'">
-                  Pievienojies kopienai ar vairāk kā <span>15,000</span> līdzīgi domājošiem cilvēkiem!
+                  Pievienojies kopienai ar vairāk kā <span>15 000</span> līdzīgi domājošiem cilvēkiem!
               </h2>
               <div class="pb">
                   <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
@@ -1149,19 +1134,18 @@ onMounted(() => {
               <div class="footer-nav" v-if="store.lang === 'LT'">
                   <a
                       href="https://digiklase.lt/privatumo-politika"
-                      target="_blank"
                       class="footer-link"
                       >Privatumo politika</a
                   >
-                  <a href="https://digiklase.lt/slapukai" target="_blank" class="footer-link"
+                  <a href="https://digiklase.lt/slapukai" class="footer-link"
                       >Slapukų politika</a
                   >
               </div>
               <div class="footer-nav" v-if="store.lang === 'LV'">
-                  <a href="https://memby.lv/privatuma-politika" target="_blank" class="footer-link"
+                  <a href="https://memby.lv/privatuma-politika" class="footer-link"
                       >Privātuma politika</a
                   >
-                  <a href="https://memby.lv/sikdatnu-politika" target="_blank" class="footer-link"
+                  <a href="https://memby.lv/sikdatnu-politika" class="footer-link"
                       >Sīkdatņu politika</a
                   >
               </div>
@@ -1198,7 +1182,7 @@ header .logo {
         width: 50%;
     }
     header .content > div {
-        width: 50%;
+        width: 60%;
     }
     header .cta-btn {
         white-space: nowrap;
