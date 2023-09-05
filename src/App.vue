@@ -74,7 +74,7 @@ onMounted(() => {
 
         // Display results
         store.step = 10
-        store.showRecomendations = url.searchParams.get('app') !== 'true';
+        store.showRecomendations = true;
     }
 })
 
