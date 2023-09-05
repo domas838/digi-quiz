@@ -60,9 +60,25 @@ const mutateProgramsFromResponse = (response) => {
   const myTier = parseInt(url.searchParams.get('tier'));
   const filteredByTier = [];
 
-  subjectsArray.forEach((subject) => {
+  if (subjectsArray.length > 0) {
+    subjectsArray.forEach((subject) => {
+      let filtered = programs.filter(program => {
+        return program.Tier <= myTier && program.Subject === subject;
+      });
+
+      filteredByTier.push(...filtered)
+
+      if (filtered.length < 1) {
+        filtered = programs.filter(program => {
+          return parseInt(program.Tier) >= myTier;
+        });
+
+        filteredByTier.push(...filtered)
+      }
+    });
+  } else {
     let filtered = programs.filter(program => {
-      return program.Tier <= myTier && program.Subject === subject;
+      return program.Tier <= myTier;
     });
 
     filteredByTier.push(...filtered)
@@ -74,7 +90,7 @@ const mutateProgramsFromResponse = (response) => {
 
       filteredByTier.push(...filtered)
     }
-  });
+  }
 
   programs = filteredByTier;
 
