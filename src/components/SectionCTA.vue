@@ -14,6 +14,7 @@ if (store.lang === 'LV') {
   btnLabel.buyNow = url.searchParams.has('lmt') ? 'Izmēģināt par 1 EUR' : 'Pirkt abonementu'
   btnLabel.showAll = 'Apskatīt visus'
 }
+
 </script>
 <template>
     <div class="d-flex justify-center cta-buttons">

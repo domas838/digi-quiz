@@ -385,7 +385,7 @@ onMounted(() => {
               <img v-if="store.lang === 'LT'" class="logo" src="../assets/images/digiklase.svg" alt="" />
               <img v-if="store.lang === 'LV'" class="logo" src="../assets/images/memby.svg" alt="" />
               <div>
-                  <a :href="selectedPlanURL()" class="cta-btn"
+                  <a :href="btnLabel.btnLink" class="cta-btn"
                       >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                   /></a>
               </div>
@@ -408,7 +408,7 @@ onMounted(() => {
                           Tavo pažymiai jau dabar yra neblogi. Todėl mūsų tikslas bus tave dar labiau
                           sudominti ir įtraukti į mokslą su nauja mokymosi medžiaga
                       </p>
-                      <a :href="selectedPlanURL()" class="cta-btn"
+                      <a :href="btnLabel.btnLink" class="cta-btn"
                           >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                       /></a>
                   </div>
@@ -429,7 +429,7 @@ onMounted(() => {
                           Tavas atzīmes jau ir augstas. Tāpēc mūsu mērķis būs noturēt Tavu interesi un
                           iesaistīt mācīties ar jauniem materiāliem.
                       </p>
-                      <a :href="selectedPlanURL()" class="cta-btn"
+                      <a :href="btnLabel.btnLink" class="cta-btn"
                           >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                       /></a>
                   </div>
@@ -449,7 +449,7 @@ onMounted(() => {
                           Tavo rezultatą apskaičiavome remdamiesi <strong>7348</strong> panašių
                           mokinių atsakymais
                       </p>
-                      <a :href="selectedPlanURL()" class="cta-btn"
+                      <a :href="btnLabel.btnLink" class="cta-btn"
                           >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                       /></a>
                   </div>
@@ -470,7 +470,7 @@ onMounted(() => {
                           Mēs izrēķinājām Tavu rezultātu balstoties uz atbildēm no
                           <strong>7348</strong> līdzīgiem skolēniem.
                       </p>
-                      <a :href="selectedPlanURL()" class="cta-btn"
+                      <a :href="btnLabel.btnLink" class="cta-btn"
                           >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                       /></a>
                   </div>
@@ -490,7 +490,7 @@ onMounted(() => {
                           Tavo rezultatą apskaičiavome remdamiesi <strong>5124</strong> panašių
                           mokinių atsakymais
                       </p>
-                      <a :href="selectedPlanURL()" class="cta-btn"
+                      <a :href="btnLabel.btnLink" class="cta-btn"
                           >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                       /></a>
                   </div>
@@ -511,7 +511,7 @@ onMounted(() => {
                           Mēs izrēķinājām Tavu rezultātu balstoties uz atbildēm no
                           <strong>5124</strong> līdzīgiem skolēniem.
                       </p>
-                      <a :href="selectedPlanURL()" class="cta-btn"
+                      <a :href="btnLabel.btnLink" class="cta-btn"
                           >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
                       /></a>
                   </div>

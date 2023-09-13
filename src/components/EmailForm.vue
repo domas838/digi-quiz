@@ -139,7 +139,7 @@ onMounted(() => {
         Rekomenduosime planą, kuris padėtų pasiekti visų užsibrėžtų tikslų
     </h1>
     <h1 v-if="store.lang === 'LV' && store.respondent === 'parent'">
-        Mēs esam izveidojuši personalizētu mācīšanās programmu, kura palīdzēs Jūsu bērnam sasniegt
+        Mēs esam izveidojuši personalizētu mācīšanās programmu, kas palīdzēs Jūsu bērnam sasniegt
         mērķus.
     </h1>
     <p v-if="store.lang === 'LT' && store.respondent === 'parent'">Kur atsiųsti rezultatus?</p>
@@ -284,8 +284,7 @@ onMounted(() => {
         </div>
         <div class="aggree-row" v-if="!store.isChildEmailEntered">
             <p>
-                *Ja Tev ir zem 13 gadiem, palūdz saviem vecākiem/ aizbildnim palīdzēt Tev aizpildīt
-                aptauju
+              *Ja Tev vēl nav 13 gadu, palūdz../aizbildnim aizpildīt aptauju par Tevi.
             </p>
         </div>
     </div>

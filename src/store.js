@@ -253,7 +253,7 @@ export const store = reactive({
                     Ans: [
                         'Mācīties pēc pasniedzēja sagatavotas programmas',
                         'Mācīties atbilstoši tematiem, ko bērns mācās skolā',
-                        'Abas opcijas ir vienlīdz svarīgas',
+                        'Abas iespējas ir vienlīdz svarīgas',
                         'Īsti nezinu'
                     ]
                 },
@@ -263,7 +263,7 @@ export const store = reactive({
                     Ans: [
                         'Apmēram 1 stundu nedēļā',
                         'Apmēram 2 stunas nedēļā',
-                        'Vairāk kā 3 stundas nedēļā'
+                        'Vairāk nekā 3 stundas nedēļā'
                     ]
                 }
             ]
