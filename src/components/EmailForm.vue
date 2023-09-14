@@ -284,7 +284,7 @@ onMounted(() => {
         </div>
         <div class="aggree-row" v-if="!store.isChildEmailEntered">
             <p>
-              *Ja Tev vēl nav 13 gadu, palūdz../aizbildnim aizpildīt aptauju par Tevi.
+              *Ja Tev vēl nav 13 gadu, palūdz vecākam/aizbildnim aizpildīt aptauju par Tevi
             </p>
         </div>
     </div>
