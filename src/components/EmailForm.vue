@@ -271,7 +271,7 @@ onMounted(() => {
                 type="checkbox"
                 name="age"
                 id="age"
-                value="Es esmu jau 13 gadus vecs"
+                value="Es esmu jau 14 gadus vecs"
                 v-model="store.olderThanThirteen"
             />
             <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
@@ -280,11 +280,11 @@ onMounted(() => {
                 alt=""
                 class="custom-checkbox-checked"
             />
-            <label for="age" class="aggree-label">Es esmu jau 13 gadus vecs</label>
+            <label for="age" class="aggree-label">Es esmu jau 14 gadus vecs</label>
         </div>
         <div class="aggree-row" v-if="!store.isChildEmailEntered">
             <p>
-              *Ja Tev vēl nav 13 gadu, palūdz vecākam/aizbildnim aizpildīt aptauju par Tevi
+              *Ja Tev vēl nav 14 gadu, palūdz vecākam/aizbildnim aizpildīt aptauju par Tevi
             </p>
         </div>
     </div>
