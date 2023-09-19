@@ -159,11 +159,11 @@ const completeness = (step) => {
             >
         </h1>
         <h1 class="intro-heading" v-if="store.lang === 'LV'">
-            Šī ir visefektīvākā mācību programma, <br />
-            lai uzlabotu savas atzīmes
+          Šī ir visefektīvākā mācību
+          programma, <br /> lai uzlabotu
+          savas sekmes –
             <span
-                >par 2 atzīmēm <br />
-                augstāk, 2 mēnešu laikā</span
+                >lai uzlabotu <br> savas atzīmes</span
             >
         </h1>
         <div class="intro-selection">
