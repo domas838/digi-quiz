@@ -250,7 +250,7 @@ onMounted(() => {
                 type="checkbox"
                 name="privacy"
                 id="privacy"
-                value="Es piekrītu privātuma politikai un lietošanas noteikumiem"
+                value="Es piekrītu lietošanas nosacījumiem un privātuma politikai"
                 v-model="store.aggreeWithPrivacy"
             />
             <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
@@ -262,7 +262,7 @@ onMounted(() => {
             <label for="privacy" class="aggree-label"
                 >Es piekrītu
                 <a href="https://memby.lv/privatuma-politika" target="_blank"
-                    >privātuma politikai un lietošanas noteikumiem</a
+                    >lietošanas nosacījumiem un privātuma politikai</a
                 ></label
             >
         </div>
@@ -340,7 +340,7 @@ onMounted(() => {
         <label for="privacy" class="aggree-label"
             >Es piekrītu
             <a href="https://memby.lv/privatuma-politika" target="_blank"
-                >privātuma politikai un lietošanas noteikumiem.</a
+                >lietošanas nosacījumiem un privātuma politikai.</a
             ></label
         >
     </div>
