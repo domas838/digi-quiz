@@ -57,10 +57,9 @@ const selectedPlanURL = () => {
         url = `${baseDomain}/plans/choose?class=${store.selectedClass}&planId=${planID}`
     }
 
-    //TODO HARDCODED
-    if (store.lang === 'LV') {
-      url = 'https://app.memby.lv/trial/campaign';
-    }
+    // if (store.lang === 'LV') {
+    //   url = 'https://app.memby.lv/trial/campaign';
+    // }
 
     return url
 }
@@ -321,7 +320,7 @@ const btnLabel = reactive({
 })
 
 if (store.lang === 'LV') {
-    btnLabel.buyNow = url.searchParams.has('lmt') ? 'Izmēģināt par 1 EUR' : 'Izmēģini 7 dienas par 5 EUR'
+    btnLabel.buyNow = url.searchParams.has('lmt') ? 'Izmēģināt par 1 EUR' : 'Pirkt abonementu'
     btnLabel.showAll = 'Apskatīt visus'
     btnLabel.btnLink = url.searchParams.has('lmt') ? 'https://app.memby.lv/trial' : selectedPlanURL()
 }

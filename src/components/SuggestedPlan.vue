@@ -90,22 +90,22 @@ const resolvePrice = (selectedSubjectsLength, isPaidTrial) => {
 
         <div class="z-[100] bg-white flex flex-col text-center w-full md:flex-row md:gap-5 md:text-left md:inline-flex md:justify-between">
           <div class="basis-1/2">
-<!--            <div class="text-[12px] md:text-[16px]">Izmēģini Memby 7 dienas par 5 EUR un iegūsti piekļuvi visām mūsu iespējām. Sāc jau šodien!</div>-->
-            <Heading level="3">💥 Izmēģini 7 dienas par 5 EUR</Heading>
+            <div class="text-[12px] md:text-[16px]">{{ isPaidTrial ? $t('SevenDaysTrial') : $t('RecommendedPlan') }}</div>
+            <Heading level="3">{{ $t(resolvePlan(selectedSubjectsLength, isPaidTrial)) }}</Heading>
           </div>
 
-<!--          <div class="basis-1/4 md:mb-4 md:mb-0" :class="{'md:self-end': isPaidTrial}">-->
-<!--            <div v-if="! isPaidTrial" class="inline mr-2 md:block md:mr-0">{{ $t('From') }}</div>-->
-<!--            <div class="font-bold self-end inline-flex">-->
-<!--              <Heading level="1">{{ resolvePrice(selectedSubjectsLength, isPaidTrial) }}</Heading>-->
-<!--              <span v-if="! isPaidTrial" class="font-normal self-end mb-1 ml-1">{{ $t('CurrencyMonth') }}</span>-->
-<!--            </div>-->
-<!--          </div>-->
+          <div class="basis-1/4 md:mb-4 md:mb-0" :class="{'md:self-end': isPaidTrial}">
+            <div v-if="! isPaidTrial" class="inline mr-2 md:block md:mr-0">{{ $t('From') }}</div>
+            <div class="font-bold self-end inline-flex">
+              <Heading level="1">{{ resolvePrice(selectedSubjectsLength, isPaidTrial) }}</Heading>
+              <span v-if="! isPaidTrial" class="font-normal self-end mb-1 ml-1">{{ $t('CurrencyMonth') }}</span>
+            </div>
+          </div>
 
           <div class="basis-1/2 self-center mt-2">
             <div class="action float-right">
               <a :href="btn.btnLink" target="_blank" class="cta-btn"
-              >Izmēģini 7 dienas<img src="../assets/images/arrow-right.svg" alt=""
+              >{{ btn.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
               /></a>
             </div>
           </div>
