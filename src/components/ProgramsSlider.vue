@@ -165,7 +165,6 @@ const resolveNextStep = () => {
 
 const callApi = () => {
   axios.get(`${BASE_APP_DOMAIN[store.lang]}/api/quiz-results/programs?userClass=${store.selectedClass}`).then((response) => {
-    console.log('data', response.data);
     store.filteredPrograms = mutateProgramsFromResponse(response);
     store.showRecomendations = true;
 
