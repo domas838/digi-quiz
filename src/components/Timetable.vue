@@ -1,5 +1,5 @@
 <script setup>
-import {reactive} from "vue";
+import { reactive } from "vue";
 import {store} from "../store";
 import {BASE_APP_DOMAIN} from "../helpers";
 
@@ -54,7 +54,7 @@ const changeTimetable = (type) => {
 </script>
 
 <template>
-  <div class="wrapper light-grey pb-10">
+  <div class="wrapper light-grey pb-10" v-if="store.showRecomendations">
     <div class="container">
       <div class="mb-5 flex justify-between items-center gap-4 flex-wrap">
         <div>

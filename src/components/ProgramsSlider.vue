@@ -27,20 +27,20 @@ const settings = {
 
 const url = new URL(window.location.href)
 
-const token = 'a29826cb-670e-4b25-9669-35f67b2e3e3b'
+// const token = 'a29826cb-670e-4b25-9669-35f67b2e3e3b'
 
-const table = reactive({
-  ID: 'grid-8XN2uCh13U' // LT
-})
+// const table = reactive({
+//   ID: 'grid-8XN2uCh13U' // LT
+// })
+//
+// if (store.lang === 'LV') {
+//   table.ID = 'grid-I_8YD1oJ_N' // LV
+// }
 
-if (store.lang === 'LV') {
-  table.ID = 'grid-I_8YD1oJ_N' // LV
-}
-
-const instance = axios.create({
-  baseURL: `https://coda.io/apis/v1/docs/otYeYWMX9e/tables/${table.ID}/`,
-  headers: { Authorization: 'Bearer ' + token }
-});
+// const instance = axios.create({
+//   baseURL: `https://coda.io/apis/v1/docs/otYeYWMX9e/tables/${table.ID}/`,
+//   headers: { Authorization: 'Bearer ' + token }
+// });
 
 const mutateProgramsFromResponse = (response) => {
   //let programs = pluck(response.data.items, 'values');
