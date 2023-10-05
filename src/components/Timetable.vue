@@ -56,7 +56,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="wrapper light-grey pb-10" v-if="timetable.type">
+  <div class="wrapper light-grey pb-10" v-if="store.cookieIsSet">
     <div class="container">
       <div class="mb-5 flex justify-between items-center gap-4 flex-wrap">
         <div>

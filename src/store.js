@@ -34,6 +34,7 @@ export const store = reactive({
     klaviyoStudentLevel: '',
     klaviyoNeededLessons: '',
     openProgramId: null,
+    cookieIsSet: false,
     quiz: {
         LT: {
             child: [

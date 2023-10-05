@@ -141,6 +141,8 @@ const setCookies = () => {
 
   document.cookie = `memby_quiz_persona=${store.selectedPersona} ; Domain=${domains[store.lang]} ;  ${expires} ; path=/;`
   document.cookie = `memby_quiz_programs=${programsIds} ; Domain=${domains[store.lang]} ;  ${expires} ; path=/;`
+
+  store.cookieIsSet = true;
 }
 
 const resolveNextStep = () => {
