@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from "vue";
+import {onMounted, reactive} from "vue";
 import {store} from "../store";
 import {BASE_APP_DOMAIN} from "../helpers";
 
@@ -50,6 +50,10 @@ const changeTimetable = (type) => {
     timetable.src = `${BASE_APP_DOMAIN[store.lang]}/iframe/quiz?availableClassSlug=${store.selectedClass}&planId=${selectedPlanId()}&filtered=true`;
   }
 }
+
+onMounted(() => {
+  changeTimetable('filtered');
+})
 
 </script>
 
