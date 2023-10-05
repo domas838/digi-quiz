@@ -10,34 +10,34 @@ const promise = {
     A: {
       heading: '<span style="color: #4a74eb">Pagerinsime tavo žinias</span> su įdomesniu ir nestandartiniu turiniu',
       paragraph: 'Tavo pažymiai jau dabar yra neblogi. Todėl mūsų tikslas bus tave dar labiau sudominti ir įtraukti į mokslą su nauja mokymosi medžiaga',
-      imgSrc: 'src/assets/images/your-level-A.svg'
+      imgSrc: 'promiseImages/your-level-A.svg'
     },
     B: {
       heading: 'Pasieksi <span style="color: #4a74eb">0,5-2 balų geresnius pažymius,</span> vos per 3 mėnesius!',
       paragraph: 'Tavo rezultatą apskaičiavome remdamiesi <strong>7348</strong> panašių mokinių atsakymais',
-      imgSrc: 'src/assets/images/your-level-B.svg'
+      imgSrc: 'promiseImages/your-level-B.svg'
     },
     C: {
       heading: 'Pasieksi <span style="color: #4a74eb">iki 2 balų geresnius pažymius,</span> vos per 2 mėnesius!',
       paragraph: 'Tavo rezultatą apskaičiavome remdamiesi <strong>5124</strong> panašių mokinių atsakymais',
-      imgSrc: 'src/assets/images/your-level-C.svg'
+      imgSrc: 'promiseImages/your-level-C.svg'
     }
   },
   LV: {
     A: {
       heading: '<span>Mēs uzlabosim Tavas zināšanas</span> ar daudz interesantāku un nestandarta saturu.',
       paragraph: 'Tavas atzīmes jau ir augstas. Tāpēc mūsu mērķis būs noturēt Tavu interesi un iesaistīt mācīties ar jauniem materiāliem.',
-      imgSrc: 'src/assets/images/your-level-A-LV.svg'
+      imgSrc: 'promiseImages/your-level-A-LV.svg'
     },
     B: {
       heading: 'Tu sasniegsi par <span style="color: #4a74eb">0.5-2 atzīmēm augstākus vērtējumus,</span> tikai 3 mēnešu laikā!',
       paragraph: 'Mēs izrēķinājām Tavu rezultātu balstoties uz atbildēm no <strong>7348</strong> līdzīgiem skolēniem.',
-      imgSrc: 'src/assets/images/your-level-B-LV.svg'
+      imgSrc: 'promiseImages/your-level-B-LV.svg'
     },
     C: {
       heading: 'Tu sasniegsi <span style="color: #4a74eb">par 2 atzīmēm augstākus vērtējumus,</span> tikai 2 mēnešu laikā!',
       paragraph: 'Mēs izrēķinājām Tavu rezultātu balstoties uz atbildēm no <strong>5124</strong> līdzīgiem skolēniem.',
-      imgSrc: 'src/assets/images/your-level-C-LV.svg'
+      imgSrc: 'promiseImages/your-level-C-LV.svg'
     }
   }
 }
