@@ -54,6 +54,7 @@ const i18n = createI18n({
             ReviewPlan: 'Peržiūrėti planą',
             TotalLessons: 'Viso pamokų: ',
             NineMonthsProgram: '9 mėn. trukmės pamoka',
+            PromiseSubHeader: 'Sukūrėme tau mokymosi planą, kuris padės pasiekti užsibrėžtų tikslų!'
         },
         lv: {
             RecommendedPlan: '🙌 Viss iekļauts plānā:',
@@ -94,6 +95,7 @@ const i18n = createI18n({
             ReviewPlan: 'Apskatīt manu plānu',
             TotalLessons: 'Nodarbības kopumā: ',
             NineMonthsProgram: '9 mēnešu programma',
+            PromiseSubHeader: 'Esam izveidojuši mācību plānu tieši Tev, lai palīdzētu Tev sasniegt savus mērķus!'
         },
     },
 })

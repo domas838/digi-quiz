@@ -60,7 +60,8 @@ const handleButtonClick = () => {
         <div class="content--left">
           <h2 v-html="promise[store.lang][store.childLevel].heading">
           </h2>
-          <p v-html="promise[store.lang][store.childLevel].paragraph">
+          <p>
+            {{ $t('PromiseSubHeader') }}
           </p>
           <button @click="handleButtonClick" class="flex border border-black rounded-[9999px] px-5 py-2 hover:opacity-50">{{ $t('ReviewPlan') }} <span class="ml-4"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_1837_7473)">
