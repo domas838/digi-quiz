@@ -34,10 +34,7 @@ const selectedPlanId = () => {
 
 const subjectsString = store.selectedSubjects.join('&subject[]=');
 
-const timetable = reactive({
-  type: 'filtered',
-  src: `${BASE_APP_DOMAIN[store.lang]}/iframe/quiz?availableClassSlug=${store.selectedClass}&planId=${selectedPlanId()}&filtered=true`
-});
+const timetable = reactive({});
 
 const changeTimetable = (type) => {
   if (type === 'all') {
@@ -52,13 +49,14 @@ const changeTimetable = (type) => {
 }
 
 onMounted(() => {
-  changeTimetable('filtered');
+  timetable.type = 'filtered';
+  timetable.src = `${BASE_APP_DOMAIN[store.lang]}/iframe/quiz?availableClassSlug=${store.selectedClass}&planId=${selectedPlanId()}&filtered=true`;
 })
 
 </script>
 
 <template>
-  <div class="wrapper light-grey pb-10" v-if="store.showRecomendations">
+  <div class="wrapper light-grey pb-10" v-if="timetable.type">
     <div class="container">
       <div class="mb-5 flex justify-between items-center gap-4 flex-wrap">
         <div>
