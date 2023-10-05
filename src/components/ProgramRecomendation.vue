@@ -417,7 +417,7 @@ const handleClose = () => {
 
     <PromiseSection :btnLabel="btnLabel" />
     <ProgramsSlider />
-    <Timetable />
+<!--    <Timetable />-->
     </div>
 
 <!--      <div class="wrapper light">-->
