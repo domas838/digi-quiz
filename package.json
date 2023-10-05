@@ -14,6 +14,8 @@
         "@vueuse/components": "^10.3.0",
         "@vueuse/core": "^10.3.0",
         "axios": "^1.4.0",
+        "date-fns": "^2.30.0",
+        "moment": "^2.29.4",
         "vite-plugin-mkcert": "^1.16.0",
         "vue": "^3.3.4",
         "vue-collapsed": "^1.2.5",
@@ -21,6 +23,7 @@
         "vue-faq-accordion": "^1.6.2",
         "vue-gtag": "^2.0.1",
         "vue-i18n": "^9.2.2",
+        "vue-moment": "^4.1.0",
         "vue3-carousel": "^0.3.1"
     },
     "devDependencies": {

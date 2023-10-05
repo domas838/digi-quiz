@@ -26,12 +26,14 @@ export const store = reactive({
     PROFILE3: [],
     PROFILE4: [],
     selectedPersona: null,
+    selectedPlan: null,
     resultUrl: '',
     klaviyoGoal: '',
     klaviyoMotivation: '',
     klaviyoIntensity: '',
     klaviyoStudentLevel: '',
     klaviyoNeededLessons: '',
+    openProgramId: null,
     quiz: {
         LT: {
             child: [

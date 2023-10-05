@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, reactive} from 'vue'
+import {onMounted, onUpdated, reactive} from 'vue'
 import { store } from '../store'
 import 'vue3-carousel/dist/carousel.css'
 import SectionCTA from './SectionCTA.vue'
@@ -10,6 +10,9 @@ import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import AccordionFAQ from './AccordionFAQ.vue'
 import SuggestedPlan from "./SuggestedPlan.vue";
 import {event} from "vue-gtag";
+import PromiseSection from "../components/PromiseSection.vue";
+import Timetable from "../components/Timetable.vue";
+import { BASE_APP_DOMAIN } from "../helpers";
 
 const url = new URL(window.location.href)
 
@@ -370,187 +373,80 @@ const getCurrentYear = () => {
 
 onMounted(() => {
   event('quiz_results');
+  window.onpopstate = function(event) {
+    if(event){
+      store.openProgramId = null;
+    }
+  }
 });
+
+const handleClose = () => {
+  store.openProgramId = null;
+}
+
 </script>
 
 <template>
+  <div class="fixed bg-white h-full w-full z-[999999999999999] pb-10" v-if="store.openProgramId">
+    <div @click="handleClose" class="text-right backdrop-brightness-50 flex items-center py-5 flex-row-reverse cursor-pointer">
+      <span class="mr-4">
+        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M24 2.41782L21.5829 0L12 9.58556L2.41714 0L0 2.41782L9.58286 12.0034L0 21.5889L2.41714 24.0068L12 14.4212L21.5829 24.0068L24 21.5889L14.4171 12.0034L24 2.41782Z" fill="white"/>
+        </svg>
+      </span>
+    </div>
+    <iframe class="h-full w-full" :src="BASE_APP_DOMAIN[store.lang] + '/quiz/program/' + store.openProgramId">
+    </iframe>
+  </div>
+
   <div v-if="url.searchParams.has('app')" class="spinner mt-48">
     <img class="!w-[150px]" src="../assets/images/spinner.svg" alt="" />
   </div>
   <div v-show="!url.searchParams.has('app')">
-    <div>
-      <header>
-          <div class="content">
-              <img v-if="store.lang === 'LT'" class="logo" src="../assets/images/digiklase.svg" alt="" />
-              <img v-if="store.lang === 'LV'" class="logo" src="../assets/images/memby.svg" alt="" />
-              <div>
-                  <a :href="btnLabel.btnLink" class="cta-btn"
-                      >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                  /></a>
-              </div>
-          </div>
-      </header>
-      <div class="wrapper yellow">
-          <div class="container">
-
-            <ProgramsSlider />
-
-              <div
-                  class="content--flex last-section-block"
-                  v-if="store.lang === 'LT' && store.childLevel === 'A'"
-              >
-                  <div class="content--left">
-                      <h2>
-                          <span>Pagerinsime tavo žinias</span> su įdomesniu ir nestandartiniu turiniu
-                      </h2>
-                      <p>
-                          Tavo pažymiai jau dabar yra neblogi. Todėl mūsų tikslas bus tave dar labiau
-                          sudominti ir įtraukti į mokslą su nauja mokymosi medžiaga
-                      </p>
-                      <a :href="btnLabel.btnLink" class="cta-btn"
-                          >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                      /></a>
-                  </div>
-                  <div class="content--right">
-                      <img src="../assets/images/your-level-A.svg" class="level-image" alt="" />
-                  </div>
-              </div>
-              <div
-                  class="content--flex last-section-block"
-                  v-if="store.lang === 'LV' && store.childLevel === 'A'"
-              >
-                  <div class="content--left">
-                      <h2>
-                          <span>Mēs uzlabosim Tavas zināšanas</span> ar daudz interesantāku un
-                          nestandarta saturu.
-                      </h2>
-                      <p>
-                          Tavas atzīmes jau ir augstas. Tāpēc mūsu mērķis būs noturēt Tavu interesi un
-                          iesaistīt mācīties ar jauniem materiāliem.
-                      </p>
-                      <a :href="btnLabel.btnLink" class="cta-btn"
-                          >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                      /></a>
-                  </div>
-                  <div class="content--right">
-                      <img src="../assets/images/your-level-A-LV.svg" class="level-image" alt="" />
-                  </div>
-              </div>
-              <div
-                  class="content--flex last-section-block"
-                  v-if="store.lang === 'LT' && store.childLevel === 'B'"
-              >
-                  <div class="content--left">
-                      <h2>
-                          Pasieksi <span>0,5-2 balų geresnius pažymius,</span> vos per 3 mėnesius!
-                      </h2>
-                      <p>
-                          Tavo rezultatą apskaičiavome remdamiesi <strong>7348</strong> panašių
-                          mokinių atsakymais
-                      </p>
-                      <a :href="btnLabel.btnLink" class="cta-btn"
-                          >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                      /></a>
-                  </div>
-                  <div class="content--right">
-                      <img src="../assets/images/your-level-B.svg" class="level-image" alt="" />
-                  </div>
-              </div>
-              <div
-                  class="content--flex last-section-block"
-                  v-if="store.lang === 'LV' && store.childLevel === 'B'"
-              >
-                  <div class="content--left">
-                      <h2>
-                          Tu sasniegsi par <span>0.5-2 atzīmēm augstākus vērtējumus,</span> tikai 3
-                          mēnešu laikā!
-                      </h2>
-                      <p>
-                          Mēs izrēķinājām Tavu rezultātu balstoties uz atbildēm no
-                          <strong>7348</strong> līdzīgiem skolēniem.
-                      </p>
-                      <a :href="btnLabel.btnLink" class="cta-btn"
-                          >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                      /></a>
-                  </div>
-                  <div class="content--right">
-                      <img src="../assets/images/your-level-B-LV.svg" class="level-image" alt="" />
-                  </div>
-              </div>
-              <div
-                  class="content--flex last-section-block"
-                  v-if="store.lang === 'LT' && store.childLevel === 'C'"
-              >
-                  <div class="content--left">
-                      <h2>
-                          Pasieksi <span>iki 2 balų geresnius pažymius,</span> vos per 2 mėnesius!
-                      </h2>
-                      <p>
-                          Tavo rezultatą apskaičiavome remdamiesi <strong>5124</strong> panašių
-                          mokinių atsakymais
-                      </p>
-                      <a :href="btnLabel.btnLink" class="cta-btn"
-                          >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                      /></a>
-                  </div>
-                  <div class="content--right">
-                      <img src="../assets/images/your-level-C.svg" class="level-image" alt="" />
-                  </div>
-              </div>
-              <div
-                  class="content--flex last-section-block"
-                  v-if="store.lang === 'LV' && store.childLevel === 'C'"
-              >
-                  <div class="content--left">
-                      <h2>
-                          Tu sasniegsi <span>par 2 atzīmēm augstākus vērtējumus,</span> tikai 2 mēnešu
-                          laikā!
-                      </h2>
-                      <p>
-                          Mēs izrēķinājām Tavu rezultātu balstoties uz atbildēm no
-                          <strong>5124</strong> līdzīgiem skolēniem.
-                      </p>
-                      <a :href="btnLabel.btnLink" class="cta-btn"
-                          >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
-                      /></a>
-                  </div>
-                  <div class="content--right">
-                      <img src="../assets/images/your-level-C-LV.svg" class="level-image" alt="" />
-                  </div>
-              </div>
-          </div>
-          <img src="../assets/images/bottomVector.svg" class="bottom-vector" alt="Vector" />
+    <header>
+      <div class="content">
+        <img v-if="store.lang === 'LT'" class="logo" src="../assets/images/digiklase.svg" alt="" />
+        <img v-if="store.lang === 'LV'" class="logo" src="../assets/images/memby.svg" alt="" />
+        <div>
+          <a :href="btnLabel.btnLink" class="cta-btn">
+            {{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""/>
+          </a>
+        </div>
       </div>
-      <div class="wrapper light">
-          <div class="flex-container cards-wrapper">
-              <div class="card card--left">
-                  <h3 v-if="store.lang === 'LT'">Tau reikės:</h3>
-                  <h3 v-if="store.lang === 'LV'">Tev vajadzēs</h3>
+    </header>
 
-                  <p v-if="store.lang === 'LT'">
-                      Bent <span>2 val./sav.</span>papildomų grupinių pamokų
-                  </p>
-                  <p v-if="store.lang === 'LV'">Vismaz <span>2h/ nedēļā</span>grupu nodarbībām</p>
-                  <img src="../assets/images/heart.svg" alt="Heart" />
-              </div>
-              <div class="card card--middle">
-                  <p v-if="store.lang === 'LT'">
-                      Bent <span>1 val./sav.</span>praeėjusių pamokų vaizdo įrašų peržiūrėjimo
-                  </p>
-                  <p v-if="store.lang === 'LV'">
-                      Vismaz <span>1h/ nedēļā</span>lai skatītos nodarbību ierakstu video
-                  </p>
-              </div>
-              <div class="card card--right">
-                  <p v-if="store.lang === 'LT'">Iki <span>1 val./sav.</span>darbo su asistentais</p>
-                  <p v-if="store.lang === 'LV'">Līdz <span>1h/ nedēļā</span>lai strādātu ar asistentiem</p>
-                  <img src="../assets/images/time.svg" alt="Time" />
-              </div>
-          </div>
-      </div>
+    <PromiseSection :btnLabel="btnLabel" />
+    <ProgramsSlider />
+    <Timetable />
     </div>
 
-    <div>
+<!--      <div class="wrapper light">-->
+<!--          <div class="flex-container cards-wrapper">-->
+<!--              <div class="card card&#45;&#45;left">-->
+<!--                  <h3 v-if="store.lang === 'LT'">Tau reikės:</h3>-->
+<!--                  <h3 v-if="store.lang === 'LV'">Tev vajadzēs</h3>-->
+
+<!--                  <p v-if="store.lang === 'LT'">-->
+<!--                      Bent <span>2 val./sav.</span>papildomų grupinių pamokų-->
+<!--                  </p>-->
+<!--                  <p v-if="store.lang === 'LV'">Vismaz <span>2h/ nedēļā</span>grupu nodarbībām</p>-->
+<!--                  <img src="../assets/images/heart.svg" alt="Heart" />-->
+<!--              </div>-->
+<!--              <div class="card card&#45;&#45;middle">-->
+<!--                  <p v-if="store.lang === 'LT'">-->
+<!--                      Bent <span>1 val./sav.</span>praeėjusių pamokų vaizdo įrašų peržiūrėjimo-->
+<!--                  </p>-->
+<!--                  <p v-if="store.lang === 'LV'">-->
+<!--                      Vismaz <span>1h/ nedēļā</span>lai skatītos nodarbību ierakstu video-->
+<!--                  </p>-->
+<!--              </div>-->
+<!--              <div class="card card&#45;&#45;right">-->
+<!--                  <p v-if="store.lang === 'LT'">Iki <span>1 val./sav.</span>darbo su asistentais</p>-->
+<!--                  <p v-if="store.lang === 'LV'">Līdz <span>1h/ nedēļā</span>lai strādātu ar asistentiem</p>-->
+<!--                  <img src="../assets/images/time.svg" alt="Time" />-->
+<!--              </div>-->
+<!--          </div>-->
+<!--    </div>-->
 
     <SuggestedPlan
         ref="target"
@@ -559,7 +455,8 @@ onMounted(() => {
         v-element-visibility="onElementVisibility"
         :selected-subjects-length="store.selectedSubjects.length"
     />
-      <div class="wrapper light">
+
+      <div class="wrapper light-grey pb-10 md:pb-20">
           <div class="container">
               <h2 class="section-title--small" v-if="store.lang === 'LT'">
                   Remdamiesi apklausa nustatėme ir tavo asmenybės tipą:
@@ -683,14 +580,14 @@ onMounted(() => {
               </p>
           </div>
       </div>
-      <div class="wrapper light">
+      <div class="wrapper light-grey">
           <div class="container pb0">
               <h2 class="section-title" v-if="store.lang === 'LT'">Kaip tai veikia?</h2>
               <h2 class="section-title" v-if="store.lang === 'LV'">Kā strādā Memby?</h2>
-              <p v-if="store.lang === 'LT'">
+              <p class="text-[18px]" v-if="store.lang === 'LT'">
                   Šis vaizdo įrašas trumpai ir aiškiai papasakos, kaip veikia Digiklasė
               </p>
-              <p v-if="store.lang === 'LV'">
+              <p class="text-[18px]" v-if="store.lang === 'LV'">
                   Šis video īsi un skaidri izskaidros, kā darbojas Memby.
               </p>
 
@@ -701,7 +598,7 @@ onMounted(() => {
 
           <img class="blue-line-vector" src="../assets/images/blue-line-vector.svg" alt="" />
       </div>
-      <div class="wrapper light">
+      <div class="wrapper light-grey">
           <div class="flex-container list-section">
               <div class="content--left">
                   <img src="../assets/images/pupil.svg" alt="" />
@@ -710,18 +607,20 @@ onMounted(() => {
                   <h3 v-if="store.lang === 'LT'">Papildomos grupinės<br />pamokos internetu:</h3>
                   <h3 v-if="store.lang === 'LV'">Tiešsaistes grupu apmācību nodarbības:</h3>
                   <ul v-if="store.lang === 'LT'">
-                      <li>Įtraukiantys mokytojai</li>
-                      <li>Individualus mokymosi planas</li>
-                      <li>Pamokų vaizdo įrašai</li>
-                      <li>Prizai už mokymąsi</li>
-                      <li>Draugiška kaina</li>
+                      <li>▶️ GYVOS pamokos ir jų įrašai</li>
+                      <li>👩‍🏫 Įtraukiantys mokytojai</li>
+                      <li>📋 Individualus mokymosi planas</li>
+                      <li>📒 Namų darbų pagalba</li>
+                      <li>🏆 Prizai už mokymąsi</li>
+                      <li>🫶 Motyvuojanti bendruomenė</li>
                   </ul>
                   <ul v-if="store.lang === 'LV'">
-                      <li>Iesaistoši pasniedzēji</li>
-                      <li>Individuāls mācīšanās plāns</li>
-                      <li>Nodarbību video ieraksti</li>
-                      <li>Apbalvojumi par mācīšanos</li>
-                      <li>Draudzīga cena</li>
+                      <li>▶️ Tiešraides nodarbības un nodarbību ieraksti</li>
+                      <li>👩‍🏫 Iesaistoši skolotāji</li>
+                      <li>📋 Individuāls mācību plāns</li>
+                      <li>📒 Palīdzība ar mājasdarbiem</li>
+                      <li>🏆 Balvas par mācīšanos</li>
+                      <li>🫶 Motivējoša kopiena</li>
                   </ul>
                   <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
                   <div class="testimonial">
@@ -748,310 +647,313 @@ onMounted(() => {
               </div>
           </div>
       </div>
-      <div class="wrapper yellow overflow-hidden">
-          <img class="blue-vector-left-top" src="../assets/images/blue-line-left.svg" alt="" />
-          <div class="container container--narrow teachers">
-              <h2 class="section-title" v-if="store.lang === 'LT'">
-                  Susipažink, tavo būsimi mokytojai:
-              </h2>
-              <h2 class="section-title" v-if="store.lang === 'LV'">
-                  Iepazīsties ar saviem nākotnes pasniedzējiem:
-              </h2>
-              <carousel
-                  v-bind="singleSlideSettings"
-                  class="teacher-carousel"
-                  v-if="store.lang === 'LT'"
-              >
-                  <slide :key="0">
-                      <picture>
-                          <source
-                              media="(min-width: 768px)"
-                              srcset="../assets/images/teachers/Sarunas.png"
-                          />
-                          <source
-                              media="(min-width: 100px)"
-                              srcset="../assets/images/teachers/Sarunas-mobile.png"
-                          />
-                          <img src="../assets/images/teachers/Sarunas.png" alt="Sarunas" />
-                      </picture>
-                  </slide>
-                  <slide :key="1">
-                      <picture>
-                          <source
-                              media="(min-width: 768px)"
-                              srcset="../assets/images/teachers/Alius.png"
-                          />
-                          <source
-                              media="(min-width: 100px)"
-                              srcset="../assets/images/teachers/Alius-mobile.png"
-                          />
-                          <img src="../assets/images/teachers/Alius.png" alt="Alius" />
-                      </picture>
-                  </slide>
-                  <slide :key="2">
-                      <picture>
-                          <source
-                              media="(min-width: 768px)"
-                              srcset="../assets/images/teachers/Paulius.png"
-                          />
-                          <source
-                              media="(min-width: 100px)"
-                              srcset="../assets/images/teachers/Paulius-mobile.png"
-                          />
-                          <img src="../assets/images/teachers/Paulius.png" alt="Paulius" />
-                      </picture>
-                  </slide>
-                  <slide :key="3">
-                      <picture>
-                          <source
-                              media="(min-width: 768px)"
-                              srcset="../assets/images/teachers/Egle.png"
-                          />
-                          <source
-                              media="(min-width: 100px)"
-                              srcset="../assets/images/teachers/Egle-mobile.png"
-                          />
-                          <img src="../assets/images/teachers/Egle.png" alt="Egle" />
-                      </picture>
-                  </slide>
-                  <slide :key="4">
-                      <picture>
-                          <source
-                              media="(min-width: 768px)"
-                              srcset="../assets/images/teachers/Algis.png"
-                          />
-                          <source
-                              media="(min-width: 100px)"
-                              srcset="../assets/images/teachers/Algis-mobile.png"
-                          />
-                          <img src="../assets/images/teachers/Algis.png" alt="Algis" />
-                      </picture>
-                  </slide>
-                  <template #addons>
-                      <navigation />
-                      <pagination />
-                  </template>
-              </carousel>
-              <carousel
-                  v-bind="singleSlideSettings"
-                  class="teacher-carousel"
-                  v-if="store.lang === 'LV'"
-              >
-                  <slide :key="0">
-                      <picture>
-                          <source
-                              media="(min-width: 768px)"
-                              srcset="../assets/images/teachersLV/Raivis.png"
-                          />
-                          <source
-                              media="(min-width: 100px)"
-                              srcset="../assets/images/teachersLV/Raivis-mobile.png"
-                          />
-                          <img src="../assets/images/teachersLV/Raivis.png" alt="Raivis" />
-                      </picture>
-                  </slide>
-                  <slide :key="1">
-                      <picture>
-                          <source
-                              media="(min-width: 768px)"
-                              srcset="../assets/images/teachersLV/Virginija.png"
-                          />
-                          <source
-                              media="(min-width: 100px)"
-                              srcset="../assets/images/teachersLV/Virginija-mobile.png"
-                          />
-                          <img src="../assets/images/teachersLV/Virginija.png" alt="Virginija" />
-                      </picture>
-                  </slide>
-                  <slide :key="2">
-                      <picture>
-                          <source
-                              media="(min-width: 768px)"
-                              srcset="../assets/images/teachersLV/Liga.png"
-                          />
-                          <source
-                              media="(min-width: 100px)"
-                              srcset="../assets/images/teachersLV/Liga-mobile.png"
-                          />
-                          <img src="../assets/images/teachersLV/Liga.png" alt="Liga" />
-                      </picture>
-                  </slide>
+<!--      <div class="wrapper yellow overflow-hidden">-->
+<!--          <img class="blue-vector-left-top" src="../assets/images/blue-line-left.svg" alt="" />-->
+<!--          <div class="container container&#45;&#45;narrow teachers">-->
+<!--              <h2 class="section-title" v-if="store.lang === 'LT'">-->
+<!--                  Susipažink, tavo būsimi mokytojai:-->
+<!--              </h2>-->
+<!--              <h2 class="section-title" v-if="store.lang === 'LV'">-->
+<!--                  Iepazīsties ar saviem nākotnes pasniedzējiem:-->
+<!--              </h2>-->
+<!--              <carousel-->
+<!--                  v-bind="singleSlideSettings"-->
+<!--                  class="teacher-carousel"-->
+<!--                  v-if="store.lang === 'LT'"-->
+<!--              >-->
+<!--                  <slide :key="0">-->
+<!--                      <picture>-->
+<!--                          <source-->
+<!--                              media="(min-width: 768px)"-->
+<!--                              srcset="../assets/images/teachers/Sarunas.png"-->
+<!--                          />-->
+<!--                          <source-->
+<!--                              media="(min-width: 100px)"-->
+<!--                              srcset="../assets/images/teachers/Sarunas-mobile.png"-->
+<!--                          />-->
+<!--                          <img src="../assets/images/teachers/Sarunas.png" alt="Sarunas" />-->
+<!--                      </picture>-->
+<!--                  </slide>-->
+<!--                  <slide :key="1">-->
+<!--                      <picture>-->
+<!--                          <source-->
+<!--                              media="(min-width: 768px)"-->
+<!--                              srcset="../assets/images/teachers/Alius.png"-->
+<!--                          />-->
+<!--                          <source-->
+<!--                              media="(min-width: 100px)"-->
+<!--                              srcset="../assets/images/teachers/Alius-mobile.png"-->
+<!--                          />-->
+<!--                          <img src="../assets/images/teachers/Alius.png" alt="Alius" />-->
+<!--                      </picture>-->
+<!--                  </slide>-->
+<!--                  <slide :key="2">-->
+<!--                      <picture>-->
+<!--                          <source-->
+<!--                              media="(min-width: 768px)"-->
+<!--                              srcset="../assets/images/teachers/Paulius.png"-->
+<!--                          />-->
+<!--                          <source-->
+<!--                              media="(min-width: 100px)"-->
+<!--                              srcset="../assets/images/teachers/Paulius-mobile.png"-->
+<!--                          />-->
+<!--                          <img src="../assets/images/teachers/Paulius.png" alt="Paulius" />-->
+<!--                      </picture>-->
+<!--                  </slide>-->
+<!--                  <slide :key="3">-->
+<!--                      <picture>-->
+<!--                          <source-->
+<!--                              media="(min-width: 768px)"-->
+<!--                              srcset="../assets/images/teachers/Egle.png"-->
+<!--                          />-->
+<!--                          <source-->
+<!--                              media="(min-width: 100px)"-->
+<!--                              srcset="../assets/images/teachers/Egle-mobile.png"-->
+<!--                          />-->
+<!--                          <img src="../assets/images/teachers/Egle.png" alt="Egle" />-->
+<!--                      </picture>-->
+<!--                  </slide>-->
+<!--                  <slide :key="4">-->
+<!--                      <picture>-->
+<!--                          <source-->
+<!--                              media="(min-width: 768px)"-->
+<!--                              srcset="../assets/images/teachers/Algis.png"-->
+<!--                          />-->
+<!--                          <source-->
+<!--                              media="(min-width: 100px)"-->
+<!--                              srcset="../assets/images/teachers/Algis-mobile.png"-->
+<!--                          />-->
+<!--                          <img src="../assets/images/teachers/Algis.png" alt="Algis" />-->
+<!--                      </picture>-->
+<!--                  </slide>-->
+<!--                  <template #addons>-->
+<!--                      <navigation />-->
+<!--                      <pagination />-->
+<!--                  </template>-->
+<!--              </carousel>-->
+<!--              <carousel-->
+<!--                  v-bind="singleSlideSettings"-->
+<!--                  class="teacher-carousel"-->
+<!--                  v-if="store.lang === 'LV'"-->
+<!--              >-->
+<!--                  <slide :key="0">-->
+<!--                      <picture>-->
+<!--                          <source-->
+<!--                              media="(min-width: 768px)"-->
+<!--                              srcset="../assets/images/teachersLV/Raivis.png"-->
+<!--                          />-->
+<!--                          <source-->
+<!--                              media="(min-width: 100px)"-->
+<!--                              srcset="../assets/images/teachersLV/Raivis-mobile.png"-->
+<!--                          />-->
+<!--                          <img src="../assets/images/teachersLV/Raivis.png" alt="Raivis" />-->
+<!--                      </picture>-->
+<!--                  </slide>-->
+<!--                  <slide :key="1">-->
+<!--                      <picture>-->
+<!--                          <source-->
+<!--                              media="(min-width: 768px)"-->
+<!--                              srcset="../assets/images/teachersLV/Virginija.png"-->
+<!--                          />-->
+<!--                          <source-->
+<!--                              media="(min-width: 100px)"-->
+<!--                              srcset="../assets/images/teachersLV/Virginija-mobile.png"-->
+<!--                          />-->
+<!--                          <img src="../assets/images/teachersLV/Virginija.png" alt="Virginija" />-->
+<!--                      </picture>-->
+<!--                  </slide>-->
+<!--                  <slide :key="2">-->
+<!--                      <picture>-->
+<!--                          <source-->
+<!--                              media="(min-width: 768px)"-->
+<!--                              srcset="../assets/images/teachersLV/Liga.png"-->
+<!--                          />-->
+<!--                          <source-->
+<!--                              media="(min-width: 100px)"-->
+<!--                              srcset="../assets/images/teachersLV/Liga-mobile.png"-->
+<!--                          />-->
+<!--                          <img src="../assets/images/teachersLV/Liga.png" alt="Liga" />-->
+<!--                      </picture>-->
+<!--                  </slide>-->
 
-                  <template #addons>
-                      <navigation />
-                      <pagination />
-                  </template>
-              </carousel>
-              <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
-          </div>
-      </div>
-      <div class="wrapper light-grey">
-          <div class="container container--narrow">
-              <div class="review" v-if="store.lang === 'LT'">
-                  <div class="image min-w-[100px]">
-                      <img src="../assets/images/reviewer.svg" alt="" />
-                  </div>
-                  <div class="content">
-                      <p>
-                          „Devintoje klasėje pradėjau svajoti apie medicinos studijas, todėl labai džiaugiuosi, kad tokia motyvuotų ir išsilavinusių mokytojų komanda buvo šalia nuo pat pradžių.“
-                      </p>
-                      <p>
-                          <strong
-                              >Karolis, Kaišiadorių Algirdo Brazausko gimnazija, buvęs Digiklasės
-                              mokinys</strong
-                          >
-                      </p>
-                  </div>
-              </div>
-              <div class="review" v-if="store.lang === 'LV'">
-                  <div class="image min-w-[100px]">
-                      <img src="../assets/images/reviewerLV.svg" alt="" />
-                  </div>
-                  <div class="content">
-                      <p>
-                          „Es biju pārsteigta par to, cik pozitīva un produktīva pieredze man bija ar Memby tiešsaistes matemātikas nodarbībām. Manas zināšanas un pašpārliecība matemātikā uzlabojās ievērojami!“
-                      </p>
-                      <p>
-                          <strong
-                              >Anija Siksna, Zentas Mauriņas Grobiņas vidusskola, 12. klase</strong
-                          >
-                      </p>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="wrapper dark">
-          <img src="../assets/images/oval-vector.svg" class="oval-vector" alt="" />
-          <img src="../assets/images/vector-arrow.svg" class="vector-arrow" alt="" />
-          <div class="container pb">
-              <h2 class="section-title" v-if="store.lang === 'LT'">Į narystę telpa tiek daug!</h2>
-              <h2 class="section-title" v-if="store.lang === 'LV'">Abonements ir visērtākais!</h2>
-          </div>
-          <div class="flex-container container--narrow">
-              <div class="membership-card">
-                  <div class="membership-icon">
-                      <img src="../assets/images/emoji/icon-play.svg" alt="" />
-                  </div>
-                  <div class="membership-content">
-                      <h3 v-if="store.lang === 'LT'">Individualus mokymosi planas</h3>
-                      <h3 v-if="store.lang === 'LV'">Individuāls mācīšanās plāns</h3>
-                  </div>
-              </div>
-              <div class="membership-card">
-                  <div class="membership-icon">
-                      <img src="../assets/images/emoji/icon-book.svg" alt="" />
-                  </div>
-                  <div class="membership-content">
-                      <h3 v-if="store.lang === 'LT'">Namų darbų pagalba</h3>
-                      <h3 v-if="store.lang === 'LV'">Palīdzība ar mājasdarbiem</h3>
-                  </div>
-              </div>
-              <div class="membership-card">
-                  <div class="membership-icon">
-                      <img src="../assets/images/emoji/icon-video.svg" alt="" />
-                  </div>
-                  <div class="membership-content">
-                      <h3 v-if="store.lang === 'LT'">Pamokų įrašai</h3>
-                      <h3 v-if="store.lang === 'LV'">Nodarbību video ieraksti</h3>
-                  </div>
-              </div>
-              <div class="membership-card">
-                  <div class="membership-icon">
-                      <img src="../assets/images/emoji/icon-stats.svg" alt="" />
-                  </div>
-                  <div class="membership-content">
-                      <h3 v-if="store.lang === 'LT'">Lankomumo peržiūra</h3>
-                      <h3 v-if="store.lang === 'LV'">Apmeklējuma apskats</h3>
-                  </div>
-              </div>
-              <div class="membership-card">
-                  <div class="membership-icon">
-                      <img src="../assets/images/emoji/icon-prize.svg" alt="" />
-                  </div>
-                  <div class="membership-content">
-                      <h3 v-if="store.lang === 'LT'">Taškai ir apdovanojimai</h3>
-                      <h3 v-if="store.lang === 'LV'">Punkti un balvas</h3>
-                  </div>
-              </div>
-              <div class="membership-card">
-                  <div class="membership-icon">
-                      <img src="../assets/images/emoji/icon-hands.svg" alt="" />
-                  </div>
-                  <div class="membership-content">
-                      <h3 v-if="store.lang === 'LT'">Motyvuojanti bendruomenė</h3>
-                      <h3 v-if="store.lang === 'LV'">Motivējoša kopiena</h3>
-                  </div>
-              </div>
-          </div>
-          <div class="container container--narrow stories-carousel">
-              <carousel v-bind="storiesCarousel" v-if="store.lang === 'LT'">
-                  <slide v-for="(item, index) in storiesArray" :key="item">
-                      <div class="story-slide">
-                          <div class="story-image hidden md:block">
-                              <img :src="'/storiesImages/story-' + index + '.png'" alt="" />
-                          </div>
-                          <div class="story-image md:hidden">
-                            <img :src="'/storiesImages/story-mobile-' + index + '.png'" alt="" />
-                          </div>
-                          <div class="story-body">
-                              <h4>{{ item.head }}</h4>
-                              <p class="hidden md:block">{{ item.body }}</p>
-                              <p class="md:hidden">{{ item.bodyMobile }}</p>
-                              <h5>{{ item.foot }}</h5>
-                          </div>
-                      </div>
-                  </slide>
-                  <template #addons>
-                      <navigation>
-                          <template #next>
-                              <img src="../assets/images/next-carousel.svg" alt="" />
-                          </template>
-                          <template #prev>
-                              <img src="../assets/images/prev-carousel.svg" alt="" />
-                          </template>
-                      </navigation>
-                  </template>
-              </carousel>
-              <carousel v-bind="storiesCarousel" v-if="store.lang === 'LV'">
-                  <slide v-for="(item, index) in storiesArrayLV" :key="item">
-                      <div class="story-slide">
-                        <div class="story-image hidden md:block">
-                          <img :src="'/storiesImagesLV/story-' + index + '.png'" alt="" />
-                        </div>
-                        <div class="story-image md:hidden">
-                          <img :src="'/storiesImagesLV/story-mobile-' + index + '.png'" alt="" />
-                        </div>
-                          <div class="story-body">
-                              <h4>{{ item.head }}</h4>
-                              <p class="hidden md:block">{{ item.body }}</p>
-                              <p class="md:hidden">{{ item.bodyMobile }}</p>
-                              <h5>{{ item.foot }}</h5>
-                          </div>
-                      </div>
-                  </slide>
-                  <template #addons>
-                      <navigation>
-                          <template #next>
-                              <img src="../assets/images/next-carousel.svg" alt="" />
-                          </template>
-                          <template #prev>
-                              <img src="../assets/images/prev-carousel.svg" alt="" />
-                          </template>
-                      </navigation>
-                  </template>
-              </carousel>
-          </div>
-          <div class="container container--narrow">
-              <h2 class="section-title" v-if="store.lang === 'LT'">
-                  <span>Net 98% mokinių sako,</span> kad „Digiklasė“ – veiksmingas būdas efektyviai
-                  pagerinti akademinius rezultatus.
-              </h2>
-              <h2 class="section-title" v-if="store.lang === 'LV'">
-                  <span>98% skolēnu apgalvo,</span> ka Memby ir visefektīvākais veids kā uzlabot savas
-                  mācību sekmes.
-              </h2>
-          </div>
-      </div>
+<!--                  <template #addons>-->
+<!--                      <navigation />-->
+<!--                      <pagination />-->
+<!--                  </template>-->
+<!--              </carousel>-->
+<!--              <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />-->
+<!--          </div>-->
+<!--      </div>-->
+
+<!--      <div class="wrapper light-grey">-->
+<!--          <div class="container container&#45;&#45;narrow">-->
+<!--              <div class="review" v-if="store.lang === 'LT'">-->
+<!--                  <div class="image min-w-[100px]">-->
+<!--                      <img src="../assets/images/reviewer.svg" alt="" />-->
+<!--                  </div>-->
+<!--                  <div class="content">-->
+<!--                      <p>-->
+<!--                          „Devintoje klasėje pradėjau svajoti apie medicinos studijas, todėl labai džiaugiuosi, kad tokia motyvuotų ir išsilavinusių mokytojų komanda buvo šalia nuo pat pradžių.“-->
+<!--                      </p>-->
+<!--                      <p>-->
+<!--                          <strong-->
+<!--                              >Karolis, Kaišiadorių Algirdo Brazausko gimnazija, buvęs Digiklasės-->
+<!--                              mokinys</strong-->
+<!--                          >-->
+<!--                      </p>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--              <div class="review" v-if="store.lang === 'LV'">-->
+<!--                  <div class="image min-w-[100px]">-->
+<!--                      <img src="../assets/images/reviewerLV.svg" alt="" />-->
+<!--                  </div>-->
+<!--                  <div class="content">-->
+<!--                      <p>-->
+<!--                          „Es biju pārsteigta par to, cik pozitīva un produktīva pieredze man bija ar Memby tiešsaistes matemātikas nodarbībām. Manas zināšanas un pašpārliecība matemātikā uzlabojās ievērojami!“-->
+<!--                      </p>-->
+<!--                      <p>-->
+<!--                          <strong-->
+<!--                              >Anija Siksna, Zentas Mauriņas Grobiņas vidusskola, 12. klase</strong-->
+<!--                          >-->
+<!--                      </p>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--          </div>-->
+<!--      </div>-->
+
+<!--      <div class="wrapper dark">-->
+<!--          <img src="../assets/images/oval-vector.svg" class="oval-vector" alt="" />-->
+<!--          <img src="../assets/images/vector-arrow.svg" class="vector-arrow" alt="" />-->
+<!--          <div class="container pb">-->
+<!--              <h2 class="section-title" v-if="store.lang === 'LT'">Į narystę telpa tiek daug!</h2>-->
+<!--              <h2 class="section-title" v-if="store.lang === 'LV'">Abonements ir visērtākais!</h2>-->
+<!--          </div>-->
+<!--          <div class="flex-container container&#45;&#45;narrow">-->
+<!--              <div class="membership-card">-->
+<!--                  <div class="membership-icon">-->
+<!--                      <img src="../assets/images/emoji/icon-play.svg" alt="" />-->
+<!--                  </div>-->
+<!--                  <div class="membership-content">-->
+<!--                      <h3 v-if="store.lang === 'LT'">Individualus mokymosi planas</h3>-->
+<!--                      <h3 v-if="store.lang === 'LV'">Individuāls mācīšanās plāns</h3>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--              <div class="membership-card">-->
+<!--                  <div class="membership-icon">-->
+<!--                      <img src="../assets/images/emoji/icon-book.svg" alt="" />-->
+<!--                  </div>-->
+<!--                  <div class="membership-content">-->
+<!--                      <h3 v-if="store.lang === 'LT'">Namų darbų pagalba</h3>-->
+<!--                      <h3 v-if="store.lang === 'LV'">Palīdzība ar mājasdarbiem</h3>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--              <div class="membership-card">-->
+<!--                  <div class="membership-icon">-->
+<!--                      <img src="../assets/images/emoji/icon-video.svg" alt="" />-->
+<!--                  </div>-->
+<!--                  <div class="membership-content">-->
+<!--                      <h3 v-if="store.lang === 'LT'">Pamokų įrašai</h3>-->
+<!--                      <h3 v-if="store.lang === 'LV'">Nodarbību video ieraksti</h3>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--              <div class="membership-card">-->
+<!--                  <div class="membership-icon">-->
+<!--                      <img src="../assets/images/emoji/icon-stats.svg" alt="" />-->
+<!--                  </div>-->
+<!--                  <div class="membership-content">-->
+<!--                      <h3 v-if="store.lang === 'LT'">Lankomumo peržiūra</h3>-->
+<!--                      <h3 v-if="store.lang === 'LV'">Apmeklējuma apskats</h3>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--              <div class="membership-card">-->
+<!--                  <div class="membership-icon">-->
+<!--                      <img src="../assets/images/emoji/icon-prize.svg" alt="" />-->
+<!--                  </div>-->
+<!--                  <div class="membership-content">-->
+<!--                      <h3 v-if="store.lang === 'LT'">Taškai ir apdovanojimai</h3>-->
+<!--                      <h3 v-if="store.lang === 'LV'">Punkti un balvas</h3>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--              <div class="membership-card">-->
+<!--                  <div class="membership-icon">-->
+<!--                      <img src="../assets/images/emoji/icon-hands.svg" alt="" />-->
+<!--                  </div>-->
+<!--                  <div class="membership-content">-->
+<!--                      <h3 v-if="store.lang === 'LT'">Motyvuojanti bendruomenė</h3>-->
+<!--                      <h3 v-if="store.lang === 'LV'">Motivējoša kopiena</h3>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--          </div>-->
+<!--          <div class="container container&#45;&#45;narrow stories-carousel">-->
+<!--              <carousel v-bind="storiesCarousel" v-if="store.lang === 'LT'">-->
+<!--                  <slide v-for="(item, index) in storiesArray" :key="item">-->
+<!--                      <div class="story-slide">-->
+<!--                          <div class="story-image hidden md:block">-->
+<!--                              <img :src="'/storiesImages/story-' + index + '.png'" alt="" />-->
+<!--                          </div>-->
+<!--                          <div class="story-image md:hidden">-->
+<!--                            <img :src="'/storiesImages/story-mobile-' + index + '.png'" alt="" />-->
+<!--                          </div>-->
+<!--                          <div class="story-body">-->
+<!--                              <h4>{{ item.head }}</h4>-->
+<!--                              <p class="hidden md:block">{{ item.body }}</p>-->
+<!--                              <p class="md:hidden">{{ item.bodyMobile }}</p>-->
+<!--                              <h5>{{ item.foot }}</h5>-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                  </slide>-->
+<!--                  <template #addons>-->
+<!--                      <navigation>-->
+<!--                          <template #next>-->
+<!--                              <img src="../assets/images/next-carousel.svg" alt="" />-->
+<!--                          </template>-->
+<!--                          <template #prev>-->
+<!--                              <img src="../assets/images/prev-carousel.svg" alt="" />-->
+<!--                          </template>-->
+<!--                      </navigation>-->
+<!--                  </template>-->
+<!--              </carousel>-->
+<!--              <carousel v-bind="storiesCarousel" v-if="store.lang === 'LV'">-->
+<!--                  <slide v-for="(item, index) in storiesArrayLV" :key="item">-->
+<!--                      <div class="story-slide">-->
+<!--                        <div class="story-image hidden md:block">-->
+<!--                          <img :src="'/storiesImagesLV/story-' + index + '.png'" alt="" />-->
+<!--                        </div>-->
+<!--                        <div class="story-image md:hidden">-->
+<!--                          <img :src="'/storiesImagesLV/story-mobile-' + index + '.png'" alt="" />-->
+<!--                        </div>-->
+<!--                          <div class="story-body">-->
+<!--                              <h4>{{ item.head }}</h4>-->
+<!--                              <p class="hidden md:block">{{ item.body }}</p>-->
+<!--                              <p class="md:hidden">{{ item.bodyMobile }}</p>-->
+<!--                              <h5>{{ item.foot }}</h5>-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                  </slide>-->
+<!--                  <template #addons>-->
+<!--                      <navigation>-->
+<!--                          <template #next>-->
+<!--                              <img src="../assets/images/next-carousel.svg" alt="" />-->
+<!--                          </template>-->
+<!--                          <template #prev>-->
+<!--                              <img src="../assets/images/prev-carousel.svg" alt="" />-->
+<!--                          </template>-->
+<!--                      </navigation>-->
+<!--                  </template>-->
+<!--              </carousel>-->
+<!--          </div>-->
+<!--          <div class="container container&#45;&#45;narrow">-->
+<!--              <h2 class="section-title" v-if="store.lang === 'LT'">-->
+<!--                  <span>Net 98% mokinių sako,</span> kad „Digiklasė“ – veiksmingas būdas efektyviai-->
+<!--                  pagerinti akademinius rezultatus.-->
+<!--              </h2>-->
+<!--              <h2 class="section-title" v-if="store.lang === 'LV'">-->
+<!--                  <span>98% skolēnu apgalvo,</span> ka Memby ir visefektīvākais veids kā uzlabot savas-->
+<!--                  mācību sekmes.-->
+<!--              </h2>-->
+<!--          </div>-->
+<!--      </div>-->
+
       <div class="wrapper dark inner">
           <carousel v-bind="testimSettings" class="testimonials-carousel" v-if="store.lang === 'LT'">
               <slide :key="1">
@@ -1155,8 +1057,6 @@ onMounted(() => {
               </div>
           </div>
       </footer>
-    </div>
-  </div>
 </template>
 
 <style scoped>
@@ -1167,7 +1067,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 74px;
 }
 header .content {
     display: flex;
@@ -1222,7 +1121,7 @@ header .logo {
 }
 .wrapper.light-grey {
     position: relative;
-    background-color: #eeeff4;
+    background-color: #F5F5F7;
 }
 .wrapper.dark {
     position: relative;
@@ -1350,8 +1249,8 @@ video {
     z-index: 10;
 }
 .p-narrow {
-    max-width: 750px;
     margin: 0 auto;
+    font-size: 18px;
 }
 .play-btn,
 .pause-btn {
@@ -1671,20 +1570,20 @@ ul {
     margin-top: 30px;
 }
 ul li {
-    padding-left: 32px;
     position: relative;
-    min-height: 50px;
+    min-height: 30px;
     font-size: 18px;
     font-style: normal;
     font-weight: 570;
+    font-family: 'obviously';
     line-height: 30px; /* 166.667% */
 }
 ul li::before {
     content: '';
-    background-image: url(../assets/images/tick.svg);
+    /*background-image: url(../assets/images/tick.svg);*/
     background-size: 100% 100%;
-    width: 20px;
-    height: 20px;
+    /*width: 20px;*/
+    /*height: 20px;*/
     position: absolute;
     left: 0;
 }
@@ -1703,9 +1602,6 @@ ul li::before {
     }
 }
 @media (min-width: 768px) {
-    ul li {
-        padding-left: 42px;
-    }
     ul li::before {
         width: 32px;
         height: 32px;

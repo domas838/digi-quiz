@@ -9,7 +9,14 @@ module.exports = {
       xl: "1280px",
       "2xl": "1536px",
     },
-    extend: {}
+    extend: {
+      colors: {
+        black: '#000',
+        white: '#FFF',
+        blue: '#4A74EB',
+        gray: '#6B6B6B'
+      },
+    }
   },
   plugins: [],
 }

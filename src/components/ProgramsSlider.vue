@@ -2,13 +2,13 @@
 import { store } from '../store'
 import axios from "axios";
 import {onMounted, reactive} from "vue";
-import {pluck, SUBJECTS} from "../helpers"
+import {BASE_APP_DOMAIN, pluck, SUBJECTS} from "../helpers"
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import ProgramSlide from './ProgramSlide.vue'
 
 const settings = {
-  itemsToShow: 4,
+  itemsToShow: 3,
   snapAlign: 'start',
   breakpoints: {
     0: {
@@ -20,7 +20,7 @@ const settings = {
     },
     // 1024 and up
     1024: {
-      itemsToShow: 4
+      itemsToShow: 3
     }
   }
 }
@@ -43,15 +43,21 @@ const instance = axios.create({
 });
 
 const mutateProgramsFromResponse = (response) => {
-  let programs = pluck(response.data.items, 'values');
+  //let programs = pluck(response.data.items, 'values');
+  let programs = response.data;
   const subjectsString = url.searchParams.get('subjects');
   const subjectsArray = JSON.parse(subjectsString);
 
   //FILTERING
   programs = programs.filter(program => {
-    const gradeCondition = program.Grade === parseInt(url.searchParams.get('class'));
-    const personaCondition = program.Persona === url.searchParams.get('persona') || program.Persona === 'Everyone';
-    const subjectsCondition = subjectsArray.includes(program.Subject) || subjectsArray.length < 1;
+    // console.log('class', program.course_subject[0].pivot.class === url.searchParams.get('class'));
+    //const gradeCondition = program.Grade === parseInt(url.searchParams.get('class'));
+    const gradeCondition = program.course_subject[0].pivot.class === url.searchParams.get('class');
+    // const personaCondition = program.Persona === url.searchParams.get('persona') || program.Persona === 'Everyone';
+    const personaCondition = program.persona === url.searchParams.get('persona') || program.persona === 'Everyone';
+
+    // const subjectsCondition = subjectsArray.includes(program.Subject) || subjectsArray.length < 1;
+    const subjectsCondition = subjectsArray.includes(program.course_subject[0].name) || subjectsArray.length < 1;
 
     return gradeCondition && personaCondition && subjectsCondition;
   });
@@ -63,14 +69,16 @@ const mutateProgramsFromResponse = (response) => {
   if (subjectsArray.length > 0) {
     subjectsArray.forEach((subject) => {
       let filtered = programs.filter(program => {
-        return program.Tier <= myTier && program.Subject === subject;
+        // return program.Tier <= myTier && program.Subject === subject;
+        return program.tier <= myTier; //&& program.course_subject[0].name === subject;
       });
 
       filteredByTier.push(...filtered)
 
       if (filtered.length < 1) {
         filtered = programs.filter(program => {
-          return parseInt(program.Tier) >= myTier;
+          // return parseInt(program.Tier) >= myTier;
+          return parseInt(program.tier) >= myTier;
         });
 
         filteredByTier.push(...filtered)
@@ -78,14 +86,16 @@ const mutateProgramsFromResponse = (response) => {
     });
   } else {
     let filtered = programs.filter(program => {
-      return program.Tier <= myTier;
+      // return program.Tier <= myTier;
+      return parseInt(program.tier) >= myTier;
     });
 
     filteredByTier.push(...filtered)
 
     if (filtered.length < 1) {
       filtered = programs.filter(program => {
-        return parseInt(program.Tier) >= myTier;
+        // return parseInt(program.Tier) >= myTier;
+        return parseInt(program.tier) >= myTier;
       });
 
       filteredByTier.push(...filtered)
@@ -94,25 +104,27 @@ const mutateProgramsFromResponse = (response) => {
 
   programs = filteredByTier;
 
+  return programs;
+
   //SORTING
-  return programs.sort((a, b) => {
-    const tierComparison = a.Tier.localeCompare(b.Tier);
-
-    if (tierComparison !== 0) {
-      return tierComparison;
-    }
-
-    const subjectIndexA = SUBJECTS[store.lang].indexOf(a.Subject);
-    const subjectIndexB = SUBJECTS[store.lang].indexOf(b.Subject);
-
-    // Compare based on predefined hierarchy
-    if (subjectIndexA !== -1 && subjectIndexB !== -1) {
-      return subjectIndexA - subjectIndexB;
-    }
-
-    // If one of the subjects is not in the hierarchy, use default comparison
-    return a.Subject.localeCompare(b.Subject);
-  });
+  // return programs.sort((a, b) => {
+  //   const tierComparison = a.tier.localeCompare(b.tier);
+  //
+  //   if (tierComparison !== 0) {
+  //     return tierComparison;
+  //   }
+  //
+  //   const subjectIndexA = SUBJECTS[store.lang].indexOf(a.course_subject[0].name);
+  //   const subjectIndexB = SUBJECTS[store.lang].indexOf(b.course_subject[0].name);
+  //
+  //   // Compare based on predefined hierarchy
+  //   if (subjectIndexA !== -1 && subjectIndexB !== -1) {
+  //     return subjectIndexA - subjectIndexB;
+  //   }
+  //
+  //   // If one of the subjects is not in the hierarchy, use default comparison
+  //   return a.course_subject[0].name.localeCompare(b.course_subject[0].name);
+  // });
 }
 
 const setCookies = () => {
@@ -120,12 +132,10 @@ const setCookies = () => {
   d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000)
   let expires = 'expires=' + d.toUTCString()
 
-  const programsIds = JSON.stringify(pluck(store.filteredPrograms, 'MembyID'))
-
-  console.log(programsIds);
+  const programsIds = JSON.stringify(pluck(store.filteredPrograms, 'id'))
 
   const domains = {
-    'LT': 'digiklase.lt',
+    'LT': '.digiklase.lt',
     'LV': 'memby.lv'
   };
 
@@ -154,15 +164,14 @@ const resolveNextStep = () => {
 }
 
 const callApi = () => {
-  instance
-      .get('/rows?useColumnNames=true&limit=1000') //INCREASED RESULTS LIMIT
-      .then((response) => {
-        store.filteredPrograms = mutateProgramsFromResponse(response);
-        store.showRecomendations = true;
+  axios.get(`${BASE_APP_DOMAIN[store.lang]}/api/quiz-results/programs?userClass=${store.selectedClass}`).then((response) => {
+    console.log('data', response.data);
+    store.filteredPrograms = mutateProgramsFromResponse(response);
+    store.showRecomendations = true;
 
-        setCookies();
-        resolveNextStep();
-      })
+    setCookies();
+    resolveNextStep();
+  });
 }
 
 onMounted(() => {
@@ -172,26 +181,37 @@ onMounted(() => {
 </script>
 
 <template>
-  <h1>{{ $t('WeRecommendingThesePrograms') }}</h1>
+  <div id="programs" class="wrapper light-grey py-10">
+    <div class="container">
+      <div class="mb-5">
+        <h1 class="text-left mb-2">{{ $t('ProgramsWhichYouGet') }}</h1>
+        <p class="text-[18px]">{{ $t('AllProgramsAreIncludedInPlan') }}</p>
+      </div>
 
-  <div class="max-w-[80%] mx-auto mb-16 sm:max-w-none">
-    <carousel v-bind="settings" class="carousel">
-      <slide v-for="(item, index) in store.filteredPrograms" :key="index">
-        <ProgramSlide
-            :index="index"
-            :isTopRecomendation="item.Tier === '1'"
-            :picture="item.Picture"
-            :subject="item.Subject"
-            :programTitle="item.ProgramName"
-            :teacherName="item.TeacherName"
-            :teacherImage="item.TeacherImage"
-            :description="item.Description"
-            :lessonsCount="item.LessonsPerWeek"
-        />
-      </slide>
-      <template #addons>
-        <navigation />
-      </template>
-    </carousel>
+      <div class="max-w-[80%] mx-auto mb-16 sm:max-w-none">
+        <carousel v-bind="settings" class="carousel">
+          <slide v-for="(item, index) in store.filteredPrograms" :key="index">
+            <ProgramSlide
+                :index="index"
+                :isTopRecomendation="item.tier === 1"
+                :picture="item.course_subject[0].subject_picture_url"
+                :subject="item.course_subject[0].name"
+                :subjectColor="item.course_subject[0].color"
+                :icon="item.course_subject[0].icon_path"
+                :programTitle="item.name"
+                :teacherName="item.teachers[0].name + ' ' + item.teachers[0].last_name"
+                :teacherImage="item.teachers[0].profile_picture_url"
+                :lessonsCount="item.classrooms_count"
+                :liveClassroomsCount="item.live_classrooms_count"
+                :nextLesson="item.next_lesson"
+                :programId="item.id"
+            />
+          </slide>
+          <template #addons>
+            <navigation />
+          </template>
+        </carousel>
+      </div>
+    </div>
   </div>
 </template>

@@ -140,7 +140,7 @@ const completeness = (step) => {
 
 <template>
     <!-- Intro -->
-    <div class="container--intro" v-if="store.step === 0">
+    <div class="container--intro yellow" v-if="store.step === 0">
         <div class="brand-logo brand-logo--mobile">
             <img
                 v-if="store.lang === 'LT'"
@@ -189,7 +189,7 @@ const completeness = (step) => {
             <img v-if="store.lang === 'LV'" src="./assets/images/memby.svg" alt="Memby logo" />
         </div>
     </div>
-    <div class="container" v-if="store.step !== 0 && ! store.showRecomendations">
+    <div class="container yellow" v-if="store.step !== 0 && ! store.showRecomendations">
         <div
             class="brand-logo"
             v-if="

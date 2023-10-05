@@ -13,3 +13,9 @@ export const SUBJECTS = {
     'LT': ['Matematika', 'Lietuvių kalba', 'Anglų kalba', 'Fizika', 'Chemija', 'Geografija', 'Pasaulio pažinimas', 'Gamta ir žmogus'],
     'LV': ['Matemātika', 'Vēsture', 'Ķīmija', 'Bioloģija', 'Fizika', 'Latviešu valoda', 'Vēsture un sociālās zinātnes']
 }
+
+export const BASE_APP_DOMAIN = {
+    'LT': 'https://app.digiklase.lt',
+    'LV': 'https://app.memby.lv',
+    'local': 'http://lt.localhost:8081'
+}

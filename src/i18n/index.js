@@ -16,7 +16,7 @@ const i18n = createI18n({
     // translations
     messages: {
         lt: {
-            RecommendedPlan: 'Rekomenduojamas planas',
+            RecommendedPlan: '🙌 Viskas įtraukta į planą:',
             CurrencyMonth: '€/mėn.',
             OneSubjectPlan: '„1 dalyko planas“',
             TwoSubjectsPlan: '„2 dalykų planas“',
@@ -43,10 +43,20 @@ const i18n = createI18n({
             VimeoExplainerLink: 'https://player.vimeo.com/video/675895976?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479',
             CalculatingResults: 'Skaičiuojame rezultatus...',
             WeRecommendingThesePrograms: 'Rekomenduojame mokytis pagal šias programas:',
-            AllPlansUrl: 'https://app.digiklase.lt/plans/choose'
+            AllPlansUrl: 'https://app.digiklase.lt/plans/choose',
+            AllProgramsAreIncludedInPlan: 'Visos programos yra įtrauktos į plano kainą 🙌',
+            ProgramsWhichYouGet: 'Programos, kurias gausi',
+            NextLive: 'Kita <span class="italic">GYVA</span> pamoka: ',
+            Timetable: 'Tvarkaraštis',
+            TimetableNote: 'Suasmeninome tvarkaraštį pagal parinktas programas',
+            MyTimetable: 'Mano tvarkaraštis',
+            AllTimetable: 'Bendras tvarkaraštis',
+            ReviewPlan: 'Peržiūrėti planą',
+            TotalLessons: 'Viso pamokų: ',
+            NineMonthsProgram: '9 mėn. trukmės pamoka',
         },
         lv: {
-            RecommendedPlan: 'Abonements, ko iesakām',
+            RecommendedPlan: '🙌 Viss iekļauts plānā:',
             CurrencyMonth: '€/mēnesī',
             OneSubjectPlan: '„1 mācību priekšmets“',
             TwoSubjectsPlan: '„2 mācību priekšmeti“',
@@ -73,7 +83,17 @@ const i18n = createI18n({
             VimeoExplainerLink: 'https://player.vimeo.com/video/853296489?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479',
             CalculatingResults: 'Rezultāti tiek aprēķināti......',
             WeRecommendingThesePrograms: 'Mēs iesakam mācīties atbilstoši sekojošām programmām:',
-            AllPlansUrl: 'https://app.memby.lv/plans/choose'
+            AllPlansUrl: 'https://app.memby.lv/plans/choose',
+            AllProgramsAreIncludedInPlan: 'Visas programmas ir iekļautas plāna cenā 🙌',
+            ProgramsWhichYouGet: 'Programmas, ko saņemsi',
+            NextLive: 'Nākamā tiešraide: ',
+            Timetable: 'Stundu saraksts',
+            TimetableNote: 'Esam personalizējuši grafiku, balstoties uz Tavām programmām 🗓️',
+            MyTimetable: 'Mans stundu saraksts',
+            AllTimetable: 'Vispārējais stundu saraksts',
+            ReviewPlan: 'Apskatīt manu plānu',
+            TotalLessons: 'Nodarbības kopumā: ',
+            NineMonthsProgram: '9 mēnešu programma',
         },
     },
 })
