@@ -16,6 +16,8 @@ const i18n = createI18n({
     // translations
     messages: {
         lt: {
+            Title: 'Digiklasės pasiūlymas!',
+            Description: 'Užpildykite trumpą klausimyną ir gaukite specialiai JUMS pritaikytą pasiūlymą.',
             RecommendedPlan: '🙌 Viskas įtraukta į planą:',
             CurrencyMonth: '€/mėn.',
             OneSubjectPlan: '„1 dalyko planas“',
@@ -57,6 +59,8 @@ const i18n = createI18n({
             PromiseSubHeader: 'Sukūrėme tau mokymosi planą, kuris padės pasiekti užsibrėžtų tikslų!'
         },
         lv: {
+            Title: 'Mācību tiešsaistes nodarbības — Memby.lv',
+            Description: 'Visu klašu skolēniem, laužam stereotipus par mācību tiešsaistes nodarbībām! Mācāmies matemātiku, bioloģiju, fiziku, ķīmiju un vēl citus priekšmetus ...',
             RecommendedPlan: '🙌 Viss iekļauts plānā:',
             CurrencyMonth: '€/mēnesī',
             OneSubjectPlan: '„1 mācību priekšmets“',

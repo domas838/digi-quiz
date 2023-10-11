@@ -9,6 +9,15 @@ import ProgramRecomendation from './components/ProgramRecomendation.vue'
 import ProgramsLoader from './components/ProgramsLoader.vue'
 import { pageview, event } from 'vue-gtag'
 import { useFavicon } from '@vueuse/core'
+import { useSeoMeta } from '@unhead/vue'
+import {useI18n} from "vue-i18n";
+
+const i18n = useI18n();
+
+useSeoMeta({
+  title: i18n.t('Title'),
+  description: i18n.t('Description'),
+})
 
 const url = new URL(window.location.href)
 
