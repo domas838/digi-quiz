@@ -11,6 +11,7 @@ import { pageview, event } from 'vue-gtag'
 import { useFavicon } from '@vueuse/core'
 import { useSeoMeta } from '@unhead/vue'
 import {useI18n} from "vue-i18n";
+import WhatsappForm from "./components/WhatsappForm.vue";
 
 const i18n = useI18n();
 
@@ -298,7 +299,8 @@ const completeness = (step) => {
         <FirstBenefit />
         <SecondBenefit />
         <ProgramsLoader v-if="store.step === 8"/>
-        <EmailForm v-if="store.step === 9" />
+        <EmailForm v-if="store.step === 9 && !url.searchParams.has('whatsapp')" />
+        <WhatsappForm v-if="store.step === 9 && url.searchParams.has('whatsapp')" />
     </div>
     <img
         src="./assets/images/bottomVector.svg"
