@@ -43,7 +43,9 @@ const promise = {
 }
 
 const handleButtonClick = () => {
-  const element = document.getElementById("programs");
+  const url = new URL(window.location.href)
+
+  const element = document.getElementById(url.searchParams.has('deal') ? "choose-plan" : "programs");
   if (element) {
     element.scrollIntoView({ behavior: "smooth" });
   }

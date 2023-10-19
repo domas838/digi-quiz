@@ -15,12 +15,21 @@ if (store.lang === 'LV') {
   btnLabel.showAll = 'Apskatīt visus'
 }
 
+const handleButtonClick = () => {
+  const element = document.getElementById("choose-plan");
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
 </script>
 <template>
     <div class="d-flex justify-center cta-buttons">
-        <a :href="props.selectedPlanURL" class="cta-btn"
+        <a v-if="!url.searchParams.has('deal')" :href="props.selectedPlanURL" class="cta-btn"
             >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
         /></a>
+      <button v-if="url.searchParams.has('deal')" @click="handleButtonClick()" class="cta-btn">{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
+      /></button>
         <a :href="props.allPlansURL" target="_blank" class="cta-link">{{ btnLabel.showAll }}</a>
     </div>
 </template>

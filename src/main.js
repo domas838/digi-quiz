@@ -5,8 +5,11 @@ import App from './App.vue'
 import i18n from "./i18n";
 import VueGtag from "vue-gtag";
 import { createHead } from '@unhead/vue'
+import VueCountdown from '@chenfengyuan/vue-countdown';
 
 const app = createApp(App);
+
+app.component(VueCountdown.name, VueCountdown);
 
 app.use(i18n)
 

@@ -13,6 +13,8 @@ import {event} from "vue-gtag";
 import PromiseSection from "../components/PromiseSection.vue";
 import Timetable from "../components/Timetable.vue";
 import { BASE_APP_DOMAIN } from "../helpers";
+import ChoosePlan from "./ChoosePlan.vue";
+import DealNotification from "./DealNotification.vue";
 
 const url = new URL(window.location.href)
 
@@ -384,6 +386,13 @@ const handleClose = () => {
   store.openProgramId = null;
 }
 
+const handleButtonClick = () => {
+  const element = document.getElementById("choose-plan");
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
 </script>
 
 <template>
@@ -408,14 +417,20 @@ const handleClose = () => {
         <img v-if="store.lang === 'LT'" class="logo" src="../assets/images/digiklase.svg" alt="" />
         <img v-if="store.lang === 'LV'" class="logo" src="../assets/images/memby.svg" alt="" />
         <div>
-          <a :href="btnLabel.btnLink" class="cta-btn">
+          <a v-if="!url.searchParams.has('deal')" :href="btnLabel.btnLink" class="cta-btn">
             {{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""/>
           </a>
+          <button v-if="url.searchParams.has('deal')" @click="handleButtonClick()" class="cta-btn">{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
+          /></button>
         </div>
       </div>
     </header>
 
+    <DealNotification />
+
     <PromiseSection :btnLabel="btnLabel" />
+
+    <ChoosePlan id="choose-plan" v-if="url.searchParams.has('deal')" />
     <ProgramsSlider />
     <Timetable />
     </div>
@@ -449,6 +464,7 @@ const handleClose = () => {
 <!--    </div>-->
 
     <SuggestedPlan
+        v-if="!url.searchParams.has('deal')"
         ref="target"
         :btn="btnLabel"
         :is-paid-trial="url.searchParams.has('lmt')"

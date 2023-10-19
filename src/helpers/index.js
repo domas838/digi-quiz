@@ -14,6 +14,11 @@ export const SUBJECTS = {
     'LV': ['Matemātika', 'Vēsture', 'Ķīmija', 'Bioloģija', 'Fizika', 'Latviešu valoda', 'Vēsture un sociālās zinātnes']
 }
 
+export const SUBJECT_PLAN_MAP = {
+    'LT': {"Fizika": "fizikas", "Chemija": "chemikas", "Istorija": "istorikas", "Biologija": "biologas", "Geografija": "geografija", "Matematika": "matematikas", "Anglų kalba": "anglu", "Lietuvių kalba": "lietuviu", "Gyvūnų mokslas": "gyvunu-mokslas", "Pasaulio pažinimas": "pasaulio-pazinimas", "Finansinis raštingumas": "finansinis-rastingumas"},
+    'LV': ['Matemātika', 'Vēsture', 'Ķīmija', 'Bioloģija', 'Fizika', 'Latviešu valoda', 'Vēsture un sociālās zinātnes']
+}
+
 export const BASE_APP_DOMAIN = {
     'LT': 'https://app.digiklase.lt',
     'LV': 'https://app.memby.lv',
