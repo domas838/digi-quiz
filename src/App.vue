@@ -12,6 +12,7 @@ import { useFavicon } from '@vueuse/core'
 import { useSeoMeta } from '@unhead/vue'
 import {useI18n} from "vue-i18n";
 import WhatsappForm from "./components/WhatsappForm.vue";
+import { changeUrlPath } from "./helpers";
 
 const i18n = useI18n();
 
@@ -86,15 +87,21 @@ onMounted(() => {
         store.step = 10
         store.showRecomendations = true;
     }
+
+    window.addEventListener('popstate', function(event) {
+      window.location.href = '/';
+    })
 })
 
 const respondentChildHandler = () => {
     store.step = 1
     store.respondent = 'child'
+    changeUrlPath('/' + store.respondent + '/' + store.step)
 }
 const respondentParentHandler = () => {
     store.step = 1
     store.respondent = 'parent'
+    changeUrlPath('/' + store.respondent + '/' + store.step)
 }
 const prevStep = () => {
     if (store.step === 3 && store.showFirstBenefit) {
@@ -106,12 +113,19 @@ const prevStep = () => {
     } else {
         store.step -= 1
     }
+
+    if (store.step !== 0) {
+      changeUrlPath('/' + store.respondent + '/' + store.step)
+    } else {
+      changeUrlPath('/')
+    }
 }
 const nextStep = () => {
     if (store.step === 3 && store.showFirstBenefit === false) {
         if (!url.searchParams.has('class')) {
             store.step = 3
             store.showFirstBenefit = true
+            changeUrlPath('/' + store.respondent + '/first-benefit')
         } else {
             store.step = 4
             store.showFirstBenefit = false
@@ -120,6 +134,7 @@ const nextStep = () => {
         if (!url.searchParams.has('class')) {
             store.step = 5
             store.showSecondBenefit = true
+            changeUrlPath('/' + store.respondent + '/second-benefit')
         } else {
             store.step = 6
             store.showSecondBenefit = false
@@ -127,6 +142,7 @@ const nextStep = () => {
     } else {
         store.step += 1
     }
+
     if (url.searchParams.has('class') || url.searchParams.has('subject')) {
         store.showFirstBenefit = false
         if (store.step === 4) {
@@ -135,6 +151,10 @@ const nextStep = () => {
         if (store.step > 7) {
             store.showRecomendations = false
         }
+    }
+
+    if (!store.showFirstBenefit && !store.showSecondBenefit) {
+      changeUrlPath('/' + store.respondent + '/' + store.step)
     }
 }
 

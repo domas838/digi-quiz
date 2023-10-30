@@ -102,7 +102,7 @@ const buildCheckoutUrl = (period) => {
   const selectedSubjects = store.selectedSubjects;
   const promo = store.lang === 'LT' ? 'digiklasieciams' : 'start15';
 
-  let url = `${BASE_APP_DOMAIN[store.lang]}/v2/checkout/create/cart-url?userClass=${store.selectedClass}&periodId=${period.periodId}&planId=${period.planId}&promo=${promo}`
+  let url = `${BASE_APP_DOMAIN[store.lang]}/v2/checkout/create/cart-url/${store.respondent}?userClass=${store.selectedClass}&periodId=${period.periodId}&planId=${period.planId}&promo=${promo}`
 
   if (selectedSubjects.length < 3) {
     selectedSubjects.forEach((subject) => {

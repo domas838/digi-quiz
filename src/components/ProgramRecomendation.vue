@@ -12,7 +12,7 @@ import SuggestedPlan from "./SuggestedPlan.vue";
 import {event} from "vue-gtag";
 import PromiseSection from "../components/PromiseSection.vue";
 import Timetable from "../components/Timetable.vue";
-import { BASE_APP_DOMAIN } from "../helpers";
+import {BASE_APP_DOMAIN, changeUrlPath} from "../helpers";
 import ChoosePlan from "./ChoosePlan.vue";
 import DealNotification from "./DealNotification.vue";
 
@@ -54,12 +54,12 @@ const selectedPlanURL = () => {
     }
     if (store.selectedSubjects.length === 1) {
         subjectsString = store.selectedSubjects[0]
-        url = `${baseDomain}/plans/choose?class=${store.selectedClass}&planId=${planID}&subject[]=${subjectsString}`
+        url = `${baseDomain}/plans/choose/${store.respondent}?class=${store.selectedClass}&planId=${planID}&subject[]=${subjectsString}`
     } else if (store.selectedSubjects.length === 2) {
         subjectsString = store.selectedSubjects.join('&subject[]=')
-        url = `${baseDomain}/plans/choose?class=${store.selectedClass}&planId=${planID}&subject[]=${subjectsString}`
+        url = `${baseDomain}/plans/choose/${store.respondent}?class=${store.selectedClass}&planId=${planID}&subject[]=${subjectsString}`
     } else {
-        url = `${baseDomain}/plans/choose?class=${store.selectedClass}&planId=${planID}`
+        url = `${baseDomain}/plans/choose/${store.respondent}?class=${store.selectedClass}&planId=${planID}`
     }
 
     // if (store.lang === 'LV') {
@@ -380,6 +380,7 @@ onMounted(() => {
       store.openProgramId = null;
     }
   }
+  changeUrlPath('/' + store.respondent + '/results')
 });
 
 const handleClose = () => {

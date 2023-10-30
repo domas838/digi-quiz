@@ -2,7 +2,8 @@
 import { store } from '../store'
 import {computed, onMounted, reactive} from 'vue'
 import axios from 'axios'
-import {event} from "vue-gtag";
+import {event as gaEvent} from "vue-gtag";
+import {changeUrlPath} from "../helpers";
 
 const submitChildEmail = (event) => {
     event.preventDefault()
@@ -46,6 +47,7 @@ const submitHandler = (event) => {
     store.step += 1
     store.showRecomendations = true
     klaviyoRequestHandler()
+    gaEvent('lead_generated');
 }
 const submitChildAndParentHandler = (event) => {
     event.preventDefault()
@@ -104,7 +106,8 @@ const klaviyoRequestHandler = () => {
 }
 
 onMounted(() => {
-  event('quiz_email_form');
+  gaEvent('quiz_email_form');
+  changeUrlPath('/' + store.respondent + '/email')
 });
 
 </script>

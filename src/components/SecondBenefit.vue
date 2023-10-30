@@ -1,9 +1,12 @@
 <script setup>
 import { store } from '../store'
 import { reactive } from 'vue'
+import { changeUrlPath } from "../helpers";
+
 const acceptSecondBenefit = () => {
     store.showSecondBenefit = false
     store.step += 1
+    changeUrlPath('/' + store.respondent + '/' + store.step)
 }
 
 const benefits = [

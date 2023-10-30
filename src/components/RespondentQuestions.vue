@@ -1,9 +1,10 @@
 <script setup>
 import { store } from '../store'
 
-import { reactive } from 'vue'
+import {reactive} from 'vue'
 import {useI18n} from "vue-i18n";
-import { Personas } from "../helpers";
+import {changeUrlPath, Personas} from "../helpers";
+import { event } from 'vue-gtag'
 
 const props = defineProps(['questions', 'next'])
 
@@ -11,6 +12,13 @@ const { t } = useI18n();
 
 const selectClass = (classNumber) => {
     store.selectedClass = classNumber.replace(' kl.', '')
+
+    const question = props.questions;
+    event('quiz_question_answered', {
+      question_number: store.step,
+      question_name: question.find(q => q.qNo === store.step).Q,
+      question_answer: classNumber
+    })
 
     props.next()
 }
@@ -152,6 +160,21 @@ const selectAnswer = (answerIndex) => {
         default:
             break
     }
+
+    const question = props.questions;
+
+    event('quiz_question_answered', {
+      question_number: store.step,
+      question_name: question.find(q => q.qNo === store.step).Q,
+      question_answer: answerIndex
+    })
+
+    console.log('test', {
+      question_number: store.step,
+      question_name: question.find(q => q.qNo === store.step).Q,
+      question_answer: answerIndex
+    })
+
     if (store.step !== 4) {
         props.next()
     }
@@ -174,13 +197,30 @@ const selectMultipleAnswers = (event) => {
 const proceedWithMultipleSelection = () => {
     store.selectedSubjects = []
     const selectedInputs = document.querySelectorAll("input[name='subjects']:checked")
-    if (selectedInputs.length) {
-        store.step += 1
 
+    if (selectedInputs.length) {
         selectedInputs.forEach((input) => {
             store.selectedSubjects.push(input.value)
         })
+
+      const question = props.questions;
+
+      event('quiz_question_answered', {
+        question_number: store.step,
+        question_name: question.find(q => q.qNo === store.step).Q,
+        question_answer: store.selectedSubjects.toString().toLowerCase()
+      })
+
+      console.log('test', {
+        question_number: store.step,
+        question_name: question.find(q => q.qNo === store.step).Q,
+        question_answer: store.selectedSubjects.toString().toLowerCase()
+      })
+
+      store.step += 1
     }
+
+    changeUrlPath('/' + store.respondent + '/' + store.step)
 
     store.klaviyoNeededLessons = store.selectedSubjects.toString().toLowerCase()
 }

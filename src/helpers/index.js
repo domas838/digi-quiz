@@ -2,6 +2,17 @@ export function pluck(array, property) {
     return array.map(item => item[property]);
 }
 
+export function changeUrlPath(path) {
+    // Get the current URL
+    let currentURL = window.location.href;
+
+    // Extract the query parameters
+    let url = new URL(currentURL);
+    let searchParams = url.searchParams;
+
+    window.history.pushState({}, document.title, path + '?' + searchParams.toString());
+}
+
 export const Personas = {
     AMBITIOUS: 'Ambitious student',
     EXAM_ORIENTED: 'Exam-oriented',

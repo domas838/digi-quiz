@@ -2,9 +2,11 @@
 import { store } from '../store'
 import {onMounted} from 'vue'
 import {event} from "vue-gtag";
+import {changeUrlPath} from "../helpers";
 
 onMounted(() => {
   event('quiz_email_whatsapp');
+  changeUrlPath('/' + store.respondent + '/whatsapp')
 });
 
 </script>
