@@ -4,7 +4,7 @@ const host = window.location.hostname;
 const domainLocaleMap = {
     'quiz.memby.lv': 'lv',
     'quiz.digiklase.lt': 'lt',
-    'localhost': 'lt'
+    'localhost': 'lv'
 };
 
 const detectedLocale = domainLocaleMap[host] || 'lt';
@@ -70,9 +70,12 @@ const i18n = createI18n({
             hours: 'h',
             minutes: 'min',
             seconds: 's',
+            days: 'd',
             OneMonth: '1 mėnuo',
             ThreeMonths: '3 mėnesiai',
-            NineMonths: '9 mėnesiai'
+            NineMonths: '9 mėnesiai',
+            NovemberDealTimer: '💣 JUODASIS <span style="color: #6B6B6B; text-decoration: line-through">PENKTADIENIS</span> LAPKRITIS -> 60% nuolaida!',
+            NovemberDealTimerFull: '💣 JUODASI <span style="color: #6B6B6B; text-decoration: line-through">PENKTADIENIS</span> LAPKRITIS -> 60% nuolaida visų dalykų planui!'
         },
         lv: {
             Title: 'Mācību tiešsaistes nodarbības — Memby.lv',
@@ -131,7 +134,10 @@ const i18n = createI18n({
             seconds: 'sekundes',
             OneMonth: '1 mēn.',
             ThreeMonths: '3 mēn.',
-            NineMonths: '9 mēn.'
+            NineMonths: '9 mēn.',
+            days: 'd',
+            NovemberDealTimer: '💣  Melnā <span style="color: #6B6B6B; text-decoration: line-through">PIEKTDIENA</span> NOVEMBRIS -> 60% atlaide!',
+            NovemberDealTimerFull: '💣  Melnā <span style="color: #6B6B6B; text-decoration: line-through">PIEKTDIENA</span> NOVEMBRIS -> 60% atlaide visu priekšmetu plānam!'
         },
     },
 })

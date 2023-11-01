@@ -15,6 +15,8 @@ import Timetable from "../components/Timetable.vue";
 import {BASE_APP_DOMAIN, changeUrlPath} from "../helpers";
 import ChoosePlan from "./ChoosePlan.vue";
 import DealNotification from "./DealNotification.vue";
+import NovemberDealNotification from "./NovemberDealNotification.vue";
+import NovemberSuggestedPlan from "./NovemberSuggestedPlan.vue";
 
 const url = new URL(window.location.href)
 
@@ -418,7 +420,7 @@ const handleButtonClick = () => {
         <img v-if="store.lang === 'LT'" class="logo" src="../assets/images/digiklase.svg" alt="" />
         <img v-if="store.lang === 'LV'" class="logo" src="../assets/images/memby.svg" alt="" />
         <div>
-          <a v-if="!url.searchParams.has('deal')" :href="btnLabel.btnLink" class="cta-btn">
+          <a v-if="!url.searchParams.has('deal') && !url.searchParams.has('november')" :href="btnLabel.btnLink" class="cta-btn">
             {{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""/>
           </a>
           <button v-if="url.searchParams.has('deal')" @click="handleButtonClick()" class="cta-btn">{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
@@ -428,6 +430,7 @@ const handleButtonClick = () => {
     </header>
 
     <DealNotification />
+    <NovemberDealNotification />
 
     <PromiseSection :btnLabel="btnLabel" />
 
@@ -465,7 +468,16 @@ const handleButtonClick = () => {
 <!--    </div>-->
 
     <SuggestedPlan
-        v-if="!url.searchParams.has('deal')"
+        v-if="!url.searchParams.has('deal') && !url.searchParams.has('november')"
+        ref="target"
+        :btn="btnLabel"
+        :is-paid-trial="url.searchParams.has('lmt')"
+        v-element-visibility="onElementVisibility"
+        :selected-subjects-length="store.selectedSubjects.length"
+    />
+
+    <NovemberSuggestedPlan
+        v-if="url.searchParams.has('november')"
         ref="target"
         :btn="btnLabel"
         :is-paid-trial="url.searchParams.has('lmt')"
@@ -639,7 +651,7 @@ const handleButtonClick = () => {
                       <li>🏆 Balvas par mācīšanos</li>
                       <li>🫶 Motivējoša kopiena</li>
                   </ul>
-                  <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
+                  <SectionCTA v-if="!url.searchParams.has('november')" :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
                   <div class="testimonial">
                       <div class="author">
                           <img src="../assets/images/testimonial-author.svg" alt="" />
@@ -1019,7 +1031,7 @@ const handleButtonClick = () => {
       </div>
       <div class="wrapper dark inner">
           <div class="container container--narrow pb">
-              <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
+              <SectionCTA v-if="!url.searchParams.has('november')" :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
           </div>
       </div>
       <div class="wrapper light pt page-bottom">
