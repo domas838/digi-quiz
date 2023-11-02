@@ -52,7 +52,7 @@ const resolvePrice = (selectedSubjectsLength, isPaidTrial) => {
     case 2:
       return '48,90';
     default:
-      return '54,90';
+      return '33,96';
   }
 }
 
