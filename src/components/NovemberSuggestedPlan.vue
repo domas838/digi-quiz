@@ -12,10 +12,10 @@ defineProps({
   isPaidTrial: Boolean
 })
 
-const showComponent = ref(true);
+const showComponent = ref(false);
 
 const handleScroll = () => {
-  showComponent.value = true;
+  showComponent.value = window.scrollY >= 800;
 };
 
 onMounted(() => {
@@ -86,7 +86,7 @@ onMounted(() => {
             </span>
         </div>
 
-        <div class="rounded-xl px-8 py-2 z-[100] bg-black text-white flex flex-col text-center w-full md:py-5 md:flex-row md:gap-5 md:text-left md:inline-flex md:justify-between">
+        <div class="rounded-b-xl px-8 py-2 z-[100] bg-black text-white flex flex-col text-center w-full md:py-5 md:flex-row md:gap-5 md:text-left md:inline-flex md:justify-between">
           <div class="basis-1/2">
             <div class="text-[12px] md:text-[16px] hidden md:block">{{ isPaidTrial ? $t('SevenDaysTrial') : $t('RecommendedPlan') }}</div>
             <Heading level="3">{{ $t(resolvePlan(selectedSubjectsLength, isPaidTrial)) }}</Heading>
