@@ -75,7 +75,7 @@ const i18n = createI18n({
             ThreeMonths: '3 mėnesiai',
             NineMonths: '9 mėnesiai',
             NovemberDealTimer: '💣 JUODASIS <span style="color: #6B6B6B; text-decoration: line-through">PENKTADIENIS</span> LAPKRITIS -> 60% nuolaida!',
-            NovemberDealTimerFull: '💣 JUODASI <span style="color: #6B6B6B; text-decoration: line-through">PENKTADIENIS</span> LAPKRITIS -> 60% nuolaida visų dalykų planui!'
+            NovemberDealTimerFull: '💣 JUODASIS <span style="color: #6B6B6B; text-decoration: line-through">PENKTADIENIS</span> LAPKRITIS -> 60% nuolaida visų dalykų planui!'
         },
         lv: {
             Title: 'Mācību tiešsaistes nodarbības — Memby.lv',
