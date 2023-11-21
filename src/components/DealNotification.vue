@@ -24,7 +24,6 @@ const resolveTimeUntilMidnight = () => {
 
 onMounted(() => {
   resolveTimeUntilMidnight()
-  console.log(time.secondsUntilMidnight);
 })
 
 

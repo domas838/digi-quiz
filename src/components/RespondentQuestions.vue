@@ -169,12 +169,6 @@ const selectAnswer = (answerIndex) => {
       question_answer: answerIndex
     })
 
-    console.log('test', {
-      question_number: store.step,
-      question_name: question.find(q => q.qNo === store.step).Q,
-      question_answer: answerIndex
-    })
-
     if (store.step !== 4) {
         props.next()
     }
@@ -206,12 +200,6 @@ const proceedWithMultipleSelection = () => {
       const question = props.questions;
 
       event('quiz_question_answered', {
-        question_number: store.step,
-        question_name: question.find(q => q.qNo === store.step).Q,
-        question_answer: store.selectedSubjects.toString().toLowerCase()
-      })
-
-      console.log('test', {
         question_number: store.step,
         question_name: question.find(q => q.qNo === store.step).Q,
         question_answer: store.selectedSubjects.toString().toLowerCase()

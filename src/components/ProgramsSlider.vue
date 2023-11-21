@@ -133,6 +133,10 @@ const setCookies = () => {
   let expires = 'expires=' + d.toUTCString()
 
   const programsIds = JSON.stringify(pluck(store.filteredPrograms, 'id'))
+  const myTier = parseInt(url.searchParams.get('tier'));
+  const subjectsString = url.searchParams.get('subjects');
+  const subjectsArray = JSON.parse(subjectsString);
+  const grade = url.searchParams.get('class');
 
   const domains = {
     'LT': '.digiklase.lt',
@@ -141,6 +145,9 @@ const setCookies = () => {
 
   document.cookie = `memby_quiz_persona=${store.selectedPersona} ; Domain=${domains[store.lang]} ;  ${expires} ; path=/;`
   document.cookie = `memby_quiz_programs=${programsIds} ; Domain=${domains[store.lang]} ;  ${expires} ; path=/;`
+  document.cookie = `memby_quiz_tier=${myTier} ; Domain=${domains[store.lang]} ;  ${expires} ; path=/;`
+  document.cookie = `memby_quiz_subjects=${subjectsArray} ; Domain=${domains[store.lang]} ;  ${expires} ; path=/;`
+  document.cookie = `memby_quiz_grade=${grade} ; Domain=${domains[store.lang]} ;  ${expires} ; path=/;`
 
   store.cookieIsSet = true;
 }
