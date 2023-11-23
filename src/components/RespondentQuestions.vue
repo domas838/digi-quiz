@@ -166,7 +166,7 @@ const selectAnswer = (answerIndex) => {
     event('quiz_question_answered', {
       question_number: store.step,
       question_name: question.find(q => q.qNo === store.step).Q,
-      question_answer: answerIndex
+      question_answer: question.find(q => q.qNo === store.step).Ans[answerIndex - 1]
     })
 
     if (store.step !== 4) {
