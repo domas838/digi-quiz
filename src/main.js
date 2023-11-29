@@ -6,10 +6,12 @@ import i18n from "./i18n";
 import VueGtag from "vue-gtag";
 import { createHead } from '@unhead/vue'
 import VueCountdown from '@chenfengyuan/vue-countdown';
+import Autocomplete from 'vue3-autocomplete'
 
 const app = createApp(App);
 
 app.component(VueCountdown.name, VueCountdown);
+app.component('VueAutocomplete', Autocomplete);
 
 app.use(i18n)
 

@@ -14,8 +14,15 @@ module.exports = {
         black: '#000',
         white: '#FFF',
         blue: '#4A74EB',
-        gray: '#6B6B6B',
-        yellow: '#F4E140'
+        yellow: '#F4E140',
+        gray: {
+          100: '#f4f5f7',
+          200: '#EEEFF4',
+          300: '#D9DBE1',
+          700: '#B8B8B8',
+          800: '#6B6B6B',
+          900: '#2D2E39'
+        }
       },
     }
   },

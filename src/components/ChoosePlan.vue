@@ -122,7 +122,7 @@ const buildCheckoutUrl = (period) => {
         <p class="text-[18px] mt-2">{{ $t('ChooseYourPlanSubHeader') }}</p>
       </div>
       <div class="flex gap-4 flex-col md:flex-row">
-        <div class="bg-white border border-gray w-full rounded-xl p-6 relative" v-for="period in planPeriods[resolvePlan(store.selectedSubjects.length)]" :key="period.periodId" :class="{ 'border-4 !border-blue': period.special }">
+        <div class="bg-white border border-gray-800 w-full rounded-xl p-6 relative" v-for="period in planPeriods[resolvePlan(store.selectedSubjects.length)]" :key="period.periodId" :class="{ 'border-4 !border-blue': period.special }">
           <div v-if="period.special" class="absolute text-center font-bold bg-blue text-white px-4 rounded-xl top-[-15px] left-0 right-0 w-[210px] mx-auto">
             {{ $t('SpecialOffer') }}
           </div>
@@ -132,7 +132,7 @@ const buildCheckoutUrl = (period) => {
             <span>{{ (period.price - period.off).toFixed(2) }} € {{ $t('Now') }},</span>
             {{ period.price }}  {{ $t('CurrencyMonth') }} {{ $t('Later') }}
           </div>
-          <div class="text-xs text-gray opacity-70">
+          <div class="text-xs text-gray-800 opacity-70">
             {{ $t('OnlyFirstMonthDiscount') }}
           </div>
             <a class="block font-bold border-2 rounded-full border-blue text-blue text-center !w-full py-2 mt-4 hover:bg-blue hover:text-white" :class="{ '!text-white bg-blue cursor-pointer hover:opacity-50': period.special }" :href="buildCheckoutUrl(period)" >{{ $t('GetItNow') }}</a>

@@ -4,7 +4,7 @@ const host = window.location.hostname;
 const domainLocaleMap = {
     'quiz.memby.lv': 'lv',
     'quiz.digiklase.lt': 'lt',
-    'localhost': 'lv'
+    'localhost': 'lt'
 };
 
 const detectedLocale = domainLocaleMap[host] || 'lt';
@@ -75,7 +75,18 @@ const i18n = createI18n({
             ThreeMonths: '3 mėnesiai',
             NineMonths: '9 mėnesiai',
             NovemberDealTimer: '💣 JUODASIS <span style="color: #6B6B6B; text-decoration: line-through">PENKTADIENIS</span> LAPKRITIS -> 60% nuolaida!',
-            NovemberDealTimerFull: '💣 JUODASIS <span style="color: #6B6B6B; text-decoration: line-through">PENKTADIENIS</span> LAPKRITIS -> 60% nuolaida visų dalykų planui!'
+            NovemberDealTimerFull: '💣 JUODASIS <span style="color: #6B6B6B; text-decoration: line-through">PENKTADIENIS</span> LAPKRITIS -> 60% nuolaida visų dalykų planui!',
+            SelectAll: 'Pasirinkti visus',
+            SelectState: '-- Select state --',
+            JustAMoment: 'Just a moment...',
+            GettingThingsReady: 'Getting things ready for you',
+            JourneyBegins: 'A Journey Through Infinite Learning Begins',
+            TrustedBy: 'Trusted by <b>15 554</b> students',
+            KidHatedMath: 'My kid hated math, but Mathups made it a breeze. Now, they get it, and I get less stress. Win-win!',
+            CollectingResults: 'Collecting your results',
+            AnalysingYourResults: 'Analysing your results',
+            GeneratingPersonalisedPlan: 'Generating personalised plan',
+
         },
         lv: {
             Title: 'Mācību tiešsaistes nodarbības — Memby.lv',
@@ -137,8 +148,30 @@ const i18n = createI18n({
             NineMonths: '9 mēn.',
             days: 'd',
             NovemberDealTimer: '💣  Melnā <span style="color: #6B6B6B; text-decoration: line-through">PIEKTDIENA</span> NOVEMBRIS -> 60% atlaide!',
-            NovemberDealTimerFull: '💣  Melnā <span style="color: #6B6B6B; text-decoration: line-through">PIEKTDIENA</span> NOVEMBRIS -> 60% atlaide visu priekšmetu plānam!'
+            NovemberDealTimerFull: '💣  Melnā <span style="color: #6B6B6B; text-decoration: line-through">PIEKTDIENA</span> NOVEMBRIS -> 60% atlaide visu priekšmetu plānam!',
+            SelectAll: 'Select all',
+            SelectState: '-- Select state --',
+            JustAMoment: 'Just a moment...',
+            GettingThingsReady: 'Getting things ready for you',
+            JourneyBegins: 'A Journey Through Infinite Learning Begins',
+            TrustedBy: 'Trusted by <b>15 554</b> students',
+            KidHatedMath: 'My kid hated math, but Mathups made it a breeze. Now, they get it, and I get less stress. Win-win!',
+            CollectingResults: 'Collecting your results',
+            AnalysingYourResults: 'Analysing your results',
+            GeneratingPersonalisedPlan: 'Generating personalised plan',
         },
+        en: {
+            SelectAll: 'Select all',
+            SelectState: '-- Select state --',
+            JustAMoment: 'Just a moment...',
+            GettingThingsReady: 'Getting things ready for you',
+            JourneyBegins: 'A Journey Through Infinite Learning Begins',
+            TrustedBy: 'Trusted by <b>15 554</b> students',
+            KidHatedMath: 'My kid hated math, but Mathups made it a breeze. Now, they get it, and I get less stress. Win-win!',
+            CollectingResults: 'Collecting your results',
+            AnalysingYourResults: 'Analysing your results',
+            GeneratingPersonalisedPlan: 'Generating personalised plan',
+        }
     },
 })
 export default i18n

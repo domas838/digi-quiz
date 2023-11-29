@@ -19,6 +19,8 @@ export const store = reactive({
     isChildEmailEntered: false,
     parentEmail: '',
     selectedSubjects: [],
+    preferredTimeWorkdays: [],
+    preferredTimeWeekends: [],
     childLevel: '',
     TIER: '',
     PROFILE1: [],

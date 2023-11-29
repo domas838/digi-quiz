@@ -64,8 +64,8 @@ onMounted(() => {
           <p class="text-[18px]">{{ $t('TimetableNote') }}</p>
         </div>
         <div class="rounded-full bg-white inline-flex">
-          <div class="px-5 py-3 rounded-full cursor-pointer text-gray hover:opacity-50" :class="{'bg-blue font-bold text-white hover:opacity-100': timetable.type === 'filtered'}" @click="changeTimetable('filtered')">{{ $t('MyTimetable') }}</div>
-          <div class="px-5 py-3 rounded-full cursor-pointer text-gray hover:opacity-50" :class="{'bg-blue font-bold text-white hover:opacity-100': timetable.type === 'all'}" @click="changeTimetable('all')">{{ $t('AllTimetable') }}</div>
+          <div class="px-5 py-3 rounded-full cursor-pointer text-gray-800 hover:opacity-50" :class="{'bg-blue font-bold text-white hover:opacity-100': timetable.type === 'filtered'}" @click="changeTimetable('filtered')">{{ $t('MyTimetable') }}</div>
+          <div class="px-5 py-3 rounded-full cursor-pointer text-gray-800 hover:opacity-50" :class="{'bg-blue font-bold text-white hover:opacity-100': timetable.type === 'all'}" @click="changeTimetable('all')">{{ $t('AllTimetable') }}</div>
         </div>
       </div>
       <iframe class="w-full min-h-[450px]" frameborder="0" :src="timetable.src"></iframe>
