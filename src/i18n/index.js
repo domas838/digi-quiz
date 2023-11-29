@@ -86,7 +86,9 @@ const i18n = createI18n({
             CollectingResults: 'Collecting your results',
             AnalysingYourResults: 'Analysing your results',
             GeneratingPersonalisedPlan: 'Generating personalised plan',
-
+            ExpertCare: 'You are in expert care',
+            MathsUpHelped: 'Mathups has helped more than <b>5 554</b> students all over United States',
+            Continue: 'Tęsti',
         },
         lv: {
             Title: 'Mācību tiešsaistes nodarbības — Memby.lv',
@@ -159,6 +161,9 @@ const i18n = createI18n({
             CollectingResults: 'Collecting your results',
             AnalysingYourResults: 'Analysing your results',
             GeneratingPersonalisedPlan: 'Generating personalised plan',
+            ExpertCare: 'You are in expert care',
+            MathsUpHelped: 'Mathups has helped more than <b>5 554</b> students all over United States',
+            Continue: 'Turpināt',
         },
         en: {
             SelectAll: 'Select all',
@@ -171,6 +176,9 @@ const i18n = createI18n({
             CollectingResults: 'Collecting your results',
             AnalysingYourResults: 'Analysing your results',
             GeneratingPersonalisedPlan: 'Generating personalised plan',
+            ExpertCare: 'You are in expert care',
+            MathsUpHelped: 'Mathups has helped more than <b>5 554</b> students all over United States',
+            Continue: 'Continue',
         }
     },
 })
