@@ -66,9 +66,3 @@ onMounted(() => {
 })
 
 </script>
-<template>
-    <div class="spinner" v-if="store.isLoading">
-        <img src="../assets/images/spinner.svg" alt="" />
-    </div>
-    <h1 v-if="store.isLoading">{{ $t('CalculatingResults') }}</h1>
-</template>

@@ -1,7 +1,10 @@
 <script setup>
 import {reactive} from "vue";
+import {store} from "@/store";
+import {event} from "vue-gtag";
+import {changeUrlPath} from "@/helpers";
 
-const props = defineProps(['options', 'placeholder'])
+const props = defineProps(['q', 'title', 'options', 'placeholder'])
 
 const localState = reactive({
     filteredOptions: [],
@@ -17,13 +20,27 @@ const filterOptions = (input) => {
 }
 
 const confirm = (input) => {
-    // TODO do smthng on confirm
-    console.log(input);
+  event('quiz_question_answered', {
+    question_number: store.step,
+    question_name: props.title,
+    question_answer: input
+  })
+
+  store.step += 1;
+
+  if (!store.showFirstBenefit && !store.showSecondBenefit) {
+    changeUrlPath('/' + store.respondent + '/' + store.step)
+  }
+
+  store.quizAnswers[props.q.id] = input
 }
 </script>
 
 <template>
-  <VueAutocomplete :results="localState.filteredOptions" @input="filterOptions" @onSelect="confirm" :placeholder="props.placeholder" />
+  <h1>
+    {{ props.title }}
+  </h1>
+  <VueAutocomplete :results="localState.filteredOptions" @input="filterOptions" @onSelect="confirm" :placeholder="$t(props.placeholder)" />
 </template>
 
 <style>
@@ -42,6 +59,7 @@ const confirm = (input) => {
       color: #B8B8B8;
   }
   .vue3-results-container {
+      max-width: 100%;
       width: 100px;
       background-color: white;
       border-radius: 16px;

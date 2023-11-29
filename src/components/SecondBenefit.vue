@@ -23,22 +23,20 @@ const benefitsLV = [
     '<strong>Individuāli testi nodarbības laikā, lai pārbaudītu zināšanas</strong>',
     '<strong>Ierakstu pieeja visām iepriekšējām nodarbībām</strong>'
 ]
-const localization = reactive({
-    continue: 'Tęsti'
-})
-if (store.lang === 'LV') {
-    localization.continue = 'Turpināt'
-}
+
+const benefitsEN = [
+    '<strong>Highly qualified teachers, </strong>including graduates of top world universities',
+    '<strong>Inspiring personalities</strong> who can not only tell stories inventively, but also spark interesting discussions',
+    'If some educational subjects are still difficult to understand, Mathups team is always ready to <strong>give you extra help after the lesson!</strong>'
+]
+
 </script>
 
 <template>
-    <div v-if="store.showSecondBenefit && store.step === 5">
+  <div class="container yellow">
         <div class="benefit-container">
-            <h1 class="benefit-heading" v-if="store.lang === 'LT'">
-                Pamokos, kurių nesinorės pramiegoti
-            </h1>
-            <h1 class="benefit-heading" v-if="store.lang === 'LV'">
-                Nodarbības, kuras Tu negribēsi palaist garām
+            <h1 class="benefit-heading">
+                {{ $t('BenefitPageH1') }}
             </h1>
             <div v-if="store.lang === 'LT'">
                 <div class="benefit-row" v-for="(b, index) in benefits" v-bind:key="index">
@@ -60,13 +58,24 @@ if (store.lang === 'LV') {
                     </div>
                 </div>
             </div>
+            <div v-if="store.lang === 'EN'">
+              <div class="benefit-row" v-for="(b, index) in benefitsEN" v-bind:key="index">
+                <div class="icon">
+                  <img class="min-w-[30px]" src="../assets/images/Description.svg" alt="" />
+                </div>
+                <div class="content">
+                  <p v-html="b"></p>
+                </div>
+              </div>
+            </div>
             <button @click="acceptSecondBenefit()" class="benefit-btn">
-                {{ localization.continue }}
+                {{ $t('Continue') }}
                 <img src="../assets/images/arrow-right.svg" alt="Next" />
             </button>
 
             <img v-if="store.lang === 'LT'" src="../assets/images/classroom.png" alt="" class="classroom-visual" />
             <img v-if="store.lang === 'LV'" src="../assets/images/classroom-lv.png" alt="" class="classroom-visual" />
+            <img v-if="store.lang === 'EN'" src="../assets/images/classroom.png" alt="" class="classroom-visual" />
         </div>
     </div>
 </template>

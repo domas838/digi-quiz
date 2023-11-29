@@ -1,0 +1,59 @@
+<script setup>
+import {store} from "@/store";
+import {changeUrlPath} from "@/helpers";
+import {onMounted} from "vue";
+import Logo from "@/components/Logo.vue";
+const respondentChildHandler = () => {
+
+  store.step = 1
+  store.respondent = 'child'
+  changeUrlPath('/' + store.respondent + '/' + store.step)
+}
+const respondentParentHandler = () => {
+  store.step = 1
+  store.respondent = 'parent'
+  changeUrlPath('/' + store.respondent + '/' + store.step)
+}
+
+onMounted(() => {
+  if (window.location.hostname === 'localhost') {
+    store.respondent = 'child'
+  }
+
+  if (store.respondent) {
+    store.step += 1;
+  }
+})
+
+</script>
+
+<template>
+  <div class="container--intro yellow" v-if="store.step === 0">
+    <div>
+      <img v-if="store.lang === 'LT'" src="/src/assets/images/digiklase.svg" alt="Digiklase logo"/>
+      <img v-if="store.lang === 'LV'" src="/src/assets/images/memby.svg" alt="Memby logo" />
+      <img v-if="store.lang === 'EN'" src="/src/assets/images/MathUps.svg" alt="MathsUp logo" />
+      <img src="../assets/images/skateboard.svg" alt="" class="intro-visual" />
+      <h1 class="intro-heading mt-5" v-html="$t('WelcomeH1')">
+      </h1>
+    </div>
+    <div class="intro-selection">
+      <h2>{{ $t('ChooseRole') }}</h2>
+      <div class="intro-selection__buttons">
+        <button class="button--child" @click="respondentChildHandler()">
+          <img src="../assets/images/emoji/INTRO_backback.svg" alt="" />
+          {{ $t('StudentRole') }}
+        </button>
+        <button class="button--parent" @click="respondentParentHandler()">
+          <img src="../assets/images/emoji/INTRO_parent.svg" alt="" />
+          {{ $t('ParentRole') }}
+        </button>
+      </div>
+    </div>
+<!--    <Logo />-->
+  </div>
+</template>
+
+<style scoped>
+
+</style>

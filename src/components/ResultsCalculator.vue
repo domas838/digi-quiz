@@ -1,15 +1,17 @@
-t<script setup>
-    import { onMounted } from 'vue'
-    import { reactive } from "vue";
-    import { useI18n } from "vue-i18n";
+<script setup>
+import { onMounted } from 'vue'
+import { reactive } from "vue";
+import { useI18n } from "vue-i18n";
+import {store} from "@/store";
+import {changeUrlPath} from "@/helpers";
 
-    const { t } = useI18n();
+const { t } = useI18n();
 
-    const localState = reactive({
-        progressStepDuration: 1000,
-        progressSteps: [
-            {
-                key: 1,
+const localState = reactive({
+  progressStepDuration: 1000,
+  progressSteps: [
+    {
+      key: 1,
                 name: t('CollectingResults'),
                 progressPercentage: 0,
             },
@@ -27,6 +29,7 @@ t<script setup>
     })
 
     onMounted(() => {
+        changeUrlPath('/' + store.respondent + '/' + store.step)
        localState.progressSteps.forEach((progressStep, index) => {
            const isLastStep = index === localState.progressSteps.length - 1;
            setTimeout(() => {
@@ -37,7 +40,7 @@ t<script setup>
                        clearInterval(interval);
 
                        if (isLastStep) {
-                           // TODO redirect to next step
+                         store.showEmailForm = true;
                        }
                    }
 
@@ -52,7 +55,12 @@ t<script setup>
 </script>
 
 <template>
-    <div class="max-w-[580px] m-auto" style="font-family: 'obviously', sans-serif;">
+    <div class="max-w-[580px] m-auto px-8" style="font-family: 'obviously', sans-serif;">
+      <div>
+        <img class="mx-auto pb-10" v-if="store.lang === 'LT'" src="/src/assets/images/digiklase.svg" alt="Digiklase logo"/>
+        <img class="mx-auto pb-10" v-if="store.lang === 'LV'" src="/src/assets/images/memby.svg" alt="Memby logo" />
+        <img class="mx-auto pb-10" v-if="store.lang === 'EN'" src="/src/assets/images/MathUps.svg" alt="MathsUp logo" />
+      </div>
         <div class="mb-20 font-semibold text-lg">
             <div class="mb-12" v-for="progressStep in localState.progressSteps" :key="progressStep.key">
                 <div class="flex flex-row justify-between mb-2.5">

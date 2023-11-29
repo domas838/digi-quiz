@@ -1,8 +1,10 @@
 <script setup>
 import { store } from '../store'
 import {reactive} from "vue";
+import {event} from "vue-gtag";
+import {changeUrlPath} from "@/helpers";
 
-const props = defineProps(['days', 'timeRanges', 'storeVariableName'])
+const props = defineProps(['q', 'title', 'days', 'timeRanges', 'storeVariableName'])
 
 let localState = reactive({
     isAllSelected: false
@@ -52,8 +54,17 @@ const selectAll = () => {
 }
 
 const confirm = () => {
-    // TODO proceed
-    console.log(store[props.storeVariableName]);
+    event('quiz_question_answered', {
+      question_number: store.step,
+      question_name: props.title,
+      // question_answer: input
+    })
+
+    store.step += 1;
+
+    changeUrlPath('/' + store.respondent + '/' + store.step)
+
+    store.quizAnswers[props.q.id] = store[props.storeVariableName]
 }
 
 const getSelectedValueIndex = (day, from, to, dayPeriod) => {
@@ -65,28 +76,22 @@ const getSelectedValueIndex = (day, from, to, dayPeriod) => {
             selectedValue.dayPeriod === dayPeriod
     );
 };
-
-const localization = reactive({
-    continue: 'Tęsti'
-})
-if (store.lang === 'LV') {
-    localization.continue = 'Turpināt'
-}
 </script>
 
 <template>
+    <h1>{{ title }}</h1>
     <div class="w-fit m-auto bg-white rounded-xl px-5 py-2.5 shadow-lg">
         <table>
             <thead>
                 <tr>
-                    <th class="mb-4 p-4 pr-7"></th>
-                    <th class="mb-4 p-4 font-normal" v-for="day in props.days" :key="day">{{ day }}</th>
+                    <th class="mb-4 p-1 sm:p-4 pr-7"></th>
+                    <th class="mb-4 p-1 sm:p-4 font-normal" v-for="day in props.days" :key="day">{{ day }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="" v-for="timeRange in props.timeRanges" :key="`${timeRange.from}-${timeRange.to}`">
-                    <td class="text-center p-4 pr-7">{{ `${timeRange.from} - ${timeRange.to} ${timeRange.dayPeriod}` }}</td>
-                    <td class="text-center p-4 border-solid border-t-2 border-gray-700" v-for="day in days" :key="day">
+                    <td class="text-center p-1 sm:p-4 pr-7">{{ `${timeRange.from} - ${timeRange.to} ${timeRange.dayPeriod}` }}</td>
+                    <td class="text-center p-1 sm:p-4 border-solid border-t-2 border-gray-700" v-for="day in days" :key="day">
                         <button @click="selectPreferredTime(day, timeRange.from, timeRange.to, timeRange.dayPeriod)">
                             <span>
                                 <input type="checkbox" name="subjects" :checked="getSelectedValueIndex(day, timeRange.from, timeRange.to, timeRange.dayPeriod) > - 1" />
@@ -134,7 +139,7 @@ if (store.lang === 'LV') {
 
     <div class="mt-10">
         <button @click="confirm()" class="benefit-btn">
-            {{ localization.continue }}
+            {{ $t('Continue') }}
             <img src="../assets/images/arrow-right.svg" alt="Next" />
         </button>
     </div>

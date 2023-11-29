@@ -28,7 +28,7 @@ if (store.lang === 'LV') {
 </script>
 
 <template>
-    <div class="benefit-container" v-if="store.showFirstBenefit && store.step === 3">
+    <div class="benefit-container">
         <h1 class="benefit-heading" v-if="store.lang === 'LT'">
             Mokytojai, <br />
             padėsiantys siekti užsibrėžtų tikslų
