@@ -62,7 +62,9 @@ const resolveResultsPage = () => {
 
   const url = `https://mathups.com/results-strugglers?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${time}`;
 
-// Redirect to the constructed URL
+  store.resultUrl = url
+
+  // Redirect to the constructed URL
   window.location.href = url;
 }
 const submitChildEmail = (event) => {
@@ -70,7 +72,7 @@ const submitChildEmail = (event) => {
     store.isChildEmailEntered = true
     store.step += 1
     store.showRecomendations = true
-    // klaviyoRequestHandler()
+    klaviyoRequestHandler()
     gaEvent('lead_generated');
 
     if (store.lang === 'EN') {
@@ -111,7 +113,7 @@ const submitHandler = (event) => {
     event.preventDefault()
     store.step += 1
     store.showRecomendations = true
-    //klaviyoRequestHandler()
+    klaviyoRequestHandler()
     gaEvent('lead_generated');
 
     if (store.lang === 'EN') {
@@ -122,7 +124,7 @@ const submitChildAndParentHandler = (event) => {
     event.preventDefault()
     store.step += 1
     store.showRecomendations = true
-    //klaviyoRequestHandler()
+    klaviyoRequestHandler()
     gaEvent('lead_generated');
     if (store.lang === 'EN') {
       resolveResultsPage()
@@ -146,16 +148,11 @@ const klaviyoRequestHandler = () => {
                         email: store.childEmail ? store.childEmail : store.parentEmail,
                         properties: {
                             ResultURL: store.resultUrl,
-                            Persona: store.selectedPersona,
-                            Class: store.selectedClass,
-                            Respondent: store.respondent,
-                            ParentEmail: store.parentEmail,
-                            ChildEmail: store.childEmail,
-                            Goal: store.klaviyoGoal,
-                            Motivation: store.klaviyoMotivation,
-                            Intensity: store.klaviyoIntensity,
-                            StudentLevel: store.klaviyoStudentLevel,
-                            NeededLessons: store.klaviyoNeededLessons
+                            Goal: store.quizAnswers['goal'],
+                            State: store.quizAnswers['state'],
+                            Class: store.quizAnswers['grade'],
+                            CurrentMark: store.quizAnswers['currentMark'],
+                            TargetMark: store.quizAnswers['targetMark']
                         }
                     }
                 }
@@ -166,7 +163,7 @@ const klaviyoRequestHandler = () => {
     axios
         .request(options)
         .then(function (response) {
-            console.log(response.data)
+            // console.log(response.data)
         })
         .catch(function (error) {
             console.error(error)

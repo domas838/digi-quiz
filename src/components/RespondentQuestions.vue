@@ -170,7 +170,6 @@ const selectAnswer = (answerIndex) => {
       store.quizAnswers[question.id] = question.Ans[answerIndex - 1].title
     }
 
-    console.log(store.quizAnswers);
 
     props.next()
 }
