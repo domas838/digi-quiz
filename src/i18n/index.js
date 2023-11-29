@@ -4,7 +4,7 @@ const host = window.location.hostname;
 const domainLocaleMap = {
     'quiz.memby.lv': 'lv',
     'quiz.digiklase.lt': 'lt',
-    'quiz.mathsup.com': 'en'
+    'quiz.mathups.com': 'en'
 };
 
 const detectedLocale = domainLocaleMap[host] || 'lt';

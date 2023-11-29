@@ -35,7 +35,7 @@ onMounted(() => {
     favicon.value = 'memby-fav.webp';
   }
 
-  if (window.location.hostname === 'quiz.mathsup.com') {
+  if (window.location.hostname === 'quiz.mathups.com') {
     store.lang = 'EN'
     const favicon = useFavicon();
     favicon.value = 'memby-fav.webp';

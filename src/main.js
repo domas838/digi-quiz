@@ -22,7 +22,7 @@ const host = window.location.hostname;
 const analyticsMap = {
     'quiz.memby.lv': 'G-QFS0LJGESV',
     'quiz.digiklase.lt': 'G-L98Z3SJY5M',
-    'quiz.mathsup.com': 'G-L98Z3SJY5M',
+    'quiz.mathups.com': 'G-L98Z3SJY5M',
     'localhost': ''
 };
 
