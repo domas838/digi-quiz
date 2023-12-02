@@ -60,9 +60,13 @@ const resolveResultsPage = () => {
     time = `dayOne=${dayOne}&dayTwo=${dayTwo}&dayOneTime=${dayOneTime}&dayTwoTime=${dayTwoTime}`;
   }
 
-  const url = `https://mathups.com/results-strugglers?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${time}`;
+  const goal = 'results-strugglers';
+
+  const url = `https://mathups.com/${goal}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${time}`;
 
   store.resultUrl = url
+
+  klaviyoRequestHandler()
 
   // Redirect to the constructed URL
   window.location.href = url;
@@ -72,7 +76,7 @@ const submitChildEmail = (event) => {
     store.isChildEmailEntered = true
     store.step += 1
     store.showRecomendations = true
-    klaviyoRequestHandler()
+    // klaviyoRequestHandler()
     gaEvent('lead_generated');
 
     if (store.lang === 'EN') {
@@ -113,7 +117,7 @@ const submitHandler = (event) => {
     event.preventDefault()
     store.step += 1
     store.showRecomendations = true
-    klaviyoRequestHandler()
+    // klaviyoRequestHandler()
     gaEvent('lead_generated');
 
     if (store.lang === 'EN') {
@@ -124,7 +128,7 @@ const submitChildAndParentHandler = (event) => {
     event.preventDefault()
     store.step += 1
     store.showRecomendations = true
-    klaviyoRequestHandler()
+    // klaviyoRequestHandler()
     gaEvent('lead_generated');
     if (store.lang === 'EN') {
       resolveResultsPage()
@@ -152,7 +156,7 @@ const klaviyoRequestHandler = () => {
                             State: store.quizAnswers['state'],
                             Class: store.quizAnswers['grade'],
                             CurrentMark: store.quizAnswers['currentMark'],
-                            TargetMark: store.quizAnswers['targetMark']
+                            TargetMark: store.quizAnswers['targetMark'],
                         }
                     }
                 }
@@ -192,7 +196,7 @@ onMounted(() => {
     <h1 v-if="store.respondent === 'child' && store.isChildEmailEntered" v-html="$t('EmailFormShareResults')"></h1>
     <h1 v-if="store.respondent === 'parent'">{{ $t('EmailFormWeWillRecommendPlan') }}</h1>
     <p v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</p>
-    <p v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</p>
+<!--    <p v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</p>-->
     <div v-if="store.respondent === 'child'">
         <input
             v-if="!store.isChildEmailEntered"
@@ -269,6 +273,31 @@ onMounted(() => {
             style="margin-bottom: 1rem"
         />
     </div>
+
+    <div class="privacy-notice">
+      <img src="../assets/images/Lock.svg" alt="Lock" />
+      <p>
+        {{ $t('EmailFormPrivacyNotice') }}
+      </p>
+    </div>
+
+  <div class="aggree-row" v-if="!store.isChildEmailEntered">
+    <input
+        type="checkbox"
+        name="age"
+        id="age"
+        :value="$t('EmailForm13YearsValue')"
+        v-model="store.olderThanThirteen"
+    />
+    <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
+    <img
+        src="../assets/images/checkbox-checked.svg"
+        alt=""
+        class="custom-checkbox-checked"
+    />
+    <label for="age" class="aggree-label">{{ $t('EmailForm13YearsLabel') }}</label>
+  </div>
+
     <div class="aggree-row" v-if="store.respondent === 'parent'">
         <input
             type="checkbox"
@@ -315,7 +344,7 @@ onMounted(() => {
         <a href="javascript:void(0)" v-if="store.lang === 'LT'" @click="cancelEmailHandler">{{ $t('Skip') }}</a>
     </div>
 
-    <ProgramsLoader />
+<!--    <ProgramsLoader />-->
 </template>
 
 <style scoped>

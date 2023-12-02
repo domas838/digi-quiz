@@ -16,8 +16,8 @@ const respondentParentHandler = () => {
 }
 
 onMounted(() => {
-  if (window.location.hostname === 'localhost') {
-    store.respondent = 'child'
+  if (window.location.hostname === 'quiz.mathups.com') {
+    store.respondent = 'parent'
   }
 
   if (store.respondent) {

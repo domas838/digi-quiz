@@ -4,7 +4,8 @@ const host = window.location.hostname;
 const domainLocaleMap = {
     'quiz.memby.lv': 'lv',
     'quiz.digiklase.lt': 'lt',
-    'quiz.mathups.com': 'en'
+    'quiz.mathups.com': 'en',
+    'localhost': 'en'
 };
 
 const detectedLocale = domainLocaleMap[host] || 'lt';
@@ -202,8 +203,8 @@ const i18n = createI18n({
             BenefitPageH1: 'Nodarbības, kuras Tu negribēsi palaist garām',
         },
         en: {
-            Title: 'Digiklasės pasiūlymas!',
-            Description: 'Užpildykite trumpą klausimyną ir gaukite specialiai JUMS pritaikytą pasiūlymą.',
+            Title: 'Mathups - quiz',
+            Description: 'Quiz',
             RecommendedPlan: '🙌 Viskas įtraukta į planą:',
             CurrencyMonth: '€/mėn.',
             OneSubjectPlan: '„1 dalyko planas“',
@@ -268,12 +269,12 @@ const i18n = createI18n({
             ParentRole: 'Parent',
             EmailFormH1: 'We’ve created a personalised plan that will help you to achieve your goal.',
             EmailFormWhereToSentResults: 'What email would you like to use to access it?',
-            EmailFormWeWillRecommendPlan: 'What email would you like to use to access it?',
+            EmailFormWeWillRecommendPlan: 'We’ve created a personalised plan that will help you to achieve your goal.',
             EmailFormYourEmail: 'Your email',
             EmailFormYourParentEmail: 'Email',
             EmailFormPrivacyNotice: 'Your personal data is safe with us. By the way, we do not send spam or share emails. email addresses with third parties.',
             EmailFormPrivacyValue: 'I agree to get future information from Mathups',
-            EmailPrivacyLabel: 'I agree to the <a href="asdf" target="_blank">Privacy policy</a>',
+            EmailPrivacyLabel: 'I agree to the <a href="https://mathups.com/privacy-policy" target="_blank">Privacy policy</a>',
             EmailForm13YearsValue: 'I agree to get future information from Mathups',
             EmailForm13YearsLabel: 'I agree to get future information from Mathups',
             EmailFormNoticeIfLessThan13Years: '',

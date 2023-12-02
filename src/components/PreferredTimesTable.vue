@@ -1,6 +1,6 @@
 <script setup>
 import { store } from '../store'
-import {reactive} from "vue";
+import {onMounted, reactive} from "vue";
 import {event} from "vue-gtag";
 import {changeUrlPath} from "@/helpers";
 
@@ -52,6 +52,10 @@ const selectAll = () => {
     }
 
 }
+
+onMounted(() => {
+  selectAll()
+})
 
 const confirm = () => {
     event('quiz_question_answered', {

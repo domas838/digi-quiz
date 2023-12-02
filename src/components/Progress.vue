@@ -23,7 +23,7 @@ const completeness = (step) => {
     <button
         class="back-button"
         @click="prevStep()"
-        v-if="store.step <= store.quiz[store.lang][store.respondent].length"
+        v-if="store.step <= store.quiz[store.lang][store.respondent].length && store.step > 1"
     >
       <img src="../assets/images/arrow.svg" alt="" />
     </button>

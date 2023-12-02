@@ -163,7 +163,7 @@ const selectAnswer = (answerIndex) => {
     event('quiz_question_answered', {
       question_number: store.step,
       question_name: question.Q,
-      question_answer: question.Ans[answerIndex - 1]
+      question_answer: question.Ans[answerIndex - 1].title
     })
 
     if (store.lang === 'EN') {
