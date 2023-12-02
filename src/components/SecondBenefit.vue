@@ -24,7 +24,7 @@ const benefitsLV = [
 ]
 
 const benefitsEN = [
-    '<strong>Highly qualified teachers, </strong>including graduates of top world universities',
+    '<strong>Highly qualified tutors, </strong>including graduates of top world universities',
     '<strong>Inspiring personalities</strong> who can not only tell stories inventively, but also spark interesting discussions',
     'If some educational subjects are still difficult to understand, Mathups team is always ready to <strong>give you extra help after the lesson!</strong>'
 ]

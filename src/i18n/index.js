@@ -267,7 +267,7 @@ const i18n = createI18n({
             ChooseRole: 'Choose role',
             StudentRole: 'Student',
             ParentRole: 'Parent',
-            EmailFormH1: 'We’ve created a personalised plan that will help you to achieve your goal.',
+            EmailFormH1: 'We’ve created a personalised plan that will help your child to achieve their goal.',
             EmailFormWhereToSentResults: 'What email would you like to use to access it?',
             EmailFormWeWillRecommendPlan: 'We’ve created a personalised plan that will help you to achieve your goal.',
             EmailFormYourEmail: 'Your email',
@@ -284,7 +284,7 @@ const i18n = createI18n({
             SelectState: '-- Select state --',
             JustAMoment: 'Just a moment...',
             GettingThingsReady: 'Getting things ready for you',
-            JourneyBegins: 'A Journey Through Infinite Learning Begins',
+            JourneyBegins: 'Mathups has helped more than 5 554 students all over United States',
             TrustedBy: 'Trusted by <b>15 554</b> students',
             KidHatedMath: 'My kid hated math, but Mathups made it a breeze. Now, they get it, and I get less stress. Win-win!',
             CollectingResults: 'Collecting your results',
@@ -292,7 +292,7 @@ const i18n = createI18n({
             GeneratingPersonalisedPlan: 'Generating personalised plan',
             ExpertCare: 'You are in expert care',
             MathsUpHelped: 'Mathups has helped more than <b>5 554</b> students all over United States',
-            BenefitPageH1: 'Teachers who help you achieve your goals'
+            BenefitPageH1: 'Tutors who help your child to achieve their goals'
         }
     },
 })

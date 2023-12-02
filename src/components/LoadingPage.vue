@@ -23,7 +23,7 @@ onMounted(() => {
                 {{ $t('JustAMoment') }} <br>
                 {{ $t('GettingThingsReady') }}
             </div>
-            <div class="text-3xl font-semibold">
+            <div class="text-3xl font-semibold max-w-[700px]">
                 {{ $t('JourneyBegins') }}
             </div>
         </div>

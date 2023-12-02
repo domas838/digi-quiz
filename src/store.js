@@ -322,10 +322,11 @@ export const store = reactive({
                     qNo: 1,
                     Q: 'Select child grade?',
                     Ans: [
-                        {title: '5th'},
                         {title: '6th'},
                         {title: '7th'},
                         {title: '8th'},
+                        {title: '9th'},
+                        {title: '10th'},
                     ],
                     component: 'grid'
                 },
@@ -524,12 +525,13 @@ export const store = reactive({
                 {
                     id: 'grade',
                     qNo: 1,
-                    Q: 'Select child grade?',
+                    Q: 'What grade is your child in?',
                     Ans: [
-                        {title: '5th'},
                         {title: '6th'},
                         {title: '7th'},
                         {title: '8th'},
+                        {title: '9th'},
+                        {title: '10th'}
                     ],
                     component: 'grid'
                 },
@@ -546,12 +548,13 @@ export const store = reactive({
                 {
                     id: 'goal',
                     qNo: 3,
-                    Q: 'What is your primary goal?',
+                    Q: "What is your child's primary goal in math?",
                     Ans: [
                         {title: 'Improve Grades and GPA', img: '/emoji/🚀.svg'},
                         {title: 'Maintain High Grades', img: '/emoji/🤓.svg'},
                         {title: 'Test Prep', img: '/emoji/📝.svg'},
                         {title: 'Prepare for Contest', img: '/emoji/🏅.svg'},
+                        {title: 'To excel and achieve top performance', img: '/emoji/🔥.svg'},
                         {title: 'Something Else', img: '/emoji/🤷_♂️.svg'}
                     ],
                     component: 'radio'
@@ -559,7 +562,7 @@ export const store = reactive({
                 {
                     id: 'preferredTimeWorkdays',
                     qNo: 4,
-                    Q: 'What times you can join lessons during workdays?',
+                    Q: 'What time can your child join lessons during workdays?',
                     component: 'timetable',
                     days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
                     times: [{from: 3, to: 5, dayPeriod: 'PM'}, {from: 5, to: 7, dayPeriod: 'PM'}, {from: 7, to: 9, dayPeriod: 'PM'}],
@@ -568,7 +571,7 @@ export const store = reactive({
                 {
                     id: 'preferredTimeWeekends',
                     qNo: 5,
-                    Q: 'What times you can join lessons on weekends?',
+                    Q: 'What time can your child join lessons during weekends?',
                     component: 'timetable',
                     days: ['Sat', 'Sun'],
                     times: [{from: 10, to: 12, dayPeriod: 'AM'}, {from: 12, to: 2, dayPeriod: 'PM'}, {from: 2, to: 4, dayPeriod: 'PM'}],
@@ -579,7 +582,7 @@ export const store = reactive({
                     component: 'loader'
                 },
                 { id: 'currentMark',
-                    qNo: 7, Q: "Your Child's Current Mark", Ans: [
+                    qNo: 7, Q: "What is your child's current average grade in math?", Ans: [
                         {title: 'A+'},
                         {title: 'A'},
                         {title: 'A-'},
@@ -596,7 +599,7 @@ export const store = reactive({
                     ], component: 'grid'
                 },
                 { id: 'targetMark',
-                    qNo: 8, Q: "Your Child’s Target Mark", Ans: [
+                    qNo: 8, Q: "What math grade do you want your child to achieve?", Ans: [
                         {title: 'A+'},
                         {title: 'A'},
                         {title: 'A-'},
@@ -668,11 +671,11 @@ export const store = reactive({
                 {
                     id: 'focusInClass',
                     qNo: 14,
-                    Q: 'Does your kid gets distracted by other students in a class?',
+                    Q: 'Does your kid get distracted by other students in a class?',
                     Ans: [
                         {title: 'Strongly agree', img: '/emoji/😊.svg'},
                         {title: 'Agree', img: '/emoji/🙂_.svg'},
-                        {title: 'Neither agree not disagree', img: '/emoji/😶.svg'},
+                        {title: 'Neither agree nor disagree', img: '/emoji/😶.svg'},
                         {title: 'Disagree', img: '/emoji/😑.svg'},
                         {title: 'Strongly disagree', img: '/emoji/🫤.svg'}
                     ],

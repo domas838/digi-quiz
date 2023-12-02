@@ -49,20 +49,39 @@ const resolveResultsPage = () => {
   const gradeAfter = encodeURIComponent(store.quizAnswers['targetMark']);
   const state = encodeURIComponent(store.quizAnswers['state']);
   const grade = encodeURIComponent(store.quizAnswers['grade']);
+  const goal = store.quizAnswers['goal'];
+  let timePreference;
+  let framerPath = 'results-strugglers';
 
-  let time = null;
+  switch (goal) {
+    case 'Improve Grades and GPA':
+      framerPath = 'results-strugglers'
+      break;
+    case 'Maintain High Grades':
+      framerPath = 'results-maintainers'
+      break;
+    case 'Test Prep':
+      framerPath = 'results-strugglers'
+      break;
+    case 'Prepare for Contest':
+      framerPath = 'results-excellers'
+      break;
+    case 'To excel and achieve top performance':
+      framerPath = 'results-excellers'
+      break;
+    default:
+      framerPath = 'results-strugglers'
+  }
 
   if (Object.keys(timetableObject).length !== 0) {
     const dayOne = encodeURIComponent(timetableObject.dayOne)
     const dayTwo = encodeURIComponent(timetableObject.dayTwo)
     const dayOneTime = encodeURIComponent(timetableObject.dayOneTime);
     const dayTwoTime = encodeURIComponent(timetableObject.dayTwoTime);
-    time = `dayOne=${dayOne}&dayTwo=${dayTwo}&dayOneTime=${dayOneTime}&dayTwoTime=${dayTwoTime}`;
+    timePreference = `dayOne=${dayOne}&dayTwo=${dayTwo}&dayOneTime=${dayOneTime}&dayTwoTime=${dayTwoTime}`;
   }
 
-  const goal = 'results-strugglers';
-
-  const url = `https://mathups.com/${goal}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${time}`;
+  const url = `https://mathups.com/${framerPath}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${timePreference}`;
 
   store.resultUrl = url
 

@@ -6,6 +6,12 @@ import {changeUrlPath} from "@/helpers";
 const prevStep = () => {
   store.step -= 1
 
+  const question = store.quiz[store.lang][store.respondent].find(q => q.qNo === store.step);
+
+  if (question.component === 'loader') {
+    store.step -= 1
+  }
+
   if (store.step !== 0) {
     changeUrlPath('/' + store.respondent + '/' + store.step)
   } else {
