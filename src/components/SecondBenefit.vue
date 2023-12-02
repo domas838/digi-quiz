@@ -74,7 +74,7 @@ const benefitsEN = [
 
             <img v-if="store.lang === 'LT'" src="../assets/images/classroom.png" alt="" class="classroom-visual" />
             <img v-if="store.lang === 'LV'" src="../assets/images/classroom-lv.png" alt="" class="classroom-visual" />
-            <img v-if="store.lang === 'EN'" src="../assets/images/teacher 1.png" alt="" class="classroom-visual" />
+            <img v-if="store.lang === 'EN'" src="../assets/images/teacher1.png" alt="" class="classroom-visual" />
         </div>
     </div>
 </template>
