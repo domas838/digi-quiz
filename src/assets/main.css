@@ -156,7 +156,7 @@ p {
 .classroom-visual {
     position: fixed;
     bottom: 0;
-    right: -200px;
+    right: -110px;
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;

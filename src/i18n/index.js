@@ -285,7 +285,7 @@ const i18n = createI18n({
             JustAMoment: 'Just a moment...',
             GettingThingsReady: 'Getting things ready for you',
             JourneyBegins: 'Mathups has helped more than 5 554 students all over United States',
-            TrustedBy: 'Trusted by <b>15 554</b> students',
+            TrustedBy: 'Trusted by <b>5 554</b> students',
             KidHatedMath: 'My kid hated math, but Mathups made it a breeze. Now, they get it, and I get less stress. Win-win!',
             CollectingResults: 'Collecting your results',
             AnalysingYourResults: 'Analysing your results',

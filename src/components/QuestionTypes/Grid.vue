@@ -19,6 +19,21 @@ const selectClass = (classNumber) => {
 
   props.next()
 }
+
+const targetMarkArray = () => {
+  // Find the index of the threshold grade in the Ans array
+  const thresholdIndex = props.q.Ans.findIndex(grade => grade.title === store.quizAnswers['currentMark']);
+
+  const gradesAboveThreshold = props.q.Ans.slice(0, thresholdIndex);
+
+  if (gradesAboveThreshold.length === 0) {
+    store.quizAnswers[props.q.id] = 'A+';
+    store.step += 1;
+  }
+
+  return gradesAboveThreshold;
+}
+
 </script>
 
 <template>
@@ -28,9 +43,19 @@ const selectClass = (classNumber) => {
     </h1>
 
     <div class="answer__content">
-      <div class="answer__buttons-wrapper grade">
+      <div class="answer__buttons-wrapper grade" v-if="q.id !== 'targetMark'">
         <button
             v-for="(answer, index) in q.Ans"
+            :key="index"
+            class="answer__btn"
+            @click="selectClass(answer.title)"
+        >
+          {{ answer.title }}
+        </button>
+      </div>
+      <div class="answer__buttons-wrapper grade" v-if="q.id === 'targetMark'">
+        <button
+            v-for="(answer, index) in targetMarkArray()"
             :key="index"
             class="answer__btn"
             @click="selectClass(answer.title)"
