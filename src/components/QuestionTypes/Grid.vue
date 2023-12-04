@@ -28,6 +28,7 @@ const targetMarkArray = () => {
 
   if (gradesAboveThreshold.length === 0) {
     store.quizAnswers[props.q.id] = 'A+';
+    store.quizAnswers['goal'] = 'Maintain High Grades';
     store.step += 1;
   }
 
