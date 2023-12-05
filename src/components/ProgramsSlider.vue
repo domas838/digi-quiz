@@ -146,7 +146,7 @@ const setCookies = () => {
   document.cookie = `memby_quiz_persona=${store.selectedPersona} ; Domain=${domains[store.lang]} ;  ${expires} ; path=/;`
   document.cookie = `memby_quiz_programs=${programsIds} ; Domain=${domains[store.lang]} ;  ${expires} ; path=/;`
   document.cookie = `memby_quiz_tier=${myTier} ; Domain=${domains[store.lang]} ;  ${expires} ; path=/;`
-  document.cookie = `memby_quiz_subjects=${subjectsArray} ; Domain=${domains[store.lang]} ;  ${expires} ; path=/;`
+  document.cookie = `memby_quiz_subjects=${JSON.stringify(subjectsArray)} ; Domain=${domains[store.lang]} ;  ${expires} ; path=/;`
   document.cookie = `memby_quiz_grade=${grade} ; Domain=${domains[store.lang]} ;  ${expires} ; path=/;`
 
   store.cookieIsSet = true;
