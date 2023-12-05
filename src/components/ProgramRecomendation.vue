@@ -437,7 +437,6 @@ const handleButtonClick = () => {
     <ChoosePlan id="choose-plan" v-if="url.searchParams.has('deal')" />
     <ProgramsSlider />
     <Timetable />
-    </div>
 
 <!--      <div class="wrapper light">-->
 <!--          <div class="flex-container cards-wrapper">-->
@@ -1086,6 +1085,7 @@ const handleButtonClick = () => {
               </div>
           </div>
       </footer>
+  </div>
 </template>
 
 <style scoped>

@@ -145,9 +145,9 @@ const nextStep = () => {
 
     if (url.searchParams.has('class') || url.searchParams.has('subject')) {
         store.showFirstBenefit = false
-        if (store.step === 4) {
-            store.step = 5
-        }
+        // if (store.step === 4) {
+        //     store.step = 5
+        // }
         if (store.step > 7) {
             store.showRecomendations = false
         }
