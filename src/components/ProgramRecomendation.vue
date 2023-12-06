@@ -420,7 +420,7 @@ const handleButtonClick = () => {
         <img v-if="store.lang === 'LT'" class="logo" src="../assets/images/digiklase.svg" alt="" />
         <img v-if="store.lang === 'LV'" class="logo" src="../assets/images/memby.svg" alt="" />
         <div>
-          <a v-if="!url.searchParams.has('deal') && !url.searchParams.has('november')" :href="btnLabel.btnLink" class="cta-btn">
+          <a v-if="!url.searchParams.has('deal')" :href="btnLabel.btnLink" class="cta-btn">
             {{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""/>
           </a>
           <button v-if="url.searchParams.has('deal')" @click="handleButtonClick()" class="cta-btn">{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
@@ -437,6 +437,7 @@ const handleButtonClick = () => {
     <ChoosePlan id="choose-plan" v-if="url.searchParams.has('deal')" />
     <ProgramsSlider />
     <Timetable />
+    </div>
 
 <!--      <div class="wrapper light">-->
 <!--          <div class="flex-container cards-wrapper">-->
@@ -467,7 +468,7 @@ const handleButtonClick = () => {
 <!--    </div>-->
 
     <SuggestedPlan
-        v-if="!url.searchParams.has('deal') && !url.searchParams.has('november')"
+        v-if="!url.searchParams.has('deal')"
         ref="target"
         :btn="btnLabel"
         :is-paid-trial="url.searchParams.has('lmt')"
@@ -475,14 +476,14 @@ const handleButtonClick = () => {
         :selected-subjects-length="store.selectedSubjects.length"
     />
 
-    <NovemberSuggestedPlan
-        v-if="url.searchParams.has('november')"
-        ref="target"
-        :btn="btnLabel"
-        :is-paid-trial="url.searchParams.has('lmt')"
-        v-element-visibility="onElementVisibility"
-        :selected-subjects-length="store.selectedSubjects.length"
-    />
+<!--    <NovemberSuggestedPlan-->
+<!--        v-if="url.searchParams.has('november')"-->
+<!--        ref="target"-->
+<!--        :btn="btnLabel"-->
+<!--        :is-paid-trial="url.searchParams.has('lmt')"-->
+<!--        v-element-visibility="onElementVisibility"-->
+<!--        :selected-subjects-length="store.selectedSubjects.length"-->
+<!--    />-->
 
       <div class="wrapper light-grey pb-10 md:pb-20">
           <div class="container">
@@ -650,7 +651,7 @@ const handleButtonClick = () => {
                       <li>🏆 Balvas par mācīšanos</li>
                       <li>🫶 Motivējoša kopiena</li>
                   </ul>
-                  <SectionCTA v-if="!url.searchParams.has('november')" :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
+                  <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
                   <div class="testimonial">
                       <div class="author">
                           <img src="../assets/images/testimonial-author.svg" alt="" />
@@ -1030,7 +1031,7 @@ const handleButtonClick = () => {
       </div>
       <div class="wrapper dark inner">
           <div class="container container--narrow pb">
-              <SectionCTA v-if="!url.searchParams.has('november')" :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
+              <SectionCTA :allPlansURL="$t('AllPlansUrl')" :selectedPlanURL="btnLabel.btnLink" />
           </div>
       </div>
       <div class="wrapper light pt page-bottom">
@@ -1085,7 +1086,6 @@ const handleButtonClick = () => {
               </div>
           </div>
       </footer>
-  </div>
 </template>
 
 <style scoped>
