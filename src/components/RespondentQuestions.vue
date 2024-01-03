@@ -166,7 +166,7 @@ const selectAnswer = (answerIndex) => {
       question_answer: question.Ans[answerIndex - 1].title
     })
 
-    if (store.lang === 'EN') {
+    if (store.lang === 'EN_IE') {
       store.quizAnswers[question.id] = question.Ans[answerIndex - 1].title
     }
 

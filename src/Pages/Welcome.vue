@@ -24,7 +24,6 @@ onMounted(() => {
     store.step += 1;
   }
 })
-
 </script>
 
 <template>
@@ -32,7 +31,8 @@ onMounted(() => {
     <div>
       <img v-if="store.lang === 'LT'" src="/src/assets/images/digiklase.svg" alt="Digiklase logo"/>
       <img v-if="store.lang === 'LV'" src="/src/assets/images/memby.svg" alt="Memby logo" />
-      <img v-if="store.lang === 'EN'" src="/src/assets/images/MathUps.svg" alt="MathsUp logo" />
+      <img v-if="store.lang === 'EN_IE'" src="/src/assets/images/MathUps.svg" alt="MathUps logo" />
+      <img v-if="store.lang === 'EN_ZA'" src="/src/assets/images/MathsUp.svg" alt="MathsUp logo" />
       <img src="../assets/images/skateboard.svg" alt="" class="intro-visual" />
       <h1 class="intro-heading mt-5" v-html="$t('WelcomeH1')">
       </h1>

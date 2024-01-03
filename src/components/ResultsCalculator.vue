@@ -59,7 +59,8 @@ const localState = reactive({
       <div>
         <img class="mx-auto pb-10" v-if="store.lang === 'LT'" src="/src/assets/images/digiklase.svg" alt="Digiklase logo"/>
         <img class="mx-auto pb-10" v-if="store.lang === 'LV'" src="/src/assets/images/memby.svg" alt="Memby logo" />
-        <img class="mx-auto pb-10" v-if="store.lang === 'EN'" src="/src/assets/images/MathUps.svg" alt="MathsUp logo" />
+        <img class="mx-auto pb-10" v-if="store.lang === 'EN_IE'" src="/src/assets/images/MathUps.svg" alt="MathUps logo" />
+        <img class="mx-auto pb-10" v-if="store.lang === 'EN_ZA'" src="/src/assets/images/MathsUp.svg" alt="MathsUp logo" />
       </div>
         <div class="mb-20 font-semibold text-lg">
             <div class="mb-12" v-for="progressStep in localState.progressSteps" :key="progressStep.key">

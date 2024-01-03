@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -279,7 +283,6 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
 }
 .answer__buttons-wrapper {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 35px 25px;
 }
 .answer__buttons-wrapper .answer__btn {
@@ -297,7 +300,7 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
     min-height: unset;
     margin: 0px;
     padding: 11px;
-    font-size: 27px;
+    font-size: 26px;
 }
 @media (max-width: 560px) {
     .grade .answer__btn {

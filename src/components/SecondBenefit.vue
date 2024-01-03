@@ -57,7 +57,7 @@ const benefitsEN = [
                     </div>
                 </div>
             </div>
-            <div v-if="store.lang === 'EN'">
+            <div v-if="store.lang === 'EN_IE' || store.lang === 'EN_ZA'">
               <div class="benefit-row" v-for="(b, index) in benefitsEN" v-bind:key="index">
                 <div class="icon">
                   <img class="min-w-[30px]" src="../assets/images/Description.svg" alt="" />
@@ -74,7 +74,8 @@ const benefitsEN = [
 
             <img v-if="store.lang === 'LT'" src="../assets/images/classroom.png" alt="" class="classroom-visual" />
             <img v-if="store.lang === 'LV'" src="../assets/images/classroom-lv.png" alt="" class="classroom-visual" />
-            <img v-if="store.lang === 'EN'" src="../assets/images/teacher-mathups2.png" alt="" class="classroom-visual" />
+            <img v-if="store.lang === 'EN_IE'" src="../assets/images/teacher-mathups2.png" alt="" class="classroom-visual" />
+            <img v-if="store.lang === 'EN_ZA'" src="../assets/images/teacher-mathups2.png" alt="" class="classroom-visual" />
         </div>
     </div>
 </template>

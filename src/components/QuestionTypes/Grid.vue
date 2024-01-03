@@ -44,7 +44,7 @@ const targetMarkArray = () => {
     </h1>
 
     <div class="answer__content">
-      <div class="answer__buttons-wrapper grade" v-if="q.id !== 'targetMark'">
+      <div class="answer__buttons-wrapper grade" :class="q.Ans.length < 4 ? 'grid-cols-' + q.Ans.length : 'grid-cols-4'" v-if="q.id !== 'targetMark'">
         <button
             v-for="(answer, index) in q.Ans"
             :key="index"
@@ -54,7 +54,7 @@ const targetMarkArray = () => {
           {{ answer.title }}
         </button>
       </div>
-      <div class="answer__buttons-wrapper grade" v-if="q.id === 'targetMark'">
+      <div class="answer__buttons-wrapper grade" :class="targetMarkArray().length < 4 ? 'grid-cols-' + targetMarkArray().length : 'grid-cols-4'" v-if="q.id === 'targetMark'">
         <button
             v-for="(answer, index) in targetMarkArray()"
             :key="index"

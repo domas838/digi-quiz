@@ -81,7 +81,13 @@ const resolveResultsPage = () => {
     timePreference = `dayOne=${dayOne}&dayTwo=${dayTwo}&dayOneTime=${dayOneTime}&dayTwoTime=${dayTwoTime}`;
   }
 
-  const url = `https://mathups.com/${framerPath}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${timePreference}`;
+
+  let host = 'mathups.com';
+  if (store.lang === 'EN_ZA') {
+      host = 'mathsup.co.za';
+  }
+
+  const url = `https://${host}/${framerPath}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${timePreference}`;
 
   store.resultUrl = url
 
@@ -98,7 +104,7 @@ const submitChildEmail = (event) => {
     // klaviyoRequestHandler()
     gaEvent('lead_generated');
 
-    if (store.lang === 'EN') {
+    if (['EN_IE', 'EN_ZA'].includes(store.lang)) {
       resolveResultsPage()
     }
 }
@@ -139,7 +145,7 @@ const submitHandler = (event) => {
     // klaviyoRequestHandler()
     gaEvent('lead_generated');
 
-    if (store.lang === 'EN') {
+    if (['EN_IE', 'EN_ZA'].includes(store.lang)) {
       resolveResultsPage()
     }
 }
@@ -149,7 +155,7 @@ const submitChildAndParentHandler = (event) => {
     store.showRecomendations = true
     // klaviyoRequestHandler()
     gaEvent('lead_generated');
-    if (store.lang === 'EN') {
+    if (['EN_IE', 'EN_ZA'].includes(store.lang)) {
       resolveResultsPage()
     }
 }
@@ -209,7 +215,8 @@ onMounted(() => {
     </button>
     <img class="mx-auto pb-5" v-if="store.lang === 'LT'" src="/src/assets/images/digiklase.svg" alt="Digiklase logo"/>
     <img class="mx-auto pb-5" v-if="store.lang === 'LV'" src="/src/assets/images/memby.svg" alt="Memby logo" />
-    <img class="mx-auto pb-5" v-if="store.lang === 'EN'" src="/src/assets/images/MathUps.svg" alt="MathsUp logo" />
+    <img class="mx-auto pb-5" v-if="store.lang === 'EN_IE'" src="/src/assets/images/MathUps.svg" alt="MathUps logo" />
+    <img class="mx-auto pb-5" v-if="store.lang === 'EN_ZA'" src="/src/assets/images/MathsUp.svg" alt="MathsUp logo" />
     <h1 class="mx-auto pb-5" v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormH1') }}</h1>
     <p v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormWhereToSentResults') }}</p>
     <h1 v-if="store.respondent === 'child' && store.isChildEmailEntered" v-html="$t('EmailFormShareResults')"></h1>

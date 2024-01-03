@@ -315,37 +315,398 @@ export const store = reactive({
                 }
             ]
         },
-        EN: {
+        EN_IE: {
             child: [
                 {
                     id: 'grade',
                     qNo: 1,
                     Q: 'Select child grade?',
                     Ans: [
-                        {title: '6th'},
-                        {title: '7th'},
-                        {title: '8th'},
-                        {title: '9th'},
-                        {title: '10th'},
+                        {title: 'Junior cycle'},
+                        {title: 'Senior cycle'},
                     ],
                     component: 'grid'
                 },
                 {
-                    id: 'state',
+                    id: 'goal',
                     qNo: 2,
-                    Q: 'Select your state',
+                    Q: 'What is your primary goal?',
                     Ans: [
-                        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+                        {title: 'Improve Grades', img: '/emoji/🚀.svg'},
+                        {title: 'Maintain High Grades', img: '/emoji/🤓.svg'},
+                        {title: 'Test Prep', img: '/emoji/📝.svg'},
+                        {title: 'Prepare for Contest', img: '/emoji/🏅.svg'},
+                        {title: 'Something Else', img: '/emoji/🤷_♂️.svg'}
                     ],
-                    placeholder: 'SelectState',
-                    component: 'select'
+                    component: 'radio'
+                },
+                {
+                    id: 'preferredTimeWorkdays',
+                    qNo: 3,
+                    Q: 'What times you can join lessons during workdays?',
+                    component: 'timetable',
+                    days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+                    times: [{from: 3, to: 5, dayPeriod: 'PM'}, {from: 5, to: 7, dayPeriod: 'PM'}, {from: 7, to: 9, dayPeriod: 'PM'}],
+                    variableName: 'preferredTimeWorkdays'
+                },
+                {
+                    id: 'preferredTimeWeekends',
+                    qNo: 4,
+                    Q: 'What times you can join lessons on weekends?',
+                    component: 'timetable',
+                    days: ['Sat', 'Sun'],
+                    times: [{from: 10, to: 12, dayPeriod: 'AM'}, {from: 12, to: 2, dayPeriod: 'PM'}, {from: 2, to: 4, dayPeriod: 'PM'}],
+                    variableName: 'preferredTimeWeekends'
+                },
+                {
+                    qNo: 5,
+                    component: 'loader'
+                },
+                { id: 'currentMark',
+                    qNo: 6, Q: "Your Child's Current Mark", Ans: [
+                        {title: 'A'},
+                        {title: 'B'},
+                        {title: 'C'},
+                        {title: 'D'},
+                        {title: 'E'},
+                        {title: 'F'}
+                    ], component: 'grid'
+                },
+                { id: 'targetMark',
+                    qNo: 7, Q: "Your Child’s Target Mark", Ans: [
+                        {title: 'A'},
+                        {title: 'B'},
+                        {title: 'C'},
+                        {title: 'D'},
+                        {title: 'E'},
+                        {title: 'F'}
+                    ], component: 'grid'
+                },
+                {
+                    id: 'studyHours',
+                    qNo: 8,
+                    Q: 'How many hours a day your child study after school?',
+                    Ans: [
+                        {title: '0 hours, school is enough', img: '/emoji/😎.svg'},
+                        {title: 'Around 1 - 2 hours/day', img: '/emoji/🤓.svg'},
+                        {title: 'More than 3 hours/day', img: '/emoji/🔥.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'motivation',
+                    qNo: 9,
+                    Q: 'What motivates your kid to study?',
+                    Ans: [
+                        {title: 'Excitement about scoring goals in school', img: '/emoji/🏅.svg'},
+                        {title: 'Loves exploring and discovering cool new stuff', img: '/emoji/🧪_.svg'},
+                        {title: 'Gets a boost from happy encouragement at home', img: '/emoji/👨_👩_👧_👦.svg'},
+                        {title: 'Dreams of awesome careers', img: '/emoji/💼.svg'},
+                        {title: 'Having fun with friends while learning', img: '/emoji/🤪.svg'},
+                        {title: 'Child is not motivated', img: '/emoji/😶.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'transformMotivation',
+                    qNo: 10,
+                    Q: 'In what way your child’s motivation transforms over time?',
+                    Ans: [
+                        {title: 'Motivation disappears', img: '/emoji/🌚.svg'},
+                        {title: 'It has up’s and down’s', img: '/emoji/🎢_.svg'},
+                        {title: 'It is constant', img: '/emoji/🌞.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    qNo: 11,
+                    component: 'firstBenefit'
+                },
+                {
+                    id: 'focus',
+                    qNo: 12,
+                    Q: 'How hard is to focus for your child?',
+                    Ans: [
+                        {title: 'Very easy', img: '/emoji/😊.svg'},
+                        {title: 'Easy', img: '/emoji/🙂_.svg'},
+                        {title: 'Neutral', img: '/emoji/😶.svg'},
+                        {title: 'Hard', img: '/emoji/😑.svg'},
+                        {title: 'Very hard', img: '/emoji/🫤.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'focusInClass',
+                    qNo: 13,
+                    Q: 'Does your kid gets distracted by other students in a class?',
+                    Ans: [
+                        {title: 'Strongly agree', img: '/emoji/😊.svg'},
+                        {title: 'Agree', img: '/emoji/🙂_.svg'},
+                        {title: 'Neither agree not disagree', img: '/emoji/😶.svg'},
+                        {title: 'Disagree', img: '/emoji/😑.svg'},
+                        {title: 'Strongly disagree', img: '/emoji/🫤.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'expectations',
+                    qNo: 14,
+                    Q: 'As I progress with Mathups I expect my children to feel:',
+                    Ans: [
+                        {title: 'Confident', img: '/emoji/😎.svg'},
+                        {title: 'Happy', img: '/emoji/🤩_.svg'},
+                        {title: 'Peaceful', img: '/emoji/😌.svg'},
+                        {title: 'Energised', img: '/emoji/⚡️.svg'},
+                        {title: 'Other', img: '/emoji/⏩️.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'sessions',
+                    qNo: 15,
+                    Q: 'How frequently and for what duration are you seeking tutoring sessions?',
+                    Ans: [
+                        {title: 'Daily', img: '/emoji/😎.svg'},
+                        {title: 'Few times a week', img: '/emoji/🤩_.svg'},
+                        {title: 'Weekends only', img: '/emoji/😌.svg'},
+                        {title: 'Other', img: '/emoji/⏩️.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'learningStyle',
+                    qNo: 16,
+                    Q: 'Does your child have a preferred learning style?',
+                    name: 'learning-styles',
+                    Ans: [
+                        {title: 'Visual learner', value: 'Visual learner', img: '/emoji/👀.svg'},
+                        {title: 'Auditory learner', value: 'Auditory learner', img: '/emoji/👂.svg'},
+                        {title: 'Kinesthetic/Tactile Learner', value: 'Kinesthetic/Tactile Learner', img: '/emoji/🫳.svg'},
+                        {title: 'Reading/Writing Learner', value: 'Reading/Writing Learner', img: '/emoji/📚️.svg'},
+                        {title: 'Social Learner', value: 'Social Learner', img: '/emoji/🙋_♂️️.svg'},
+                        {title: 'Solitary/Individual Learner', value: 'Solitary/Individual Learner', img: '/emoji/☝️️.svg'},
+                        {title: 'I don’t know', value: 'I don’t know', img: '/emoji/🤷_♀️️.svg'},
+                    ],
+                    component: 'multi-select'
+                },
+                {
+                    qNo: 17,
+                    component: 'final-results'
+                }
+            ],
+            parent: [
+                {
+                    id: 'grade',
+                    qNo: 1,
+                    Q: 'Select children\'s grade?',
+                    Ans: [
+                        {title: 'Junior cycle'},
+                        {title: 'Senior cycle'},
+                    ],
+                    component: 'grid'
+                },
+                {
+                    id: 'goal',
+                    qNo: 2,
+                    Q: "What is your child's primary goal in math?",
+                    Ans: [
+                        {title: 'Improve Grades', img: '/emoji/🚀.svg'},
+                        {title: 'Maintain High Grades', img: '/emoji/🤓.svg'},
+                        {title: 'Test Prep', img: '/emoji/📝.svg'},
+                        {title: 'Prepare for Contest', img: '/emoji/🏅.svg'},
+                        {title: 'To excel and achieve top performance', img: '/emoji/🔥.svg'},
+                        {title: 'Something Else', img: '/emoji/🤷_♂️.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'preferredTimeWorkdays',
+                    qNo: 3,
+                    Q: 'What time can your child join lessons during workdays?',
+                    component: 'timetable',
+                    days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+                    times: [{from: 3, to: 5, dayPeriod: 'PM'}, {from: 5, to: 7, dayPeriod: 'PM'}, {from: 7, to: 9, dayPeriod: 'PM'}],
+                    variableName: 'preferredTimeWorkdays'
+                },
+                {
+                    id: 'preferredTimeWeekends',
+                    qNo: 4,
+                    Q: 'What time can your child join lessons during weekends?',
+                    component: 'timetable',
+                    days: ['Sat', 'Sun'],
+                    times: [{from: 10, to: 12, dayPeriod: 'AM'}, {from: 12, to: 2, dayPeriod: 'PM'}, {from: 2, to: 4, dayPeriod: 'PM'}],
+                    variableName: 'preferredTimeWeekends'
+                },
+                {
+                    qNo: 5,
+                    component: 'loader'
+                },
+                { id: 'currentMark',
+                    qNo: 6, Q: "What is your child's current average grade in math?", Ans: [
+                        {title: 'A'},
+                        {title: 'B'},
+                        {title: 'C'},
+                        {title: 'D'},
+                        {title: 'E'},
+                        {title: 'F'}
+                    ], component: 'grid'
+                },
+                { id: 'targetMark',
+                    qNo: 7, Q: "What math grade do you want your child to achieve?", Ans: [
+                        {title: 'A'},
+                        {title: 'B'},
+                        {title: 'C'},
+                        {title: 'D'},
+                        {title: 'E'},
+                        {title: 'F'}
+                    ], component: 'grid'
+                },
+                {
+                    id: 'studyHours',
+                    qNo: 8,
+                    Q: 'How many hours a day your child study after school?',
+                    Ans: [
+                        {title: '0 hours, school is enough', img: '/emoji/😎.svg'},
+                        {title: 'Around 1 - 2 hours/day', img: '/emoji/🤓.svg'},
+                        {title: 'More than 3 hours/day', img: '/emoji/🔥.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'motivation',
+                    qNo: 9,
+                    Q: 'What motivates your kid to study?',
+                    Ans: [
+                        {title: 'Excitement about scoring goals in school', img: '/emoji/🏅.svg'},
+                        {title: 'Loves exploring and discovering cool new stuff', img: '/emoji/🧪_.svg'},
+                        {title: 'Gets a boost from happy encouragement at home', img: '/emoji/👨_👩_👧_👦.svg'},
+                        {title: 'Dreams of awesome careers', img: '/emoji/💼.svg'},
+                        {title: 'Having fun with friends while learning', img: '/emoji/🤪.svg'},
+                        {title: 'Child is not motivated', img: '/emoji/😶.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'transformMotivation',
+                    qNo: 10,
+                    Q: 'In what way your child’s motivation transforms over time?',
+                    Ans: [
+                        {title: 'Motivation disappears', img: '/emoji/🌚.svg'},
+                        {title: 'It has up’s and down’s', img: '/emoji/🎢_.svg'},
+                        {title: 'It is constant', img: '/emoji/🌞.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    qNo: 11,
+                    component: 'firstBenefit'
+                },
+                {
+                    id: 'focus',
+                    qNo: 12,
+                    Q: 'How hard is to focus for your child?',
+                    Ans: [
+                        {title: 'Very easy', img: '/emoji/😊.svg'},
+                        {title: 'Easy', img: '/emoji/🙂_.svg'},
+                        {title: 'Neutral', img: '/emoji/😶.svg'},
+                        {title: 'Hard', img: '/emoji/😑.svg'},
+                        {title: 'Very hard', img: '/emoji/🫤.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'focusInClass',
+                    qNo: 13,
+                    Q: 'Does your kid get distracted by other students in a class?',
+                    Ans: [
+                        {title: 'Strongly agree', img: '/emoji/😊.svg'},
+                        {title: 'Agree', img: '/emoji/🙂_.svg'},
+                        {title: 'Neither agree nor disagree', img: '/emoji/😶.svg'},
+                        {title: 'Disagree', img: '/emoji/😑.svg'},
+                        {title: 'Strongly disagree', img: '/emoji/🫤.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'expectations',
+                    qNo: 14,
+                    Q: 'As I progress with Mathups I expect my children to feel:',
+                    Ans: [
+                        {title: 'Confident', img: '/emoji/😎.svg'},
+                        {title: 'Happy', img: '/emoji/🤩_.svg'},
+                        {title: 'Peaceful', img: '/emoji/😌.svg'},
+                        {title: 'Energised', img: '/emoji/⚡️.svg'},
+                        {title: 'Other', img: '/emoji/⏩️.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'sessions',
+                    qNo: 15,
+                    Q: 'How frequently and for what duration are you seeking tutoring sessions?',
+                    Ans: [
+                        {title: 'Daily', img: '/emoji/😎.svg'},
+                        {title: 'Few times a week', img: '/emoji/🤩_.svg'},
+                        {title: 'Weekends only', img: '/emoji/😌.svg'},
+                        {title: 'Other', img: '/emoji/⏩️.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'learningStyle',
+                    qNo: 16,
+                    Q: 'Does your child have a preferred learning style?',
+                    name: 'learning-styles',
+                    Ans: [
+                        {title: 'Visual learner', value: 'Visual learner', img: '/emoji/👀.svg'},
+                        {title: 'Auditory learner', value: 'Auditory learner', img: '/emoji/👂.svg'},
+                        {title: 'Kinesthetic/Tactile Learner', value: 'Kinesthetic/Tactile Learner', img: '/emoji/🫳.svg'},
+                        {title: 'Reading/Writing Learner', value: 'Reading/Writing Learner', img: '/emoji/📚️.svg'},
+                        {title: 'Social Learner', value: 'Social Learner', img: '/emoji/🙋_♂️️.svg'},
+                        {title: 'Solitary/Individual Learner', value: 'Solitary/Individual Learner', img: '/emoji/☝️️.svg'},
+                        {title: 'I don’t know', value: 'I don’t know', img: '/emoji/🤷_♀️️.svg'},
+                    ],
+                    component: 'multi-select'
+                },
+                {
+                    qNo: 17,
+                    component: 'final-results'
+                }
+            ]
+        },
+        EN_ZA: {
+            child: [
+                {
+                    id: 'grade',
+                    qNo: 1,
+                    Q: 'Select your grade?',
+                    Ans: [
+                        {title: '7th'},
+                        {title: '8th'},
+                        {title: '9th'},
+                        {title: '10th'},
+                        {title: '11th'},
+                        {title: '12th'},
+                    ],
+                    component: 'grid'
+                },
+                {
+                    id: 'goal',
+                    qNo: 2,
+                    Q: "What program do you follow?",
+                    Ans: [
+                        {title: 'IEB (usually in private schools)', img: '/emoji/🔸.svg'},
+                        {title: 'CAPS (usually in government schools)', img: '/emoji/🔹.svg'},
+                        {title: 'I don\'t know', img: '/emoji/🔻.svg'},
+                    ],
+                    component: 'radio'
                 },
                 {
                     id: 'goal',
                     qNo: 3,
                     Q: 'What is your primary goal?',
                     Ans: [
-                        {title: 'Improve Grades and GPA', img: '/emoji/🚀.svg'},
+                        {title: 'Improve Grades', img: '/emoji/🚀.svg'},
                         {title: 'Maintain High Grades', img: '/emoji/🤓.svg'},
                         {title: 'Test Prep', img: '/emoji/📝.svg'},
                         {title: 'Prepare for Contest', img: '/emoji/🏅.svg'},
@@ -377,35 +738,21 @@ export const store = reactive({
                 },
                 { id: 'currentMark',
                     qNo: 7, Q: "Your Child's Current Mark", Ans: [
-                        {title: 'A+'},
                         {title: 'A'},
-                        {title: 'A-'},
-                        {title: 'B+'},
                         {title: 'B'},
-                        {title: 'B-'},
-                        {title: 'C+'},
                         {title: 'C'},
-                        {title: 'C-'},
-                        {title: 'D+'},
                         {title: 'D'},
-                        {title: 'D-'},
+                        {title: 'E'},
                         {title: 'F'}
                     ], component: 'grid'
                 },
                 { id: 'targetMark',
                     qNo: 8, Q: "Your Child’s Target Mark", Ans: [
-                        {title: 'A+'},
                         {title: 'A'},
-                        {title: 'A-'},
-                        {title: 'B+'},
                         {title: 'B'},
-                        {title: 'B-'},
-                        {title: 'C+'},
                         {title: 'C'},
-                        {title: 'C-'},
-                        {title: 'D+'},
                         {title: 'D'},
-                        {title: 'D-'},
+                        {title: 'E'},
                         {title: 'F'}
                     ], component: 'grid'
                 },
@@ -525,32 +872,34 @@ export const store = reactive({
                 {
                     id: 'grade',
                     qNo: 1,
-                    Q: 'What grade is your child in?',
+                    Q: 'Select children\'s grade?',
                     Ans: [
-                        {title: '6th'},
                         {title: '7th'},
                         {title: '8th'},
                         {title: '9th'},
-                        {title: '10th'}
+                        {title: '10th'},
+                        {title: '11th'},
+                        {title: '12th'},
                     ],
                     component: 'grid'
                 },
                 {
-                    id: 'state',
+                    id: 'goal',
                     qNo: 2,
-                    Q: 'In which state do you live?',
+                    Q: "What program do you follow?",
                     Ans: [
-                        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+                        {title: 'IEB (usually in private schools)', img: '/emoji/🔸.svg'},
+                        {title: 'CAPS (usually in government schools)', img: '/emoji/🔹.svg'},
+                        {title: 'I don\'t know', img: '/emoji/🔻.svg'},
                     ],
-                    placeholder: 'State',
-                    component: 'select'
+                    component: 'radio'
                 },
                 {
                     id: 'goal',
                     qNo: 3,
                     Q: "What is your child's primary goal in math?",
                     Ans: [
-                        {title: 'Improve Grades and GPA', img: '/emoji/🚀.svg'},
+                        {title: 'Improve Grades', img: '/emoji/🚀.svg'},
                         {title: 'Maintain High Grades', img: '/emoji/🤓.svg'},
                         {title: 'Test Prep', img: '/emoji/📝.svg'},
                         {title: 'Prepare for Contest', img: '/emoji/🏅.svg'},
@@ -582,37 +931,25 @@ export const store = reactive({
                     component: 'loader'
                 },
                 { id: 'currentMark',
-                    qNo: 7, Q: "What is your child's current average grade in math?", Ans: [
-                        {title: 'A+'},
-                        {title: 'A'},
-                        {title: 'A-'},
-                        {title: 'B+'},
-                        {title: 'B'},
-                        {title: 'B-'},
-                        {title: 'C+'},
-                        {title: 'C'},
-                        {title: 'C-'},
-                        {title: 'D+'},
-                        {title: 'D'},
-                        {title: 'D-'},
-                        {title: 'F'}
+                    qNo: 7, Q: "Your Child’s Current Mark", Ans: [
+                        {title: '100-90%'},
+                        {title: '89-80%'},
+                        {title: '79-70%'},
+                        {title: '69-60%'},
+                        {title: '59-50%'},
+                        {title: '49-40%'},
+                        {title: '39-0%'},
                     ], component: 'grid'
                 },
                 { id: 'targetMark',
-                    qNo: 8, Q: "What math grade do you want your child to achieve?", Ans: [
-                        {title: 'A+'},
-                        {title: 'A'},
-                        {title: 'A-'},
-                        {title: 'B+'},
-                        {title: 'B'},
-                        {title: 'B-'},
-                        {title: 'C+'},
-                        {title: 'C'},
-                        {title: 'C-'},
-                        {title: 'D+'},
-                        {title: 'D'},
-                        {title: 'D-'},
-                        {title: 'F'}
+                    qNo: 8, Q: "Your Child’s Target Mark?", Ans: [
+                        {title: '100-90%'},
+                        {title: '89-80%'},
+                        {title: '79-70%'},
+                        {title: '69-60%'},
+                        {title: '59-50%'},
+                        {title: '49-40%'},
+                        {title: '39-0%'},
                     ], component: 'grid'
                 },
                 {

@@ -33,6 +33,7 @@ export const SUBJECT_PLAN_MAP = {
 export const BASE_APP_DOMAIN = {
     'LT': 'https://app.digiklase.lt',
     'LV': 'https://app.memby.lv',
-    'EN': 'quiz.mathups.com',
+    'EN_IE': 'quiz.mathups.com',
+    'EN_ZA': 'quiz.mathsup.co.za',
     'local': 'http://lt.localhost:8081'
 }

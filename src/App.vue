@@ -35,10 +35,16 @@ onMounted(() => {
     favicon.value = 'memby-fav.webp';
   }
 
-  if (window.location.hostname === 'quiz.mathups.com') {
-    store.lang = 'EN'
+  if (window.location.hostname === 'quiz.mathups.com' || window.location.hostname === 'localhost') {
+    store.lang = 'EN_IE'
     const favicon = useFavicon();
     favicon.value = 'memby-fav.webp';
+  }
+
+  if (window.location.hostname === 'quiz.mathsup.co.za') {
+      store.lang = 'EN_ZA'
+      const favicon = useFavicon();
+      favicon.value = 'memby-fav.webp';
   }
 
   if (store.lang === 'LV') {
@@ -78,7 +84,8 @@ onMounted(() => {
           url.searchParams.has('level') &&
           url.searchParams.has('subjects') &&
           url.searchParams.has('tier')) &&
-          store.lang !== 'EN'
+          store.lang !== 'EN_IE' &&
+          store.lang !== 'EN_ZA'
   ) {
     // Set Data Values
     store.selectedPersona = url.searchParams.get('persona')
