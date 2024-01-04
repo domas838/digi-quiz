@@ -320,10 +320,14 @@ export const store = reactive({
                 {
                     id: 'grade',
                     qNo: 1,
-                    Q: 'Select child grade?',
+                    Q: 'Select child\'s year',
                     Ans: [
-                        {title: 'Junior cycle'},
-                        {title: 'Senior cycle'},
+                        {title: 'VII'},
+                        {title: 'VIII'},
+                        {title: 'IX'},
+                        {title: 'X'},
+                        {title: 'XI'},
+                        {title: 'XII'},
                     ],
                     component: 'grid'
                 },
@@ -334,7 +338,7 @@ export const store = reactive({
                     Ans: [
                         {title: 'Improve Grades', img: '/emoji/🚀.svg'},
                         {title: 'Maintain High Grades', img: '/emoji/🤓.svg'},
-                        {title: 'Test Prep', img: '/emoji/📝.svg'},
+                        {title: 'Certification Prep', img: '/emoji/📝.svg'},
                         {title: 'Prepare for Contest', img: '/emoji/🏅.svg'},
                         {title: 'Something Else', img: '/emoji/🤷_♂️.svg'}
                     ],
@@ -498,10 +502,14 @@ export const store = reactive({
                 {
                     id: 'grade',
                     qNo: 1,
-                    Q: 'Select children\'s grade?',
+                    Q: 'Select child\'s year',
                     Ans: [
-                        {title: 'Junior cycle'},
-                        {title: 'Senior cycle'},
+                        {title: 'VII'},
+                        {title: 'VIII'},
+                        {title: 'IX'},
+                        {title: 'X'},
+                        {title: 'XI'},
+                        {title: 'XII'},
                     ],
                     component: 'grid'
                 },
@@ -512,7 +520,7 @@ export const store = reactive({
                     Ans: [
                         {title: 'Improve Grades', img: '/emoji/🚀.svg'},
                         {title: 'Maintain High Grades', img: '/emoji/🤓.svg'},
-                        {title: 'Test Prep', img: '/emoji/📝.svg'},
+                        {title: 'Certification Prep', img: '/emoji/📝.svg'},
                         {title: 'Prepare for Contest', img: '/emoji/🏅.svg'},
                         {title: 'To excel and achieve top performance', img: '/emoji/🔥.svg'},
                         {title: 'Something Else', img: '/emoji/🤷_♂️.svg'}
@@ -543,22 +551,22 @@ export const store = reactive({
                 },
                 { id: 'currentMark',
                     qNo: 6, Q: "What is your child's current average grade in math?", Ans: [
-                        {title: 'A'},
-                        {title: 'B'},
-                        {title: 'C'},
-                        {title: 'D'},
-                        {title: 'E'},
-                        {title: 'F'}
+                        {title: 'A (90-100%)'},
+                        {title: 'B (80-90%)'},
+                        {title: 'C (70-80%)'},
+                        {title: 'D (60-70%)'},
+                        {title: 'E (50-60%)'},
+                        {title: 'F (below 50%)'}
                     ], component: 'grid'
                 },
                 { id: 'targetMark',
                     qNo: 7, Q: "What math grade do you want your child to achieve?", Ans: [
-                        {title: 'A'},
-                        {title: 'B'},
-                        {title: 'C'},
-                        {title: 'D'},
-                        {title: 'E'},
-                        {title: 'F'}
+                        {title: 'A (90-100%)'},
+                        {title: 'B (80-90%)'},
+                        {title: 'C (70-80%)'},
+                        {title: 'D (60-70%)'},
+                        {title: 'E (50-60%)'},
+                        {title: 'F (below 50%)'}
                     ], component: 'grid'
                 },
                 {
