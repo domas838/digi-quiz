@@ -16,7 +16,7 @@ const respondentParentHandler = () => {
 }
 
 onMounted(() => {
-  if (window.location.hostname === 'quiz.mathups.com') {
+  if (['quiz.mathups.com', 'quiz.mathups.com'].includes(window.location.hostname)) {
     store.respondent = 'parent'
   }
 
