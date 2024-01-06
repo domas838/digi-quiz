@@ -4,7 +4,7 @@ const host = window.location.hostname;
 const domainLocaleMap = {
     'quiz.memby.lv': 'lv',
     'quiz.digiklase.lt': 'lt',
-    'localhost': 'lv'
+    'localhost': 'lt'
 };
 
 const detectedLocale = domainLocaleMap[host] || 'lt';
@@ -74,8 +74,8 @@ const i18n = createI18n({
             OneMonth: '1 mėnuo',
             ThreeMonths: '3 mėnesiai',
             NineMonths: '9 mėnesiai',
-            NovemberDealTimer: '💣 JUODASIS <span style="color: #6B6B6B; text-decoration: line-through">PENKTADIENIS</span> LAPKRITIS -> 60% nuolaida!',
-            NovemberDealTimerFull: '💣 JUODASIS <span style="color: #6B6B6B; text-decoration: line-through">PENKTADIENIS</span> LAPKRITIS -> 60% nuolaida visų dalykų planui!'
+            NovemberDealTimer: '6 mėn. planui – 50% nuolaida! 🎉',
+            NovemberDealTimerFull: '🎉 Naujametinė nuolaida -> -50% visų dalykų planui!'
         },
         lv: {
             Title: 'Mācību tiešsaistes nodarbības — Memby.lv',
@@ -128,7 +128,7 @@ const i18n = createI18n({
             OnlyFirstMonthDiscount: '*atlaide attiecas tikai uz pirmo mēnesi',
             Now: 'tagad',
             Later: 'vēlāk',
-            ThisOfferValidFor: 'Šis piedāvājums ir spēkā: ',
+            ThisOfferValidFor: 'Piedāvājums beidzas: ',
             hours: 'stundas',
             minutes: 'minūtes',
             seconds: 'sekundes',
@@ -136,8 +136,8 @@ const i18n = createI18n({
             ThreeMonths: '3 mēn.',
             NineMonths: '9 mēn.',
             days: 'd',
-            NovemberDealTimer: '💣  Melnā <span style="color: #6B6B6B; text-decoration: line-through">PIEKTDIENA</span> NOVEMBRIS -> 60% atlaide!',
-            NovemberDealTimerFull: '💣  Melnā <span style="color: #6B6B6B; text-decoration: line-through">PIEKTDIENA</span> NOVEMBRIS -> 60% atlaide visu priekšmetu plānam!'
+            NovemberDealTimer: '50% atlaide 6 mēnešu abonementam! 🎉',
+            NovemberDealTimerFull: '50% atlaide visu priekšmetu abonementam'
         },
     },
 })

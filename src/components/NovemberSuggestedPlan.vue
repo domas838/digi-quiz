@@ -52,7 +52,7 @@ const resolvePrice = (selectedSubjectsLength, isPaidTrial) => {
     case 2:
       return '48,90';
     default:
-      return '33,96';
+      return '42,45';
   }
 }
 
@@ -63,7 +63,7 @@ const time = reactive({
 const resolveTimeUntilDecemberFirst = () => {
   const date = new Date();
 
-  const decemberFirst = startOfMonth(new Date(date.getFullYear(), 11, 1));
+  const decemberFirst = startOfMonth(new Date(date.getFullYear(), 1, 1));
   time.secondsUntilMidnight = differenceInSeconds(decemberFirst, date);
 }
 
@@ -76,8 +76,8 @@ onMounted(() => {
 <template>
   <Transition>
     <div v-if="showComponent" class="rounded z-[100]">
-      <div class="border border-yellow bg-black max-w-[1200px] w-full rounded-xl drop-shadow-md bg-white fixed z-[100] left-1/2 transform -translate-x-1/2 bottom-0 lg:bottom-10">
-        <div class="bg-yellow rounded-t-xl py-2 flex gap-5 justify-center text-center text-xs md:text-[14px]">
+      <div class="border border-orange bg-black max-w-[1200px] w-full rounded-xl drop-shadow-md bg-white fixed z-[100] left-1/2 transform -translate-x-1/2 bottom-0 lg:bottom-10">
+        <div class="bg-orange rounded-t-xl py-2 flex gap-5 justify-center text-center text-xs md:text-[14px]">
           <span class="font-bold block" v-html="$t('NovemberDealTimerFull')"></span>
           <span class="hidden md:block">
             <vue-countdown :time="time.secondsUntilMidnight * 1000" v-slot="{ days, hours, minutes, seconds }">
@@ -103,7 +103,7 @@ onMounted(() => {
 
           <div class="basis-1/4 self-center">
             <div class="action">
-              <a :href="btn.btnLink" target="_blank" class="cta-btn !bg-yellow !text-black"
+              <a :href="btn.btnLink" target="_blank" class="cta-btn !bg-orange !text-black"
               >{{ btn.buyNow }}
                 <span class="ml-3">
                 <svg width="30" height="22" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -475,14 +475,14 @@ const handleButtonClick = () => {
         :selected-subjects-length="store.selectedSubjects.length"
     />
 
-<!--    <NovemberSuggestedPlan-->
-<!--        v-if="url.searchParams.has('november')"-->
-<!--        ref="target"-->
-<!--        :btn="btnLabel"-->
-<!--        :is-paid-trial="url.searchParams.has('lmt')"-->
-<!--        v-element-visibility="onElementVisibility"-->
-<!--        :selected-subjects-length="store.selectedSubjects.length"-->
-<!--    />-->
+    <NovemberSuggestedPlan
+        v-if="url.searchParams.has('new-year')"
+        ref="target"
+        :btn="btnLabel"
+        :is-paid-trial="url.searchParams.has('lmt')"
+        v-element-visibility="onElementVisibility"
+        :selected-subjects-length="store.selectedSubjects.length"
+    />
 
       <div class="wrapper light-grey pb-10 md:pb-20">
           <div class="container">
