@@ -6,7 +6,7 @@ const domainLocaleMap = {
     'quiz.digiklase.lt': 'lt',
     'quiz.mathups.com': 'en_ie',
     'quiz.mathsup.co.za': 'en_za',
-    'localhost': 'en_ie'
+    'localhost': 'en_za'
 };
 
 const detectedLocale = domainLocaleMap[host] || 'lt';

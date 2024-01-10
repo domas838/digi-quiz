@@ -54,7 +54,7 @@ const selectAll = () => {
 }
 
 onMounted(() => {
-  selectAll()
+    selectAll()
 })
 
 const confirm = () => {

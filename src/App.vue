@@ -35,13 +35,13 @@ onMounted(() => {
     favicon.value = 'memby-fav.webp';
   }
 
-  if (window.location.hostname === 'quiz.mathups.com' || window.location.hostname === 'localhost') {
+  if (window.location.hostname === 'quiz.mathups.com') {
     store.lang = 'EN_IE'
     const favicon = useFavicon();
     favicon.value = 'memby-fav.webp';
   }
 
-  if (window.location.hostname === 'quiz.mathsup.co.za') {
+  if (window.location.hostname === 'quiz.mathsup.co.za' || window.location.hostname === 'localhost') {
       store.lang = 'EN_ZA'
       const favicon = useFavicon();
       favicon.value = 'memby-fav.webp';
