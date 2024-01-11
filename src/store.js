@@ -884,6 +884,8 @@ export const store = reactive({
                     qNo: 1,
                     Q: 'Select children\'s grade?',
                     Ans: [
+                        {title: '5th'},
+                        {title: '6th'},
                         {title: '7th'},
                         {title: '8th'},
                         {title: '9th'},
