@@ -4,7 +4,7 @@ import {computed, onMounted} from 'vue'
 import axios from 'axios'
 import {event as gaEvent} from "vue-gtag";
 import {changeUrlPath} from "../helpers";
-import ProgramsLoader from "@/components/ProgramsLoader.vue";
+import {useI18n} from "vue-i18n";
 
 const getTimetableParams = () => {
   const daysMap = {
@@ -204,6 +204,10 @@ onMounted(() => {
   changeUrlPath('/' + store.respondent + '/email')
 });
 
+const { t } = useI18n();
+
+const buttonText = store.lang === 'EN_ZA' ? t('ContinueWithTrial') : t('Continue')
+
 </script>
 <template>
     <button
@@ -345,7 +349,7 @@ onMounted(() => {
         @click="submitChildEmail($event)"
         :disabled="isChildProceedDisabled"
     >
-        {{ $t('Continue') }} <img src="../assets/images/arrow-right.svg" alt="" />
+        {{ buttonText }} <img src="../assets/images/arrow-right.svg" alt="" />
     </button>
 
     <button
@@ -356,7 +360,7 @@ onMounted(() => {
         @click="submitHandler($event)"
         :disabled="isParentProceedDisabled"
     >
-      {{ $t('Continue') }} <img src="../assets/images/arrow-right.svg" alt="" />
+      {{ buttonText }} <img src="../assets/images/arrow-right.svg" alt="" />
     </button>
     <div class="submit-container" v-if="store.respondent === 'child' && store.isChildEmailEntered">
         <button
@@ -365,7 +369,7 @@ onMounted(() => {
             @click="submitChildAndParentHandler($event)"
             :disabled="isParentProceedDisabled"
         >
-          {{ $t('Continue') }} <img src="../assets/images/arrow-right.svg" alt="" />
+          {{ buttonText }} <img src="../assets/images/arrow-right.svg" alt="" />
         </button>
         <a href="javascript:void(0)" v-if="store.lang === 'LT'" @click="cancelEmailHandler">{{ $t('Skip') }}</a>
     </div>
