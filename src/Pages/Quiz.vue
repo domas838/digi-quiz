@@ -13,7 +13,7 @@ const nextStep = () => {
   store.step += 1
 
   if (!store.showFirstBenefit && !store.showSecondBenefit) {
-    changeUrlPath('/' + store.respondent + '/' + store.step)
+    changeUrlPath('/' + store.respondent + '/' + store.flow + '/' + store.step)
   }
 }
 

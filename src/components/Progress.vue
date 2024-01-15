@@ -13,7 +13,7 @@ const prevStep = () => {
   }
 
   if (store.step !== 0) {
-    changeUrlPath('/' + store.respondent + '/' + store.step)
+    changeUrlPath('/' + store.respondent + '/' + store.flow + '/' + store.step)
   } else {
     changeUrlPath('/')
   }

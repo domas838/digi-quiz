@@ -51,26 +51,24 @@ const resolveResultsPage = () => {
   const grade = encodeURIComponent(store.quizAnswers['grade']);
   const goal = store.quizAnswers['goal'];
   let timePreference;
-  let framerPath = 'results-strugglers';
+  let framerPath = store.flow === 'pricing' ? 'results-strugglers-pricing' : 'results-strugglers';
 
   switch (goal) {
     case 'Improve Grades and GPA':
-      framerPath = 'results-strugglers'
+      framerPath = store.flow === 'pricing' ? 'results-strugglers-pricing' : 'results-strugglers';
       break;
     case 'Maintain High Grades':
-      framerPath = 'results-maintainers'
+      framerPath = store.flow === 'pricing' ? 'results-maintainers-pricing' : 'results-maintainers';
       break;
     case 'Test Prep':
-      framerPath = 'results-strugglers'
+      framerPath = store.flow === 'pricing' ? 'results-strugglers-pricing' : 'results-strugglers'
       break;
     case 'Prepare for Contest':
-      framerPath = 'results-excellers'
+      framerPath = store.flow === 'pricing' ? 'results-excellers-pricing' : 'results-excellers'
       break;
     case 'To excel and achieve top performance':
-      framerPath = 'results-excellers'
+      framerPath = store.flow === 'pricing' ? 'results-excellers-pricing' : 'results-excellers'
       break;
-    default:
-      framerPath = 'results-strugglers'
   }
 
   if (Object.keys(timetableObject).length !== 0) {
@@ -206,7 +204,7 @@ onMounted(() => {
 
 const { t } = useI18n();
 
-const buttonText = store.lang === 'EN_ZA' ? t('ContinueWithTrial') : t('Continue')
+const buttonText = store.flow === 'trial' ? t('ContinueWithTrial') : t('Continue')
 
 </script>
 <template>
@@ -221,10 +219,10 @@ const buttonText = store.lang === 'EN_ZA' ? t('ContinueWithTrial') : t('Continue
     <img class="mx-auto pb-5" v-if="store.lang === 'LV'" src="/src/assets/images/memby.svg" alt="Memby logo" />
     <img class="mx-auto pb-5" v-if="store.lang === 'EN_IE'" src="/src/assets/images/MathUps.svg" alt="MathUps logo" />
     <img class="mx-auto pb-5" v-if="store.lang === 'EN_ZA'" src="/src/assets/images/MathsUp.svg" alt="MathsUp logo" />
-    <h1 class="mx-auto pb-5" v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormH1') }}</h1>
+    <h1 class="mx-auto pb-5" v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ store.flow === 'trial' ? $t('EmailFormH1Trial') : $t('EmailFormH1') }}</h1>
     <p v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormWhereToSentResults') }}</p>
     <h1 v-if="store.respondent === 'child' && store.isChildEmailEntered" v-html="$t('EmailFormShareResults')"></h1>
-    <h1 v-if="store.respondent === 'parent'">{{ $t('EmailFormWeWillRecommendPlan') }}</h1>
+    <h1 v-if="store.respondent === 'parent'">{{ store.flow === 'trial' ? $t('EmailFormWeWillRecommendPlanTrial') : $t('EmailFormWeWillRecommendPlan') }}</h1>
     <p v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</p>
 <!--    <p v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</p>-->
     <div v-if="store.respondent === 'child'">

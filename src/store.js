@@ -13,6 +13,7 @@ export const store = reactive({
     isShowingBenefit: false,
     isSubjectNotSelected: true,
     respondent: null,
+    flow: 'standard',
     selectedClass: null,
     showFirstBenefit: false,
     showSecondBenefit: false,
@@ -716,8 +717,8 @@ export const store = reactive({
                     qNo: 3,
                     Q: 'What is your primary goal?',
                     Ans: [
-                        {title: 'Improve Grades', img: '/emoji/🚀.svg'},
-                        {title: 'Maintain High Grades', img: '/emoji/🤓.svg'},
+                        {title: 'Improve Marks', img: '/emoji/🚀.svg'},
+                        {title: 'Maintain High Marks', img: '/emoji/🤓.svg'},
                         {title: 'Test Prep', img: '/emoji/📝.svg'},
                         {title: 'Prepare for Contest', img: '/emoji/🏅.svg'},
                         {title: 'Something Else', img: '/emoji/🤷_♂️.svg'}
@@ -911,8 +912,8 @@ export const store = reactive({
                     qNo: 3,
                     Q: "What is your child's primary goal in math?",
                     Ans: [
-                        {title: 'Improve Grades', img: '/emoji/🚀.svg'},
-                        {title: 'Maintain High Grades', img: '/emoji/🤓.svg'},
+                        {title: 'Improve Marks', img: '/emoji/🚀.svg'},
+                        {title: 'Maintain High Marks', img: '/emoji/🤓.svg'},
                         {title: 'Test Prep', img: '/emoji/📝.svg'},
                         {title: 'Prepare for Contest', img: '/emoji/🏅.svg'},
                         {title: 'To excel and achieve top performance', img: '/emoji/🔥.svg'},

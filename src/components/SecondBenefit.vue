@@ -5,7 +5,7 @@ import { changeUrlPath } from "../helpers";
 const acceptSecondBenefit = () => {
     store.showSecondBenefit = false
     store.step += 1
-    changeUrlPath('/' + store.respondent + '/' + store.step)
+    changeUrlPath('/' + store.respondent + '/' + store.flow + '/' + store.step)
 }
 
 const benefits = [
