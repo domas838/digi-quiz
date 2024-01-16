@@ -41,7 +41,7 @@ const proceedWithMultipleSelection = (name) => {
     store.step += 1
   }
 
-  changeUrlPath('/' + store.respondent + '/' + store.flow + '/' + store.step)
+  changeUrlPath('/' + store.respondent + '/' + store.step + '/' + store.flow)
 
   store.klaviyoNeededLessons = store.selectedSubjects.toString().toLowerCase()
 }

@@ -13,7 +13,7 @@ export const store = reactive({
     isShowingBenefit: false,
     isSubjectNotSelected: true,
     respondent: null,
-    flow: 'standard',
+    flow: 'pricing',
     selectedClass: null,
     showFirstBenefit: false,
     showSecondBenefit: false,

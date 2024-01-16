@@ -66,7 +66,7 @@ const confirm = () => {
 
     store.step += 1;
 
-    changeUrlPath('/' + store.respondent + '/' + store.flow + '/' + store.step)
+    changeUrlPath('/' + store.respondent + '/' + store.step + '/' + store.flow)
 
     store.quizAnswers[props.q.id] = store[props.storeVariableName]
 }

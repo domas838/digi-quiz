@@ -7,28 +7,27 @@ const respondentChildHandler = () => {
 
   store.step = 1
   store.respondent = 'child'
-  changeUrlPath('/' + store.respondent + '/' + store.flow + '/' + store.step)
+  changeUrlPath('/' + store.respondent + '/' + store.step + '/' + store.flow)
 }
 const respondentParentHandler = () => {
   store.step = 1
   store.respondent = 'parent'
-  changeUrlPath('/' + store.respondent + '/' + store.flow + '/' + store.step)
+  changeUrlPath('/' + store.respondent + '/' + store.step + '/' + store.flow)
 }
 
 onMounted(() => {
   if (['quiz.mathups.com', 'quiz.mathsup.co.za', 'localhost'].includes(window.location.hostname)) {
     store.respondent = 'parent'
 
-
-    const flow = new URL(window.location.href).searchParams.get('flow');
-    if (flow) {
-        store.flow = flow;
+    const explodedPath = new URL(window.location.href).pathname.split('/');
+    if (['trial', 'price'].includes(explodedPath[3])) {
+        store.flow = explodedPath[3];
     }
   }
 
   if (store.respondent) {
     store.step += 1;
-    changeUrlPath('/' + store.respondent + '/' + store.flow + '/' + store.step);
+    changeUrlPath('/' + store.respondent + '/' + store.step + '/' + store.flow);
   }
 })
 </script>

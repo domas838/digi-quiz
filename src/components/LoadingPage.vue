@@ -7,7 +7,7 @@ import {changeUrlPath} from "@/helpers";
 onMounted(() => {
   setTimeout(() => {
     store.step += 1
-    changeUrlPath('/' + store.respondent + '/' + store.flow + '/' + store.step)
+    changeUrlPath('/' + store.respondent + '/' + store.step + '/' + store.flow)
   }, 4000)
 })
 </script>

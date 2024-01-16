@@ -29,7 +29,7 @@ const confirm = (input) => {
   store.step += 1;
 
   if (!store.showFirstBenefit && !store.showSecondBenefit) {
-    changeUrlPath('/' + store.respondent + '/' + store.flow + '/' + store.step)
+    changeUrlPath('/' + store.respondent + '/' + store.step + '/' + store.flow)
   }
 
   store.quizAnswers[props.q.id] = input

@@ -29,7 +29,7 @@ const localState = reactive({
     })
 
     onMounted(() => {
-        changeUrlPath('/' + store.respondent + '/' + store.flow + '/' + store.step)
+        changeUrlPath('/' + store.respondent + '/' + store.step + '/' + store.flow)
        localState.progressSteps.forEach((progressStep, index) => {
            const isLastStep = index === localState.progressSteps.length - 1;
            setTimeout(() => {

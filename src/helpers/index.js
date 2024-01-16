@@ -9,8 +9,11 @@ export function changeUrlPath(path) {
     // Extract the query parameters
     let url = new URL(currentURL);
     let searchParams = url.searchParams;
+    if (searchParams.toString()) {
+        path = path + '?' + searchParams.toString()
+    }
 
-    window.history.pushState({}, document.title, path + '?' + searchParams.toString());
+    window.history.pushState({}, document.title, path);
 }
 
 export const Personas = {
