@@ -296,7 +296,7 @@ const i18n = createI18n({
             BenefitPageH1: 'Tutors who help your child to achieve their goals'
         },
         en_za: {
-            Title: 'MathsUp - quiz',
+            Title: 'Mathsup - quiz',
             Description: 'Quiz',
             RecommendedPlan: '🙌 Viskas įtraukta į planą:',
             CurrencyMonth: '€/mėn.',
