@@ -51,23 +51,33 @@ const resolveResultsPage = () => {
   const grade = encodeURIComponent(store.quizAnswers['grade']);
   const goal = store.quizAnswers['goal'];
   let timePreference;
-  let framerPath = store.flow === 'pricing' ? 'results-strugglers-pricing' : 'results-strugglers';
 
+  let suffix = '';
+  switch (store.flow) {
+      case 'paid-trial':
+          suffix = '-paid-trial';
+          break;
+      case 'pricing':
+          suffix = '-pricing';
+          break;
+  }
+
+  let framerPath = 'results-strugglers' + suffix;
   switch (goal) {
     case 'Improve Grades and GPA':
-      framerPath = store.flow === 'pricing' ? 'results-strugglers-pricing' : 'results-strugglers';
+      framerPath = 'results-strugglers' + suffix;
       break;
     case 'Maintain High Grades':
-      framerPath = store.flow === 'pricing' ? 'results-maintainers-pricing' : 'results-maintainers';
+      framerPath = 'results-maintainers' + suffix;
       break;
     case 'Test Prep':
-      framerPath = store.flow === 'pricing' ? 'results-strugglers-pricing' : 'results-strugglers'
+      framerPath = 'results-strugglers' + suffix
       break;
     case 'Prepare for Contest':
-      framerPath = store.flow === 'pricing' ? 'results-excellers-pricing' : 'results-excellers'
+      framerPath = 'results-excellers' + suffix
       break;
     case 'To excel and achieve top performance':
-      framerPath = store.flow === 'pricing' ? 'results-excellers-pricing' : 'results-excellers'
+      framerPath = 'results-excellers' + suffix
       break;
   }
 
