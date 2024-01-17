@@ -204,7 +204,15 @@ onMounted(() => {
 
 const { t } = useI18n();
 
-const buttonText = store.flow === 'trial' ? t('ContinueWithTrial') : t('Continue')
+let buttonText = t('Continue');
+switch (store.flow) {
+  case 'trial':
+      buttonText = t('ContinueWithTrial');
+      break;
+  case 'paid-trial':
+      buttonText = t('ContinueWithPaidTrial');
+      break;
+}
 
 </script>
 <template>
@@ -219,10 +227,10 @@ const buttonText = store.flow === 'trial' ? t('ContinueWithTrial') : t('Continue
     <img class="mx-auto pb-5" v-if="store.lang === 'LV'" src="/src/assets/images/memby.svg" alt="Memby logo" />
     <img class="mx-auto pb-5" v-if="store.lang === 'EN_IE'" src="/src/assets/images/MathUps.svg" alt="MathUps logo" />
     <img class="mx-auto pb-5" v-if="store.lang === 'EN_ZA'" src="/src/assets/images/MathsUp.svg" alt="MathsUp logo" />
-    <h1 class="mx-auto pb-5" v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ store.flow === 'trial' ? $t('EmailFormH1Trial') : $t('EmailFormH1') }}</h1>
+    <h1 class="mx-auto pb-5" v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormH1') }}</h1>
     <p v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormWhereToSentResults') }}</p>
     <h1 v-if="store.respondent === 'child' && store.isChildEmailEntered" v-html="$t('EmailFormShareResults')"></h1>
-    <h1 v-if="store.respondent === 'parent'">{{ store.flow === 'trial' ? $t('EmailFormWeWillRecommendPlanTrial') : $t('EmailFormWeWillRecommendPlan') }}</h1>
+    <h1 v-if="store.respondent === 'parent'">{{ $t('EmailFormWeWillRecommendPlan') }}</h1>
     <p v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</p>
 <!--    <p v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</p>-->
     <div v-if="store.respondent === 'child'">
