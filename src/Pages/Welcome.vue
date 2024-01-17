@@ -20,7 +20,7 @@ onMounted(() => {
     store.respondent = 'parent'
 
     const explodedPath = new URL(window.location.href).pathname.split('/');
-    if (['trial', 'price'].includes(explodedPath[3])) {
+    if (['trial', 'price', 'paid-trial'].includes(explodedPath[3])) {
         store.flow = explodedPath[3];
     }
   }
