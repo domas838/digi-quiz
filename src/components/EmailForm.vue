@@ -55,9 +55,11 @@ const resolveResultsPage = () => {
   let suffix = '';
   switch (store.flow) {
       case 'paid-trial':
+      case 'paid-trial-2':
           suffix = '-paid-trial';
           break;
       case 'pricing':
+      case 'pricing-2':
           suffix = '-pricing';
           break;
   }
@@ -169,6 +171,10 @@ const submitChildAndParentHandler = (event) => {
 }
 
 const klaviyoRequestHandler = () => {
+    if (store.childEmail === '' && store.parentEmail === '') {
+        return;
+    }
+
     const options = {
         method: 'POST',
         url: 'https://app.digiklase.lt/api/klaviyo/create',
@@ -208,8 +214,14 @@ const klaviyoRequestHandler = () => {
 }
 
 onMounted(() => {
-  gaEvent('quiz_email_form');
-  changeUrlPath('/' + store.respondent + '/email')
+    gaEvent('quiz_email_form');
+    if (['paid-trial-2', 'pricing-2'].includes(store.flow) && document.getElementById('continue-btn')) {
+        console.log(document.getElementById('continue-btn'));
+        document.getElementById('continue-btn').disabled = false
+        document.getElementById('continue-btn').click()
+    } else {
+        changeUrlPath('/' + store.respondent + '/email')
+    }
 });
 
 const { t } = useI18n();
@@ -360,6 +372,7 @@ switch (store.flow) {
     <button
         v-if="store.respondent === 'child' && !store.isChildEmailEntered"
         type="submit"
+        id="continue-btn"
         class="benefit-btn"
         style="margin-top: 2rem"
         @click="submitChildEmail($event)"
@@ -371,6 +384,7 @@ switch (store.flow) {
     <button
         v-if="store.respondent === 'parent'"
         type="submit"
+        id="continue-btn"
         class="benefit-btn"
         style="margin-top: 2rem"
         @click="submitHandler($event)"
@@ -381,6 +395,7 @@ switch (store.flow) {
     <div class="submit-container" v-if="store.respondent === 'child' && store.isChildEmailEntered">
         <button
             type="submit"
+            id="continue-btn"
             class="benefit-btn"
             @click="submitChildAndParentHandler($event)"
             :disabled="isParentProceedDisabled"
