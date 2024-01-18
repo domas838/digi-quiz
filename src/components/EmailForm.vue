@@ -17,11 +17,20 @@ const getTimetableParams = () => {
     Sun: 'Sunday',
   };
 
-  const groupedPreferredTimes = {
-    ...Object.groupBy(store.preferredTimeWorkdays, ({ day }) => day),
-    ...Object.groupBy(store.preferredTimeWeekends, ({ day }) => day),
+  const groupBy = (array, getKey) => {
+    return array.reduce((result, item) => {
+      const key = getKey(item);
+      result[key] = result[key] || [];
+      result[key].push(item);
+      return result;
+    }, {});
   };
 
+  const groupedPreferredTimes = Object.assign(
+      {},
+      groupBy(store.preferredTimeWorkdays, ({ day }) => day),
+      groupBy(store.preferredTimeWeekends, ({ day }) => day)
+  );
   let timetableParams = []
 
   const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
