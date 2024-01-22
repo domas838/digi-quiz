@@ -71,6 +71,9 @@ const resolveResultsPage = () => {
       case 'pricing-2':
           suffix = '-pricing';
           break;
+      case 'checkout':
+          suffix = '-checkout';
+          break;
   }
 
   let framerPath = 'results-strugglers' + suffix;
@@ -225,7 +228,6 @@ const klaviyoRequestHandler = () => {
 onMounted(() => {
     gaEvent('quiz_email_form');
     if (['paid-trial-2', 'pricing-2'].includes(store.flow) && document.getElementById('continue-btn')) {
-        console.log(document.getElementById('continue-btn'));
         document.getElementById('continue-btn').disabled = false
         document.getElementById('continue-btn').click()
     } else {
