@@ -74,6 +74,9 @@ const resolveResultsPage = () => {
       case 'checkout':
           suffix = '-checkout';
           break;
+      case 'cashback':
+          suffix = '-5-weeks-streak'
+          break;
   }
 
   let framerPath = 'results-strugglers' + suffix;
