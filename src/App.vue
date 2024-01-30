@@ -10,6 +10,7 @@ import {event, pageview} from "vue-gtag";
 import {useFavicon} from "@vueuse/core/index";
 import EmailForm from "@/components/EmailForm.vue";
 import Layout from "@/layouts/Layout.vue";
+import SecondBenefitNew from "@/components/SecondBenefitNew.vue";
 
 const i18n = useI18n();
 

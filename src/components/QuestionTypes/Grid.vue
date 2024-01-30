@@ -2,6 +2,7 @@
 
 import {store} from "@/store";
 import {event} from "vue-gtag";
+import Heading from "@/components/Typography/Heading.vue";
 
 const props = defineProps(['questions', 'next', 'q'])
 const selectClass = (classNumber) => {
@@ -39,11 +40,11 @@ const targetMarkArray = () => {
 
 <template>
   <div>
-    <h1>
+    <Heading level="2">
       {{ q.Q }}
-    </h1>
+    </Heading>
 
-    <div class="answer__content">
+    <div class="answer__content mt-5 sm:mt-10">
       <div class="answer__buttons-wrapper grade" :class="q.Ans.length < 3 ? 'grid-cols-' + q.Ans.length : 'grid-cols-3'" v-if="q.id !== 'targetMark'">
         <button
             v-for="(answer, index) in q.Ans"

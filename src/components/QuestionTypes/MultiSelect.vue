@@ -2,6 +2,7 @@
 import {store} from "@/store";
 import {event} from "vue-gtag";
 import {changeUrlPath} from "@/helpers";
+import Heading from "@/components/Typography/Heading.vue";
 
 const props = defineProps(['q', 'questions'])
 
@@ -48,10 +49,10 @@ const proceedWithMultipleSelection = (name) => {
 </script>
 
 <template>
-  <h1>
+  <Heading level="2">
     {{ q.Q }}
-  </h1>
-  <div class="answer__container">
+  </Heading>
+  <div class="answer__container mt-5 mx-auto sm:mt-10">
     <div v-for="(answer, index) in props.q.Ans" :key="index">
     <button
         class="answer__btn"

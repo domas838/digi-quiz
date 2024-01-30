@@ -1,14 +1,16 @@
 <script setup>
 
+import Heading from "@/components/Typography/Heading.vue";
+
 defineProps(['q', 'next'])
 
 </script>
 <template>
-  <h1>
+  <Heading level="2">
     {{ q.Q }}
-  </h1>
+  </Heading>
 
-  <div class="answer__container">
+  <div class="answer__container mt-5 mx-auto sm:mt-10">
     <div>
       <button
           v-for="(answer, index) in q.Ans"

@@ -5,6 +5,9 @@ import axios from 'axios'
 import {event as gaEvent} from "vue-gtag";
 import {changeUrlPath} from "../helpers";
 import {useI18n} from "vue-i18n";
+import QuizLogo from "@/components/QuizLogo.vue";
+import Heading from "@/components/Typography/Heading.vue";
+import Label from "@/components/Typography/Label.vue";
 
 const getTimetableParams = () => {
   const daysMap = {
@@ -259,15 +262,16 @@ switch (store.flow) {
     >
         <img src="../assets/images/close-x.svg" width="48" height="48" />
     </button>
-    <img class="mx-auto pb-5" v-if="store.lang === 'LT'" src="/src/assets/images/digiklase.svg" alt="Digiklase logo"/>
-    <img class="mx-auto pb-5" v-if="store.lang === 'LV'" src="/src/assets/images/memby.svg" alt="Memby logo" />
-    <img class="mx-auto pb-5" v-if="store.lang === 'EN_IE'" src="/src/assets/images/MathUps.svg" alt="MathUps logo" />
-    <img class="mx-auto pb-5" v-if="store.lang === 'EN_ZA'" src="/src/assets/images/MathsUp.svg" alt="MathsUp logo" />
-    <h1 class="mx-auto pb-5" v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormH1') }}</h1>
+    <QuizLogo tw="mx-auto" />
+<!--    <img class="mx-auto pb-5" v-if="store.lang === 'LT'" src="/src/assets/images/digiklase.svg" alt="Digiklase logo"/>-->
+<!--    <img class="mx-auto pb-5" v-if="store.lang === 'LV'" src="/src/assets/images/memby.svg" alt="Memby logo" />-->
+<!--    <img class="mx-auto pb-5" v-if="store.lang === 'EN_IE'" src="/src/assets/images/MathUps.svg" alt="MathUps logo" />-->
+<!--    <img class="mx-auto pb-5" v-if="store.lang === 'EN_ZA'" src="/src/assets/images/MathsUp.svg" alt="MathsUp logo" />-->
+    <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormH1') }}</Heading>
     <p v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormWhereToSentResults') }}</p>
-    <h1 v-if="store.respondent === 'child' && store.isChildEmailEntered" v-html="$t('EmailFormShareResults')"></h1>
-    <h1 v-if="store.respondent === 'parent'">{{ $t('EmailFormWeWillRecommendPlan') }}</h1>
-    <p v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</p>
+    <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'child' && store.isChildEmailEntered" v-html="$t('EmailFormShareResults')"></Heading>
+    <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'parent'">{{ $t('EmailFormWeWillRecommendPlan') }}</Heading>
+    <Label tw="text-center mb-3 md:mb-5" v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</Label>
 <!--    <p v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</p>-->
     <div v-if="store.respondent === 'child'">
         <input
@@ -387,7 +391,7 @@ switch (store.flow) {
         v-if="store.respondent === 'child' && !store.isChildEmailEntered"
         type="submit"
         id="continue-btn"
-        class="benefit-btn"
+        class="benefit-btn mx-auto mb-12"
         style="margin-top: 2rem"
         @click="submitChildEmail($event)"
         :disabled="isChildProceedDisabled"
@@ -399,7 +403,7 @@ switch (store.flow) {
         v-if="store.respondent === 'parent'"
         type="submit"
         id="continue-btn"
-        class="benefit-btn"
+        class="benefit-btn mx-auto mb-12"
         style="margin-top: 2rem"
         @click="submitHandler($event)"
         :disabled="isParentProceedDisabled"
@@ -410,7 +414,7 @@ switch (store.flow) {
         <button
             type="submit"
             id="continue-btn"
-            class="benefit-btn"
+            class="benefit-btn mx-auto mb-12"
             @click="submitChildAndParentHandler($event)"
             :disabled="isParentProceedDisabled"
         >

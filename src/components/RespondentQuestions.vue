@@ -1,19 +1,18 @@
 <script setup>
-import { store } from '../store'
+import { store } from '@/store'
 
 import {useI18n} from "vue-i18n";
-import {Personas} from "../helpers";
+import {Personas} from "@/helpers";
 import { event } from 'vue-gtag'
 import Grid from "@/components/QuestionTypes/Grid.vue";
 import RadioSelect from "@/components/QuestionTypes/RadioSelect.vue";
 import MultiSelect from "@/components/QuestionTypes/MultiSelect.vue";
 import QuestionLayout from "@/layouts/QuestionLayout.vue";
-import SecondBenefit from "@/components/SecondBenefit.vue";
+import SecondBenefitNew from "@/components/SecondBenefitNew.vue";
 import AutocompleteInput from "@/components/AutocompleteInput.vue";
 import PreferredTimesTable from "@/components/PreferredTimesTable.vue";
 import LoadingPage from "@/components/LoadingPage.vue";
 import ResultsCalculator from "@/components/ResultsCalculator.vue";
-import Layout from "@/App.vue";
 
 const props = defineProps(['questions', 'next'])
 
@@ -176,7 +175,7 @@ const selectAnswer = (answerIndex) => {
 
 </script>
 <template>
-  <div v-if="! store.showRecomendations" class="py-16">
+  <div v-if="! store.showRecomendations" class="py-9 sm:py-16">
     <div v-for="(q, index) in props.questions" :key="index">
       <QuestionLayout v-if="q.component === 'grid' && q.qNo === store.step">
         <Grid :q="q" :questions="props.questions" :next="next"/>
@@ -204,7 +203,7 @@ const selectAnswer = (answerIndex) => {
         />
       </QuestionLayout>
 
-      <SecondBenefit v-if="q.component === 'firstBenefit' && q.qNo === store.step" />
+      <SecondBenefitNew v-if="q.component === 'firstBenefit' && q.qNo === store.step" />
 
       <LoadingPage v-if="q.component === 'loader' && q.qNo === store.step" />
 

@@ -174,7 +174,6 @@ p {
 }
 .brand-logo {
     display: block;
-    margin: 50px auto;
     width: 100%;
 }
 .brand-logo--mobile {
@@ -213,6 +212,7 @@ p {
 .progress__count {
     margin-left: auto;
     margin-bottom: 8px;
+    font-family: 'Obviously';
 }
 .completeness {
     position: absolute;
@@ -277,7 +277,6 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
 }
 .answer__container {
     display: block;
-    margin: 0 auto;
     padding-bottom: 60px;
     max-width: 600px;
 }
@@ -346,7 +345,7 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
     position: relative;
 }
 .answer__btn span img {
-    min-width: 50px;
+    min-width: 20px;
     z-index: 1;
 }
 .digi-input {
@@ -399,6 +398,14 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
         font-size: 16px !important;
         line-height: 24px !important;
     }
+
+    .digi-input {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+    .digi-input::placeholder {
+        font-size: 16px;
+    }
 }
 .benefit-container {
     width: 50%;
@@ -448,11 +455,11 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
     border: none;
     color: white;
 
-    margin-top: 100px;
+    /*margin-top: 100px;*/
     position: relative;
     z-index: 10;
     transition: 0.25s ease;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
 }
 .benefit-btn:hover {
     background-color: #194fe6;
@@ -595,9 +602,6 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
         width: 28px;
         bottom: 16px;
     }
-    .brand-logo {
-        margin: 30px auto;
-    }
     .progress__wrapper {
         margin-bottom: 0;
         transform: translateY(-40px);
@@ -606,6 +610,10 @@ input[type='checkbox']:checked ~ .custom-checkbox-checked {
     .answer__buttons-wrapper {
         grid-template-columns: repeat(3, 1fr);
         gap: 20px 10px;
+    }
+
+    .answer__btn {
+        font-size: 16px;
     }
 }
 .spinner {

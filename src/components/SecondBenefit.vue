@@ -1,6 +1,7 @@
 <script setup>
 import { store } from '../store'
 import { changeUrlPath } from "../helpers";
+import Heading from "@/components/Typography/Heading.vue";
 
 const acceptSecondBenefit = () => {
     store.showSecondBenefit = false
@@ -24,9 +25,9 @@ const benefitsLV = [
 ]
 
 const benefitsEN = [
-    '<strong>Highly qualified tutors, </strong>including graduates of top world universities',
-    '<strong>Inspiring personalities</strong> who can not only tell stories inventively, but also spark interesting discussions',
-    'If some educational subjects are still difficult to understand, Mathups team is always ready to <strong>give you extra help after the lesson!</strong>'
+    '<strong>Cape Town University</strong> graduate with strong expertise in mathematics.',
+    'Global <strong>Best Teacher Award</strong> winner in Dubai 2023.',
+    'Teaches math in an easily way, fostering meaningful connections and <strong>motivating students.</strong>'
 ]
 
 </script>
@@ -34,9 +35,9 @@ const benefitsEN = [
 <template>
   <div class="container yellow">
         <div class="benefit-container">
-            <h1 class="benefit-heading">
+            <Heading level="2" class="text-left">
                 {{ $t('BenefitPageH1') }}
-            </h1>
+            </Heading>
             <div v-if="store.lang === 'LT'">
                 <div class="benefit-row" v-for="(b, index) in benefits" v-bind:key="index">
                     <div class="icon">

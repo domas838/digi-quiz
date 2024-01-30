@@ -3,6 +3,7 @@ import { store } from '../store'
 import {onMounted, reactive} from "vue";
 import {event} from "vue-gtag";
 import {changeUrlPath} from "@/helpers";
+import Heading from "@/components/Typography/Heading.vue";
 
 const props = defineProps(['q', 'title', 'days', 'timeRanges', 'storeVariableName'])
 
@@ -54,7 +55,21 @@ const selectAll = () => {
 }
 
 onMounted(() => {
-    selectAll()
+  if (localState.isAllSelected === false) {
+    const allValues = [];
+    for (let i = 0; i < props.days.length; i++) {
+      for (let x = 0; x < props.timeRanges.length; x++) {
+        allValues.push({
+          day: props.days[i],
+          from: props.timeRanges[x].from,
+          to: props.timeRanges[x].to,
+          dayPeriod: props.timeRanges[x].dayPeriod,
+        });
+      }
+    }
+    store[props.storeVariableName] = allValues;
+    localState.isAllSelected = true;
+  }
 })
 
 const confirm = () => {
@@ -83,8 +98,8 @@ const getSelectedValueIndex = (day, from, to, dayPeriod) => {
 </script>
 
 <template>
-    <h1>{{ title }}</h1>
-    <div class="w-fit m-auto bg-white rounded-xl px-5 py-2.5 shadow-lg">
+    <Heading level="2">{{ title }}</Heading>
+    <div class="w-fit m-auto bg-white rounded-xl px-5 py-2.5 shadow-lg mt-5 sm:mt-10" v-if="true">
         <table>
             <thead>
                 <tr>
@@ -95,7 +110,7 @@ const getSelectedValueIndex = (day, from, to, dayPeriod) => {
             <tbody>
                 <tr class="" v-for="timeRange in props.timeRanges" :key="`${timeRange.from}-${timeRange.to}`">
                     <td class="text-center p-1 sm:p-4 pr-7">{{ `${timeRange.from} - ${timeRange.to} ${timeRange.dayPeriod}` }}</td>
-                    <td class="text-center p-1 sm:p-4 border-solid border-t-2 border-gray-700" v-for="day in days" :key="day">
+                    <td class="text-center p-1 sm:p-4 border-solid border-t-2 border-gray-700 relative" v-for="day in days" :key="day">
                         <button @click="selectPreferredTime(day, timeRange.from, timeRange.to, timeRange.dayPeriod)">
                             <span>
                                 <input type="checkbox" name="subjects" :checked="getSelectedValueIndex(day, timeRange.from, timeRange.to, timeRange.dayPeriod) > - 1" />
@@ -119,7 +134,7 @@ const getSelectedValueIndex = (day, from, to, dayPeriod) => {
             </tbody>
         </table>
 
-        <div class="flex my-2">
+        <div class="flex my-2 relative">
             <button @click="selectAll()">
             <div class="mr-1">
                 <input type="checkbox" name="subjects" :checked="localState.isAllSelected" />
@@ -142,7 +157,7 @@ const getSelectedValueIndex = (day, from, to, dayPeriod) => {
     </div>
 
     <div class="mt-10">
-        <button @click="confirm()" class="benefit-btn">
+        <button @click="confirm()" class="benefit-btn mx-auto">
             {{ $t('Continue') }}
             <img src="../assets/images/arrow-right.svg" alt="Next" />
         </button>

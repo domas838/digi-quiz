@@ -4,6 +4,7 @@ import { reactive } from "vue";
 import { useI18n } from "vue-i18n";
 import {store} from "@/store";
 import {changeUrlPath} from "@/helpers";
+import QuizLogo from "@/components/QuizLogo.vue";
 
 const { t } = useI18n();
 
@@ -56,12 +57,7 @@ const localState = reactive({
 
 <template>
     <div class="max-w-[580px] m-auto px-8" style="font-family: 'obviously', sans-serif;">
-      <div>
-        <img class="mx-auto pb-10" v-if="store.lang === 'LT'" src="/src/assets/images/digiklase.svg" alt="Digiklase logo"/>
-        <img class="mx-auto pb-10" v-if="store.lang === 'LV'" src="/src/assets/images/memby.svg" alt="Memby logo" />
-        <img class="mx-auto pb-10" v-if="store.lang === 'EN_IE'" src="/src/assets/images/MathUps.svg" alt="MathUps logo" />
-        <img class="mx-auto pb-10" v-if="store.lang === 'EN_ZA'" src="/src/assets/images/MathsUp.svg" alt="MathsUp logo" />
-      </div>
+        <QuizLogo tw="mx-auto mb-10" />
         <div class="mb-20 font-semibold text-lg">
             <div class="mb-12" v-for="progressStep in localState.progressSteps" :key="progressStep.key">
                 <div class="flex flex-row justify-between mb-2.5">

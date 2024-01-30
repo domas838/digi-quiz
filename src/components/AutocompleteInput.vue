@@ -3,6 +3,7 @@ import {reactive} from "vue";
 import {store} from "@/store";
 import {event} from "vue-gtag";
 import {changeUrlPath} from "@/helpers";
+import Heading from "@/components/Typography/Heading.vue";
 
 const props = defineProps(['q', 'title', 'options', 'placeholder'])
 
@@ -37,10 +38,12 @@ const confirm = (input) => {
 </script>
 
 <template>
-  <h1>
+  <Heading level="2">
     {{ props.title }}
-  </h1>
-  <VueAutocomplete :results="localState.filteredOptions" @input="filterOptions" @onSelect="confirm" :placeholder="$t(props.placeholder)" />
+  </Heading>
+  <div class="mt-5 sm:mt-10">
+    <VueAutocomplete :results="localState.filteredOptions" @input="filterOptions" @onSelect="confirm" :placeholder="$t(props.placeholder)" />
+  </div>
 </template>
 
 <style>

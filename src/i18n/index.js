@@ -387,7 +387,7 @@ const i18n = createI18n({
             GeneratingPersonalisedPlan: 'Generating personalised plan',
             ExpertCare: 'You are in expert care',
             MathsUpHelped: 'MathsUp has helped more than <b>5 554</b> students all over South Africa',
-            BenefitPageH1: 'Tutors who help your child to achieve their goals'
+            BenefitPageH1: 'Your teacher: <span class="text-blue">Sandile Mathebula</span>'
         }
     },
 })
