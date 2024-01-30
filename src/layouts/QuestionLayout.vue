@@ -14,7 +14,7 @@ import ProgressCounter from "@/components/ProgressCounter.vue";
       <ProgressCounter />
     </div>
 
-    <ProgressBar class="mt-14" />
+    <ProgressBar class="mt-16" />
 
     <div
         class="answer__container answer__container--wide mx-auto"
