@@ -63,7 +63,7 @@ const time = reactive({
 const resolveTimeUntilDecemberFirst = () => {
   const date = new Date();
 
-  const decemberFirst = startOfMonth(new Date(date.getFullYear(), 1, 1));
+  const decemberFirst = new Date('2024-02-15');
   time.secondsUntilMidnight = differenceInSeconds(decemberFirst, date);
 }
 
