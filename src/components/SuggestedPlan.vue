@@ -2,6 +2,7 @@
 import Heading from "./Typography/Heading.vue";
 import { ref, onMounted, onUnmounted } from 'vue';
 import { store } from '../store'
+import {decorateUrlWithUTMParams} from "../helpers";
 
 defineProps({
   plan: Object,
@@ -78,7 +79,7 @@ const resolvePrice = (selectedSubjectsLength, isPaidTrial) => {
 
           <div class="basis-1/4 self-center">
             <div class="action">
-              <a :href="btn.btnLink" target="_blank" class="cta-btn"
+              <a :href="decorateUrlWithUTMParams(btn.btnLink)" target="_blank" class="cta-btn"
               >{{ btn.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
               /></a>
             </div>
@@ -104,7 +105,7 @@ const resolvePrice = (selectedSubjectsLength, isPaidTrial) => {
 
           <div class="basis-1/2 self-center mt-2">
             <div class="action float-right">
-              <a :href="btn.btnLink" target="_blank" class="cta-btn"
+              <a :href="decorateUrlWithUTMParams(btn.btnLink)" target="_blank" class="cta-btn"
               >{{ btn.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
               /></a>
             </div>

@@ -1,8 +1,8 @@
 <script setup>
 import Heading from "./Typography/Heading.vue";
 import {ref, onMounted, onUnmounted, reactive} from 'vue';
-import { store } from '../store'
-import {differenceInSeconds, startOfMonth} from "date-fns";
+import {differenceInSeconds} from "date-fns";
+import {decorateUrlWithUTMParams} from "../helpers";
 
 defineProps({
   plan: Object,
@@ -67,6 +67,8 @@ const resolveTimeUntilDecemberFirst = () => {
   time.secondsUntilMidnight = differenceInSeconds(decemberFirst, date);
 }
 
+
+
 onMounted(() => {
   resolveTimeUntilDecemberFirst()
 })
@@ -103,7 +105,7 @@ onMounted(() => {
 
           <div class="basis-1/4 self-center">
             <div class="action">
-              <a :href="btn.btnLink" target="_blank" class="cta-btn !bg-orange !text-black"
+              <a :href="decorateUrlWithUTMParams(btn.btnLink)" target="_blank" class="cta-btn !bg-orange !text-black"
               >{{ btn.buyNow }}
                 <span class="ml-3">
                 <svg width="30" height="22" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -13,6 +13,20 @@ export function changeUrlPath(path) {
     window.history.pushState({}, document.title, path + '?' + searchParams.toString());
 }
 
+export function decorateUrlWithUTMParams(url) {
+    const currentUrl = window.location.href;
+    const queryString = (currentUrl.split('?')[1] || '');
+    const params = Object.fromEntries(new URLSearchParams(queryString).entries());
+    const existingUtmParams = Object.fromEntries(Object.entries(params).filter(([key]) => key.startsWith('utm_')));
+
+    if (url && Object.keys(existingUtmParams).length > 0) {
+        const separator = url.includes('?') ? '&' : '?';
+        url = `${url}${separator}${new URLSearchParams(existingUtmParams)}`;
+    }
+
+    return url;
+}
+
 export const Personas = {
     AMBITIOUS: 'Ambitious student',
     EXAM_ORIENTED: 'Exam-oriented',

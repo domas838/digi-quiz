@@ -1,6 +1,7 @@
 <script setup>
 import { reactive } from 'vue'
 import { store } from '../store'
+import {decorateUrlWithUTMParams} from "../helpers";
 const props = defineProps(['allPlansURL', 'selectedPlanURL'])
 
 const url = new URL(window.location.href)
@@ -22,15 +23,18 @@ const handleButtonClick = () => {
   }
 }
 
+const decoratedSelectedPlansUrl = decorateUrlWithUTMParams(props.selectedPlanURL)
+const decoratedAllPlansUrl = decorateUrlWithUTMParams(props.allPlansURL)
+
 </script>
 <template>
     <div class="d-flex justify-center cta-buttons">
-        <a v-if="!url.searchParams.has('deal')" :href="props.selectedPlanURL" class="cta-btn"
+        <a v-if="!url.searchParams.has('deal')" :href="decoratedSelectedPlansUrl" class="cta-btn"
             >{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
         /></a>
       <button v-if="url.searchParams.has('deal')" @click="handleButtonClick()" class="cta-btn">{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
       /></button>
-        <a :href="props.allPlansURL" target="_blank" class="cta-link">{{ btnLabel.showAll }}</a>
+        <a :href="decoratedAllPlansUrl" target="_blank" class="cta-link">{{ btnLabel.showAll }}</a>
     </div>
 </template>
 

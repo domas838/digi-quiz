@@ -17,6 +17,7 @@ import ChoosePlan from "./ChoosePlan.vue";
 import DealNotification from "./DealNotification.vue";
 import NovemberDealNotification from "./NovemberDealNotification.vue";
 import NovemberSuggestedPlan from "./NovemberSuggestedPlan.vue";
+import {decorateUrlWithUTMParams} from "../helpers";
 
 const url = new URL(window.location.href)
 
@@ -420,7 +421,7 @@ const handleButtonClick = () => {
         <img v-if="store.lang === 'LT'" class="logo" src="../assets/images/digiklase.svg" alt="" />
         <img v-if="store.lang === 'LV'" class="logo" src="../assets/images/memby.svg" alt="" />
         <div>
-          <a v-if="!url.searchParams.has('deal')" :href="btnLabel.btnLink" class="cta-btn">
+          <a v-if="!url.searchParams.has('deal')" :href="decorateUrlWithUTMParams(btnLabel.btnLink)" class="cta-btn">
             {{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""/>
           </a>
           <button v-if="url.searchParams.has('deal')" @click="handleButtonClick()" class="cta-btn">{{ btnLabel.buyNow }}<img src="../assets/images/arrow-right.svg" alt=""
