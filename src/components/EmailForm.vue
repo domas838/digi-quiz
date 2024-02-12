@@ -52,6 +52,21 @@ const getTimetableParams = () => {
 
   return timetableParams.reduce((acc, obj) => ({ ...acc, ...obj }), {});
 }
+
+const decorateUrlWithUTMParams = (url) => {
+  const currentUrl = window.location.href;
+  const queryString = (currentUrl.split('?')[1] || '');
+  const params = Object.fromEntries(new URLSearchParams(queryString).entries());
+  const existingUtmParams = Object.fromEntries(Object.entries(params).filter(([key]) => key.startsWith('utm_')));
+
+  if (url && Object.keys(existingUtmParams).length > 0) {
+    const separator = url.includes('?') ? '&' : '?';
+    url = `${url}${separator}${new URLSearchParams(existingUtmParams)}`;
+  }
+
+  return url;
+}
+
 const resolveResultsPage = () => {
   //TODO RESOLVE RESULT PAGE
   const timetableObject = getTimetableParams();
@@ -115,7 +130,8 @@ const resolveResultsPage = () => {
       host = 'mathsup.co.za';
   }
 
-  const url = `https://${host}/${framerPath}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${timePreference}`;
+  let url = `https://${host}/${framerPath}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${timePreference}`;
+  url = decorateUrlWithUTMParams(url);
 
   store.resultUrl = url
 

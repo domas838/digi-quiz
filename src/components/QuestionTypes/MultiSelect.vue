@@ -69,7 +69,7 @@ const proceedWithMultipleSelection = (name) => {
     </div>
     <button
         @click="proceedWithMultipleSelection(q.name)"
-        class="benefit-btn"
+        class="benefit-btn mx-auto"
         style="margin-top: 2rem"
         :disabled="store.isSubjectNotSelected"
     >
