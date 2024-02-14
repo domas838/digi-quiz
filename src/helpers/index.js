@@ -37,6 +37,6 @@ export const BASE_APP_DOMAIN = {
     'LT': 'https://app.digiklase.lt',
     'LV': 'https://app.memby.lv',
     'EN_IE': 'quiz.mathups.com',
-    'EN_ZA': 'quiz.mathsup.co.za',
+    'EN_ZA': 'quiz.memby.org',
     'local': 'http://lt.localhost:8081'
 }

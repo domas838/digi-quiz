@@ -7,7 +7,7 @@ import { store } from "@/store";
     <img v-show="store.lang === 'LT'" src="/src/assets/images/digiklase.svg" alt="Digiklase logo"/>
     <img v-show="store.lang === 'LV'" src="/src/assets/images/memby.svg" alt="Memby logo" />
     <img v-show="store.lang === 'EN_IE'" src="/src/assets/images/MathUps.svg" alt="MathsUp logo" />
-    <img v-show="store.lang === 'EN_ZA'" src="/src/assets/images/MathsUp.svg" alt="MathsUp logo" />
+    <img v-show="store.lang === 'EN_ZA'" src="/src/assets/images/memby.svg" alt="Memby logo" />
   </div>
 </template>
 

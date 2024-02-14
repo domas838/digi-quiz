@@ -161,7 +161,7 @@ const resolveResultsPage = () => {
 
   let host = 'mathups.com';
   if (store.lang === 'EN_ZA') {
-      host = 'mathsup.co.za';
+      host = 'new.memby.org';
   }
 
   let url = `https://${host}/${framerPath}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${timePreference}`;
@@ -174,7 +174,7 @@ const resolveResultsPage = () => {
   klaviyoRequestHandler()
 
   // Redirect to the constructed URL
-  // window.location.href = url;
+  window.location.href = url;
 }
 const submitChildEmail = (event) => {
     event.preventDefault()
@@ -284,7 +284,6 @@ const klaviyoRequestHandler = () => {
 }
 
 onMounted(() => {
-  console.log(store.quizAnswers);
     gaEvent('quiz_email_form');
     if (['trial', 'paid-trial-2', 'pricing-2'].includes(store.flow) && document.getElementById('continue-btn')) {
         document.getElementById('continue-btn').disabled = false

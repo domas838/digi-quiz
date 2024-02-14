@@ -5,7 +5,7 @@ const domainLocaleMap = {
     'quiz.memby.lv': 'lv',
     'quiz.digiklase.lt': 'lt',
     'quiz.mathups.com': 'en_ie',
-    'quiz.mathsup.co.za': 'en_za',
+    'quiz.memby.org': 'en_za',
     'localhost': 'en_za'
 };
 
