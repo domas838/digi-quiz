@@ -1,16 +1,192 @@
 <script setup>
 import { store } from '../store'
-import {computed, onMounted, reactive} from 'vue'
+import {computed, onMounted} from 'vue'
 import axios from 'axios'
 import {event as gaEvent} from "vue-gtag";
 import {changeUrlPath} from "../helpers";
+import {useI18n} from "vue-i18n";
+import QuizLogo from "@/components/QuizLogo.vue";
+import Heading from "@/components/Typography/Heading.vue";
+import Label from "@/components/Typography/Label.vue";
 
+const getTimetableParams = () => {
+  const daysMap = {
+    Mon: 'Monday',
+    Tue: 'Tuesday',
+    Wed: 'Wednesday',
+    Thu: 'Thursday',
+    Fri: 'Friday',
+    Sat: 'Saturday',
+    Sun: 'Sunday',
+  };
+
+  const groupBy = (array, getKey) => {
+    return array.reduce((result, item) => {
+      const key = getKey(item);
+      result[key] = result[key] || [];
+      result[key].push(item);
+      return result;
+    }, {});
+  };
+
+  const groupedPreferredTimes = Object.assign(
+      {},
+      groupBy(store.preferredTimeWorkdays, ({ day }) => day),
+      groupBy(store.preferredTimeWeekends, ({ day }) => day)
+  );
+  let timetableParams = []
+
+  const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  daysOfWeek.forEach(weekDay => {
+    if (groupedPreferredTimes[weekDay] && groupedPreferredTimes[weekDay][0]) {
+      timetableParams.push({
+        [timetableParams.length > 0 ? 'dayTwo' : 'dayOne']: daysMap[groupedPreferredTimes[weekDay][0].day],
+        [timetableParams.length > 0 ? 'dayTwoTime' : 'dayOneTime']: `${groupedPreferredTimes[weekDay][0].from} - ${groupedPreferredTimes[weekDay][0].to} ${groupedPreferredTimes[weekDay][0].dayPeriod}`
+      })
+    }
+
+    if (timetableParams.length === 2) {
+      return timetableParams.reduce((acc, obj) => ({ ...acc, ...obj }), {});
+    }
+  })
+
+  return timetableParams.reduce((acc, obj) => ({ ...acc, ...obj }), {});
+}
+
+const decorateUrlWithUTMParams = (url) => {
+  const currentUrl = window.location.href;
+  const queryString = (currentUrl.split('?')[1] || '');
+  const params = Object.fromEntries(new URLSearchParams(queryString).entries());
+  const existingUtmParams = Object.fromEntries(Object.entries(params).filter(([key]) => key.startsWith('utm_')));
+
+  if (url && Object.keys(existingUtmParams).length > 0) {
+    const separator = url.includes('?') ? '&' : '?';
+    url = `${url}${separator}${new URLSearchParams(existingUtmParams)}`;
+  }
+
+  return url;
+}
+
+const decorateUrlWithSubjectParams = (url) => {
+  if (! (store.quizAnswers['subjects'])) {
+    return url;
+  }
+
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}subjects=${store.quizAnswers['subjects']}`;
+}
+
+const decorateUrlWithPlan = (url) => {
+    if (! store.quizAnswers['subjects']) {
+      return url;
+    }
+
+    const selectedSubjectsArray = store.quizAnswers['subjects'].split(',');
+    const selectedSubjectsLength = selectedSubjectsArray.length;
+
+    let plan = '';
+
+    switch (selectedSubjectsLength) {
+      case 1:
+        plan = 'OneSubjectPlan' ;
+        break;
+      case 2:
+        plan = 'TwoSubjectsPlan';
+        break
+      default:
+        plan = 'AllSubjectsPlan';
+        break;
+    }
+
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}plan=${plan}`;
+}
+
+const resolveResultsPage = () => {
+  //TODO RESOLVE RESULT PAGE
+  const timetableObject = getTimetableParams();
+  // Assuming 'store' is a valid object containing quiz answers
+  const gradeBefore = encodeURIComponent(store.quizAnswers['currentMark']);
+  const gradeAfter = encodeURIComponent(store.quizAnswers['targetMark']);
+  const state = encodeURIComponent(store.quizAnswers['state']);
+  const grade = encodeURIComponent(store.quizAnswers['grade']);
+  const goal = store.quizAnswers['goal'];
+  let timePreference;
+
+  let suffix = '';
+  switch (store.flow) {
+      case 'paid-trial':
+      case 'paid-trial-2':
+          suffix = '-paid-trial';
+          break;
+      case 'pricing':
+      case 'pricing-2':
+          suffix = '-pricing';
+          break;
+      case 'checkout':
+          suffix = '-checkout';
+          break;
+      case 'cashback':
+          suffix = '-5-weeks-streak'
+          break;
+  }
+
+  let framerPath = 'results-strugglers' + suffix;
+  switch (goal) {
+    case 'Improve Grades and GPA':
+      framerPath = 'results-strugglers' + suffix;
+      break;
+    case 'Maintain High Grades':
+      framerPath = 'results-maintainers' + suffix;
+      break;
+    case 'Test Prep':
+      framerPath = 'results-strugglers' + suffix
+      break;
+    case 'Prepare for Contest':
+      framerPath = 'results-excellers' + suffix
+      break;
+    case 'To excel and achieve top performance':
+      framerPath = 'results-excellers' + suffix
+      break;
+  }
+
+  if (Object.keys(timetableObject).length !== 0) {
+    const dayOne = encodeURIComponent(timetableObject.dayOne)
+    const dayTwo = encodeURIComponent(timetableObject.dayTwo)
+    const dayOneTime = encodeURIComponent(timetableObject.dayOneTime);
+    const dayTwoTime = encodeURIComponent(timetableObject.dayTwoTime);
+    timePreference = `dayOne=${dayOne}&dayTwo=${dayTwo}&dayOneTime=${dayOneTime}&dayTwoTime=${dayTwoTime}`;
+  }
+
+
+  let host = 'mathups.com';
+  if (store.lang === 'EN_ZA') {
+      host = 'mathsup.co.za';
+  }
+
+  let url = `https://${host}/${framerPath}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${timePreference}`;
+  url = decorateUrlWithSubjectParams(url)
+  url = decorateUrlWithUTMParams(url);
+  url = decorateUrlWithPlan(url);
+
+  store.resultUrl = url
+
+  klaviyoRequestHandler()
+
+  // Redirect to the constructed URL
+  // window.location.href = url;
+}
 const submitChildEmail = (event) => {
     event.preventDefault()
     store.isChildEmailEntered = true
     store.step += 1
     store.showRecomendations = true
-    klaviyoRequestHandler()
+    // klaviyoRequestHandler()
+    gaEvent('lead_generated');
+
+    if (['EN_IE', 'EN_ZA'].includes(store.lang)) {
+      resolveResultsPage()
+    }
 }
 // Klaviyo API KEY
 // pk_5a1e956f717f7efdc37cbdf9ca124b1986
@@ -46,22 +222,29 @@ const submitHandler = (event) => {
     event.preventDefault()
     store.step += 1
     store.showRecomendations = true
-    klaviyoRequestHandler()
+    // klaviyoRequestHandler()
     gaEvent('lead_generated');
+
+    if (['EN_IE', 'EN_ZA'].includes(store.lang)) {
+      resolveResultsPage()
+    }
 }
 const submitChildAndParentHandler = (event) => {
     event.preventDefault()
     store.step += 1
     store.showRecomendations = true
-    klaviyoRequestHandler()
+    // klaviyoRequestHandler()
+    gaEvent('lead_generated');
+    if (['EN_IE', 'EN_ZA'].includes(store.lang)) {
+      resolveResultsPage()
+    }
 }
-const localization = reactive({
-    continue: 'Tęsti'
-})
-if (store.lang === 'LV') {
-    localization.continue = 'Turpināt'
-}
+
 const klaviyoRequestHandler = () => {
+    if (store.childEmail === '' && store.parentEmail === '') {
+        return;
+    }
+
     const options = {
         method: 'POST',
         url: 'https://app.digiklase.lt/api/klaviyo/create',
@@ -78,16 +261,11 @@ const klaviyoRequestHandler = () => {
                         email: store.childEmail ? store.childEmail : store.parentEmail,
                         properties: {
                             ResultURL: store.resultUrl,
-                            Persona: store.selectedPersona,
-                            Class: store.selectedClass,
-                            Respondent: store.respondent,
-                            ParentEmail: store.parentEmail,
-                            ChildEmail: store.childEmail,
-                            Goal: store.klaviyoGoal,
-                            Motivation: store.klaviyoMotivation,
-                            Intensity: store.klaviyoIntensity,
-                            StudentLevel: store.klaviyoStudentLevel,
-                            NeededLessons: store.klaviyoNeededLessons
+                            Goal: store.quizAnswers['goal'],
+                            State: store.quizAnswers['state'],
+                            Class: store.quizAnswers['grade'],
+                            CurrentMark: store.quizAnswers['currentMark'],
+                            TargetMark: store.quizAnswers['targetMark'],
                         }
                     }
                 }
@@ -98,7 +276,7 @@ const klaviyoRequestHandler = () => {
     axios
         .request(options)
         .then(function (response) {
-            console.log(response.data)
+            // console.log(response.data)
         })
         .catch(function (error) {
             console.error(error)
@@ -106,9 +284,27 @@ const klaviyoRequestHandler = () => {
 }
 
 onMounted(() => {
-  gaEvent('quiz_email_form');
-  changeUrlPath('/' + store.respondent + '/email')
+  console.log(store.quizAnswers);
+    gaEvent('quiz_email_form');
+    if (['trial', 'paid-trial-2', 'pricing-2'].includes(store.flow) && document.getElementById('continue-btn')) {
+        document.getElementById('continue-btn').disabled = false
+        document.getElementById('continue-btn').click()
+    } else {
+        changeUrlPath('/' + store.respondent + '/email')
+    }
 });
+
+const { t } = useI18n();
+
+let buttonText = t('Continue');
+switch (store.flow) {
+  case 'trial':
+      buttonText = t('ContinueWithTrial');
+      break;
+  case 'paid-trial':
+      buttonText = t('ContinueWithPaidTrial');
+      break;
+}
 
 </script>
 <template>
@@ -119,44 +315,25 @@ onMounted(() => {
     >
         <img src="../assets/images/close-x.svg" width="48" height="48" />
     </button>
-    <h1 v-if="store.lang === 'LT' && store.respondent === 'child' && !store.isChildEmailEntered">
-        Rekomenduosime planą, kuris padėtų pasiekti visų užsibrėžtų tikslų
-    </h1>
-    <h1 v-if="store.lang === 'LV' && store.respondent === 'child' && !store.isChildEmailEntered">
-        Mēs esam izveidojuši personalizētu mācību programmu, kas palīdzēs Tev sasniegt savus mērķus.
-    </h1>
-    <p v-if="store.lang === 'LT' && store.respondent === 'child' && !store.isChildEmailEntered">
-        Kur atsiųsti rezultatus?
-    </p>
-    <p v-if="store.lang === 'LV' && store.respondent === 'child' && !store.isChildEmailEntered">
-        Kādu e-pastu Tu vēlies izmantot, lai pieslēgtos?
-    </p>
-    <h1 v-if="store.lang === 'LT' && store.respondent === 'child' && store.isChildEmailEntered">
-        Pasidalink rezultatais su tėveliais/globėjais ir gauk <span>15 EUR nuolaidą</span> narystei
-        įsigyti!
-    </h1>
-    <h1 v-if="store.lang === 'LV' && store.respondent === 'child' && store.isChildEmailEntered">
-        Aizsūti vecākiem savus rezultātus un saņem <span>15 EUR atlaides</span> kodu abonementam!
-    </h1>
-    <h1 v-if="store.lang === 'LT' && store.respondent === 'parent'">
-        Rekomenduosime planą, kuris padėtų pasiekti visų užsibrėžtų tikslų
-    </h1>
-    <h1 v-if="store.lang === 'LV' && store.respondent === 'parent'">
-        Mēs esam izveidojuši personalizētu mācīšanās programmu, kas palīdzēs Jūsu bērnam sasniegt
-        mērķus.
-    </h1>
-    <p v-if="store.lang === 'LT' && store.respondent === 'parent'">Kur atsiųsti rezultatus?</p>
-    <p v-if="store.lang === 'LV' && store.respondent === 'parent'">
-        Kādu e-pastu Jūs vēlaties izmantot, lai pieslēgtos?
-    </p>
-    <div v-if="store.lang === 'LT' && store.respondent === 'child'">
+    <QuizLogo tw="mx-auto" />
+<!--    <img class="mx-auto pb-5" v-if="store.lang === 'LT'" src="/src/assets/images/digiklase.svg" alt="Digiklase logo"/>-->
+<!--    <img class="mx-auto pb-5" v-if="store.lang === 'LV'" src="/src/assets/images/memby.svg" alt="Memby logo" />-->
+<!--    <img class="mx-auto pb-5" v-if="store.lang === 'EN_IE'" src="/src/assets/images/MathUps.svg" alt="MathUps logo" />-->
+<!--    <img class="mx-auto pb-5" v-if="store.lang === 'EN_ZA'" src="/src/assets/images/MathsUp.svg" alt="MathsUp logo" />-->
+    <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormH1') }}</Heading>
+    <p v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormWhereToSentResults') }}</p>
+    <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'child' && store.isChildEmailEntered" v-html="$t('EmailFormShareResults')"></Heading>
+    <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'parent'">{{ $t('EmailFormWeWillRecommendPlan') }}</Heading>
+    <Label tw="text-center mb-3 md:mb-5" v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</Label>
+<!--    <p v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</p>-->
+    <div v-if="store.respondent === 'child'">
         <input
             v-if="!store.isChildEmailEntered"
             class="digi-input"
             type="email"
             name="child-email"
             id="child-email"
-            placeholder="Tavo el. paštas"
+            :placeholder="$t('EmailFormYourEmail')"
             v-model="store.childEmail"
             style="margin-bottom: 1rem"
         />
@@ -166,15 +343,14 @@ onMounted(() => {
             type="email"
             name="parent-email"
             id="parent-email"
-            placeholder="Tėvelio/globėjo el. paštas"
+            :placeholder="$t('EmailFormYourParentEmail')"
             v-model="store.parentEmail"
             style="margin-bottom: 1rem"
         />
         <div class="privacy-notice">
             <img src="../assets/images/Lock.svg" alt="Lock" />
             <p>
-                Jūsų asmens duomenys pas mus yra saugūs. Beje, nesiunčiame šlamšto ir nesidaliname
-                el. pašto adresais su trečiosiomis šalimis.
+                {{ $t('EmailFormPrivacyNotice') }}
             </p>
         </div>
         <div class="aggree-row" v-if="!store.isChildEmailEntered">
@@ -182,7 +358,7 @@ onMounted(() => {
                 type="checkbox"
                 name="privacy"
                 id="privacy"
-                value="Sutinku su privatumo politika ir naudojimosi taisyklėmis"
+                :value="$t('EmailFormPrivacyValue')"
                 v-model="store.aggreeWithPrivacy"
             />
             <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
@@ -191,11 +367,7 @@ onMounted(() => {
                 alt=""
                 class="custom-checkbox-checked"
             />
-            <label for="privacy" class="aggree-label"
-                >Sutinku su
-                <a href="https://digiklase.lt/privatumo-politika" target="_blank"
-                    >privatumo politika ir naudojimosi taisyklėmis</a
-                ></label
+            <label for="privacy" class="aggree-label" v-html="$t('EmailPrivacyLabel')"></label
             >
         </div>
         <div class="aggree-row" v-if="!store.isChildEmailEntered">
@@ -203,7 +375,7 @@ onMounted(() => {
                 type="checkbox"
                 name="age"
                 id="age"
-                value="Man jau yra 13 metų"
+                :value="$t('EmailForm13YearsValue')"
                 v-model="store.olderThanThirteen"
             />
             <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
@@ -212,178 +384,99 @@ onMounted(() => {
                 alt=""
                 class="custom-checkbox-checked"
             />
-            <label for="age" class="aggree-label">Man jau yra 13 metų</label>
+            <label for="age" class="aggree-label">{{ $t('EmailForm13YearsLabel') }}</label>
         </div>
         <div class="aggree-row" v-if="!store.isChildEmailEntered">
-            <p>
-                *Jeigu tau mažiau nei 13 m., paprašyk tėvelių/globėjų pagalbos užpildyti apklausą.
-            </p>
+            <p>{{ $t('EmailFormNoticeIfLessThan13Years') }}</p>
         </div>
     </div>
-    <div v-if="store.lang === 'LV' && store.respondent === 'child'">
-        <input
-            v-if="!store.isChildEmailEntered"
-            class="digi-input"
-            type="email"
-            name="child-email"
-            id="child-email"
-            placeholder="E-pasts"
-            v-model="store.childEmail"
-            style="margin-bottom: 1rem"
-        />
-        <input
-            v-if="store.isChildEmailEntered"
-            class="digi-input"
-            type="email"
-            name="parent-email"
-            id="parent-email"
-            placeholder="Vecāku / aizbildņa e-pasts"
-            v-model="store.parentEmail"
-            style="margin-bottom: 1rem"
-        />
-        <div class="privacy-notice">
-            <img src="../assets/images/Lock.svg" alt="Lock" />
-            <p>
-                Tavi personīgie dati ir drošībā ar mums. Kā arī mēs nesūtām SPAM ziņas un nedalāmies
-                ar e-pastu adresēm, ar trešajām personām.
-            </p>
-        </div>
-        <div class="aggree-row" v-if="!store.isChildEmailEntered">
-            <input
-                type="checkbox"
-                name="privacy"
-                id="privacy"
-                value="Es piekrītu lietošanas nosacījumiem un privātuma politikai"
-                v-model="store.aggreeWithPrivacy"
-            />
-            <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
-            <img
-                src="../assets/images/checkbox-checked.svg"
-                alt=""
-                class="custom-checkbox-checked"
-            />
-            <label for="privacy" class="aggree-label"
-                >Es piekrītu
-                <a href="https://memby.lv/privatuma-politika" target="_blank"
-                    >lietošanas nosacījumiem un privātuma politikai</a
-                ></label
-            >
-        </div>
-        <div class="aggree-row" v-if="!store.isChildEmailEntered">
-            <input
-                type="checkbox"
-                name="age"
-                id="age"
-                value="Es esmu jau 14 gadus vecs"
-                v-model="store.olderThanThirteen"
-            />
-            <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
-            <img
-                src="../assets/images/checkbox-checked.svg"
-                alt=""
-                class="custom-checkbox-checked"
-            />
-            <label for="age" class="aggree-label">Es esmu jau 14 gadus vecs</label>
-        </div>
-        <div class="aggree-row" v-if="!store.isChildEmailEntered">
-            <p>
-              *Ja Tev vēl nav 14 gadu, palūdz vecākam/aizbildnim aizpildīt aptauju par Tevi
-            </p>
-        </div>
-    </div>
-    <div v-if="store.lang === 'LT' && store.respondent === 'parent'">
+
+    <div v-if="store.respondent === 'parent'">
         <input
             class="digi-input"
             type="email"
             name="parent-email"
             id="parent-email"
-            placeholder="El. paštas"
+            :placeholder="$t('EmailFormYourEmail')"
             v-model="store.parentEmail"
             style="margin-bottom: 1rem"
         />
     </div>
-    <div v-if="store.lang === 'LV' && store.respondent === 'parent'">
-        <input
-            class="digi-input"
-            type="email"
-            name="parent-email"
-            id="parent-email"
-            placeholder="E-pasts"
-            v-model="store.parentEmail"
-            style="margin-bottom: 1rem"
-        />
+
+    <div class="privacy-notice">
+      <img src="../assets/images/Lock.svg" alt="Lock" />
+      <p>
+        {{ $t('EmailFormPrivacyNotice') }}
+      </p>
     </div>
-    <div class="aggree-row" v-if="store.lang === 'LT' && store.respondent === 'parent'">
+
+  <div class="aggree-row" v-if="!store.isChildEmailEntered">
+    <input
+        type="checkbox"
+        name="age"
+        id="age"
+        :value="$t('EmailForm13YearsValue')"
+        v-model="store.olderThanThirteen"
+    />
+    <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
+    <img
+        src="../assets/images/checkbox-checked.svg"
+        alt=""
+        class="custom-checkbox-checked"
+    />
+    <label for="age" class="aggree-label">{{ $t('EmailForm13YearsLabel') }}</label>
+  </div>
+
+    <div class="aggree-row" v-if="store.respondent === 'parent'">
         <input
             type="checkbox"
             name="privacy"
             id="privacy"
-            value="Sutinku su privatumo politika ir naudojimosi taisyklėmis"
+            :value="$t('EmailFormPrivacyValue')"
             v-model="store.aggreeWithPrivacy"
         />
         <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
         <img src="../assets/images/checkbox-checked.svg" alt="" class="custom-checkbox-checked" />
-        <label for="privacy" class="aggree-label"
-            >Sutinku su
-            <a href="https://digiklase.lt/privatumo-politika" target="_blank"
-                >privatumo politika ir naudojimosi taisyklėmis</a
-            ></label
-        >
+        <label for="privacy" class="aggree-label" v-html="$t('EmailPrivacyLabel')"></label>
     </div>
-    <div class="aggree-row" v-if="store.lang === 'LV' && store.respondent === 'parent'">
-        <input
-            type="checkbox"
-            name="privacy"
-            id="privacy"
-            value="Sutinku su privatumo politika ir naudojimosi taisyklėmis"
-            v-model="store.aggreeWithPrivacy"
-        />
-        <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
-        <img src="../assets/images/checkbox-checked.svg" alt="" class="custom-checkbox-checked" />
-        <label for="privacy" class="aggree-label"
-            >Es piekrītu
-            <a href="https://memby.lv/privatuma-politika" target="_blank"
-                >lietošanas nosacījumiem un privātuma politikai.</a
-            ></label
-        >
-    </div>
+
     <button
         v-if="store.respondent === 'child' && !store.isChildEmailEntered"
         type="submit"
-        class="benefit-btn"
+        id="continue-btn"
+        class="benefit-btn mx-auto mb-12"
         style="margin-top: 2rem"
         @click="submitChildEmail($event)"
         :disabled="isChildProceedDisabled"
     >
-        {{ localization.continue }} <img src="../assets/images/arrow-right.svg" alt="" />
+        {{ buttonText }} <img src="../assets/images/arrow-right.svg" alt="" />
     </button>
 
     <button
         v-if="store.respondent === 'parent'"
         type="submit"
-        class="benefit-btn"
+        id="continue-btn"
+        class="benefit-btn mx-auto mb-12"
         style="margin-top: 2rem"
         @click="submitHandler($event)"
         :disabled="isParentProceedDisabled"
     >
-        {{ localization.continue }} <img src="../assets/images/arrow-right.svg" alt="" />
+      {{ buttonText }} <img src="../assets/images/arrow-right.svg" alt="" />
     </button>
     <div class="submit-container" v-if="store.respondent === 'child' && store.isChildEmailEntered">
         <button
             type="submit"
-            class="benefit-btn"
+            id="continue-btn"
+            class="benefit-btn mx-auto mb-12"
             @click="submitChildAndParentHandler($event)"
             :disabled="isParentProceedDisabled"
         >
-            {{ localization.continue }} <img src="../assets/images/arrow-right.svg" alt="" />
+          {{ buttonText }} <img src="../assets/images/arrow-right.svg" alt="" />
         </button>
-        <a href="javascript:void(0)" v-if="store.lang === 'LT'" @click="cancelEmailHandler"
-            >Praleisti</a
-        >
-        <a href="javascript:void(0)" v-if="store.lang === 'LV'" @click="cancelEmailHandler"
-            >Izlaist</a
-        >
+        <a href="javascript:void(0)" v-if="store.lang === 'LT'" @click="cancelEmailHandler">{{ $t('Skip') }}</a>
     </div>
+
+<!--    <ProgramsLoader />-->
 </template>
 
 <style scoped>
