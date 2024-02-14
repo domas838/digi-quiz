@@ -67,10 +67,44 @@ const decorateUrlWithUTMParams = (url) => {
   return url;
 }
 
+const decorateUrlWithSubjectParams = (url) => {
+  if (! (store.quizAnswers['subjects'])) {
+    return url;
+  }
+
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}subjects=${store.quizAnswers['subjects']}`;
+}
+
+const decorateUrlWithPlan = (url) => {
+    if (! store.quizAnswers['subjects']) {
+      return url;
+    }
+
+    const selectedSubjectsArray = store.quizAnswers['subjects'].split(',');
+    const selectedSubjectsLength = selectedSubjectsArray.length;
+
+    let plan = '';
+
+    switch (selectedSubjectsLength) {
+      case 1:
+        plan = 'OneSubjectPlan' ;
+        break;
+      case 2:
+        plan = 'TwoSubjectsPlan';
+        break
+      default:
+        plan = 'AllSubjectsPlan';
+        break;
+    }
+
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}plan=${plan}`;
+}
+
 const resolveResultsPage = () => {
   //TODO RESOLVE RESULT PAGE
   const timetableObject = getTimetableParams();
-  // console.log(store.quizAnswers)
   // Assuming 'store' is a valid object containing quiz answers
   const gradeBefore = encodeURIComponent(store.quizAnswers['currentMark']);
   const gradeAfter = encodeURIComponent(store.quizAnswers['targetMark']);
@@ -131,14 +165,16 @@ const resolveResultsPage = () => {
   }
 
   let url = `https://${host}/${framerPath}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${timePreference}`;
+  url = decorateUrlWithSubjectParams(url)
   url = decorateUrlWithUTMParams(url);
+  url = decorateUrlWithPlan(url);
 
   store.resultUrl = url
 
   klaviyoRequestHandler()
 
   // Redirect to the constructed URL
-  window.location.href = url;
+  // window.location.href = url;
 }
 const submitChildEmail = (event) => {
     event.preventDefault()
@@ -248,6 +284,7 @@ const klaviyoRequestHandler = () => {
 }
 
 onMounted(() => {
+  console.log(store.quizAnswers);
     gaEvent('quiz_email_form');
     if (['trial', 'paid-trial-2', 'pricing-2'].includes(store.flow) && document.getElementById('continue-btn')) {
         document.getElementById('continue-btn').disabled = false
