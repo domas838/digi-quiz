@@ -708,7 +708,7 @@ export const store = reactive({
                     name: 'selected-subjects',
                     Ans: [
                         {title: 'Maths', value: 'maths'},
-                        {title: 'Africaans', value: 'africaans'},
+                        {title: 'Afrikaans', value: 'afrikaans'},
                         {title: 'Natural Science', value: 'natural-science'},
                     ],
                     component: 'multi-select'
@@ -915,7 +915,7 @@ export const store = reactive({
                     name: 'selected-subjects',
                     Ans: [
                         {title: 'Maths', value: 'maths'},
-                        {title: 'Africaans', value: 'africaans'},
+                        {title: 'Afrikaans', value: 'afrikaans'},
                         {title: 'Natural Science', value: 'natural-science'},
                     ],
                     component: 'multi-select'

@@ -296,7 +296,7 @@ const i18n = createI18n({
             BenefitPageH1: 'Tutors who help your child to achieve their goals'
         },
         en_za: {
-            Title: 'Mathsup - quiz',
+            Title: 'Memby - quiz',
             Description: 'Quiz',
             RecommendedPlan: '🙌 Viskas įtraukta į planą:',
             CurrencyMonth: '€/mėn.',
@@ -366,10 +366,10 @@ const i18n = createI18n({
             EmailFormYourEmail: 'Your email',
             EmailFormYourParentEmail: 'Email',
             EmailFormPrivacyNotice: 'Your personal data is safe with us. By the way, we do not send spam or share emails. email addresses with third parties.',
-            EmailFormPrivacyValue: 'I agree to get future information from MathsUp',
-            EmailPrivacyLabel: 'I agree to the <a href="https://mathsup.co.za/privacy-policy" target="_blank">Privacy policy</a>',
-            EmailForm13YearsValue: 'I agree to get future information from MathsUp',
-            EmailForm13YearsLabel: 'I agree to get future information from MathsUp',
+            EmailFormPrivacyValue: 'I agree to get future information from Memby',
+            EmailPrivacyLabel: 'I agree to the <a href="https://memby.org/privacy-policy" target="_blank">Privacy policy</a>',
+            EmailForm13YearsValue: 'I agree to get future information from Memby',
+            EmailForm13YearsLabel: 'I agree to get future information from Memby',
             EmailFormNoticeIfLessThan13Years: '',
             Continue: 'Continue',
             ContinueWithTrial: 'Continue and Start Free Trial',
@@ -381,12 +381,12 @@ const i18n = createI18n({
             GettingThingsReady: 'Getting things ready for you',
             JourneyBegins: ' A Journey Through Infinite Learning Begins',
             TrustedBy: 'Trusted by <b>5 554</b> students',
-            KidHatedMath: 'My kid hated math, but MathsUp made it a breeze. Now, they get it, and I get less stress. Win-win!',
+            KidHatedMath: 'My kid hated math, but Memby made it a breeze. Now, they get it, and I get less stress. Win-win!',
             CollectingResults: 'Collecting your results',
             AnalysingYourResults: 'Analysing your results',
             GeneratingPersonalisedPlan: 'Generating personalised plan',
             ExpertCare: 'You are in expert care',
-            MathsUpHelped: 'MathsUp has helped more than <b>5 554</b> students all over South Africa',
+            MathsUpHelped: 'Memby has helped more than <b>5 554</b> students all over South Africa',
             BenefitPageH1: 'Your teacher: <span class="text-blue">Sandile Mathebula</span>'
         }
     },
