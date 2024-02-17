@@ -161,7 +161,7 @@ const resolveResultsPage = () => {
 
   let host = 'mathups.com';
   if (store.lang === 'EN_ZA') {
-      host = 'new.memby.org';
+      host = 'memby.org';
   }
 
   let url = `https://${host}/${framerPath}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${timePreference}`;
