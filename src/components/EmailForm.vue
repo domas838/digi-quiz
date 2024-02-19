@@ -90,6 +90,7 @@ const resolveResultsPage = () => {
           suffix = '-pricing';
           break;
       case 'checkout':
+      case 'first-month':
           suffix = '-checkout';
           break;
       case 'cashback':
