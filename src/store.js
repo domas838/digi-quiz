@@ -848,7 +848,7 @@ export const store = reactive({
                 {
                     id: 'expectations',
                     qNo: 16,
-                    Q: 'As I progress with Mathups I expect my children to feel:',
+                    Q: 'As I progress with Memby I expect my children to feel:',
                     Ans: [
                         {title: 'Confident', img: '/emoji/😎.svg'},
                         {title: 'Happy', img: '/emoji/🤩_.svg'},
@@ -1058,7 +1058,7 @@ export const store = reactive({
                 {
                     id: 'expectations',
                     qNo: 16,
-                    Q: 'As I progress with Mathups I expect my children to feel:',
+                    Q: 'As I progress with Memby I expect my children to feel:',
                     Ans: [
                         {title: 'Confident', img: '/emoji/😎.svg'},
                         {title: 'Happy', img: '/emoji/🤩_.svg'},
