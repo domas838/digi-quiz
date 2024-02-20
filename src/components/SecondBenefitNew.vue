@@ -1,7 +1,12 @@
 <script setup>
 import { store } from '../store'
-import { changeUrlPath } from "../helpers";
+import {changeUrlPath, getLocaleFromURL} from "../helpers";
 import Heading from "@/components/Typography/Heading.vue";
+import SandileDesktopIMG from '../assets/images/sandile_desktop.png';
+import SandileMobileIMG from '../assets/images/sandile_mobile.png';
+import BrTeacherIMG from '../assets/images/BR teacher.png';
+
+const localeKey = getLocaleFromURL(window.location)
 
 const acceptSecondBenefit = () => {
     store.showSecondBenefit = false
@@ -9,26 +14,27 @@ const acceptSecondBenefit = () => {
     changeUrlPath('/' + store.respondent + '/' + store.step + '/' + store.flow)
 }
 
-const benefits = [
-    '<strong>Tiesioginės pamokų transliacijos</strong>',
-    '<strong>Skiringi sudėtingumo lygiai,</strong> jog galėtum mokytis tau labiausiai tinkančiu tempu',
-    '<strong>Išmaniosios mokymo technologijos</strong> ir gyvi pokalbiai',
-    '<strong>Individualūs testai</strong> pamokų metu žinioms patikrinti',
-    'Visų transliacijų <strong>įrašų archyvas</strong>'
-]
-const benefitsLV = [
-    '<strong>Nodarbības notiek tiešraidē</strong>',
-    '<strong>Dažādu līmeņu grūtības pakāpes, lai vari mācīties savā tempā</strong>',
-    '<strong>Gudras, iesaistošas tehnoloģijas un tiešsaistes čati</strong>',
-    '<strong>Individuāli testi nodarbības laikā, lai pārbaudītu zināšanas</strong>',
-    '<strong>Ierakstu pieeja visām iepriekšējām nodarbībām</strong>'
-]
-
 const benefitsEN = [
     '<strong>Cape Town University</strong> graduate with strong expertise in mathematics.',
     'Global <strong>Best Teacher Award</strong> winner in Dubai 2023.',
     'Teaches math in an easily way, fostering meaningful connections and <strong>motivating students.</strong>'
 ]
+
+const benefitsBR = [
+  '<strong>Professores altamente qualificados,</strong> incluindo graduados das melhores universidades do mundo',
+  '<strong>Personalidades inspiradoras</strong> que podem não apenas contar histórias de forma criativa, mas também gerar discussões interessantes',
+  'Se algumas matérias educacionais ainda forem difíceis de entender, a equipe Mathups estará sempre <strong>pronta para oferecer ajuda extra após a aula</strong>'
+]
+
+const BENEFITS_BULLETS_LOCALE_MAP = {
+  'sa': benefitsEN,
+  'br': benefitsBR
+}
+
+const BENEFITS_IMAGE_MAP = {
+  'sa': {'desktop': SandileDesktopIMG, 'mobile': SandileMobileIMG},
+  'br': {'desktop': BrTeacherIMG, 'mobile': BrTeacherIMG}
+}
 
 </script>
 
@@ -40,8 +46,8 @@ const benefitsEN = [
           <span v-html="$t('BenefitPageH1')" />
         </Heading>
       </div>
-      <div v-if="store.lang === 'EN_IE' || store.lang === 'EN_ZA'">
-        <div class="benefit-row" v-for="(b, index) in benefitsEN" v-bind:key="index">
+      <div>
+        <div class="benefit-row" v-for="(b, index) in BENEFITS_BULLETS_LOCALE_MAP[localeKey]" v-bind:key="index">
           <div class="icon">
             <img class="min-w-[30px]" src="../assets/images/Description.svg" alt="" />
           </div>
@@ -55,54 +61,7 @@ const benefitsEN = [
         <img src="../assets/images/arrow-right.svg" alt="Next" />
       </button>
     </div>
-    <img src="../assets/images/sandile_dekstop.png" alt="sandile" class="hidden sm:block max-h-[700px]" />
-    <img src="../assets/images/sandile_mobile.png" alt="sandile" class="w-full sm:hidden" />
+    <img :src="BENEFITS_IMAGE_MAP[localeKey]['desktop']" alt="teacher" class="hidden sm:block max-h-[700px]" />
+    <img :src="BENEFITS_IMAGE_MAP[localeKey]['mobile']" alt="teacher" class="w-full sm:hidden" />
   </div>
-
-<!--  <div class="container yellow">-->
-<!--        <div class="benefit-container">-->
-<!--            <Heading level="2" class="text-left">-->
-<!--                {{ $t('BenefitPageH1') }}-->
-<!--            </Heading>-->
-<!--            <div v-if="store.lang === 'LT'">-->
-<!--                <div class="benefit-row" v-for="(b, index) in benefits" v-bind:key="index">-->
-<!--                    <div class="icon">-->
-<!--                      <img class="min-w-[30px]" src="../assets/images/Description.svg" alt="" />-->
-<!--                    </div>-->
-<!--                    <div class="content">-->
-<!--                        <p v-html="b"></p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div v-if="store.lang === 'LV'">-->
-<!--                <div class="benefit-row" v-for="(b, index) in benefitsLV" v-bind:key="index">-->
-<!--                    <div class="icon">-->
-<!--                      <img class="min-w-[30px]" src="../assets/images/Description.svg" alt="" />-->
-<!--                    </div>-->
-<!--                    <div class="content">-->
-<!--                        <p v-html="b"></p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div v-if="store.lang === 'EN_IE' || store.lang === 'EN_ZA'">-->
-<!--              <div class="benefit-row" v-for="(b, index) in benefitsEN" v-bind:key="index">-->
-<!--                <div class="icon">-->
-<!--                  <img class="min-w-[30px]" src="../assets/images/Description.svg" alt="" />-->
-<!--                </div>-->
-<!--                <div class="content">-->
-<!--                  <p v-html="b"></p>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <button @click="acceptSecondBenefit()" class="benefit-btn">-->
-<!--                {{ $t('Continue') }}-->
-<!--                <img src="../assets/images/arrow-right.svg" alt="Next" />-->
-<!--            </button>-->
-
-<!--            <img v-if="store.lang === 'LT'" src="../assets/images/classroom.png" alt="" class="classroom-visual" />-->
-<!--            <img v-if="store.lang === 'LV'" src="../assets/images/classroom-lv.png" alt="" class="classroom-visual" />-->
-<!--            <img v-if="store.lang === 'EN_IE'" src="../assets/images/teacher-mathups2.png" alt="" class="classroom-visual" />-->
-<!--            <img v-if="store.lang === 'EN_ZA'" src="../assets/images/teacher-mathups2.png" alt="" class="classroom-visual" />-->
-<!--        </div>-->
-<!--    </div>-->
 </template>

@@ -13,7 +13,7 @@ export const store = reactive({
     isShowingBenefit: false,
     isSubjectNotSelected: true,
     respondent: null,
-    flow: 'pricing',
+    flow: 'checkout',
     selectedClass: null,
     showFirstBenefit: false,
     showSecondBenefit: false,
@@ -1102,5 +1102,416 @@ export const store = reactive({
                 }
             ]
         },
+        PT_BR: {
+            child: [
+                {
+                    id: 'grade',
+                    qNo: 1,
+                    Q: 'Select your gradee?',
+                    Ans: [
+                        {title: '5th'},
+                        {title: '6th'},
+                        {title: '7th'},
+                        {title: '8th'},
+                        {title: '9th'},
+                        {title: '10th'},
+                        {title: '11th'},
+                        {title: '12th'},
+                    ],
+                    component: 'grid'
+                },
+                {
+                    id: 'subjects',
+                    qNo: 2,
+                    Q: 'Mark the subjects you would like to study?',
+                    name: 'selected-subjects',
+                    Ans: [
+                        {title: 'Maths', value: 'maths'},
+                        {title: 'Afrikaans', value: 'afrikaans'},
+                        {title: 'Natural Science', value: 'natural-science'},
+                    ],
+                    component: 'multi-select'
+                },
+                {
+                    id: 'goal',
+                    qNo: 3,
+                    Q: "What program do you follow?",
+                    Ans: [
+                        {title: 'IEB (usually in private schools)', img: '/emoji/🔸.svg'},
+                        {title: 'CAPS (usually in government schools)', img: '/emoji/🔹.svg'},
+                        {title: 'I don\'t know', img: '/emoji/🔻.svg'},
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'goal',
+                    qNo: 4,
+                    Q: 'What is your primary goal?',
+                    Ans: [
+                        {title: 'Improve Marks', img: '/emoji/🚀.svg'},
+                        {title: 'Maintain High Marks', img: '/emoji/🤓.svg'},
+                        {title: 'Test Prep', img: '/emoji/📝.svg'},
+                        {title: 'Prepare for Contest', img: '/emoji/🏅.svg'},
+                        {title: 'Something Else', img: '/emoji/🤷_♂️.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'preferredTimeWorkdays',
+                    qNo: 5,
+                    Q: 'What times you can join lessons during workdays?',
+                    component: 'timetable',
+                    days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+                    times: [{from: 3, to: 5, dayPeriod: 'PM'}, {from: 5, to: 7, dayPeriod: 'PM'}, {from: 7, to: 9, dayPeriod: 'PM'}],
+                    variableName: 'preferredTimeWorkdays'
+                },
+                {
+                    id: 'preferredTimeWeekends',
+                    qNo: 6,
+                    Q: 'What times you can join lessons on weekends?',
+                    component: 'timetable',
+                    days: ['Sat', 'Sun'],
+                    times: [{from: 10, to: 12, dayPeriod: 'AM'}, {from: 12, to: 2, dayPeriod: 'PM'}, {from: 2, to: 4, dayPeriod: 'PM'}],
+                    variableName: 'preferredTimeWeekends'
+                },
+                {
+                    qNo: 7,
+                    component: 'loader'
+                },
+                { id: 'currentMark',
+                    qNo: 8, Q: "Your Child's Current Mark", Ans: [
+                        {title: 'A'},
+                        {title: 'B'},
+                        {title: 'C'},
+                        {title: 'D'},
+                        {title: 'E'},
+                        {title: 'F'}
+                    ], component: 'grid'
+                },
+                { id: 'targetMark',
+                    qNo: 9, Q: "Your Child’s Target Mark", Ans: [
+                        {title: 'A'},
+                        {title: 'B'},
+                        {title: 'C'},
+                        {title: 'D'},
+                        {title: 'E'},
+                        {title: 'F'}
+                    ], component: 'grid'
+                },
+                {
+                    id: 'studyHours',
+                    qNo: 10,
+                    Q: 'How many hours a day your child study after school?',
+                    Ans: [
+                        {title: '0 hours, school is enough', img: '/emoji/😎.svg'},
+                        {title: 'Around 1 - 2 hours/day', img: '/emoji/🤓.svg'},
+                        {title: 'More than 3 hours/day', img: '/emoji/🔥.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'motivation',
+                    qNo: 11,
+                    Q: 'What motivates your kid to study?',
+                    Ans: [
+                        {title: 'Excitement about scoring goals in school', img: '/emoji/🏅.svg'},
+                        {title: 'Loves exploring and discovering cool new stuff', img: '/emoji/🧪_.svg'},
+                        {title: 'Gets a boost from happy encouragement at home', img: '/emoji/👨_👩_👧_👦.svg'},
+                        {title: 'Dreams of awesome careers', img: '/emoji/💼.svg'},
+                        {title: 'Having fun with friends while learning', img: '/emoji/🤪.svg'},
+                        {title: 'Child is not motivated', img: '/emoji/😶.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'transformMotivation',
+                    qNo: 12,
+                    Q: 'In what way your child’s motivation transforms over time?',
+                    Ans: [
+                        {title: 'Motivation disappears', img: '/emoji/🌚.svg'},
+                        {title: 'It has up’s and down’s', img: '/emoji/🎢_.svg'},
+                        {title: 'It is constant', img: '/emoji/🌞.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    qNo: 13,
+                    component: 'firstBenefit'
+                },
+                {
+                    id: 'focus',
+                    qNo: 14,
+                    Q: 'How hard is to focus for your child?',
+                    Ans: [
+                        {title: 'Very easy', img: '/emoji/😊.svg'},
+                        {title: 'Easy', img: '/emoji/🙂_.svg'},
+                        {title: 'Neutral', img: '/emoji/😶.svg'},
+                        {title: 'Hard', img: '/emoji/😑.svg'},
+                        {title: 'Very hard', img: '/emoji/🫤.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'focusInClass',
+                    qNo: 15,
+                    Q: 'Does your kid gets distracted by other students in a class?',
+                    Ans: [
+                        {title: 'Strongly agree', img: '/emoji/😊.svg'},
+                        {title: 'Agree', img: '/emoji/🙂_.svg'},
+                        {title: 'Neither agree not disagree', img: '/emoji/😶.svg'},
+                        {title: 'Disagree', img: '/emoji/😑.svg'},
+                        {title: 'Strongly disagree', img: '/emoji/🫤.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'expectations',
+                    qNo: 16,
+                    Q: 'As I progress with Memby I expect my children to feel:',
+                    Ans: [
+                        {title: 'Confident', img: '/emoji/😎.svg'},
+                        {title: 'Happy', img: '/emoji/🤩_.svg'},
+                        {title: 'Peaceful', img: '/emoji/😌.svg'},
+                        {title: 'Energised', img: '/emoji/⚡️.svg'},
+                        {title: 'Other', img: '/emoji/⏩️.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'sessions',
+                    qNo: 17,
+                    Q: 'How frequently and for what duration are you seeking tutoring sessions?',
+                    Ans: [
+                        {title: 'Daily', img: '/emoji/😎.svg'},
+                        {title: 'Few times a week', img: '/emoji/🤩_.svg'},
+                        {title: 'Weekends only', img: '/emoji/😌.svg'},
+                        {title: 'Other', img: '/emoji/⏩️.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'learningStyle',
+                    qNo: 18,
+                    Q: 'Does your child have a preferred learning style?',
+                    name: 'learning-styles',
+                    Ans: [
+                        {title: 'Visual learner', value: 'Visual learner', img: '/emoji/👀.svg'},
+                        {title: 'Auditory learner', value: 'Auditory learner', img: '/emoji/👂.svg'},
+                        {title: 'Kinesthetic/Tactile Learner', value: 'Kinesthetic/Tactile Learner', img: '/emoji/🫳.svg'},
+                        {title: 'Reading/Writing Learner', value: 'Reading/Writing Learner', img: '/emoji/📚️.svg'},
+                        {title: 'Social Learner', value: 'Social Learner', img: '/emoji/🙋_♂️️.svg'},
+                        {title: 'Solitary/Individual Learner', value: 'Solitary/Individual Learner', img: '/emoji/☝️️.svg'},
+                        {title: 'I don’t know', value: 'I don’t know', img: '/emoji/🤷_♀️️.svg'},
+                    ],
+                    component: 'multi-select'
+                },
+                {
+                    qNo: 19,
+                    component: 'final-results'
+                }
+            ],
+            parent: [
+                {
+                    id: 'grade',
+                    qNo: 1,
+                    Q: 'Selecione a série da criança',
+                    Ans: [
+                        {title: '8º ano'},
+                        {title: '9º ano'},
+                        {title: '1º ano do ensino médio'},
+                        {title: '2º ano do ensino médio'},
+                        {title: '3º ano do ensino médio'},
+                    ],
+                    component: 'radio-class-select-centered'
+                },
+                // {
+                //     id: 'subjects',
+                //     qNo: 2,
+                //     Q: 'Mark the subjects you would like to study?',
+                //     name: 'selected-subjects',
+                //     Ans: [
+                //         {title: 'Maths', value: 'maths'},
+                //         {title: 'Afrikaans', value: 'afrikaans'},
+                //         {title: 'Natural Science', value: 'natural-science'},
+                //     ],
+                //     component: 'multi-select'
+                // },
+                {
+                    id: 'goal',
+                    qNo: 2,
+                    Q: "Qual programa você segue?",
+                    Ans: [
+                        {title: 'ENEM (Exame Nacional do Ensino Médio)', img: '/emoji/🔸.svg'},
+                        {title: 'PCN (Parâmetros Curriculares Nacionais)', img: '/emoji/🔹.svg'},
+                        {title: 'Currículos de Escolas Particulares', img: '/emoji/🔺.png'},
+                        {title: 'Não sei', img: '/emoji/🔻.svg'},
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'goal',
+                    qNo: 3,
+                    Q: "Qual é o seu principal objetivo?",
+                    Ans: [
+                        {title: 'Melhorar notas', img: '/emoji/🚀.svg'},
+                        {title: 'Manter notas altas', img: '/emoji/🤓.svg'},
+                        {title: 'Preparação para testes', img: '/emoji/📝.svg'},
+                        {title: 'Preparar-se para competição', img: '/emoji/🏅.svg'},
+                        // {title: 'To excel and achieve top performance', img: '/emoji/🔥.svg'},
+                        {title: 'Outro', img: '/emoji/🤷_♂️.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'preferredTimeWorkdays',
+                    qNo: 4,
+                    Q: 'Em que horários você pode participar das aulas durante os dias úteis?',
+                    component: 'timetable',
+                    days: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
+                    times: [{from: 3, to: 5, dayPeriod: 'PM'}, {from: 5, to: 7, dayPeriod: 'PM'}, {from: 7, to: 9, dayPeriod: 'PM'}],
+                    variableName: 'preferredTimeWorkdays'
+                },
+                {
+                    id: 'preferredTimeWeekends',
+                    qNo: 5,
+                    Q: 'Em que horários você pode participar das aulas nos finais de semana?',
+                    component: 'timetable',
+                    days: ['Sab', 'Dom'],
+                    times: [{from: 10, to: 12, dayPeriod: 'AM'}, {from: 12, to: 2, dayPeriod: 'PM'}, {from: 2, to: 4, dayPeriod: 'PM'}],
+                    variableName: 'preferredTimeWeekends'
+                },
+                {
+                    qNo: 6,
+                    component: 'loader'
+                },
+                { id: 'currentMark',
+                    qNo: 7, Q: "A média atual do seu filho", Ans: [
+                        {title: '10-9'},
+                        {title: '8-7'},
+                        {title: '6-5'},
+                        {title: '4-0'}
+                    ], component: 'grid'
+                },
+                { id: 'targetMark',
+                    qNo: 8, Q: "A meta de média do seu filho", Ans: [
+                        {title: '10-9'},
+                        {title: '8-7'},
+                        {title: '6-5'},
+                        {title: '4-0'}
+                    ], component: 'grid'
+                },
+                {
+                    id: 'studyHours',
+                    qNo: 9,
+                    Q: 'Quantas horas por dia seu filho estuda após a escola?',
+                    Ans: [
+                        {title: '0 horas, escola é suficiente', img: '/emoji/😎.svg'},
+                        {title: '1-2 horas por dia', img: '/emoji/🤓.svg'},
+                        {title: 'Mais de 3 horas por dia', img: '/emoji/🔥.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'motivation',
+                    qNo: 10,
+                    Q: 'O que motiva seu filho a estudar?',
+                    Ans: [
+                        {title: 'Entusiasmo em alcançar metas na escola', img: '/emoji/🏅.svg'},
+                        {title: 'Ama explorar e descobrir coisas novas e legais', img: '/emoji/🧪_.svg'},
+                        {title: 'Recebe estímulo através de incentivo feliz em casa', img: '/emoji/👨_👩_👧_👦.svg'},
+                        {title: 'Sonhos de carreiras incríveis', img: '/emoji/💼.svg'},
+                        {title: 'Se divertir com os amigos enquanto aprende', img: '/emoji/🤪.svg'},
+                        {title: 'A criança não está motivada', img: '/emoji/😶.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'transformMotivation',
+                    qNo: 11,
+                    Q: 'De que forma a motivação do seu filho se transforma ao longo do tempo?',
+                    Ans: [
+                        {title: 'A motivação desaparece', img: '/emoji/🌚.svg'},
+                        {title: 'Tem seus altos e baixos', img: '/emoji/🎢_.svg'},
+                        {title: 'É constante', img: '/emoji/🌞.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    qNo: 12,
+                    component: 'firstBenefit'
+                },
+                {
+                    id: 'focus',
+                    qNo: 13,
+                    Q: 'O quão difícil é se concentrar para o seu filho?',
+                    Ans: [
+                        {title: 'Muito fácil', img: '/emoji/😊.svg'},
+                        {title: 'Fácil', img: '/emoji/🙂_.svg'},
+                        {title: 'Neutro', img: '/emoji/😶.svg'},
+                        {title: 'Difícil', img: '/emoji/😑.svg'},
+                        {title: 'Muito difícil', img: '/emoji/🫤.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'focusInClass',
+                    qNo: 14,
+                    Q: 'O seu filho é distraído por outros alunos na sala de aula?',
+                    Ans: [
+                        {title: 'Concordo totalmente', img: '/emoji/😊.svg'},
+                        {title: 'Concordo', img: '/emoji/🙂_.svg'},
+                        {title: 'Nem concordo ou discordo', img: '/emoji/😶.svg'},
+                        {title: 'Discordo', img: '/emoji/😑.svg'},
+                        {title: 'Discordo totalmente', img: '/emoji/🫤.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'expectations',
+                    qNo: 15,
+                    Q: 'Ao progredir com Memby espero que meus filhos se sintam',
+                    Ans: [
+                        {title: 'Confiantes', img: '/emoji/😎.svg'},
+                        {title: 'Felizes', img: '/emoji/🤩_.svg'},
+                        {title: 'Tranquilos', img: '/emoji/😌.svg'},
+                        {title: 'Energizados', img: '/emoji/⚡️.svg'},
+                        {title: 'Outro', img: '/emoji/⏩️.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'sessions',
+                    qNo: 16,
+                    Q: 'Com que frequência e por quanto tempo você está buscando sessões de tutoria?',
+                    Ans: [
+                        {title: 'Diariamente', img: '/emoji/😎.svg'},
+                        {title: 'Algumas vezes por semana', img: '/emoji/🤩_.svg'},
+                        {title: 'Somente nos finais de semana', img: '/emoji/😌.svg'},
+                        {title: 'Outro', img: '/emoji/⏩️.svg'}
+                    ],
+                    component: 'radio'
+                },
+                {
+                    id: 'learningStyle',
+                    qNo: 17,
+                    Q: 'Seu filho tem um estilo de aprendizagem preferido?',
+                    name: 'learning-styles',
+                    Ans: [
+                        {title: 'Aprendiz visual', value: 'Visual learner'},
+                        {title: 'Aprendiz auditivo', value: 'Auditory learner'},
+                        {title: 'Aprendiz cinestésico/tátil', value: 'Kinesthetic/Tactile Learner'},
+                        {title: 'Aprendiz de leitura/escrita', value: 'Reading/Writing Learner'},
+                        {title: 'Aprendiz social', value: 'Social Learner'},
+                        {title: 'Aprendiz solitário/individual', value: 'Solitary/Individual Learner'},
+                        {title: 'Não sei', value: 'I don’t know'},
+                    ],
+                    component: 'multi-select'
+                },
+                {
+                    qNo: 18,
+                    component: 'final-results'
+                }
+            ]
+        }
     }
 })

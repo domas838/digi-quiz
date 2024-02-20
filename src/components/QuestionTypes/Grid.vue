@@ -65,16 +65,6 @@ const targetMarkArray = () => {
           {{ answer.title }}
         </button>
       </div>
-<!--      <div class="answer__buttons-wrapper grade" v-if="store.lang === 'LV'">-->
-<!--        <button-->
-<!--            v-for="(classNo, index) in ['5', '6', '7', '8', '9', '10', '11', '12']"-->
-<!--            :key="index"-->
-<!--            class="answer__btn"-->
-<!--            @click="selectClass(classNo)"-->
-<!--        >-->
-<!--          {{ classNo }}-->
-<!--        </button>-->
-<!--      </div>-->
     </div>
   </div>
 </template>

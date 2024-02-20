@@ -13,6 +13,7 @@ import AutocompleteInput from "@/components/AutocompleteInput.vue";
 import PreferredTimesTable from "@/components/PreferredTimesTable.vue";
 import LoadingPage from "@/components/LoadingPage.vue";
 import ResultsCalculator from "@/components/ResultsCalculator.vue";
+import RadioClassSelectCentered from "@/components/QuestionTypes/RadioClassSelectCentered.vue";
 
 const props = defineProps(['questions', 'next'])
 
@@ -177,6 +178,10 @@ const selectAnswer = (answerIndex) => {
 <template>
   <div v-if="! store.showRecomendations" class="py-9 sm:py-16">
     <div v-for="(q, index) in props.questions" :key="index">
+      <QuestionLayout v-if="q.component === 'radio-class-select-centered' && q.qNo === store.step">
+        <RadioClassSelectCentered :q="q" :questions="props.questions" :next="next"/>
+      </QuestionLayout>
+
       <QuestionLayout v-if="q.component === 'grid' && q.qNo === store.step">
         <Grid :q="q" :questions="props.questions" :next="next"/>
       </QuestionLayout>

@@ -1,15 +1,22 @@
 import { createI18n } from 'vue-i18n'
+import {getLocaleFromURL} from "@/helpers";
 
-const host = window.location.hostname;
-const domainLocaleMap = {
-    'quiz.memby.lv': 'lv',
-    'quiz.digiklase.lt': 'lt',
-    'quiz.mathups.com': 'en_ie',
-    'quiz.memby.org': 'en_za',
-    'localhost': 'en_za'
-};
+const localeKey = getLocaleFromURL(window.location)
 
-const detectedLocale = domainLocaleMap[host] || 'lt';
+// const domainLocaleMap = {
+//     'quiz.memby.lv': 'lv',
+//     'quiz.digiklase.lt': 'lt',
+//     'quiz.mathups.com': 'en_ie',
+//     'quiz.memby.org': 'en_za',
+//     'localhost': 'pt_br'
+// };
+
+const LOCALE_KEY_LANGUAGE_MAP = {
+    'sa': 'en_za',
+    'br': 'pt_br'
+}
+
+const detectedLocale =  LOCALE_KEY_LANGUAGE_MAP[localeKey] || 'en_za';
 
 const i18n = createI18n({
     legacy: false,
@@ -387,7 +394,105 @@ const i18n = createI18n({
             GeneratingPersonalisedPlan: 'Generating personalised plan',
             ExpertCare: 'You are in expert care',
             MathsUpHelped: 'Memby has helped more than <b>5 554</b> students all over South Africa',
-            BenefitPageH1: 'Your teacher: <span class="text-blue">Sandile Mathebula</span>'
+            BenefitPageH1: 'Your teacher: <span class="text-blue">Sandile Mathebula</span>',
+            SeePersonalisedPlan: 'See personalised plan',
+            ReviewName: 'Brian J'
+        },
+        pt_br: {
+            Title: 'Memby - Quiz',
+            Description: 'Quiz',
+            RecommendedPlan: '🙌 Viskas įtraukta į planą:',
+            CurrencyMonth: '€/mėn.',
+            OneSubjectPlan: '„1 dalyko planas“',
+            TwoSubjectsPlan: '„2 dalykų planas“',
+            AllSubjectsPlan: '„Visi mokykliniai dalykai ir visi būreliai“',
+            From: 'Nuo',
+            SevenDaysTrial: '7 dienu izmēģinājums',
+            AKlaviyoStudentLevel: 'aukštesnis (dirbsime su įdomesniu ir nestandartiniu turiniu)',
+            BKlaviyoStudentLevel: 'vidutinis (planuojama pasiekti iki 2 balų geresnį pažymį per 3 mėnesius)',
+            CKlaviyoStudentLevel: 'žemesnis (planuojama pasiekti 2 balais geresnius pažymius, vos per 2 mėnesius)',
+            KlaviyoAmbitiousGoal: 'pasiruošti egzaminams',
+            KlaviyoExamOrientedGoal: 'pagerinti pažymius ir ištaisyti spragas',
+            KlaviyoStrugglingGoal: 'tobulėti dominančiuose dalykuose',
+            KlaviyoBusyMultiTaskerGoal: 'subalansuoti papildomą mokymąsi su hobiais ir kitais užsiėmimais',
+            KlaviyoAmbitiousMotivation: 'ideali (nuolat ieškoma kažko naujo)',
+            KlaviyoExamOrientedMotivation: 'gera (daugiau dėmesio skiriama testams, egzaminų rezultatams)',
+            KlaviyoStrugglingMotivation: 'vidutiniška (norima pasigerinti pažymius, bet ne visada randama noro)',
+            KlaviyoBusyMultiTaskerMotivation: 'žemesnė, nei vidutinė (priklauso nuo to, kiek laisvo turima)',
+            KlaviyoIntensityTier1: 'maždaug 1 valandą per savaitę',
+            KlaviyoIntensityTier2: 'apie 2 valandas per savaitę',
+            KlaviyoIntensityTier3: 'daugiau nei 3 valandas per savaitę',
+            LiveLessonsPerWeek: 'GYVA pam./sav',
+            LiveLessonsPerWeekPlural: 'GYVOS pam./sav',
+            ReadMore: 'Daugiau',
+            VimeoExplainerLink: 'https://player.vimeo.com/video/675895976?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479',
+            CalculatingResults: 'Calculando seus resultados...',
+            WeRecommendingThesePrograms: 'Rekomenduojame mokytis pagal šias programas:',
+            AllPlansUrl: 'https://app.digiklase.lt/plans/choose',
+            AllProgramsAreIncludedInPlan: 'Visos programos yra įtrauktos į plano kainą 🙌',
+            ProgramsWhichYouGet: 'Programos, kurias gausi',
+            NextLive: 'Kita <span class="italic">GYVA</span> pamoka: ',
+            Timetable: 'Tvarkaraštis',
+            TimetableNote: 'Suasmeninome tvarkaraštį pagal parinktas programas',
+            MyTimetable: 'Mano tvarkaraštis',
+            AllTimetable: 'Bendras tvarkaraštis',
+            ReviewPlan: 'Peržiūrėti planą',
+            TotalLessons: 'Viso pamokų: ',
+            NineMonthsProgram: '9 mėn. trukmės pamoka',
+            PromiseSubHeader: 'Sukūrėme tau mokymosi planą, kuris padės pasiekti užsibrėžtų tikslų!',
+            ChooseYourPlan: 'Pasirinkti planą',
+            ChooseYourPlanSubHeader: 'Nėra geresnio laiko negu DABAR pradėti siekti savo tikslų 🎯',
+            SpecialOffer: 'Specialus pasiūlymas',
+            WillBeChargedEveryMonth: 'will be charged every month',
+            GetItNow: 'Pirkti dabar',
+            SpecialDeal: 'Specialus -15 € pasiūlymas aktyvuotas!',
+            OnlyFirstMonthDiscount: '*nuolaida taikoma pirmam mėnesiui',
+            Now: 'dabar',
+            Later: 'vėliau',
+            ThisOfferValidFor: 'Šis pasiūlymas galioja: ',
+            hours: 'h',
+            minutes: 'min',
+            seconds: 's',
+            days: 'd',
+            OneMonth: '1 mėnuo',
+            ThreeMonths: '3 mėnesiai',
+            NineMonths: '9 mėnesiai',
+            NovemberDealTimer: '💣 JUODASIS <span style="color: #6B6B6B; text-decoration: line-through">PENKTADIENIS</span> LAPKRITIS -> 60% nuolaida!',
+            NovemberDealTimerFull: '💣 JUODASIS <span style="color: #6B6B6B; text-decoration: line-through">PENKTADIENIS</span> LAPKRITIS -> 60% nuolaida visų dalykų planui!',
+            WelcomeH1: 'Fill out a short questionnaire <br /> and get specially <span>MathsUp <br />offer</span>',
+            ChooseRole: 'Choose role',
+            StudentRole: 'Student',
+            ParentRole: 'Parent',
+            EmailFormH1: 'Criamos um plano personalizado que lhe ajudará a alcançar o seu objetivo.',
+            EmailFormWhereToSentResults: 'Qual email gostaria de utilizar para acessar?',
+            EmailFormWeWillRecommendPlan: 'Criamos um plano personalizado que lhe ajudará a alcançar o seu objetivo.',
+            EmailFormYourEmail: 'Seu email',
+            EmailFormYourParentEmail: 'Email',
+            EmailFormPrivacyNotice: 'Seus dados pessoais estão seguros conosco. A propósito, não enviamos spam nem compartilhamos e-mails e endereços de e-mail com terceiros.',
+            EmailFormPrivacyValue: 'Concordo em receber futuras informações da Memby',
+            EmailPrivacyLabel: 'Concordo com a <a href="https://memby.org/br/privacy-policy" target="_blank">política de privacidade</a>',
+            EmailForm13YearsValue: 'Concordo em receber futuras informações da Memby',
+            EmailForm13YearsLabel: 'Concordo em receber futuras informações da Memby',
+            EmailFormNoticeIfLessThan13Years: '',
+            Continue: 'Continue',
+            ContinueWithTrial: 'Continue and Start Free Trial',
+            ContinueWithPaidTrial: 'Try 7 days for R20!',
+            Skip: 'Skip',
+            SelectAll: 'Selecione tudo',
+            SelectState: '-- Select state --',
+            JustAMoment: 'Só um momento',
+            GettingThingsReady: 'Estamos preparando tudo para você',
+            JourneyBegins: 'Começa um jornada de aprendizado infinito',
+            TrustedBy: 'Aprovado por <b>15 554</b> estudantes',
+            KidHatedMath: 'Meu filho odiava matemática, mas Memby tornou tudo mais fácil e agora ele entende, e eu fico menos estressado. Vitória para ambos!',
+            CollectingResults: 'Coletando seus resultados',
+            AnalysingYourResults: 'Analisando seus resultados',
+            GeneratingPersonalisedPlan: 'Analisando seus resultados',
+            ExpertCare: 'You are in expert care',
+            MathsUpHelped: 'Memby has helped more than <b>5 554</b> students all over South Africa',
+            BenefitPageH1: 'Professores que te ajudam a alcançar os seus objetivos',
+            SeePersonalisedPlan: 'Ver plano personalizado',
+            ReviewName: 'Ricardo P'
         }
     },
 })

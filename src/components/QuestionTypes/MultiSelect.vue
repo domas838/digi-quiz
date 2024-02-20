@@ -61,7 +61,6 @@ const proceedWithMultipleSelection = (name) => {
       <span><input type="checkbox" :name="q.name" :value="answer.value" />
         <img src="../../assets/images/checkbox.svg" alt="" class="custom-checkbox"/>
         <img src="../../assets/images/checkbox-checked.svg" alt="" class="custom-checkbox-checked"/>
-<!--                            ../assets/images/emoji/Q4_matematika.svg-->
         <img v-if="answer.img" :src="answer.img" alt="" class="emoji"/>
       </span>
       {{ answer.title }}

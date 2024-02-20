@@ -2,9 +2,7 @@
 import {store} from "@/store";
 import {changeUrlPath} from "@/helpers";
 import {onMounted} from "vue";
-import Logo from "@/components/Logo.vue";
 const respondentChildHandler = () => {
-
   store.step = 1
   store.respondent = 'child'
   changeUrlPath('/' + store.respondent + '/' + store.step + '/' + store.flow)
@@ -20,8 +18,11 @@ onMounted(() => {
     store.respondent = 'parent'
 
     const explodedPath = new URL(window.location.href).pathname.split('/');
-    if (['trial', 'price', 'paid-trial', 'pricing-2', 'paid-trial-2', 'checkout', 'cashback'].includes(explodedPath[3])) {
-        store.flow = explodedPath[3];
+
+    if (['trial', 'price', 'paid-trial', 'pricing-2', 'paid-trial-2', 'checkout', 'cashback'].includes(explodedPath[4])) {
+        store.flow = explodedPath[4];
+    } else if (['trial', 'price', 'paid-trial', 'pricing-2', 'paid-trial-2', 'checkout', 'cashback'].includes(explodedPath[3])) {
+      store.flow = explodedPath[3];
     }
   }
 

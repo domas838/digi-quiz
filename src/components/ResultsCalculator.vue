@@ -78,7 +78,7 @@ const localState = reactive({
                 </svg>
             </div>
             <div>{{ $t('KidHatedMath') }}</div>
-            <div class="font-bold">Brian J</div>
+            <div class="font-bold">{{ $t('ReviewName') }}</div>
         </div>
     </div>
 </template>
