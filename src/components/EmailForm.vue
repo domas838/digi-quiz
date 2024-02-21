@@ -3,7 +3,7 @@ import { store } from '../store'
 import {computed, onMounted} from 'vue'
 import axios from 'axios'
 import {event as gaEvent} from "vue-gtag";
-import {changeUrlPath, getLocaleFromURL} from "../helpers";
+import {changeUrlPath} from "../helpers";
 import {useI18n} from "vue-i18n";
 import QuizLogo from "@/components/QuizLogo.vue";
 import Heading from "@/components/Typography/Heading.vue";
@@ -67,43 +67,10 @@ const decorateUrlWithUTMParams = (url) => {
   return url;
 }
 
-const decorateUrlWithSubjectParams = (url) => {
-  if (! (store.quizAnswers['subjects'])) {
-    return url;
-  }
-
-  const separator = url.includes('?') ? '&' : '?';
-  return `${url}${separator}subjects=${store.quizAnswers['subjects']}`;
-}
-
-const decorateUrlWithPlan = (url) => {
-    if (! store.quizAnswers['subjects']) {
-      return url;
-    }
-
-    const selectedSubjectsArray = store.quizAnswers['subjects'].split(',');
-    const selectedSubjectsLength = selectedSubjectsArray.length;
-
-    let plan = '';
-
-    switch (selectedSubjectsLength) {
-      case 1:
-        plan = 'OneSubjectPlan' ;
-        break;
-      case 2:
-        plan = 'TwoSubjectsPlan';
-        break
-      default:
-        plan = 'AllSubjectsPlan';
-        break;
-    }
-
-  const separator = url.includes('?') ? '&' : '?';
-  return `${url}${separator}plan=${plan}`;
-}
-
 const resolveResultsPage = () => {
+  //TODO RESOLVE RESULT PAGE
   const timetableObject = getTimetableParams();
+  // console.log(store.quizAnswers)
   // Assuming 'store' is a valid object containing quiz answers
   const gradeBefore = encodeURIComponent(store.quizAnswers['currentMark']);
   const gradeAfter = encodeURIComponent(store.quizAnswers['targetMark']);
@@ -123,6 +90,7 @@ const resolveResultsPage = () => {
           suffix = '-pricing';
           break;
       case 'checkout':
+      case 'first-month':
           suffix = '-checkout';
           break;
       case 'cashback':
@@ -157,13 +125,14 @@ const resolveResultsPage = () => {
     timePreference = `dayOne=${dayOne}&dayTwo=${dayTwo}&dayOneTime=${dayOneTime}&dayTwoTime=${dayTwoTime}`;
   }
 
-  const host = 'memby.org';
-  const locale = getLocaleFromURL(window.location)
 
-  let url = `https://${host}/${locale}/${framerPath}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${timePreference}`;
-  url = decorateUrlWithSubjectParams(url)
+  let host = 'mathups.com';
+  if (store.lang === 'EN_ZA') {
+      host = 'mathsup.co.za';
+  }
+
+  let url = `https://${host}/${framerPath}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${timePreference}`;
   url = decorateUrlWithUTMParams(url);
-  url = decorateUrlWithPlan(url);
 
   store.resultUrl = url
 
@@ -176,9 +145,16 @@ const submitChildEmail = (event) => {
     event.preventDefault()
     store.isChildEmailEntered = true
     store.step += 1
+    store.showRecomendations = true
+    // klaviyoRequestHandler()
     gaEvent('lead_generated');
-    resolveResultsPage()
+
+    if (['EN_IE', 'EN_ZA'].includes(store.lang)) {
+      resolveResultsPage()
+    }
 }
+// Klaviyo API KEY
+// pk_5a1e956f717f7efdc37cbdf9ca124b1986
 
 const emailIsValid = (email) => {
     if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
@@ -210,14 +186,23 @@ const isParentProceedDisabled = computed(() => {
 const submitHandler = (event) => {
     event.preventDefault()
     store.step += 1
+    store.showRecomendations = true
+    // klaviyoRequestHandler()
     gaEvent('lead_generated');
-    resolveResultsPage()
+
+    if (['EN_IE', 'EN_ZA'].includes(store.lang)) {
+      resolveResultsPage()
+    }
 }
 const submitChildAndParentHandler = (event) => {
     event.preventDefault()
     store.step += 1
+    store.showRecomendations = true
+    // klaviyoRequestHandler()
     gaEvent('lead_generated');
-    resolveResultsPage();
+    if (['EN_IE', 'EN_ZA'].includes(store.lang)) {
+      resolveResultsPage()
+    }
 }
 
 const klaviyoRequestHandler = () => {
@@ -253,9 +238,14 @@ const klaviyoRequestHandler = () => {
         }
     }
 
-    axios.request(options).catch(function (error) {
+    axios
+        .request(options)
+        .then(function (response) {
+            // console.log(response.data)
+        })
+        .catch(function (error) {
             console.error(error)
-    })
+        })
 }
 
 onMounted(() => {
@@ -270,7 +260,7 @@ onMounted(() => {
 
 const { t } = useI18n();
 
-let buttonText = t('SeePersonalisedPlan');
+let buttonText = t('Continue');
 switch (store.flow) {
   case 'trial':
       buttonText = t('ContinueWithTrial');
@@ -290,11 +280,16 @@ switch (store.flow) {
         <img src="../assets/images/close-x.svg" width="48" height="48" />
     </button>
     <QuizLogo tw="mx-auto" />
+<!--    <img class="mx-auto pb-5" v-if="store.lang === 'LT'" src="/src/assets/images/digiklase.svg" alt="Digiklase logo"/>-->
+<!--    <img class="mx-auto pb-5" v-if="store.lang === 'LV'" src="/src/assets/images/memby.svg" alt="Memby logo" />-->
+<!--    <img class="mx-auto pb-5" v-if="store.lang === 'EN_IE'" src="/src/assets/images/MathUps.svg" alt="MathUps logo" />-->
+<!--    <img class="mx-auto pb-5" v-if="store.lang === 'EN_ZA'" src="/src/assets/images/MathsUp.svg" alt="MathsUp logo" />-->
     <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormH1') }}</Heading>
     <p v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormWhereToSentResults') }}</p>
     <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'child' && store.isChildEmailEntered" v-html="$t('EmailFormShareResults')"></Heading>
     <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'parent'">{{ $t('EmailFormWeWillRecommendPlan') }}</Heading>
     <Label tw="text-center mb-3 md:mb-5" v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</Label>
+<!--    <p v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</p>-->
     <div v-if="store.respondent === 'child'">
         <input
             v-if="!store.isChildEmailEntered"
