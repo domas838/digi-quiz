@@ -1316,13 +1316,15 @@ export const store = reactive({
                     qNo: 1,
                     Q: 'Selecione a série da criança',
                     Ans: [
+                        {title: '6º ano'},
+                        {title: '7º ano'},
                         {title: '8º ano'},
                         {title: '9º ano'},
-                        {title: '1º ano do ensino médio'},
-                        {title: '2º ano do ensino médio'},
-                        {title: '3º ano do ensino médio'},
+                        {title: '1º ano'},
+                        {title: '2º ano'},
+                        {title: '3º ano'},
                     ],
-                    component: 'radio-class-select-centered'
+                    component: 'grid'
                 },
                 // {
                 //     id: 'subjects',
