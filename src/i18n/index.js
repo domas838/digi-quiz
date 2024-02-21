@@ -3,14 +3,6 @@ import {getLocaleFromURL} from "@/helpers";
 
 const localeKey = getLocaleFromURL(window.location)
 
-// const domainLocaleMap = {
-//     'quiz.memby.lv': 'lv',
-//     'quiz.digiklase.lt': 'lt',
-//     'quiz.mathups.com': 'en_ie',
-//     'quiz.memby.org': 'en_za',
-//     'localhost': 'pt_br'
-// };
-
 const LOCALE_KEY_LANGUAGE_MAP = {
     'sa': 'en_za',
     'br': 'pt_br'

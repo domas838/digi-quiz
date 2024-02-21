@@ -15,10 +15,6 @@ const selectClass = (classNumber) => {
     question_answer: classNumber
   })
 
-  console.log({question_number: store.step,
-    question_name: props.q.Q,
-    question_answer: classNumber})
-
   store.quizAnswers[props.q.id] = classNumber;
 
   props.next()
