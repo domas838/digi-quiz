@@ -3,7 +3,7 @@ import { store } from '../store'
 import {computed, onMounted} from 'vue'
 import axios from 'axios'
 import {event as gaEvent} from "vue-gtag";
-import {changeUrlPath} from "../helpers";
+import {changeUrlPath, getLocaleFromURL} from "../helpers";
 import {useI18n} from "vue-i18n";
 import QuizLogo from "@/components/QuizLogo.vue";
 import Heading from "@/components/Typography/Heading.vue";
@@ -67,10 +67,43 @@ const decorateUrlWithUTMParams = (url) => {
   return url;
 }
 
+const decorateUrlWithSubjectParams = (url) => {
+  if (! (store.quizAnswers['subjects'])) {
+    return url;
+  }
+
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}subjects=${store.quizAnswers['subjects']}`;
+}
+
+const decorateUrlWithPlan = (url) => {
+  if (! store.quizAnswers['subjects']) {
+    return url;
+  }
+
+  const selectedSubjectsArray = store.quizAnswers['subjects'].split(',');
+  const selectedSubjectsLength = selectedSubjectsArray.length;
+
+  let plan = '';
+
+  switch (selectedSubjectsLength) {
+    case 1:
+      plan = 'OneSubjectPlan' ;
+      break;
+    case 2:
+      plan = 'TwoSubjectsPlan';
+      break
+    default:
+      plan = 'AllSubjectsPlan';
+      break;
+  }
+
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}plan=${plan}`;
+}
+
 const resolveResultsPage = () => {
-  //TODO RESOLVE RESULT PAGE
   const timetableObject = getTimetableParams();
-  // console.log(store.quizAnswers)
   // Assuming 'store' is a valid object containing quiz answers
   const gradeBefore = encodeURIComponent(store.quizAnswers['currentMark']);
   const gradeAfter = encodeURIComponent(store.quizAnswers['targetMark']);
@@ -81,23 +114,20 @@ const resolveResultsPage = () => {
 
   let suffix = '';
   switch (store.flow) {
-      case 'paid-trial':
-      case 'paid-trial-2':
-          suffix = '-paid-trial';
-          break;
-      case 'pricing':
-      case 'pricing-2':
-          suffix = '-pricing';
-          break;
-      case 'checkout':
-          suffix = '-checkout';
-          break;
-      case 'first-month':
-          suffix = '-first-month';
-          break;
-      case 'cashback':
-          suffix = '-5-weeks-streak'
-          break;
+    case 'paid-trial':
+    case 'paid-trial-2':
+      suffix = '-paid-trial';
+      break;
+    case 'pricing':
+    case 'pricing-2':
+      suffix = '-pricing';
+      break;
+    case 'checkout':
+      suffix = '-checkout';
+      break;
+    case 'cashback':
+      suffix = '-5-weeks-streak'
+      break;
   }
 
   let framerPath = 'results-strugglers' + suffix;
@@ -127,14 +157,13 @@ const resolveResultsPage = () => {
     timePreference = `dayOne=${dayOne}&dayTwo=${dayTwo}&dayOneTime=${dayOneTime}&dayTwoTime=${dayTwoTime}`;
   }
 
+  const host = 'memby.org';
+  const locale = getLocaleFromURL(window.location)
 
-  let host = 'mathups.com';
-  if (store.lang === 'EN_ZA') {
-      host = 'mathsup.co.za';
-  }
-
-  let url = `https://${host}/${framerPath}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${timePreference}`;
+  let url = `https://${host}/${locale}/${framerPath}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${timePreference}`;
+  url = decorateUrlWithSubjectParams(url)
   url = decorateUrlWithUTMParams(url);
+  url = decorateUrlWithPlan(url);
 
   store.resultUrl = url
 
@@ -144,237 +173,211 @@ const resolveResultsPage = () => {
   window.location.href = url;
 }
 const submitChildEmail = (event) => {
-    event.preventDefault()
-    store.isChildEmailEntered = true
-    store.step += 1
-    store.showRecomendations = true
-    // klaviyoRequestHandler()
-    gaEvent('lead_generated');
-
-    if (['EN_IE', 'EN_ZA'].includes(store.lang)) {
-      resolveResultsPage()
-    }
+  event.preventDefault()
+  store.isChildEmailEntered = true
+  store.step += 1
+  gaEvent('lead_generated');
+  resolveResultsPage()
 }
-// Klaviyo API KEY
-// pk_5a1e956f717f7efdc37cbdf9ca124b1986
 
 const emailIsValid = (email) => {
-    if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-        return true
-    } else {
-        return false
-    }
+  if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    return true
+  } else {
+    return false
+  }
 }
 const cancelEmailHandler = () => {
-    store.step += 1
-    store.showRecomendations = true
-    klaviyoRequestHandler()
+  store.step += 1
+  store.showRecomendations = true
+  klaviyoRequestHandler()
 }
 const isChildProceedDisabled = computed(() => {
-    if (!store.childEmail || !store.aggreeWithPrivacy || !emailIsValid(store.childEmail)) {
-        return true
-    } else {
-        return false
-    }
+  if (!store.childEmail || !store.aggreeWithPrivacy || !emailIsValid(store.childEmail)) {
+    return true
+  } else {
+    return false
+  }
 })
 const isParentProceedDisabled = computed(() => {
-    if (!store.parentEmail || !store.aggreeWithPrivacy || !emailIsValid(store.parentEmail)) {
-        return true
-    } else {
-        return false
-    }
+  if (!store.parentEmail || !store.aggreeWithPrivacy || !emailIsValid(store.parentEmail)) {
+    return true
+  } else {
+    return false
+  }
 })
 
 const submitHandler = (event) => {
-    event.preventDefault()
-    store.step += 1
-    store.showRecomendations = true
-    // klaviyoRequestHandler()
-    gaEvent('lead_generated');
-
-    if (['EN_IE', 'EN_ZA'].includes(store.lang)) {
-      resolveResultsPage()
-    }
+  event.preventDefault()
+  store.step += 1
+  gaEvent('lead_generated');
+  resolveResultsPage()
 }
 const submitChildAndParentHandler = (event) => {
-    event.preventDefault()
-    store.step += 1
-    store.showRecomendations = true
-    // klaviyoRequestHandler()
-    gaEvent('lead_generated');
-    if (['EN_IE', 'EN_ZA'].includes(store.lang)) {
-      resolveResultsPage()
-    }
+  event.preventDefault()
+  store.step += 1
+  gaEvent('lead_generated');
+  resolveResultsPage();
 }
 
 const klaviyoRequestHandler = () => {
-    if (store.childEmail === '' && store.parentEmail === '') {
-        return;
-    }
+  if (store.childEmail === '' && store.parentEmail === '') {
+    return;
+  }
 
-    const options = {
-        method: 'POST',
-        url: 'https://app.digiklase.lt/api/klaviyo/create',
-        headers: {
-            'content-type': 'application/json'
-        },
+  const options = {
+    method: 'POST',
+    url: 'https://app.digiklase.lt/api/klaviyo/create',
+    headers: {
+      'content-type': 'application/json'
+    },
+    data: {
+      locale: store.lang,
+      role: store.childEmail ? 'student' : 'parent',
+      payload: {
         data: {
-            locale: store.lang,
-            role: store.childEmail ? 'student' : 'parent',
-            payload: {
-                data: {
-                    type: 'profile',
-                    attributes: {
-                        email: store.childEmail ? store.childEmail : store.parentEmail,
-                        properties: {
-                            ResultURL: store.resultUrl,
-                            Goal: store.quizAnswers['goal'],
-                            State: store.quizAnswers['state'],
-                            Class: store.quizAnswers['grade'],
-                            CurrentMark: store.quizAnswers['currentMark'],
-                            TargetMark: store.quizAnswers['targetMark'],
-                        }
-                    }
-                }
+          type: 'profile',
+          attributes: {
+            email: store.childEmail ? store.childEmail : store.parentEmail,
+            properties: {
+              ResultURL: store.resultUrl,
+              Goal: store.quizAnswers['goal'],
+              State: store.quizAnswers['state'],
+              Class: store.quizAnswers['grade'],
+              CurrentMark: store.quizAnswers['currentMark'],
+              TargetMark: store.quizAnswers['targetMark'],
             }
+          }
         }
+      }
     }
+  }
 
-    axios
-        .request(options)
-        .then(function (response) {
-            // console.log(response.data)
-        })
-        .catch(function (error) {
-            console.error(error)
-        })
+  axios.request(options).catch(function (error) {
+    console.error(error)
+  })
 }
 
 onMounted(() => {
-    gaEvent('quiz_email_form');
-    if (['trial', 'paid-trial-2', 'pricing-2'].includes(store.flow) && document.getElementById('continue-btn')) {
-        document.getElementById('continue-btn').disabled = false
-        document.getElementById('continue-btn').click()
-    } else {
-        changeUrlPath('/' + store.respondent + '/email')
-    }
+  gaEvent('quiz_email_form');
+  if (['trial', 'paid-trial-2', 'pricing-2'].includes(store.flow) && document.getElementById('continue-btn')) {
+    document.getElementById('continue-btn').disabled = false
+    document.getElementById('continue-btn').click()
+  } else {
+    changeUrlPath('/' + store.respondent + '/email')
+  }
 });
 
 const { t } = useI18n();
 
-let buttonText = t('Continue');
+let buttonText = t('SeePersonalisedPlan');
 switch (store.flow) {
   case 'trial':
-      buttonText = t('ContinueWithTrial');
-      break;
+    buttonText = t('ContinueWithTrial');
+    break;
   case 'paid-trial':
-      buttonText = t('ContinueWithPaidTrial');
-      break;
+    buttonText = t('ContinueWithPaidTrial');
+    break;
 }
 
 </script>
 <template>
-    <button
-        class="close-email-form"
-        @click="cancelEmailHandler"
-        v-if="store.respondent === 'child' && store.isChildEmailEntered"
-    >
-        <img src="../assets/images/close-x.svg" width="48" height="48" />
-    </button>
-    <QuizLogo tw="mx-auto" />
-<!--    <img class="mx-auto pb-5" v-if="store.lang === 'LT'" src="/src/assets/images/digiklase.svg" alt="Digiklase logo"/>-->
-<!--    <img class="mx-auto pb-5" v-if="store.lang === 'LV'" src="/src/assets/images/memby.svg" alt="Memby logo" />-->
-<!--    <img class="mx-auto pb-5" v-if="store.lang === 'EN_IE'" src="/src/assets/images/MathUps.svg" alt="MathUps logo" />-->
-<!--    <img class="mx-auto pb-5" v-if="store.lang === 'EN_ZA'" src="/src/assets/images/MathsUp.svg" alt="MathsUp logo" />-->
-    <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormH1') }}</Heading>
-    <p v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormWhereToSentResults') }}</p>
-    <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'child' && store.isChildEmailEntered" v-html="$t('EmailFormShareResults')"></Heading>
-    <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'parent'">{{ $t('EmailFormWeWillRecommendPlan') }}</Heading>
-    <Label tw="text-center mb-3 md:mb-5" v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</Label>
-<!--    <p v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</p>-->
-    <div v-if="store.respondent === 'child'">
-        <input
-            v-if="!store.isChildEmailEntered"
-            class="digi-input"
-            type="email"
-            name="child-email"
-            id="child-email"
-            :placeholder="$t('EmailFormYourEmail')"
-            v-model="store.childEmail"
-            style="margin-bottom: 1rem"
-        />
-        <input
-            v-if="store.isChildEmailEntered"
-            class="digi-input"
-            type="email"
-            name="parent-email"
-            id="parent-email"
-            :placeholder="$t('EmailFormYourParentEmail')"
-            v-model="store.parentEmail"
-            style="margin-bottom: 1rem"
-        />
-        <div class="privacy-notice">
-            <img src="../assets/images/Lock.svg" alt="Lock" />
-            <p>
-                {{ $t('EmailFormPrivacyNotice') }}
-            </p>
-        </div>
-        <div class="aggree-row" v-if="!store.isChildEmailEntered">
-            <input
-                type="checkbox"
-                name="privacy"
-                id="privacy"
-                :value="$t('EmailFormPrivacyValue')"
-                v-model="store.aggreeWithPrivacy"
-            />
-            <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
-            <img
-                src="../assets/images/checkbox-checked.svg"
-                alt=""
-                class="custom-checkbox-checked"
-            />
-            <label for="privacy" class="aggree-label" v-html="$t('EmailPrivacyLabel')"></label
-            >
-        </div>
-        <div class="aggree-row" v-if="!store.isChildEmailEntered">
-            <input
-                type="checkbox"
-                name="age"
-                id="age"
-                :value="$t('EmailForm13YearsValue')"
-                v-model="store.olderThanThirteen"
-            />
-            <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
-            <img
-                src="../assets/images/checkbox-checked.svg"
-                alt=""
-                class="custom-checkbox-checked"
-            />
-            <label for="age" class="aggree-label">{{ $t('EmailForm13YearsLabel') }}</label>
-        </div>
-        <div class="aggree-row" v-if="!store.isChildEmailEntered">
-            <p>{{ $t('EmailFormNoticeIfLessThan13Years') }}</p>
-        </div>
-    </div>
-
-    <div v-if="store.respondent === 'parent'">
-        <input
-            class="digi-input"
-            type="email"
-            name="parent-email"
-            id="parent-email"
-            :placeholder="$t('EmailFormYourEmail')"
-            v-model="store.parentEmail"
-            style="margin-bottom: 1rem"
-        />
-    </div>
-
+  <button
+      class="close-email-form"
+      @click="cancelEmailHandler"
+      v-if="store.respondent === 'child' && store.isChildEmailEntered"
+  >
+    <img src="../assets/images/close-x.svg" width="48" height="48" />
+  </button>
+  <QuizLogo tw="mx-auto" />
+  <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormH1') }}</Heading>
+  <p v-if="store.respondent === 'child' && !store.isChildEmailEntered">{{ $t('EmailFormWhereToSentResults') }}</p>
+  <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'child' && store.isChildEmailEntered" v-html="$t('EmailFormShareResults')"></Heading>
+  <Heading level="1" tw="mx-auto pb-5" v-if="store.respondent === 'parent'">{{ $t('EmailFormWeWillRecommendPlan') }}</Heading>
+  <Label tw="text-center mb-3 md:mb-5" v-if="store.respondent === 'parent'">{{ $t('EmailFormWhereToSentResults') }}</Label>
+  <div v-if="store.respondent === 'child'">
+    <input
+        v-if="!store.isChildEmailEntered"
+        class="digi-input"
+        type="email"
+        name="child-email"
+        id="child-email"
+        :placeholder="$t('EmailFormYourEmail')"
+        v-model="store.childEmail"
+        style="margin-bottom: 1rem"
+    />
+    <input
+        v-if="store.isChildEmailEntered"
+        class="digi-input"
+        type="email"
+        name="parent-email"
+        id="parent-email"
+        :placeholder="$t('EmailFormYourParentEmail')"
+        v-model="store.parentEmail"
+        style="margin-bottom: 1rem"
+    />
     <div class="privacy-notice">
       <img src="../assets/images/Lock.svg" alt="Lock" />
       <p>
         {{ $t('EmailFormPrivacyNotice') }}
       </p>
     </div>
+    <div class="aggree-row" v-if="!store.isChildEmailEntered">
+      <input
+          type="checkbox"
+          name="privacy"
+          id="privacy"
+          :value="$t('EmailFormPrivacyValue')"
+          v-model="store.aggreeWithPrivacy"
+      />
+      <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
+      <img
+          src="../assets/images/checkbox-checked.svg"
+          alt=""
+          class="custom-checkbox-checked"
+      />
+      <label for="privacy" class="aggree-label" v-html="$t('EmailPrivacyLabel')"></label
+      >
+    </div>
+    <div class="aggree-row" v-if="!store.isChildEmailEntered">
+      <input
+          type="checkbox"
+          name="age"
+          id="age"
+          :value="$t('EmailForm13YearsValue')"
+          v-model="store.olderThanThirteen"
+      />
+      <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
+      <img
+          src="../assets/images/checkbox-checked.svg"
+          alt=""
+          class="custom-checkbox-checked"
+      />
+      <label for="age" class="aggree-label">{{ $t('EmailForm13YearsLabel') }}</label>
+    </div>
+    <div class="aggree-row" v-if="!store.isChildEmailEntered">
+      <p>{{ $t('EmailFormNoticeIfLessThan13Years') }}</p>
+    </div>
+  </div>
+
+  <div v-if="store.respondent === 'parent'">
+    <input
+        class="digi-input"
+        type="email"
+        name="parent-email"
+        id="parent-email"
+        :placeholder="$t('EmailFormYourEmail')"
+        v-model="store.parentEmail"
+        style="margin-bottom: 1rem"
+    />
+  </div>
+
+  <div class="privacy-notice">
+    <img src="../assets/images/Lock.svg" alt="Lock" />
+    <p>
+      {{ $t('EmailFormPrivacyNotice') }}
+    </p>
+  </div>
 
   <div class="aggree-row" v-if="!store.isChildEmailEntered">
     <input
@@ -393,130 +396,130 @@ switch (store.flow) {
     <label for="age" class="aggree-label">{{ $t('EmailForm13YearsLabel') }}</label>
   </div>
 
-    <div class="aggree-row" v-if="store.respondent === 'parent'">
-        <input
-            type="checkbox"
-            name="privacy"
-            id="privacy"
-            :value="$t('EmailFormPrivacyValue')"
-            v-model="store.aggreeWithPrivacy"
-        />
-        <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
-        <img src="../assets/images/checkbox-checked.svg" alt="" class="custom-checkbox-checked" />
-        <label for="privacy" class="aggree-label" v-html="$t('EmailPrivacyLabel')"></label>
-    </div>
+  <div class="aggree-row" v-if="store.respondent === 'parent'">
+    <input
+        type="checkbox"
+        name="privacy"
+        id="privacy"
+        :value="$t('EmailFormPrivacyValue')"
+        v-model="store.aggreeWithPrivacy"
+    />
+    <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
+    <img src="../assets/images/checkbox-checked.svg" alt="" class="custom-checkbox-checked" />
+    <label for="privacy" class="aggree-label" v-html="$t('EmailPrivacyLabel')"></label>
+  </div>
 
+  <button
+      v-if="store.respondent === 'child' && !store.isChildEmailEntered"
+      type="submit"
+      id="continue-btn"
+      class="benefit-btn mx-auto mb-12"
+      style="margin-top: 2rem"
+      @click="submitChildEmail($event)"
+      :disabled="isChildProceedDisabled"
+  >
+    {{ buttonText }} <img src="../assets/images/arrow-right.svg" alt="" />
+  </button>
+
+  <button
+      v-if="store.respondent === 'parent'"
+      type="submit"
+      id="continue-btn"
+      class="benefit-btn mx-auto mb-12"
+      style="margin-top: 2rem"
+      @click="submitHandler($event)"
+      :disabled="isParentProceedDisabled"
+  >
+    {{ buttonText }} <img src="../assets/images/arrow-right.svg" alt="" />
+  </button>
+  <div class="submit-container" v-if="store.respondent === 'child' && store.isChildEmailEntered">
     <button
-        v-if="store.respondent === 'child' && !store.isChildEmailEntered"
         type="submit"
         id="continue-btn"
         class="benefit-btn mx-auto mb-12"
-        style="margin-top: 2rem"
-        @click="submitChildEmail($event)"
-        :disabled="isChildProceedDisabled"
-    >
-        {{ buttonText }} <img src="../assets/images/arrow-right.svg" alt="" />
-    </button>
-
-    <button
-        v-if="store.respondent === 'parent'"
-        type="submit"
-        id="continue-btn"
-        class="benefit-btn mx-auto mb-12"
-        style="margin-top: 2rem"
-        @click="submitHandler($event)"
+        @click="submitChildAndParentHandler($event)"
         :disabled="isParentProceedDisabled"
     >
       {{ buttonText }} <img src="../assets/images/arrow-right.svg" alt="" />
     </button>
-    <div class="submit-container" v-if="store.respondent === 'child' && store.isChildEmailEntered">
-        <button
-            type="submit"
-            id="continue-btn"
-            class="benefit-btn mx-auto mb-12"
-            @click="submitChildAndParentHandler($event)"
-            :disabled="isParentProceedDisabled"
-        >
-          {{ buttonText }} <img src="../assets/images/arrow-right.svg" alt="" />
-        </button>
-        <a href="javascript:void(0)" v-if="store.lang === 'LT'" @click="cancelEmailHandler">{{ $t('Skip') }}</a>
-    </div>
+    <a href="javascript:void(0)" v-if="store.lang === 'LT'" @click="cancelEmailHandler">{{ $t('Skip') }}</a>
+  </div>
 
-<!--    <ProgramsLoader />-->
+  <!--    <ProgramsLoader />-->
 </template>
 
 <style scoped>
 h1 {
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 32px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 32px;
 }
 p {
-    margin-bottom: 32px;
-    text-align: center;
-    font-size: 20px;
+  margin-bottom: 32px;
+  text-align: center;
+  font-size: 20px;
 }
 h1 span {
-    color: #4a74eb;
+  color: #4a74eb;
 }
 .privacy-notice {
-    display: flex;
-    align-items: flex-start;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+  display: flex;
+  align-items: flex-start;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .privacy-notice img {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
 }
 .privacy-notice p {
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 20px;
-    text-align: left;
-    margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 20px;
+  text-align: left;
+  margin-bottom: 10px;
 }
 .submit-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
 }
 .submit-container button {
-    margin: 0;
+  margin: 0;
 }
 .submit-container a {
-    color: #4a74eb;
-    min-width: 155px;
-    display: flex;
-    justify-content: center;
+  color: #4a74eb;
+  min-width: 155px;
+  display: flex;
+  justify-content: center;
 }
 .submit-container a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 .close-email-form {
-    outline: none;
-    border: none;
-    background-color: transparent;
-    position: absolute;
-    right: -5%;
-    top: -5%;
-    cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  right: -5%;
+  top: -5%;
+  cursor: pointer;
 }
 @media (max-width: 992px) {
-    .close-email-form {
-        right: 1rem;
-        top: -4rem;
-    }
+  .close-email-form {
+    right: 1rem;
+    top: -4rem;
+  }
 }
 @media (max-width: 768px) {
-    .close-email-form {
-        right: 1rem;
-        top: -1rem;
-    }
+  .close-email-form {
+    right: 1rem;
+    top: -1rem;
+  }
 }
 </style>
