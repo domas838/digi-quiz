@@ -44,7 +44,7 @@ onMounted(() => {
   }
 
   window.addEventListener('popstate', function(event) {
-    window.location.href = '/';
+    window.location.href = `/${localeKey}`;
   })
 })
 
