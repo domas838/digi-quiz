@@ -24,7 +24,7 @@ const benefitsEN = [
 const benefitsBR = [
   '<strong>Professores altamente qualificados,</strong> incluindo graduados das melhores universidades do mundo',
   '<strong>Personalidades inspiradoras</strong> que podem não apenas contar histórias de forma criativa, mas também gerar discussões interessantes',
-  'Se algumas matérias educacionais ainda forem difíceis de entender, a equipe Mathups estará sempre <strong>pronta para oferecer ajuda extra após a aula</strong>'
+  'Se algumas matérias educacionais ainda forem difíceis de entender, a equipe Memby estará sempre <strong>pronta para oferecer ajuda extra após a aula</strong>'
 ]
 
 const BENEFITS_BULLETS_LOCALE_MAP = {
