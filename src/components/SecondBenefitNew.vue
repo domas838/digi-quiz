@@ -4,7 +4,8 @@ import {changeUrlPath, getLocaleFromURL} from "../helpers";
 import Heading from "@/components/Typography/Heading.vue";
 import SandileDesktopIMG from '../assets/images/sandile_desktop.png';
 import SandileMobileIMG from '../assets/images/sandile_mobile.png';
-import BrTeacherIMG from '../assets/images/BR teacher.png';
+import BrTeacherDesktopIMG from '../assets/images/Desktop-professora.png';
+import BrTeacherMobileIMG from '../assets/images/Mobile-professora.png';
 
 const localeKey = getLocaleFromURL(window.location)
 
@@ -33,13 +34,13 @@ const BENEFITS_BULLETS_LOCALE_MAP = {
 
 const BENEFITS_IMAGE_MAP = {
   'sa': {'desktop': SandileDesktopIMG, 'mobile': SandileMobileIMG},
-  'br': {'desktop': BrTeacherIMG, 'mobile': BrTeacherIMG}
+  'br': {'desktop': BrTeacherDesktopIMG, 'mobile': BrTeacherMobileIMG}
 }
 
 </script>
 
 <template>
-  <div class="grid grid-cols-1 items-center px-8 gap-5 lg:grid-cols-2 md:px-16 xl:px-52">
+  <div class="grid grid-cols-1 items-center px-8 gap-5 lg:grid-cols-2 md:px-16 xl:px-36">
     <div class="max-w-[615px]">
       <div class="text-left mb-10">
         <Heading level="1" tw="text-left">
