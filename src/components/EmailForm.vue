@@ -89,8 +89,14 @@ const resolveResultsPage = () => {
       case 'pricing-2':
           suffix = '-pricing';
           break;
+      case 'pricing-old':
+          suffix = '-pricing-old';
+          break;
       case 'checkout':
           suffix = '-checkout';
+          break;
+      case 'checkout-old':
+          suffix = '-checkout-old';
           break;
       case 'first-month':
           suffix = '-first-month';
