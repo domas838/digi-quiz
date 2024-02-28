@@ -709,7 +709,8 @@ export const store = reactive({
                     Ans: [
                         {title: 'Maths', value: 'maths'},
                         {title: 'Afrikaans', value: 'afrikaans'},
-                        {title: 'Natural Science', value: 'natural-science'},
+                        {title: 'Physical Science', value: 'naturalscience'},
+                        {title: 'Maths Literacy', value: 'mathlit'},
                     ],
                     component: 'multi-select'
                 },
@@ -916,7 +917,8 @@ export const store = reactive({
                     Ans: [
                         {title: 'Maths', value: 'maths'},
                         {title: 'Afrikaans', value: 'afrikaans'},
-                        {title: 'Natural Science', value: 'natural-science'},
+                        {title: 'Physical Science', value: 'naturalscience'},
+                        {title: 'Maths Literacy', value: 'mathlit'},
                     ],
                     component: 'multi-select'
                 },
@@ -1128,7 +1130,8 @@ export const store = reactive({
                     Ans: [
                         {title: 'Maths', value: 'maths'},
                         {title: 'Afrikaans', value: 'afrikaans'},
-                        {title: 'Natural Science', value: 'natural-science'},
+                        {title: 'Physical Science', value: 'naturalscience'},
+                        {title: 'Maths Literacy', value: 'mathlit'},
                     ],
                     component: 'multi-select'
                 },
@@ -1346,7 +1349,8 @@ export const store = reactive({
                 //     Ans: [
                 //         {title: 'Maths', value: 'maths'},
                 //         {title: 'Afrikaans', value: 'afrikaans'},
-                //         {title: 'Natural Science', value: 'natural-science'},
+                //         {title: 'Physical Science', value: 'naturalscience'},
+                //         {title: 'Maths Literacy', value: 'mathlit'},
                 //     ],
                 //     component: 'multi-select'
                 // },
