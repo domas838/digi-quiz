@@ -10,14 +10,27 @@ import Heading from "@/components/Typography/Heading.vue";
 import Label from "@/components/Typography/Label.vue";
 
 const getTimetableParams = () => {
+  const locale = getLocaleFromURL(window.location)
+
   const daysMap = {
-    Mon: 'Monday',
-    Tue: 'Tuesday',
-    Wed: 'Wednesday',
-    Thu: 'Thursday',
-    Fri: 'Friday',
-    Sat: 'Saturday',
-    Sun: 'Sunday',
+    br: {
+      Seg: 'Segunda',
+      Ter: 'Terça',
+      Qua: 'Quarta',
+      Qui: 'Quinta',
+      Sex: 'Sexta',
+      Sab: 'Sábado',
+      Dom: 'Domingo',
+    },
+    sa: {
+      Mon: 'Monday',
+      Tue: 'Tuesday',
+      Wed: 'Wednesday',
+      Thu: 'Thursday',
+      Fri: 'Friday',
+      Sat: 'Saturday',
+      Sun: 'Sunday',
+    }
   };
 
   const groupBy = (array, getKey) => {
@@ -34,13 +47,15 @@ const getTimetableParams = () => {
       groupBy(store.preferredTimeWorkdays, ({ day }) => day),
       groupBy(store.preferredTimeWeekends, ({ day }) => day)
   );
+
   let timetableParams = []
 
-  const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const daysOfWeek = Object.keys(daysMap[locale]);
+
   daysOfWeek.forEach(weekDay => {
     if (groupedPreferredTimes[weekDay] && groupedPreferredTimes[weekDay][0]) {
       timetableParams.push({
-        [timetableParams.length > 0 ? 'dayTwo' : 'dayOne']: daysMap[groupedPreferredTimes[weekDay][0].day],
+        [timetableParams.length > 0 ? 'dayTwo' : 'dayOne']: daysMap[locale][groupedPreferredTimes[weekDay][0].day],
         [timetableParams.length > 0 ? 'dayTwoTime' : 'dayOneTime']: `${groupedPreferredTimes[weekDay][0].from} - ${groupedPreferredTimes[weekDay][0].to} ${groupedPreferredTimes[weekDay][0].dayPeriod}`
       })
     }
@@ -104,6 +119,7 @@ const decorateUrlWithPlan = (url) => {
 
 const resolveResultsPage = () => {
   const timetableObject = getTimetableParams();
+  
   // Assuming 'store' is a valid object containing quiz answers
   const gradeBefore = encodeURIComponent(store.quizAnswers['currentMark']);
   const gradeAfter = encodeURIComponent(store.quizAnswers['targetMark']);

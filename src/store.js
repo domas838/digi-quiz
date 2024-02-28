@@ -1316,13 +1316,27 @@ export const store = reactive({
                     qNo: 1,
                     Q: 'Selecione a série da criança',
                     Ans: [
+                        {title: '6º ano'},
+                        {title: '7º ano'},
                         {title: '8º ano'},
                         {title: '9º ano'},
-                        {title: '1º ano do ensino médio'},
-                        {title: '2º ano do ensino médio'},
-                        {title: '3º ano do ensino médio'},
+                        {title: '1º ano'},
+                        {title: '2º ano'},
+                        {title: '3º ano'},
                     ],
-                    component: 'radio-class-select-centered'
+                    component: 'grid'
+                },
+                {
+                    id: 'state',
+                    qNo: 2,
+                    Q: "Selecione seu fuso horário",
+                    Ans: [
+                        {title: 'Horário de Brasília (BRT)', img: '/emoji/🔸.svg'},
+                        {title: 'Horário da Amazônia (AMT)', img: '/emoji/🔹.svg'},
+                        {title: 'Horário do Nordeste (BRT)', img: '/emoji/🔺.png'},
+                        {title: 'Horário de Fernando de Noronha (FNT)', img: '/emoji/🔻.svg'},
+                    ],
+                    component: 'radio'
                 },
                 // {
                 //     id: 'subjects',
@@ -1338,7 +1352,7 @@ export const store = reactive({
                 // },
                 {
                     id: 'goal',
-                    qNo: 2,
+                    qNo: 3,
                     Q: "Qual programa você segue?",
                     Ans: [
                         {title: 'ENEM (Exame Nacional do Ensino Médio)', img: '/emoji/🔸.svg'},
@@ -1350,7 +1364,7 @@ export const store = reactive({
                 },
                 {
                     id: 'goal',
-                    qNo: 3,
+                    qNo: 4,
                     Q: "Qual é o seu principal objetivo?",
                     Ans: [
                         {title: 'Melhorar notas', img: '/emoji/🚀.svg'},
@@ -1364,7 +1378,7 @@ export const store = reactive({
                 },
                 {
                     id: 'preferredTimeWorkdays',
-                    qNo: 4,
+                    qNo: 5,
                     Q: 'Em que horários você pode participar das aulas durante os dias úteis?',
                     component: 'timetable',
                     days: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
@@ -1373,7 +1387,7 @@ export const store = reactive({
                 },
                 {
                     id: 'preferredTimeWeekends',
-                    qNo: 5,
+                    qNo: 6,
                     Q: 'Em que horários você pode participar das aulas nos finais de semana?',
                     component: 'timetable',
                     days: ['Sab', 'Dom'],
@@ -1381,11 +1395,11 @@ export const store = reactive({
                     variableName: 'preferredTimeWeekends'
                 },
                 {
-                    qNo: 6,
+                    qNo: 7,
                     component: 'loader'
                 },
                 { id: 'currentMark',
-                    qNo: 7, Q: "A média atual do seu filho", Ans: [
+                    qNo: 8, Q: "A média atual do seu filho", Ans: [
                         {title: '10-9'},
                         {title: '8-7'},
                         {title: '6-5'},
@@ -1393,7 +1407,7 @@ export const store = reactive({
                     ], component: 'grid'
                 },
                 { id: 'targetMark',
-                    qNo: 8, Q: "A meta de média do seu filho", Ans: [
+                    qNo: 9, Q: "A meta de média do seu filho", Ans: [
                         {title: '10-9'},
                         {title: '8-7'},
                         {title: '6-5'},
@@ -1402,7 +1416,7 @@ export const store = reactive({
                 },
                 {
                     id: 'studyHours',
-                    qNo: 9,
+                    qNo: 10,
                     Q: 'Quantas horas por dia seu filho estuda após a escola?',
                     Ans: [
                         {title: '0 horas, escola é suficiente', img: '/emoji/😎.svg'},
@@ -1413,7 +1427,7 @@ export const store = reactive({
                 },
                 {
                     id: 'motivation',
-                    qNo: 10,
+                    qNo: 11,
                     Q: 'O que motiva seu filho a estudar?',
                     Ans: [
                         {title: 'Entusiasmo em alcançar metas na escola', img: '/emoji/🏅.svg'},
@@ -1427,7 +1441,7 @@ export const store = reactive({
                 },
                 {
                     id: 'transformMotivation',
-                    qNo: 11,
+                    qNo: 12,
                     Q: 'De que forma a motivação do seu filho se transforma ao longo do tempo?',
                     Ans: [
                         {title: 'A motivação desaparece', img: '/emoji/🌚.svg'},
@@ -1437,12 +1451,12 @@ export const store = reactive({
                     component: 'radio'
                 },
                 {
-                    qNo: 12,
+                    qNo: 13,
                     component: 'firstBenefit'
                 },
                 {
                     id: 'focus',
-                    qNo: 13,
+                    qNo: 14,
                     Q: 'O quão difícil é se concentrar para o seu filho?',
                     Ans: [
                         {title: 'Muito fácil', img: '/emoji/😊.svg'},
@@ -1455,7 +1469,7 @@ export const store = reactive({
                 },
                 {
                     id: 'focusInClass',
-                    qNo: 14,
+                    qNo: 15,
                     Q: 'O seu filho é distraído por outros alunos na sala de aula?',
                     Ans: [
                         {title: 'Concordo totalmente', img: '/emoji/😊.svg'},
@@ -1468,7 +1482,7 @@ export const store = reactive({
                 },
                 {
                     id: 'expectations',
-                    qNo: 15,
+                    qNo: 16,
                     Q: 'Ao progredir com Memby espero que meus filhos se sintam',
                     Ans: [
                         {title: 'Confiantes', img: '/emoji/😎.svg'},
@@ -1481,7 +1495,7 @@ export const store = reactive({
                 },
                 {
                     id: 'sessions',
-                    qNo: 16,
+                    qNo: 17,
                     Q: 'Com que frequência e por quanto tempo você está buscando sessões de tutoria?',
                     Ans: [
                         {title: 'Diariamente', img: '/emoji/😎.svg'},
@@ -1493,7 +1507,7 @@ export const store = reactive({
                 },
                 {
                     id: 'learningStyle',
-                    qNo: 17,
+                    qNo: 18,
                     Q: 'Seu filho tem um estilo de aprendizagem preferido?',
                     name: 'learning-styles',
                     Ans: [
@@ -1508,7 +1522,7 @@ export const store = reactive({
                     component: 'multi-select'
                 },
                 {
-                    qNo: 18,
+                    qNo: 19,
                     component: 'final-results'
                 }
             ]
