@@ -233,6 +233,7 @@ const klaviyoRequestHandler = () => {
     },
     data: {
       locale: store.lang,
+      membyOrg: true,
       role: store.childEmail ? 'student' : 'parent',
       payload: {
         data: {
