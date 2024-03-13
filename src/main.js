@@ -24,6 +24,7 @@ const analyticsMap = {
     'quiz.digiklase.lt': 'G-L98Z3SJY5M',
     'quiz.mathups.com': 'G-L98Z3SJY5M',
     'quiz.mathsup.co.za': 'G-DG30YLMJCK',
+    'quiz2.memby.org': 'G-DG30YLMJCK',
     'localhost': ''
 };
 

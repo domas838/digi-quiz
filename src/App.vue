@@ -42,7 +42,7 @@ onMounted(() => {
     favicon.value = 'memby-fav.webp';
   }
 
-  if (window.location.hostname === 'quiz.mathsup.co.za' || window.location.hostname === 'localhost') {
+  if (window.location.hostname === 'quiz.mathsup.co.za' || window.location.hostname === 'quiz2.memby.org' || window.location.hostname === 'localhost') {
       store.lang = 'EN_ZA'
       const favicon = useFavicon();
       favicon.value = 'memby-fav.webp';

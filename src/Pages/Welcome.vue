@@ -16,7 +16,7 @@ const respondentParentHandler = () => {
 }
 
 onMounted(() => {
-  if (['quiz.mathups.com', 'quiz.mathsup.co.za', 'localhost'].includes(window.location.hostname)) {
+  if (['quiz.mathups.com', 'quiz.mathsup.co.za', 'quiz2.memby.org', 'localhost'].includes(window.location.hostname)) {
     store.respondent = 'parent'
 
     const explodedPath = new URL(window.location.href).pathname.split('/');
