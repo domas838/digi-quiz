@@ -20,7 +20,7 @@ onMounted(() => {
     store.respondent = 'parent'
 
     const explodedPath = new URL(window.location.href).pathname.split('/');
-    if (['trial', 'price', 'paid-trial', 'pricing-2', 'paid-trial-2', 'checkout', 'maths-quiz', 'cashback', 'first-month', 'pricing-old', 'checkout-old'].includes(explodedPath[3])) {
+    if (['trial', 'price', 'paid-trial', 'pricing-2', 'paid-trial-2', 'checkout', 'maths', 'cashback', 'first-month', 'pricing-old', 'checkout-old'].includes(explodedPath[3])) {
         store.flow = explodedPath[3];
     }
   }
@@ -36,9 +36,9 @@ onMounted(() => {
   <div class="container--intro yellow" v-if="store.step === 0">
     <div>
       <img v-if="store.lang === 'LT'" src="/src/assets/images/digiklase.svg" alt="Digiklase logo"/>
-      <img v-if="store.lang === 'LV' || store.flow === 'maths-quiz'" src="/src/assets/images/memby.svg" alt="Memby logo" />
+      <img v-if="store.lang === 'LV' || store.flow === 'maths'" src="/src/assets/images/memby.svg" alt="Memby logo" />
       <img v-if="store.lang === 'EN_IE'" src="/src/assets/images/MathUps.svg" alt="MathUps logo" />
-      <img v-if="store.lang === 'EN_ZA' && store.flow !== 'maths-quiz'" src="/src/assets/images/MathsUp.svg" alt="MathsUp logo" />
+      <img v-if="store.lang === 'EN_ZA' && store.flow !== 'maths'" src="/src/assets/images/MathsUp.svg" alt="MathsUp logo" />
       <img src="../assets/images/skateboard.svg" alt="" class="intro-visual" />
       <h1 class="intro-heading mt-5" v-html="$t('WelcomeH1')">
       </h1>

@@ -95,8 +95,8 @@ const resolveResultsPage = () => {
       case 'checkout':
           suffix = '-checkout';
           break;
-      case 'maths-quiz':
-          suffix = '-maths-quiz';
+      case 'maths':
+          suffix = '-maths';
           break;
       case 'checkout-old':
           suffix = '-checkout-old';
