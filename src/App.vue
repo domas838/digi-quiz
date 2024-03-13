@@ -10,12 +10,11 @@ import {event, pageview} from "vue-gtag";
 import {useFavicon} from "@vueuse/core/index";
 import EmailForm from "@/components/EmailForm.vue";
 import Layout from "@/layouts/Layout.vue";
-import SecondBenefitNew from "@/components/SecondBenefitNew.vue";
 
 const i18n = useI18n();
 
 useSeoMeta({
-  title: i18n.t('Title'),
+  title: window.location.hostname === 'quiz2.memby.org' ? 'Memby - quiz' : i18n.t('Title'),
   description: i18n.t('Description'),
 })
 
@@ -42,10 +41,17 @@ onMounted(() => {
     favicon.value = 'memby-fav.webp';
   }
 
-  if (window.location.hostname === 'quiz.mathsup.co.za' || window.location.hostname === 'quiz2.memby.org' || window.location.hostname === 'localhost') {
+  if (window.location.hostname === 'quiz.mathsup.co.za') {
       store.lang = 'EN_ZA'
       const favicon = useFavicon();
       favicon.value = 'memby-fav.webp';
+  }
+
+  if (window.location.hostname === 'quiz2.memby.org' || window.location.hostname === 'localhost') {
+      store.lang = 'EN_ZA'
+      const favicon = useFavicon();
+      favicon.value = 'memby-fav.webp';
+      window.document.title = 'Memby'
   }
 
   if (store.lang === 'LV') {
