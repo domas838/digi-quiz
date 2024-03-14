@@ -402,7 +402,7 @@ switch (store.flow) {
         alt=""
         class="custom-checkbox-checked"
     />
-    <label for="age" class="aggree-label">{{ $t('EmailForm13YearsLabel') }}</label>
+    <label for="age" class="aggree-label">{{ store.flow === 'maths' ? $t('EmailForm13YearsLabelMemby') : $t('EmailForm13YearsLabel') }}</label>
   </div>
 
     <div class="aggree-row" v-if="store.respondent === 'parent'">
@@ -415,7 +415,7 @@ switch (store.flow) {
         />
         <img src="../assets/images/checkbox.svg" alt="" class="custom-checkbox" />
         <img src="../assets/images/checkbox-checked.svg" alt="" class="custom-checkbox-checked" />
-        <label for="privacy" class="aggree-label" v-html="$t('EmailPrivacyLabel')"></label>
+        <label for="privacy" class="aggree-label" v-html="store.flow === 'maths' ? $t('EmailPrivacyLabelMemby') : $t('EmailPrivacyLabel')"></label>
     </div>
 
     <button
