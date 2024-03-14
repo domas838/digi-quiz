@@ -1404,18 +1404,28 @@ export const store = reactive({
                 },
                 { id: 'currentMark',
                     qNo: 8, Q: "A média atual do seu filho", Ans: [
-                        {title: '10-9'},
-                        {title: '8-7'},
-                        {title: '6-5'},
-                        {title: '4-0'}
+                        {title: '10'},
+                        {title: '9'},
+                        {title: '8'},
+                        {title: '7'},
+                        {title: '6'},
+                        {title: '5'},
+                        {title: '4'},
+                        {title: '3'},
+                        {title: '2'},
                     ], component: 'grid'
                 },
                 { id: 'targetMark',
                     qNo: 9, Q: "A meta de média do seu filho", Ans: [
-                        {title: '10-9'},
-                        {title: '8-7'},
-                        {title: '6-5'},
-                        {title: '4-0'}
+                        {title: '10'},
+                        {title: '9'},
+                        {title: '8'},
+                        {title: '7'},
+                        {title: '6'},
+                        {title: '5'},
+                        {title: '4'},
+                        {title: '3'},
+                        {title: '2'},
                     ], component: 'grid'
                 },
                 {
