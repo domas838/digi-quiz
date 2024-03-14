@@ -61,6 +61,14 @@ const localization = reactive({
 if (store.lang === 'LV') {
     localization.continue = 'Turpināt'
 }
+
+function getRedTrackCookie() {
+    const value = `; ${document.cookie}`;
+    // const parts = value.split(`; rtkclickid-store=`);
+    const parts = value.split(`; rtkclickid-store=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 const klaviyoRequestHandler = () => {
     const options = {
         method: 'POST',
@@ -69,6 +77,7 @@ const klaviyoRequestHandler = () => {
             'content-type': 'application/json'
         },
         data: {
+            redTrackClickId: getRedTrackCookie(),
             locale: store.lang,
             role: store.childEmail ? 'student' : 'parent',
             payload: {
