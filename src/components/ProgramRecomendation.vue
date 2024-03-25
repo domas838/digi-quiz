@@ -430,7 +430,7 @@ const handleButtonClick = () => {
       </div>
     </header>
 
-    <DealNotification />
+<!--    <DealNotification />-->
     <NovemberDealNotification />
 
     <PromiseSection :btnLabel="btnLabel" />
@@ -467,17 +467,16 @@ const handleButtonClick = () => {
 <!--          </div>-->
 <!--    </div>-->
 
-    <SuggestedPlan
-        v-if="!url.searchParams.has('deal')"
-        ref="target"
-        :btn="btnLabel"
-        :is-paid-trial="url.searchParams.has('lmt')"
-        v-element-visibility="onElementVisibility"
-        :selected-subjects-length="store.selectedSubjects.length"
-    />
+<!--    <SuggestedPlan-->
+<!--        v-if="!url.searchParams.has('deal')"-->
+<!--        ref="target"-->
+<!--        :btn="btnLabel"-->
+<!--        :is-paid-trial="url.searchParams.has('lmt')"-->
+<!--        v-element-visibility="onElementVisibility"-->
+<!--        :selected-subjects-length="store.selectedSubjects.length"-->
+<!--    />-->
 
     <NovemberSuggestedPlan
-        v-if="url.searchParams.has('new-year')"
         ref="target"
         :btn="btnLabel"
         :is-paid-trial="url.searchParams.has('lmt')"
