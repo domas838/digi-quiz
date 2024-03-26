@@ -74,8 +74,8 @@ const i18n = createI18n({
             OneMonth: '1 mėnuo',
             ThreeMonths: '3 mėnesiai',
             NineMonths: '9 mėnesiai',
-            NovemberDealTimer: '6 mėn. planui – 50% nuolaida! 🎉',
-            NovemberDealTimerFull: '🎉 Naujametinė nuolaida -> -50% visų dalykų planui!'
+            NovemberDealTimer: '🔥 SPECIALUS PASIŪLYMAS -> Visi dalykai už 2-iejų kainą! 🔥',
+            NovemberDealTimerFull: '🔥 Tik dabar -> visi dalykai už 2 kainą! 🔥'
         },
         lv: {
             Title: 'Mācību tiešsaistes nodarbības — Memby.lv',
@@ -136,8 +136,8 @@ const i18n = createI18n({
             ThreeMonths: '3 mēn.',
             NineMonths: '9 mēn.',
             days: 'd',
-            NovemberDealTimer: '50% atlaide 6 mēnešu abonementam! 🎉',
-            NovemberDealTimerFull: '50% atlaide visu priekšmetu abonementam'
+            NovemberDealTimer: '🔥 ĪPAŠAIS PIEDĀVĀJUMS -> Visi priekšmeti par 2 cenu! 🔥',
+            NovemberDealTimerFull: '🔥 Tikai tagad -> Visi priekšmeti par 2 cenu! 🔥'
         },
     },
 })

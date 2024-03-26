@@ -78,14 +78,14 @@ onMounted(() => {
 <template>
   <Transition>
     <div v-if="showComponent" class="rounded z-[100]">
-      <div class="border border-orange bg-black max-w-[1200px] w-full rounded-xl drop-shadow-md bg-white fixed z-[100] left-1/2 transform -translate-x-1/2 bottom-0 lg:bottom-10">
-        <div class="bg-orange rounded-t-xl py-2 flex gap-5 justify-center text-center text-xs md:text-[14px]">
+      <div class="border border-yellow bg-black max-w-[1200px] w-full rounded-xl drop-shadow-md bg-white fixed z-[100] left-1/2 transform -translate-x-1/2 bottom-0 lg:bottom-10">
+        <div class="bg-yellow rounded-t-xl py-2 flex gap-5 justify-center text-center text-xs md:text-[14px]">
           <span class="font-bold block" v-html="$t('NovemberDealTimerFull')"></span>
-          <span class="hidden md:block">
-            <vue-countdown :time="time.secondsUntilMidnight * 1000" v-slot="{ days, hours, minutes, seconds }">
-              {{ $t('ThisOfferValidFor') }} <span class="font-bold">{{ days }} {{ $t('days') }} {{ hours }} {{ $t('hours') }} {{ minutes }} {{ $t('minutes') }} {{ seconds }} {{ $t('seconds') }}.</span>
-            </vue-countdown>
-            </span>
+<!--          <span class="hidden md:block">-->
+<!--            <vue-countdown :time="time.secondsUntilMidnight * 1000" v-slot="{ days, hours, minutes, seconds }">-->
+<!--              {{ $t('ThisOfferValidFor') }} <span class="font-bold">{{ days }} {{ $t('days') }} {{ hours }} {{ $t('hours') }} {{ minutes }} {{ $t('minutes') }} {{ seconds }} {{ $t('seconds') }}.</span>-->
+<!--            </vue-countdown>-->
+<!--            </span>-->
         </div>
 
         <div class="rounded-b-xl px-8 py-2 z-[100] bg-black text-white flex flex-col text-center w-full md:py-5 md:flex-row md:gap-5 md:text-left md:inline-flex md:justify-between">
@@ -105,7 +105,7 @@ onMounted(() => {
 
           <div class="basis-1/4 self-center">
             <div class="action">
-              <a :href="decorateUrlWithUTMParams(btn.btnLink)" target="_blank" class="cta-btn !bg-orange !text-black"
+              <a :href="decorateUrlWithUTMParams(btn.btnLink)" target="_blank" class="cta-btn !bg-yellow !text-black"
               >{{ btn.buyNow }}
                 <span class="ml-3">
                 <svg width="30" height="22" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg">
