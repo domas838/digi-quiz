@@ -41,7 +41,19 @@
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-K8FL5JL');</script>
         <!-- End Google Tag Manager -->
-        <script src="https://track.digiklase.lt/uniclick.js?attribution=lastpaid&cookiedomain=digiklase.lt&cookieduration=90&defaultcampaignid=65f0629524e83f0001fb92b1&regviewonce=false"></script>
+        <script>
+            if (window.location.hostname === 'quiz.memby.lv') {
+                // LV lT
+                var script1 = document.createElement('script');
+                script1.src = 'https://track.digiklase.lt/uniclick.js?attribution=lastpaid&cookiedomain=memby.lv&cookieduration=90&defaultcampaignid=66017145829c730001bd1269&regviewonce=false';
+                document.head.appendChild(script1);
+            } else if (window.location.hostname === 'quiz.digiklase.lt') {
+                // LT RT
+                var script2 = document.createElement('script');
+                script2.src = 'https://track.digiklase.lt/uniclick.js?attribution=lastpaid&cookiedomain=digiklase.lt&cookieduration=90&defaultcampaignid=65f0629524e83f0001fb92b1&regviewonce=false';
+                document.head.appendChild(script2);
+            }
+        </script>
     </head>
     <body>
         <!-- Google Tag Manager (noscript) -->
