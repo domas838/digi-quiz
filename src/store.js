@@ -896,7 +896,7 @@ export const store = reactive({
                 {
                     id: 'grade',
                     qNo: 1,
-                    Q: 'Select children\'s grade?',
+                    Q: 'Select student\'s grade?',
                     Ans: [
                         {title: '5th'},
                         {title: '6th'},
@@ -912,7 +912,7 @@ export const store = reactive({
                 {
                     id: 'subjects',
                     qNo: 2,
-                    Q: 'Mark the subjects you would like to study?',
+                    Q: 'Mark the subjects student would like to study?',
                     name: 'selected-subjects',
                     Ans: [
                         {title: 'Maths', value: 'maths'},
@@ -925,7 +925,7 @@ export const store = reactive({
                 {
                     id: 'goal',
                     qNo: 3,
-                    Q: "What program do you follow?",
+                    Q: "What program do student follow?",
                     Ans: [
                         {title: 'IEB (usually in private schools)', img: '/emoji/🔸.svg'},
                         {title: 'CAPS (usually in government schools)', img: '/emoji/🔹.svg'},
@@ -936,7 +936,7 @@ export const store = reactive({
                 {
                     id: 'goal',
                     qNo: 4,
-                    Q: "What is your child's primary goal in math?",
+                    Q: "What is your student's primary goal?",
                     Ans: [
                         {title: 'Improve Marks', img: '/emoji/🚀.svg'},
                         {title: 'Maintain High Marks', img: '/emoji/🤓.svg'},
@@ -950,7 +950,7 @@ export const store = reactive({
                 {
                     id: 'preferredTimeWorkdays',
                     qNo: 5,
-                    Q: 'What time can your child join lessons during workdays?',
+                    Q: 'What time can student join lessons during workdays?',
                     component: 'timetable',
                     days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
                     times: [{from: 3, to: 5, dayPeriod: 'PM'}, {from: 5, to: 7, dayPeriod: 'PM'}, {from: 7, to: 9, dayPeriod: 'PM'}],
@@ -959,7 +959,7 @@ export const store = reactive({
                 {
                     id: 'preferredTimeWeekends',
                     qNo: 6,
-                    Q: 'What time can your child join lessons during weekends?',
+                    Q: 'What time can student join lessons during weekends?',
                     component: 'timetable',
                     days: ['Sat', 'Sun'],
                     times: [{from: 10, to: 12, dayPeriod: 'AM'}, {from: 12, to: 2, dayPeriod: 'PM'}, {from: 2, to: 4, dayPeriod: 'PM'}],
@@ -970,7 +970,7 @@ export const store = reactive({
                     component: 'loader'
                 },
                 { id: 'currentMark',
-                    qNo: 8, Q: "Your Child’s Current Mark", Ans: [
+                    qNo: 8, Q: "Student’s Current Mark", Ans: [
                         {title: '100-90%'},
                         {title: '89-80%'},
                         {title: '79-70%'},
@@ -981,7 +981,7 @@ export const store = reactive({
                     ], component: 'grid'
                 },
                 { id: 'targetMark',
-                    qNo: 9, Q: "Your Child’s Target Mark?", Ans: [
+                    qNo: 9, Q: "Student’s Target Mark?", Ans: [
                         {title: '100-90%'},
                         {title: '89-80%'},
                         {title: '79-70%'},
@@ -994,7 +994,7 @@ export const store = reactive({
                 {
                     id: 'studyHours',
                     qNo: 10,
-                    Q: 'How many hours a day your child study after school?',
+                    Q: 'How many hours a day student study after school?',
                     Ans: [
                         {title: '0 hours, school is enough', img: '/emoji/😎.svg'},
                         {title: 'Around 1 - 2 hours/day', img: '/emoji/🤓.svg'},
@@ -1005,7 +1005,7 @@ export const store = reactive({
                 {
                     id: 'motivation',
                     qNo: 11,
-                    Q: 'What motivates your kid to study?',
+                    Q: 'What motivates student to study?',
                     Ans: [
                         {title: 'Excitement about scoring goals in school', img: '/emoji/🏅.svg'},
                         {title: 'Loves exploring and discovering cool new stuff', img: '/emoji/🧪_.svg'},
@@ -1019,7 +1019,7 @@ export const store = reactive({
                 {
                     id: 'transformMotivation',
                     qNo: 12,
-                    Q: 'In what way your child’s motivation transforms over time?',
+                    Q: 'In what way student’s motivation transforms over time?',
                     Ans: [
                         {title: 'Motivation disappears', img: '/emoji/🌚.svg'},
                         {title: 'It has up’s and down’s', img: '/emoji/🎢_.svg'},
@@ -1034,7 +1034,7 @@ export const store = reactive({
                 {
                     id: 'focus',
                     qNo: 14,
-                    Q: 'How hard is to focus for your child?',
+                    Q: 'How hard is to focus for student?',
                     Ans: [
                         {title: 'Very easy', img: '/emoji/😊.svg'},
                         {title: 'Easy', img: '/emoji/🙂_.svg'},
@@ -1047,7 +1047,7 @@ export const store = reactive({
                 {
                     id: 'focusInClass',
                     qNo: 15,
-                    Q: 'Does your kid get distracted by other students in a class?',
+                    Q: 'Does student get distracted by other students in a class?',
                     Ans: [
                         {title: 'Strongly agree', img: '/emoji/😊.svg'},
                         {title: 'Agree', img: '/emoji/🙂_.svg'},
@@ -1060,7 +1060,7 @@ export const store = reactive({
                 {
                     id: 'expectations',
                     qNo: 16,
-                    Q: 'As I progress with Memby I expect my children to feel:',
+                    Q: 'As I progress with Memby I expect student to feel:',
                     Ans: [
                         {title: 'Confident', img: '/emoji/😎.svg'},
                         {title: 'Happy', img: '/emoji/🤩_.svg'},
@@ -1085,7 +1085,7 @@ export const store = reactive({
                 {
                     id: 'learningStyle',
                     qNo: 18,
-                    Q: 'Does your child have a preferred learning style?',
+                    Q: 'Does student have a preferred learning style?',
                     name: 'learning-styles',
                     Ans: [
                         {title: 'Visual learner', value: 'Visual learner'},
