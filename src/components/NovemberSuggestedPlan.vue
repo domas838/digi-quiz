@@ -48,11 +48,11 @@ const resolvePrice = (selectedSubjectsLength, isPaidTrial) => {
 
   switch (selectedSubjectsLength) {
     case 1:
-      return '24,45' ;
+      return '20,54' ;
     case 2:
-      return '48,90';
+      return '41,10';
     default:
-      return '42,45';
+      return '41,10';
   }
 }
 
