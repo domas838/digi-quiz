@@ -936,7 +936,7 @@ export const store = reactive({
                 {
                     id: 'goal',
                     qNo: 4,
-                    Q: "What is your student's primary goal?",
+                    Q: "What is student's primary goal?",
                     Ans: [
                         {title: 'Improve Marks', img: '/emoji/🚀.svg'},
                         {title: 'Maintain High Marks', img: '/emoji/🤓.svg'},
