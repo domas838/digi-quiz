@@ -400,17 +400,17 @@ const handleButtonClick = () => {
 </script>
 
 <template>
-  <div class="fixed bg-white h-full w-full z-[999999999999999] pb-10" v-if="store.openProgramId">
-    <div @click="handleClose" class="text-right backdrop-brightness-50 flex items-center py-5 flex-row-reverse cursor-pointer">
-      <span class="mr-4">
-        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M24 2.41782L21.5829 0L12 9.58556L2.41714 0L0 2.41782L9.58286 12.0034L0 21.5889L2.41714 24.0068L12 14.4212L21.5829 24.0068L24 21.5889L14.4171 12.0034L24 2.41782Z" fill="white"/>
-        </svg>
-      </span>
-    </div>
-    <iframe class="h-full w-full" :src="BASE_APP_DOMAIN[store.lang] + '/quiz/program/' + store.openProgramId">
-    </iframe>
-  </div>
+<!--  <div class="fixed bg-white h-full w-full z-[999999999999999] pb-10" v-if="store.openProgramId">-->
+<!--    <div @click="handleClose" class="text-right backdrop-brightness-50 flex items-center py-5 flex-row-reverse cursor-pointer">-->
+<!--      <span class="mr-4">-->
+<!--        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--        <path fill-rule="evenodd" clip-rule="evenodd" d="M24 2.41782L21.5829 0L12 9.58556L2.41714 0L0 2.41782L9.58286 12.0034L0 21.5889L2.41714 24.0068L12 14.4212L21.5829 24.0068L24 21.5889L14.4171 12.0034L24 2.41782Z" fill="white"/>-->
+<!--        </svg>-->
+<!--      </span>-->
+<!--    </div>-->
+<!--    <iframe class="h-full w-full" :src="BASE_APP_DOMAIN[store.lang] + '/quiz/program/' + store.openProgramId">-->
+<!--    </iframe>-->
+<!--  </div>-->
 
   <div v-if="url.searchParams.has('app')" class="spinner mt-48">
     <img class="!w-[150px]" src="../assets/images/spinner.svg" alt="" />

@@ -3,6 +3,7 @@ import { reactive } from 'vue'
 import { store } from '../store'
 import { format } from 'date-fns'
 import { lt, lv } from 'date-fns/locale';
+import {BASE_APP_DOMAIN} from "@/helpers";
 
 const props = defineProps([
     'picture',
@@ -51,7 +52,7 @@ const handleCardClick = () => {
         <h3>{{ props.programTitle }}</h3>
         <p>{{ props.description }}</p>
     </div>
-    <div @click="handleCardClick" class="slide-wrapper flex flex-wrap h-full cursor-pointer">
+    <a :href="BASE_APP_DOMAIN[store.lang] + '/quiz/program/' + props.programId" class="slide-wrapper flex flex-wrap h-full cursor-pointer">
         <div class="slide-header">
             <div class="slide-badge top-result" v-if="isTopRecomendation">
                 <p v-if="store.lang === 'LT'">⭐️ Labiausiai tinkanti programa</p>
@@ -122,7 +123,7 @@ const handleCardClick = () => {
           </div>
 
         </div>
-    </div>
+    </a>
 </template>
 
 <style scoped>
