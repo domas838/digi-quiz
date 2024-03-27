@@ -59,5 +59,6 @@ export const BASE_APP_DOMAIN = {
     'LV': 'https://app.memby.lv',
     'EN_IE': 'https://app.memby.org',
     'EN_ZA': 'https://za.memby.org',
+    'PT_BR': 'https://br.memby.org',
     'local': 'http://lt.localhost:8081'
 }
