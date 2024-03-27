@@ -385,6 +385,7 @@ const i18n = createI18n({
             JourneyBegins: ' A Journey Through Infinite Learning Begins',
             TrustedBy: 'Trusted by <b>5 554</b> students',
             KidHatedMath: 'My kid hated math, but MathsUp made it a breeze. Now, they get it, and I get less stress. Win-win!',
+            KidHatedMathMemby: 'My kid hated math, but Memby made it a breeze. Now, they get it, and I get less stress. Win-win!',
             CollectingResults: 'Collecting your results',
             AnalysingYourResults: 'Analysing your results',
             GeneratingPersonalisedPlan: 'Generating personalised plan',

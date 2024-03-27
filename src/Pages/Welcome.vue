@@ -22,6 +22,9 @@ onMounted(() => {
     const explodedPath = new URL(window.location.href).pathname.split('/');
     if (['trial', 'price', 'paid-trial', 'pricing-2', 'paid-trial-2', 'checkout', 'maths', 'cashback', 'first-month', 'pricing-old', 'checkout-old'].includes(explodedPath[3])) {
         store.flow = explodedPath[3];
+        localStorage.setItem('flow', store.flow);
+    } else  if (explodedPath[3] === undefined && localStorage.getItem('flow')) {
+        store.flow = localStorage.getItem('flow');
     }
   }
 
