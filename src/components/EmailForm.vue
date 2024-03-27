@@ -3,7 +3,7 @@ import { store } from '../store'
 import {computed, onMounted} from 'vue'
 import axios from 'axios'
 import {event as gaEvent} from "vue-gtag";
-import {changeUrlPath} from "../helpers";
+import {BASE_APP_DOMAIN, changeUrlPath} from "../helpers";
 import {useI18n} from "vue-i18n";
 import QuizLogo from "@/components/QuizLogo.vue";
 import Heading from "@/components/Typography/Heading.vue";
@@ -226,7 +226,7 @@ const klaviyoRequestHandler = () => {
 
     const options = {
         method: 'POST',
-        url: 'https://app.digiklase.lt/api/klaviyo/create',
+        url: `${BASE_APP_DOMAIN[store.lang]}/api/klaviyo/create`,
         headers: {
             'content-type': 'application/json'
         },
