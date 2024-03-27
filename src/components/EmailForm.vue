@@ -3,7 +3,7 @@ import { store } from '../store'
 import {computed, onMounted} from 'vue'
 import axios from 'axios'
 import {event as gaEvent} from "vue-gtag";
-import {changeUrlPath, getLocaleFromURL} from "../helpers";
+import {BASE_APP_DOMAIN, changeUrlPath, getLocaleFromURL} from "../helpers";
 import {useI18n} from "vue-i18n";
 import QuizLogo from "@/components/QuizLogo.vue";
 import Heading from "@/components/Typography/Heading.vue";
@@ -119,7 +119,7 @@ const decorateUrlWithPlan = (url) => {
 
 const resolveResultsPage = () => {
   const timetableObject = getTimetableParams();
-  
+
   // Assuming 'store' is a valid object containing quiz answers
   const gradeBefore = encodeURIComponent(store.quizAnswers['currentMark']);
   const gradeAfter = encodeURIComponent(store.quizAnswers['targetMark']);
@@ -243,7 +243,7 @@ const klaviyoRequestHandler = () => {
 
   const options = {
     method: 'POST',
-    url: 'https://app.digiklase.lt/api/klaviyo/create',
+    url: `${BASE_APP_DOMAIN[store.lang]}/api/klaviyo/create`,
     headers: {
       'content-type': 'application/json'
     },
