@@ -107,25 +107,31 @@ const resolveResultsPage = () => {
       case 'cashback':
           suffix = '-5-weeks-streak'
           break;
+      case 'courses':
+          suffix = '-grade' + grade.match(/\d+/)
+          break;
   }
 
-  let framerPath = 'results-strugglers' + suffix;
-  switch (goal) {
-    case 'Improve Grades and GPA':
+  let framerPath = 'results' + suffix;
+  if (store.flow !== 'courses') {
       framerPath = 'results-strugglers' + suffix;
-      break;
-    case 'Maintain High Grades':
-      framerPath = 'results-maintainers' + suffix;
-      break;
-    case 'Test Prep':
-      framerPath = 'results-strugglers' + suffix
-      break;
-    case 'Prepare for Contest':
-      framerPath = 'results-excellers' + suffix
-      break;
-    case 'To excel and achieve top performance':
-      framerPath = 'results-excellers' + suffix
-      break;
+      switch (goal) {
+          case 'Improve Grades and GPA':
+              framerPath = 'results-strugglers' + suffix;
+              break;
+          case 'Maintain High Grades':
+              framerPath = 'results-maintainers' + suffix;
+              break;
+          case 'Test Prep':
+              framerPath = 'results-strugglers' + suffix
+              break;
+          case 'Prepare for Contest':
+              framerPath = 'results-excellers' + suffix
+              break;
+          case 'To excel and achieve top performance':
+              framerPath = 'results-excellers' + suffix
+              break;
+      }
   }
 
   if (Object.keys(timetableObject).length !== 0) {
@@ -146,6 +152,20 @@ const resolveResultsPage = () => {
   }
 
   let url = `https://${host}/${framerPath}?grade=${grade}&gradeBefore=${gradeBefore}&gradeAfter=${gradeAfter}&state=${state}&${timePreference}`;
+  if (store.flow === 'courses') {
+      // TODO update programId
+      let programId = {
+          '5th': 5,
+          '6th': 6,
+          '7th': 7,
+          '8th': 8,
+          '9th': 9,
+          '10th': 10,
+          '11th': 11,
+          '12th': 12,
+      }[store.quizAnswers['grade']];
+      url += `&programId=${programId}`;
+  }
   url = decorateUrlWithUTMParams(url);
 
   store.resultUrl = url
@@ -224,6 +244,11 @@ const klaviyoRequestHandler = () => {
         return;
     }
 
+    let role = store.childEmail ? 'student' : 'parent';
+    if (store.flow === 'courses') {
+        role = 'courses';
+    }
+
     const options = {
         method: 'POST',
         url: 'https://app.digiklase.lt/api/klaviyo/create',
@@ -232,7 +257,7 @@ const klaviyoRequestHandler = () => {
         },
         data: {
             locale: store.lang,
-            role: store.childEmail ? 'student' : 'parent',
+            role: role,
             payload: {
                 data: {
                     type: 'profile',
